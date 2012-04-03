@@ -47,7 +47,7 @@
 
         public static function getRecommendedRunFrequencyContent()
         {
-            return Yii::t('Default', 'Once per day');
+            return Yii::t('Default', 'Once a day, early in the morning.');
         }
 
         /**
@@ -78,12 +78,12 @@
             $box                       = EmailBox::resolveAndGetByName(EmailBox::NOTIFICATIONS_NAME);
             $emailMessage->folder      = EmailFolder::getByBoxAndType($box, EmailFolder::TYPE_DRAFT);
             $validated                 = $emailMessage->validate();
-            if(!$validated)
+            if (!$validated)
             {
                 throw new NotSupportedException();
             }
             Yii::app()->emailHelper->sendImmediately($emailMessage);
-            if(!$emailMessage->hasSendError())
+            if (!$emailMessage->hasSendError())
             {
                 $messageContent .= Yii::t('Default', 'Message successfully sent') . "\n";
                 return true;
