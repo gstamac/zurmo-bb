@@ -131,11 +131,15 @@
             }
             else
             {
+                // Begin Not Coding Standard
                 Yii::app()->clientScript->registerScript($scriptName, "
+                        /*
+                        //AA: Not sure we need it anymore, seem to create more problems with text content height..
                         var remainingHeight =  $('.email-template-textContent').closest('.left-column').height() -
                                                $('.email-template-textContent').closest('.left-column').find('.panel').height() -
                                                $('.email-template-textContent').closest('.tabs-nav').height() - 100;
                         $('.email-template-textContent').height(remainingHeight);
+                        */
 
                         $('.tab').on('tab-changed', function(event){
                             if( $('.email-template-htmlContent').hasClass('active-tab') === true  ){
@@ -145,6 +149,7 @@
                             }
                         });
                     ");
+                // End Not Coding Standard
             }
         }
 

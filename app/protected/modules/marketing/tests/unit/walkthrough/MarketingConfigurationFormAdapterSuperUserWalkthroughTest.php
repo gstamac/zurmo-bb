@@ -53,25 +53,19 @@
             $super = $this->logoutCurrentUserLoginNewUserAndGetByUsername('super');
             $this->setPostArray(array('save'                    => 'Save',
                     'MarketingConfigurationForm'  => array(
-                        'autoresponderOrCampaignBatchSize'              => '',
-                        'campaignItemsToCreatePageSize'                 => '',
                         'autoresponderOrCampaignFooterPlainText'        => '',
                         'autoresponderOrCampaignFooterRichText'         => '',
                     )
                 )
             );
             $content = $this->runControllerWithNoExceptionsAndGetContent('marketing/default/configurationEdit');
-            $this->assertFalse(strpos($content, 'Autoresponder/Campaign batch size cannot be blank.') === false);
-            $this->assertFalse(strpos($content, 'Campaign Items creation page size cannot be blank.') === false);
-            $this->assertFalse(strpos($content, 'Autoresponder/Campaign Footer(Plain Text) cannot be blank.') === false);
-            $this->assertFalse(strpos($content, 'Autoresponder/Campaign Footer(Rich Text) cannot be blank.') === false);
+            $this->assertFalse(strpos($content, 'Marketing Footer(Plain Text) cannot be blank.') === false);
+            $this->assertFalse(strpos($content, 'Marketing Footer(Rich Text) cannot be blank.') === false);
 
             //checking with proper values for required fields
             $super = $this->logoutCurrentUserLoginNewUserAndGetByUsername('super');
             $this->setPostArray(array('save'                    => 'Save',
                     'MarketingConfigurationForm'  => array(
-                        'autoresponderOrCampaignBatchSize'          => '100',
-                        'campaignItemsToCreatePageSize'             => '200',
                         'autoresponderOrCampaignFooterPlainText'    => 'abc',
                         'autoresponderOrCampaignFooterRichText'     => 'def',
                     )

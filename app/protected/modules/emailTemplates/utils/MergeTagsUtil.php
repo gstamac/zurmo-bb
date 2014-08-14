@@ -57,7 +57,7 @@
 
         public static function resolveAttributeStringToMergeTagString($attributeString)
         {
-            $string = preg_replace('/(?<=\\w)(?=[A-Z])/', static::CAPITAL_DELIMITER . "$1", $attributeString);
+            $string = preg_replace('/(?<=\\w)(?=[A-Z])/', static::CAPITAL_DELIMITER . "$1", $attributeString); // Not Coding Standard
             $string = strtolower($string);
             $string = str_replace(FormModelUtil::RELATION_DELIMITER, static::PROPERTY_DELIMITER, $string);
             $string = str_replace(static::PROPERTY_DELIMITER . static::CAPITAL_DELIMITER, static::PROPERTY_DELIMITER, $string);
@@ -104,23 +104,25 @@
          * @param array $invalidTags
          * @param null $language
          * @param bool $errorOnFirstMissing
+         * @param array $params
          * @return bool | array
          */
-        public function resolveMergeTagsArrayToAttributes($model, & $invalidTags = array(), $language = null, $errorOnFirstMissing = false)
+        public function resolveMergeTagsArrayToAttributes($model, & $invalidTags = array(), $language = null,
+                                                          $errorOnFirstMissing = false, $params = array())
         {
+            $mergeTagsToAttributes  = false;
             if (!$language)
             {
                 $language = $this->language;
             }
-            if (empty($this->mergeTags))
+            if (!empty($this->mergeTags))
             {
-                return false;
+                $mergeTagsToAttributes = MergeTagsToModelAttributesAdapter::
+                                            resolveMergeTagsArrayToAttributesFromModel($this->mergeTags[1], $model,
+                                                                                        $invalidTags, $language,
+                                                                                        $errorOnFirstMissing, $params);
             }
-            else
-            {
-                return MergeTagsToModelAttributesAdapter::resolveMergeTagsArrayToAttributesFromModel($this->mergeTags[1],
-                                        $model, $invalidTags, $language, $errorOnFirstMissing);
-            }
+            return $mergeTagsToAttributes;
         }
 
         /**
@@ -128,16 +130,18 @@
          * @param array $invalidTags
          * @param null $language
          * @param bool $errorOnFirstMissing
+         * @param array $params
          * @return bool | string
          */
-        public function resolveMergeTags($model, & $invalidTags = array(), $language = null, $errorOnFirstMissing = false)
+        public function resolveMergeTags($model, & $invalidTags = array(), $language = null,
+                                         $errorOnFirstMissing = false, $params = array())
         {
             if (!isset($language))
             {
                 $language = $this->language;
             }
             if (!$this->extractMergeTagsPlaceHolders() ||
-                    $this->resolveMergeTagsArrayToAttributes($model, $invalidTags, $language, $errorOnFirstMissing) &&
+                    $this->resolveMergeTagsArrayToAttributes($model, $invalidTags, $language, $errorOnFirstMissing, $params) &&
                     $this->resolveMergeTagsInTemplateToAttributes())
             {
                 return $this->content;

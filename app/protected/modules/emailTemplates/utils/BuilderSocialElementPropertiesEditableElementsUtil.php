@@ -57,9 +57,8 @@
                                             'ButtonSizeStaticDropDownFormElement',
                                             'sizeClass',
                                             static::resolveDefaultParams(
-                                                Zurmo::t('EmailTemplatesModule', 'Size')));
+                                                Zurmo::t('Core', 'Size')));
             return $configurationItems;
         }
     }
-
 ?>

@@ -77,12 +77,6 @@
                        $this->renderXHtmlBodyEnd()   .
                        $this->renderXHtmlEnd();
             Yii::app()->getClientScript()->render($content);
-            $performanceMessage = null;
-            if (YII_DEBUG && SHOW_PERFORMANCE && Yii::app()->isApplicationInstalled())
-            {
-                $endTime = microtime(true);
-                $performanceMessage .= 'Page render time: ' . number_format(($endTime - $startTime), 3) . ' seconds.<br />';
-            }
             if (YII_DEBUG)
             {
                 if (defined('XHTML_VALIDATION') && XHTML_VALIDATION)
@@ -96,42 +90,6 @@
                         }
                     }
                 }
-                if (SHOW_PERFORMANCE && Yii::app()->isApplicationInstalled())
-                {
-                    $endTime      = microtime(true);
-                    $endTotalTime = Yii::app()->performance->endClockAndGet();
-                    if (defined('XHTML_VALIDATION') && XHTML_VALIDATION)
-                    {
-                        $performanceMessage .= '<span>Total page view time including validation: ' . number_format(($endTime - $startTime), 3) . ' seconds.</span><br />';
-                    }
-                    else
-                    {
-                        $performanceMessage .= '<span>Total page view time: ' . number_format(($endTime - $startTime), 3) . ' seconds.</span><br />';
-                    }
-                    $performanceMessage .= '<span>Total page time: ' . number_format(($endTotalTime), 3) . ' seconds.</span><br />';
-                }
-            }
-            else
-            {
-                if (SHOW_PERFORMANCE && Yii::app()->isApplicationInstalled())
-                {
-                    $endTime      = microtime(true);
-                    $endTotalTime = Yii::app()->performance->endClockAndGet();
-                    $performanceMessage .= 'Load time: ' . number_format(($endTotalTime), 3) . ' seconds.<br />';
-                }
-            }
-            if (SHOW_PERFORMANCE && Yii::app()->isApplicationInstalled())
-            {
-                if (SHOW_QUERY_DATA)
-                {
-                    $performanceMessage .= self::makeShowQueryDataContent();
-                }
-                foreach (Yii::app()->performance->getTimings() as $id => $time)
-                {
-                    $performanceMessage .= 'Timing: ' . $id . ' total time: ' . number_format(($time), 3) . "</br>";
-                }
-                $performanceMessageHtml = '<div class="performance-info">' . $performanceMessage . '</div>';
-                $content = $this->appendContentBeforeXHtmlBodyEndAndXHtmlEnd($content, $performanceMessageHtml);
             }
             if (YII_DEBUG && Yii::app()->isApplicationInstalled())
             {
@@ -209,6 +167,12 @@
         {
             $themeUrl  = Yii::app()->themeManager->baseUrl;
             $theme    = Yii::app()->theme->name;
+            $backgroundTexture = Yii::app()->themeManager->getActiveBackgroundTexture();
+            $classContent = null;
+            if ($backgroundTexture != null)
+            {
+                $classContent .= ' ' . $backgroundTexture;
+            }
             if (!MINIFY_SCRIPTS && Yii::app()->isApplicationInstalled())
             {
                 Yii::app()->clientScript->registerScriptFile(
@@ -228,8 +192,8 @@
                 Yii::app()->getAssetManager()->publish(
                     Yii::getPathOfAlias('application.core.views.assets')) . '/jquery.truncateText.js');
             return '<!DOCTYPE html>' .
-                   '<!--[if IE 8]><html class="zurmo ie8" lang="en"><![endif]-->' .
-                   '<!--[if gt IE 8]><!--><html class="zurmo" lang="en"><!--<![endif]-->';
+                   '<!--[if IE 8]><html class="zurmo ie8' . $classContent . '" lang="en"><![endif]-->' .
+                   '<!--[if gt IE 8]><!--><html class="zurmo' . $classContent . '" lang="en"><!--<![endif]-->';
         }
 
         /**
@@ -282,11 +246,6 @@
             {
                 $specialCssContent .= '<link rel="stylesheet/less" type="text/css" id="default-theme" href="' .
                                                                                 $themeBaseUrl . '/less/default-theme.less"/>';
-                if (Yii::app()->userInterface->isMobile())
-                {
-//                    $specialCssContent .= '<link rel="stylesheet/less" type="text/css" id="mobile" href="' .
-//                                                                                $themeBaseUrl . '/less/mobile.less"/>';
-                }
                 $specialCssContent .= '<!--[if lt IE 9]><link rel="stylesheet/less" type="text/css" href="' .
                                                                         $themeBaseUrl . '/less/ie.less"/><![endif]-->';
             }
@@ -295,15 +254,13 @@
                 Yii::app()->themeManager->registerThemeColorCss();
                 if (file_exists("themes/$themeName/css/commercial.css"))
                 {
-                    $cs->registerCssFile($themeBaseUrl . '/css/commercial.css');
+                    $cs->registerCssFile($themeBaseUrl . '/css/commercial.css' .
+                        ZurmoAssetManager::getCssAndJavascriptHashQueryString("themes/$themeName/css/commercial.css"));
                 }
                 if (file_exists("themes/$themeName/css/custom.css"))
                 {
-                    $cs->registerCssFile($themeBaseUrl . '/css/custom.css');
-                }
-                if (Yii::app()->userInterface->isMobile())
-                {
-//                    $cs->registerCssFile($themeBaseUrl . '/css/mobile.css');
+                    $cs->registerCssFile($themeBaseUrl . '/css/custom.css' .
+                        ZurmoAssetManager::getCssAndJavascriptHashQueryString("themes/$themeName/css/custom.css"));
                 }
             }
             if (MINIFY_SCRIPTS)
@@ -317,7 +274,8 @@
             }
             if (Yii::app()->browser->getName() == 'msie' && Yii::app()->browser->getVersion() < 9)
             {
-                $cs->registerCssFile($themeBaseUrl . '/css' . '/ie.css', 'screen, projection');
+                $cs->registerCssFile($themeBaseUrl . '/css/ie.css' .
+                    ZurmoAssetManager::getCssAndJavascriptHashQueryString("themes/$themeName/css/ie.css"), 'screen, projection');
             }
 
             foreach ($this->getStyles() as $style)
@@ -326,7 +284,10 @@
                 {
                     if (file_exists("themes/$themeName/css/$style.css"))
                     {
-                        $cs->registerCssFile($themeBaseUrl . '/css/' . $style. '.css'); // Not Coding Standard
+                        // Begin Not Coding Standard
+                        $cs->registerCssFile($themeBaseUrl . '/css/' . $style. '.css' .
+                            ZurmoAssetManager::getCssAndJavascriptHashQueryString("themes/$themeName/css/$style.css"));
+                        // End Not Coding Standard
                     }
                 }
             }
@@ -375,11 +336,6 @@
         protected function renderXHtmlBodyStart()
         {
             $classContent      = Yii::app()->themeManager->getActiveThemeColor();
-            $backgroundTexture = Yii::app()->themeManager->getActiveBackgroundTexture();
-            if ($backgroundTexture != null)
-            {
-                $classContent .= ' ' . $backgroundTexture;
-            }
             if (Yii::app()->userInterface->isMobile())
             {
                 $classContent .= ' mobile-app';
@@ -402,28 +358,6 @@
         protected function renderXHtmlEnd()
         {
             return '</html>';
-        }
-
-        public static function makeShowQueryDataContent()
-        {
-            $performanceMessage  = static::getTotalAndDuplicateQueryCountContent();
-            $duplicateData = Yii::app()->performance->getRedBeanQueryLogger()->getDuplicateQueriesData();
-            if (count($duplicateData) > 0)
-            {
-                $performanceMessage .= '</br></br>' . 'Duplicate Queries:' . '</br>';
-            }
-            foreach ($duplicateData as $query => $count)
-            {
-                $performanceMessage .= 'Count: ' . $count . '&#160;&#160;&#160;Query: ' . $query . '</br>';
-            }
-            return $performanceMessage;
-        }
-
-        public static function getTotalAndDuplicateQueryCountContent()
-        {
-            $performanceMessage  = 'Total/Duplicate Queries: ' . Yii::app()->performance->getRedBeanQueryLogger()->getQueriesCount();
-            $performanceMessage .= '/'   . Yii::app()->performance->getRedBeanQueryLogger()->getDuplicateQueriesCount();
-            return $performanceMessage;
         }
 
         public static function makeNonHtmlDuplicateCountAndQueryContent()

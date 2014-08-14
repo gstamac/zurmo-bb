@@ -230,7 +230,7 @@
         protected function resolveLabelContent(array $item)
         {
             $label      = $item['label'] . $this->resolveAndGetSpanAndDynamicLabelContent($item);
-            if(isset($item['labelSpanHtmlOptions']))
+            if (isset($item['labelSpanHtmlOptions']))
             {
                 $labelSpanHtmlOptions = $item['labelSpanHtmlOptions'];
             }
@@ -238,7 +238,6 @@
             {
                 $labelSpanHtmlOptions = array();
             }
-            $avatarImageContent = '<img id="avatar" src="http://zurmo.com/img/amit.png">';
             $content    = $this->renderLabelPrefix() . ZurmoHtml::tag('span', $labelSpanHtmlOptions,  $label);
             return $content;
         }
@@ -338,7 +337,7 @@
                 {
                     $active = true;
                 }
-                if ($items[$i]['active'] && $this->activeCssClass != '' && !$ischild)
+                if ($items[$i]['active'] && $this->activeCssClass != '')
                 {
                     if (isset($item['itemOptions']['class']))
                     {

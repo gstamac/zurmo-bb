@@ -63,8 +63,8 @@
 
         protected static function resolveEditableTemplateByProperty($element, $property)
         {
-            $property =str_replace(array('[', ']'), '', $property);
-            $icon = static::getIconByProperty($property);
+            $property = str_replace(array('[', ']'), '', $property);
+            $icon     = static::getIconByProperty($property);
             if (isset($icon))
             {
                 $element->editableTemplate = '<th>{label}</th><td colspan="{colspan}"><div><div class="has-unit-input">{content}' .
@@ -74,15 +74,16 @@
             {
                 $element->editableTemplate = '<th>{label}</th><td colspan="{colspan}"><div>{content}{error}</div></td>';
             }
-
         }
 
         protected static function getIconByProperty($property)
         {
-            if (isset(BaseBuilderElement::getPropertiesSuffixMappedArray()[$property]))
+            $propertiesSuffixMappedArray = BaseBuilderElement::getPropertiesSuffixMappedArray();
+            if (isset($propertiesSuffixMappedArray[$property]))
             {
-                $icon = BaseBuilderElement::getPropertiesSuffixMappedArray()[$property];
-                switch ($icon) {
+                $icon = $propertiesSuffixMappedArray[$property];
+                switch ($icon)
+                {
                     case '%':
                         $iconClass = 'icon-percentage';
                         break;

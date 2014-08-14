@@ -211,7 +211,7 @@
             $report->setModuleClassName('ReportsTestModule');
             $adapter            = new ModelRelationsAndAttributesToReportAdapter($model, $rules, $report->getType());
             $attributes = $adapter->getAttributesIncludingDerivedAttributesData();
-            $this->assertEquals(27, count($attributes));
+            $this->assertEquals(28, count($attributes));
             $compareData        = array('label' => 'Id');
             $this->assertEquals($compareData, $attributes['id']);
             $compareData        = array('label' => 'Created Date Time');
@@ -262,6 +262,8 @@
             //Includes derived attributes as well
             $compareData        = array('label' => 'Test Calculated', 'derivedAttributeType' => 'CalculatedNumber');
             $this->assertEquals($compareData, $attributes['calculated']);
+            $compareData        = array('label' => 'ID',       'derivedAttributeType' => 'UniqueIdentifier');
+            $this->assertEquals($compareData, $attributes['UniqueIdentifier']);
             $compareData        = array('label' => 'Full Name',       'derivedAttributeType' => 'FullName');
             $this->assertEquals($compareData, $attributes['FullName']);
             //Add Dynamically Derived Attributes
@@ -511,7 +513,7 @@
             $report->setModuleClassName('ReportsTestModule');
             $adapter            = new ModelRelationsAndAttributesToRowsAndColumnsReportAdapter($model, $rules, $report->getType());
             $attributes = $adapter->getAttributesForDisplayAttributes();
-            $this->assertEquals(26, count($attributes));
+            $this->assertEquals(27, count($attributes));
 
             //Includes derived attributes as well
             $compareData        = array('label' => 'Test Calculated', 'derivedAttributeType' => 'CalculatedNumber');
@@ -1042,13 +1044,15 @@
             $report->setModuleClassName('ReportsTestModule');
             $adapter            = new ModelRelationsAndAttributesToSummationReportAdapter($model, $rules, $report->getType());
             $attributes = $adapter->getForDrillDownAttributes();
-            $this->assertEquals(26, count($attributes));
+            $this->assertEquals(27, count($attributes));
 
             //Includes derived attributes as well
             $compareData        = array('label' => 'Test Calculated', 'derivedAttributeType' => 'CalculatedNumber');
             $this->assertEquals($compareData, $attributes['calculated']);
             $compareData        = array('label' => 'Full Name',       'derivedAttributeType' => 'FullName');
             $this->assertEquals($compareData, $attributes['FullName']);
+            $compareData        = array('label' => 'ID',       'derivedAttributeType' => 'UniqueIdentifier');
+            $this->assertEquals($compareData, $attributes['UniqueIdentifier']);
         }
 
         /**
@@ -1462,6 +1466,156 @@
             $adapter            = new ModelRelationsAndAttributesToReportAdapter($model, $rules, Report::TYPE_ROWS_AND_COLUMNS);
             $this->assertEquals(ModelAttributeToReportOperatorTypeUtil::AVAILABLE_OPERATORS_TYPE_DROPDOWN,
                                 $adapter->getAvailableOperatorsType('likeContactState'));
+        }
+
+        public function testGetFilterRulesByAttribute()
+        {
+            $model              = new ReportModelTestItem();
+            $rules              = new ReportsTestReportRules();
+            $adapter            = new ModelRelationsAndAttributesToReportAdapter($model, $rules, Report::TYPE_ROWS_AND_COLUMNS);
+            $exptected          = ModelAttributeRulesToDefaultValueMappingRuleUtil::
+                                        getApplicableRulesByModelClassNameAndAttributeName(
+                                            get_class($model),
+                                            'string',
+                                            'value',
+                                            false,
+                                            true,
+                                            false);
+            $this->assertEquals($exptected, $adapter->getFilterRulesByAttribute('string', 'value'));
+            $exptected          = ModelAttributeRulesToDefaultValueMappingRuleUtil::
+                                        getApplicableRulesByModelClassNameAndAttributeName(
+                                            get_class($model),
+                                            'boolean',
+                                            'value',
+                                            false,
+                                            true,
+                                            false);
+            $this->assertEquals($exptected, $adapter->getFilterRulesByAttribute('boolean', 'value'));
+            $exptected          = array(array('value', 'type', 'type' => 'float'));
+            $this->assertEquals($exptected, $adapter->getFilterRulesByAttribute('currencyValue', 'value'));
+            $exptected          = ModelAttributeRulesToDefaultValueMappingRuleUtil::
+                                        getApplicableRulesByModelClassNameAndAttributeName(
+                                            get_class($model),
+                                            'date',
+                                            'value',
+                                            false,
+                                            true,
+                                            false);
+            $this->assertEquals($exptected, $adapter->getFilterRulesByAttribute('date', 'value'));
+            $exptected          = ModelAttributeRulesToDefaultValueMappingRuleUtil::
+                                        getApplicableRulesByModelClassNameAndAttributeName(
+                                            get_class($model),
+                                            'dateTime',
+                                            'value',
+                                            false,
+                                            true,
+                                            false);
+            $this->assertEquals($exptected, $adapter->getFilterRulesByAttribute('dateTime', 'value'));
+            $exptected          = ModelAttributeRulesToDefaultValueMappingRuleUtil::
+                                        getApplicableRulesByModelClassNameAndAttributeName(
+                                            get_class($model),
+                                            'dropDown',
+                                            'value',
+                                            false,
+                                            true,
+                                            false);
+            $this->assertEquals($exptected, $adapter->getFilterRulesByAttribute('dropDown', 'value'));
+            $exptected          = ModelAttributeRulesToDefaultValueMappingRuleUtil::
+                                        getApplicableRulesByModelClassNameAndAttributeName(
+                                            get_class($model),
+                                            'float',
+                                            'value',
+                                            false,
+                                            true,
+                                            false);
+            $this->assertEquals($exptected, $adapter->getFilterRulesByAttribute('float', 'value'));
+            $exptected          = ModelAttributeRulesToDefaultValueMappingRuleUtil::
+                                        getApplicableRulesByModelClassNameAndAttributeName(
+                                            get_class($model),
+                                            'integer',
+                                            'value',
+                                            false,
+                                            true,
+                                            false);
+            $this->assertEquals($exptected, $adapter->getFilterRulesByAttribute('integer', 'value'));
+            $exptected          = ModelAttributeRulesToDefaultValueMappingRuleUtil::
+                                        getApplicableRulesByModelClassNameAndAttributeName(
+                                            get_class($model),
+                                            'multiDropDown',
+                                            'value',
+                                            false,
+                                            true,
+                                            false);
+            $this->assertEquals($exptected, $adapter->getFilterRulesByAttribute('multiDropDown', 'value'));
+            $exptected          = ModelAttributeRulesToDefaultValueMappingRuleUtil::
+                                        getApplicableRulesByModelClassNameAndAttributeName(
+                                            get_class($model),
+                                            'owner',
+                                            'value',
+                                            false,
+                                            true,
+                                            false);
+            $this->assertEquals($exptected, $adapter->getFilterRulesByAttribute('owner', 'value'));
+            $exptected          = ModelAttributeRulesToDefaultValueMappingRuleUtil::
+                                        getApplicableRulesByModelClassNameAndAttributeName(
+                                            get_class($model),
+                                            'phone',
+                                            'value',
+                                            false,
+                                            true,
+                                            false);
+            $this->assertEquals($exptected, $adapter->getFilterRulesByAttribute('phone', 'value'));
+            $exptected          = ModelAttributeRulesToDefaultValueMappingRuleUtil::
+                                        getApplicableRulesByModelClassNameAndAttributeName(
+                                            get_class($model),
+                                            'radioDropDown',
+                                            'value',
+                                            false,
+                                            true,
+                                            false);
+            $this->assertEquals($exptected, $adapter->getFilterRulesByAttribute('radioDropDown', 'value'));
+            $exptected          = ModelAttributeRulesToDefaultValueMappingRuleUtil::
+                                        getApplicableRulesByModelClassNameAndAttributeName(
+                                            get_class($model),
+                                            'tagCloud',
+                                            'value',
+                                            false,
+                                            true,
+                                            false);
+            $this->assertEquals($exptected, $adapter->getFilterRulesByAttribute('tagCloud', 'value'));
+            $exptected          = ModelAttributeRulesToDefaultValueMappingRuleUtil::
+                                        getApplicableRulesByModelClassNameAndAttributeName(
+                                            get_class($model),
+                                            'textArea',
+                                            'value',
+                                            false,
+                                            true,
+                                            false);
+            $this->assertEquals($exptected, $adapter->getFilterRulesByAttribute('textArea', 'value'));
+            $exptected          = ModelAttributeRulesToDefaultValueMappingRuleUtil::
+                                        getApplicableRulesByModelClassNameAndAttributeName(
+                                            get_class($model),
+                                            'url',
+                                            'value',
+                                            false,
+                                            true,
+                                            false);
+            $this->assertEquals($exptected, $adapter->getFilterRulesByAttribute('url', 'value'));
+            $exptected          = ModelAttributeRulesToDefaultValueMappingRuleUtil::
+                                        getApplicableRulesByModelClassNameAndAttributeName(
+                                            get_class($model),
+                                            'likeContactState',
+                                            'value',
+                                            false,
+                                            true,
+                                            false);
+            $this->assertEquals($exptected, $adapter->getFilterRulesByAttribute('likeContactState', 'value'));
+
+            $model              = new ReportModelTestItem12();
+            $rules              = new ReportsTestReportRules();
+            $adapter            = new ModelRelationsAndAttributesToReportAdapter($model, $rules, Report::TYPE_ROWS_AND_COLUMNS);
+            $exptected          = array(array('value', 'type', 'type' => 'string'));
+            $this->assertEquals($exptected, $adapter->getFilterRulesByAttribute('emailAddress', 'value'));
         }
     }
 ?>

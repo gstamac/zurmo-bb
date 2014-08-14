@@ -140,6 +140,11 @@
                     'latestActivityDateTime',
                     'website'
                 ),
+                'indexes' => array(
+                    'person_id' => array(
+                        'members' => array('person_id'),
+                        'unique' => false),
+                ),
             );
             return $metadata;
         }
@@ -208,6 +213,32 @@
         {
             assert('is_string($dateTime)');
             $this->unrestrictedSet('latestActivityDateTime', $dateTime);
+        }
+
+        protected function afterDelete()
+        {
+            parent::afterDelete();
+            ContactsUtil::resolveMarketingListMembersByContact($this);
+        }
+
+        /**
+         * Override to handle the set read-only latestActivityDateTime attribute on the import scenario.
+         * (non-PHPdoc)
+         * @see RedBeanModel::isAllowedToSetReadOnlyAttribute()
+         */
+        public function isAllowedToSetReadOnlyAttribute($attributeName)
+        {
+            if ($this->getScenario() == 'importModel' || $this->getScenario() == 'searchModel')
+            {
+                if ( $attributeName == 'latestActivityDateTime')
+                {
+                    return true;
+                }
+                else
+                {
+                    return parent::isAllowedToSetReadOnlyAttribute($attributeName);
+                }
+            }
         }
     }
 ?>

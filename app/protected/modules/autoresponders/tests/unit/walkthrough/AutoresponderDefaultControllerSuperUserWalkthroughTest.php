@@ -47,7 +47,6 @@
             $super = User::getByUsername('super');
             Yii::app()->user->userModel = $super;
 
-
             EmailTemplateTestHelper::create('EmailTemplate 01', 'Subject 01', 'Contact', 'Html Content 01',
                                             'Text Content 01');
             EmailTemplateTestHelper::create('EmailTemplate 02', 'Subject 02', 'Contact', 'Html Content 02',
@@ -66,7 +65,7 @@
                             'This is html Content 01', 10, Autoresponder::OPERATION_SUBSCRIBE, true, $marketingList);
             AutoresponderTestHelper::createAutoresponder('Subject 02', 'This is text Content 02',
                         'This is html Content 02', 5, Autoresponder::OPERATION_UNSUBSCRIBE, false, $marketingList);
-            ReadPermissionsOptimizationUtil::rebuild();
+            AllPermissionsOptimizationUtil::rebuild();
         }
 
         public function setUp()
@@ -164,13 +163,17 @@
             $this->assertTrue(strpos($content, '<option value="2">Unsubscribed from list</option>') !== false);
             $this->assertTrue(strpos($content, '<input id="Autoresponder_subject" name="Autoresponder[subject]" ' .
                                                 'type="text" maxlength="64"') !== false);
-            $this->assertTrue(strpos($content, '<select name="Autoresponder[contactEmailTemplateNames]" ' .
-                                                'id="Autoresponder_contactEmailTemplateNames_value">') !== false);
-            $this->assertTrue(strpos($content, '<option value="">Select a template</option>') !== false);
-            $this->assertTrue(strpos($content, '>EmailTemplate 01</option>') !== false);
-            $this->assertTrue(strpos($content, '>EmailTemplate 02</option>') !== false);
-            $this->assertTrue(strpos($content, '>EmailTemplate 03</option>') !== false);
-            $this->assertTrue(strpos($content, '>EmailTemplate 04</option>') !== false);
+            $this->assertTrue(strpos($content, '<tr><th><label for="Autoresponder_contactEmailTemplateNames_name">Select a template</label></th>') !== false);
+            $this->assertTrue(strpos($content, '<td colspan="1"><div class="has-model-select">' .
+                                                '<input name="" id="Autoresponder_contactEmailTemplateNames_id"' .
+                                                ' value="" type="hidden" />') !== false);
+            $this->assertTrue(strpos($content, '<input onblur="clearIdFromAutoCompleteField($(this).val(), &#039;' .
+                                                'Autoresponder_contactEmailTemplateNames_id&#039;);" id="Autoresponder_contact' .
+                                                'EmailTemplateNames_name" type="text" value="" ' .
+                                                'name="" />') !== false);
+            $this->assertTrue(strpos($content, '<a id="Autoresponder_contactEmailTemplateNames_SelectLink" href="#">' .
+                                                '<span class="model-select-icon"></span><span class="z-spinner">' .
+                                                '</span></a></div></td></tr>') !== false);
             $this->assertTrue(strpos($content, '<a href="#tab1">Text Content</a>') !== false);
             $this->assertTrue(strpos($content, '<a class="active-tab" href="#tab2">Html Content</a>') !== false);
             $this->assertTrue(strpos($content, 'class="simple-link" ' .
@@ -181,7 +184,7 @@
                                                 'name="Autoresponder[htmlContent]"') !== false);
             $this->assertTrue(strpos($content, '<label>Attachments</label>') !== false);
             $this->assertTrue(strpos($content, '<strong class="add-label">Add Files</strong>') !== false);
-            $this->assertTrue(strpos($content, '<input id="Autoresponder_files" type="file" ' .
+            $this->assertTrue(strpos($content, '<input id="Autoresponder_files" multiple="multiple" type="file" ' .
                                                 'name="Autoresponder_files"') !== false);
             $this->assertTrue(strpos($content, '<span class="z-label">Cancel</span>') !== false);
             $this->assertTrue(strpos($content, '<span class="z-label">Save</span>') !== false);
@@ -304,8 +307,8 @@
                                                 'name="Autoresponder[enableTracking]" disabled="disabled" value="1" ' .
                                                 'type="checkbox"') !== false);
             $this->assertTrue(strpos($content, '<th>Attachments</th>') !== false);
-            $this->assertTrue(strpos($content, '<a class="active-tab" href="#tab1">Text Content</a>') !== false);
-            $this->assertTrue(strpos($content, '<a href="#tab2">Html Content</a>') !== false);
+            $this->assertTrue(strpos($content, '<a href="#tab1">Text Content</a>') !== false);
+            $this->assertTrue(strpos($content, '<a class="active-tab" href="#tab2">Html Content</a>') !== false);
             $this->assertTrue(strpos($content, 'Text Content 04') !== false);
             $this->assertTrue(strpos($content, 'iframe') !== false); //Now Html is in an iframe
         }
@@ -363,15 +366,20 @@
             $this->assertTrue(strpos($content, '<option value="2" selected="selected">Unsubscribed from list</option>') !== false);
             $this->assertTrue(strpos($content, '<input id="Autoresponder_subject" name="Autoresponder[subject]" ' .
                                                 'type="text" maxlength="64" value="Subject 04"') !== false);
-            $this->assertTrue(strpos($content, '<select name="Autoresponder[contactEmailTemplateNames]" ' .
-                                                'id="Autoresponder_contactEmailTemplateNames_value">') !== false);
-            $this->assertTrue(strpos($content, '<option value="">Select a template</option>') !== false);
-            $this->assertTrue(strpos($content, '>EmailTemplate 01</option>') !== false);
-            $this->assertTrue(strpos($content, '>EmailTemplate 02</option>') !== false);
-            $this->assertTrue(strpos($content, '>EmailTemplate 03</option>') !== false);
-            $this->assertTrue(strpos($content, '>EmailTemplate 04</option>') !== false);
-            $this->assertTrue(strpos($content, '<a class="active-tab" href="#tab1">Text Content</a>') !== false);
-            $this->assertTrue(strpos($content, '<a href="#tab2">Html Content</a>') !== false);
+            $this->assertTrue(strpos($content, '<tr><th><label for="Autoresponder_contactEmailTemplateNames_name">Select a template</label></th>') !== false);
+            $this->assertTrue(strpos($content, '<td colspan="1"><div class="has-model-select"><input name=""' .
+                                                ' id="Autoresponder_contactEmailTemplateNames_id"' .
+                                                ' value="" type="hidden" />') !== false);
+            $this->assertTrue(strpos($content, '<div class="has-model-select">') !== false);
+            $this->assertTrue(strpos($content, '<input onblur="clearIdFromAutoCompleteField($(this).val(), &#039;' .
+                                                'Autoresponder_contactEmailTemplateNames_id&#039;);" id="Autoresponder_contact' .
+                                                'EmailTemplateNames_name" type="text" value="" ' .
+                                                'name="" />') !== false);
+            $this->assertTrue(strpos($content, '<a id="Autoresponder_contactEmailTemplateNames_SelectLink" href="#">' .
+                                                '<span class="model-select-icon"></span><span class="z-spinner">' .
+                                                '</span></a></div></td></tr>') !== false);
+            $this->assertTrue(strpos($content, '<a href="#tab1">Text Content</a>') !== false);
+            $this->assertTrue(strpos($content, '<a class="active-tab" href="#tab2">Html Content</a>') !== false);
             $this->assertTrue(strpos($content, 'class="simple-link" ' .
                                                 'href="#">MergeTag Guide</a>') !== false);
             $this->assertTrue(strpos($content, '<textarea id="Autoresponder_textContent" ' .
@@ -380,7 +388,7 @@
                                                 'name="Autoresponder[htmlContent]"') !== false);
             $this->assertTrue(strpos($content, '<label>Attachments</label>') !== false);
             $this->assertTrue(strpos($content, '<strong class="add-label">Add Files</strong>') !== false);
-            $this->assertTrue(strpos($content, '<input id="Autoresponder_files" type="file" ' .
+            $this->assertTrue(strpos($content, '<input id="Autoresponder_files" multiple="multiple" type="file" ' .
                                                 'name="Autoresponder_files"') !== false);
             $this->assertTrue(strpos($content, '<span class="z-label">Cancel</span>') !== false);
             $this->assertTrue(strpos($content, '<span class="z-label">Save</span>') !== false);

@@ -79,7 +79,7 @@
         protected function resolveSpecialTagNodes()
         {
             $specialTagNodesData = array();
-            foreach($this->getSpecialTagsData() as $data)
+            foreach ($this->getSpecialTagsData() as $data)
             {
                 $node = array(  'id'           => self::makeNodeId($data['id']),
                                 'text'         => $data['label'],
@@ -132,8 +132,8 @@
          * [[OWNERS^AVATAR^MEDIUM ]] : prints the owner's medium avatar image (32x32).
          * [[OWNERS^AVATAR^LARGE]] : prints the owner's large avatar image (32x32).
          * [[OWNERS^EMAIL^SIGNATURE]] : prints the owner's email signature.
-         * {{UNSUBSCRIBE_URL}} : prints unsubscribe url.
-         * {{MANAGE_SUBSCRIPTIONS_URL}} : prints manage subscriptions url.
+         * [[UNSUBSCRIBE^URL]] : prints unsubscribe url.
+         * [[MANAGE^SUBSCRIPTIONS^URL]] : prints manage subscriptions url.
          * @return array
          */
         protected function getSpecialTagsData()
@@ -148,7 +148,7 @@
                       'dataValue' => MergeTagsUtil::TAG_PREFIX . 'BASE' . MergeTagsUtil::CAPITAL_DELIMITER . 'URL' .
                                    MergeTagsUtil::TAG_SUFFIX),
                 array('id'        => 'applicationName',
-                      'label'     => Zurmo::t('EmailTemplatesModule', 'Application Name'),
+                      'label'     => Zurmo::t('ZurmoModule', 'Application Name'),
                       'dataValue' => MergeTagsUtil::TAG_PREFIX . 'APPLICATION' . MergeTagsUtil::CAPITAL_DELIMITER . 'NAME' .
                                    MergeTagsUtil::TAG_SUFFIX),
                 array('id'        => 'currentYear',
@@ -177,10 +177,10 @@
                         MergeTagsUtil::CAPITAL_DELIMITER . 'SIGNATURE' . MergeTagsUtil::TAG_SUFFIX),
                 array('id'        => 'unsubscribeUrl',
                       'label'     => Zurmo::t('EmailTemplatesModule', 'Unsubscribe URL'),
-                      'dataValue' => '{{UNSUBSCRIBE_URL}}'),
+                      'dataValue' => GlobalMarketingFooterUtil::resolveUnsubscribeUrlMergeTag()),
                 array('id'        => 'manageSubscriptionsUrl',
                       'label'     => Zurmo::t('EmailTemplatesModule', 'Manage Subscriptions URL'),
-                      'dataValue' => '{{MANAGE_SUBSCRIPTIONS_URL}}'),
+                      'dataValue' => GlobalMarketingFooterUtil::resolveManageSubscriptionsMergeTag()),
             );
         }
     }

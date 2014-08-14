@@ -46,6 +46,11 @@
 
         public static function getAllByFolderType($type)
         {
+            return static::getByFolderType($type, null);
+        }
+
+        public static function getByFolderType($type, $count)
+        {
             assert('is_string($type)');
             $searchAttributeData = array();
             $searchAttributeData['clauses'] = array(
@@ -59,7 +64,7 @@
             $searchAttributeData['structure'] = '1';
             $joinTablesAdapter = new RedBeanModelJoinTablesQueryAdapter('EmailMessage');
             $where = RedBeanModelDataProvider::makeWhere('EmailMessage', $searchAttributeData, $joinTablesAdapter);
-            return self::getSubset($joinTablesAdapter, null, null, $where, null);
+            return self::getSubset($joinTablesAdapter, null, $count, $where, null);
         }
 
         public function __toString()
@@ -148,7 +153,7 @@
             return array_merge(parent::translatedAttributeLabels($language),
                 array(
                     'account'      => Zurmo::t('EmailMessagesModule', 'Email Account',  array(), null, $language),
-                    'content'      => Zurmo::t('EmailMessagesModule', 'Content',  array(), null, $language),
+                    'content'      => Zurmo::t('Core', 'Content',  array(), null, $language),
                     'error'        => Zurmo::t('Core',                'Error',  array(), null, $language),
                     'folder'       => Zurmo::t('ZurmoModule',         'Folder',  array(), null, $language),
                     'files'        => Zurmo::t('ZurmoModule',         'Files',  array(), null, $language),

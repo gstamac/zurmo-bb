@@ -143,7 +143,7 @@
             {
                 $verticalColumns = 2;
             }
-            $aVerticalGridView   = new GridView($verticalColumns, 1,'nav', false);
+            $aVerticalGridView   = new GridView($verticalColumns, 1, 'nav', false);
             $aVerticalGridView->setCssClasses( array('AppNavigation')); //navigation left column
             $aVerticalGridView->setView(static::makeMenuView($controller), 0, 0);
             if (static::$showRecentlyViewed)
@@ -199,7 +199,7 @@
          */
         public static function makeErrorViewForCurrentUser(CController $controller, View $containedView)
         {
-            $aVerticalGridView   = new GridView(1, 1,'nav', false);
+            $aVerticalGridView   = new GridView(1, 1, 'nav', false);
             $aVerticalGridView->setCssClasses( array('AppNavigation')); //navigation left column
             $aVerticalGridView->setView(static::makeMenuView($controller), 0, 0);
 
@@ -284,6 +284,36 @@
                     static::resolveActiveModuleId($controller) == $item['moduleId'])
                 {
                     $items[$key]['active'] = true;
+                    if (isset($items[$key]['items']))
+                    {
+                        try
+                        {
+                            $url        = Yii::app()->urlManager->parseUrl(Yii::app()->request);
+                            foreach ($items[$key]['items'] as $subItemKey => $subItem)
+                            {
+                                $subItemUrl = $subItem['url'];
+                                if (stristr($subItemUrl[0], $url) == $url)
+                                {
+                                    if (isset($_GET['moduleClassName']) && isset($subItemUrl['moduleClassName']) && $_GET['moduleClassName'] == $subItemUrl['moduleClassName'])
+                                    {
+                                        $items[$key]['items'][$subItemKey]['active'] = true;
+                                    }
+                                    elseif (isset($_GET['moduleClassName']) && isset($subItemUrl['moduleClassName']) && $_GET['moduleClassName'] != $subItemUrl['moduleClassName'])
+                                    {
+                                        $items[$key]['items'][$subItemKey]['active'] = false;
+                                    }
+                                    else
+                                    {
+                                        $items[$key]['items'][$subItemKey]['active'] = true;
+                                    }
+                                }
+                            }
+                        }
+                        catch (Exception $exception)
+                        {
+                            //Do nothing
+                        }
+                    }
                 }
             }
         }

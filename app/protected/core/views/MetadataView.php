@@ -151,6 +151,7 @@
                 {
                     $renderedContent = null;
                     $this->resolveActionElementInformationDuringRender($elementInformation);
+                    Yii::app()->custom->resolveActionElementInformationDuringRender($this, $elementInformation);
                     array_walk($elementInformation, array($this, 'resolveEvaluateSubString'));
                     $params = array_slice($elementInformation, 1);
                     $elementClassName = $elementInformation['type'] . 'ActionElement';
@@ -186,18 +187,6 @@
                     $first = false;
                     $content .= $renderedContent;
                 }
-            }
-            if (!empty($dropDownItems))
-            {
-                $content .= ZurmoHtml::link('', '#', array('class' => 'mobile-actions'));
-                $content .= ZurmoHtml::tag('div', array( 'class' => 'mobile-view-toolbar-container'),
-                    ZurmoHtml::dropDownList(
-                        $dropDownId,
-                        '',
-                        $dropDownItems,
-                        $dropDownItemHtmlOptions
-                    )
-                );
             }
             return $content;
         }

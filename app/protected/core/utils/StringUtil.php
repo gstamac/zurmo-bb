@@ -39,6 +39,8 @@
      */
     class StringUtil
     {
+        const VALID_HASH_PATTERN    = '~^[A-Z0-9\+=/ ]+~i'; // Not Coding Standard
+
         /**
          * Given a string and a length, return the chopped string if it is larger than the length.
          * @param $string
@@ -154,7 +156,7 @@
         {
             if (empty($characterSet))
             {
-                $characterSet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                $characterSet = implode(range("A", "Z")) . implode(range("a", "z")) . implode(range("0", "9"));
             }
             $characterSetLength = strlen($characterSet);
             $randomString = '';
@@ -184,6 +186,48 @@
         public static function endsWith($haystack, $needle)
         {
             return $needle === "" || substr($haystack, -strlen($needle)) === $needle;
+        }
+
+        /**
+         * Add a default scheme to url
+         * @param $url
+         * @param string $scheme
+         * @return string
+         */
+        public static function addSchemeIfMissing($url, $scheme = 'http')
+        {
+            if (!preg_match("~^(?:f|ht)tps?://~i", $url))
+            {
+                $url = $scheme ."://" . $url;
+            }
+            return $url;
+        }
+
+        public static function resolveHashForQueryStringArray($queryStringArray)
+        {
+            $queryString            = http_build_query($queryStringArray);
+            $encryptedString        = ZurmoPasswordSecurityUtil::encrypt($queryString);
+            if (!$encryptedString || !static::isValidHash($encryptedString))
+            {
+                throw new NotSupportedException();
+            }
+            $encryptedString        = base64_encode($encryptedString);
+            return $encryptedString;
+        }
+
+        public static function isValidHash($hash)
+        {
+            if (empty($hash))
+            {
+                return false;
+            }
+            $matches = array();
+            $matchesCount = preg_match_all(static::VALID_HASH_PATTERN, $hash, $matches);
+            if (!$matchesCount || ($matches[0][0] !== $hash))
+            {
+                return false;
+            }
+            return true;
         }
     }
 ?>

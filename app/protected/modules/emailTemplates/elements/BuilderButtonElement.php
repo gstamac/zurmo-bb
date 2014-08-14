@@ -56,12 +56,15 @@
             $properties              = array(
                 'backend'       => array(
                     'sizeClass'         => 'button',
-                    'text'              => Zurmo::t('EmailTemplatesModule', 'Click Here'),
+                    'text'              => Zurmo::t('Core', 'Click Here'),
                     'width'             => '100%',
                 ),
                 'frontend'      => array(
                     'href'              => Yii::app()->createAbsoluteUrl('/'),
                     'target'            => '_blank',
+                    'inlineStyles'  => array(
+                        'color'              => '#ffffff',
+                    ),
                 )
             );
             return $properties;
@@ -72,8 +75,7 @@
             $target                 = null;
             $href                   = null;
             extract($this->properties['frontend']);
-            $text                   = $this->properties['backend']['text'];
-            $label                  = ZurmoHtml::tag('strong', array(), $text);
+            $label                  = $this->properties['backend']['text'];
             $frontendOptions        = $this->resolveFrontendPropertiesNonEditable();
             $htmlOptions            = $this->resolveDefaultHtmlOptionsForLink();
             $options                = CMap::mergeArray($htmlOptions, $frontendOptions);
@@ -100,20 +102,16 @@
             if ($inlineStyles)
             {
                 $usableInlineStyles = array();
-                foreach($this->inlineStylesToKeepOnATag as $style)
+                foreach ($this->inlineStylesToKeepOnATag as $style)
                 {
-                    if(isset($inlineStyles[$style]))
+                    if (isset($inlineStyles[$style]))
                     {
                         $usableInlineStyles[$style] = $inlineStyles[$style];
-                        if($style == 'color')
-                        {
-                            $usableInlineStyles[$style] .= ' !important';
-                        }
                         unset($mergedProperties['inlineStyles'][$style]);
                     }
                 }
                 unset($mergedProperties['inlineStyles']);
-                if($usableInlineStyles)
+                if ($usableInlineStyles)
                 {
                     $mergedProperties['style']  = $this->stringifyProperties($usableInlineStyles, null, null, ':', ';');
                 }
@@ -128,22 +126,26 @@
             {
                 $properties = $frontendProperties;
             }
-            foreach($this->inlineStylesToKeepOnATag as $style)
+            foreach ($this->inlineStylesToKeepOnATag as $style)
             {
-                if(isset($properties['inlineStyles']) && isset($properties['inlineStyles'][$style]))
+                if (isset($properties['inlineStyles']) && isset($properties['inlineStyles'][$style]) && $style != 'color')
                 {
                     unset($properties['inlineStyles'][$style]);
                 }
             }
-            if(isset($properties['target']))
+            if (isset($properties['target']))
             {
                 unset($properties['target']);
             }
-            if(isset($properties['href']))
+            if (isset($properties['href']))
             {
                 unset($properties['href']);
             }
             $this->resolveInlineStylePropertiesNonEditable($properties);
+            if (isset($properties['inlineStyles']))
+            {
+                unset($properties['inlineStyles']);
+            }
             return $properties;
         }
 
@@ -232,17 +234,25 @@
         protected function resolveNonEditableContentWrappingTableOptions()
         {
             $frontendOptions    = $this->resolveFrontendPropertiesNonEditable();
-            if(isset($frontendOptions['href']))
+            if (isset($frontendOptions['href']))
             {
                 unset($frontendOptions['href']);
             }
-            if(isset($frontendOptions['target']))
+            if (isset($frontendOptions['target']))
             {
                 unset($frontendOptions['target']);
             }
             $htmlOptions        = $this->resolveNonEditableContentWrappingTdHtmlOptions();
             $options            = CMap::mergeArray($htmlOptions, $frontendOptions);
             return $options;
+        }
+
+        protected function resolveWrapperTdNonEditableByContent($content)
+        {
+            $options            = $this->resolveNonEditableContentWrappingTdOptions();
+            $options            = CMap::mergeArray($options, array('class' => 'button-td'));
+            $content            = ZurmoHtml::tag('td', $options, $content);
+            return $content;
         }
     }
 ?>

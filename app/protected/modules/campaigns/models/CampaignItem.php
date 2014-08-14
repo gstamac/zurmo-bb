@@ -78,6 +78,13 @@
                 ),
                 'elements' => array(
                 ),
+                'indexes' => array( 'campaign_id' => array(
+                                        'members' => array('campaign_id'),
+                                        'unique' => false),
+                                    'contact_id' => array(
+                                        'members' => array('contact_id'),
+                                        'unique' => false)
+                ),
             );
             return $metadata;
         }
@@ -243,33 +250,6 @@
                 return self::getCount($joinTablesAdapter, $where, get_called_class(), true);
             }
             return self::getSubset($joinTablesAdapter, null, $pageSize, $where, null);
-        }
-
-        public static function registerCampaignItemsByCampaign($campaign, $contacts)
-        {
-            foreach ($contacts as $contact)
-            {
-                if (!static::addNewItem(0, $contact, $campaign))
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        public static function addNewItem($processed, $contact, $campaign)
-        {
-            $campaignItem                       = new self;
-            $campaignItem->processed            = $processed;
-            $campaignItem->contact              = $contact;
-            $campaignItem->campaign             = $campaign;
-            $saved                              = $campaignItem->unrestrictedSave();
-            assert('$saved');
-            if (!$saved)
-            {
-                throw new FailedToSaveModelException();
-            }
-            return $saved;
         }
 
         /**

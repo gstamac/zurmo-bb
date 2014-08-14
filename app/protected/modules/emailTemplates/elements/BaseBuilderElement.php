@@ -263,7 +263,6 @@
          */
         protected function registerNonEditableScripts()
         {
-
         }
 
         /**
@@ -271,7 +270,6 @@
          */
         protected function registerNonEditableCss()
         {
-
         }
 
         /**
@@ -575,9 +573,16 @@
             $content               .= $formEnd;
             $content                = ZurmoHtml::tag('div', array('class' => 'wide form'), $content);
             $content                = ZurmoHtml::tag('div', array('class' => 'wrapper'), $content);
+            $content               .= $this->renderModalContainer($form);
             return $content;
         }
 
+        protected function renderModalContainer($form)
+        {
+            return ZurmoHtml::tag('div', array(
+                'id' => ModelElement::MODAL_CONTAINER_PREFIX . '-' . $form->id
+            ), '');
+        }
 
         /**
          * Returns string containing all form input fields properly wrapped in containers.
@@ -771,22 +776,26 @@
         protected function registerTabbedContentScripts()
         {
             $scriptName = 'element-edit-form-tab-switch-handler';
+            // Begin Not Coding Standard
             Yii::app()->clientScript->registerScript($scriptName, "
                     $('.edit-form-tab-content .tabs-nav a:not(.simple-link)').click( function(event){
                         event.preventDefault();
-                        //the menu items
-                        $('.active-tab', $(this).parent()).removeClass('active-tab');
-                        $(this).addClass('active-tab');
-                        //the sections
-                        var _old = $('.tab.active-tab'); //maybe add context here for tab-container
-                        _old.fadeToggle();
-                        var _new = $( $(this).attr('href') );
-                        _new.fadeToggle(150, 'linear', function(){
+                        if ( !$(this).hasClass('active-tab') )
+                        {
+                            //the menu items
+                            $('.active-tab', $(this).parent()).removeClass('active-tab');
+                            $(this).addClass('active-tab');
+                            //the sections
+                            var _old = $('.tab.active-tab'); //maybe add context here for tab-container
+                            _old.fadeToggle();
                             _old.removeClass('active-tab');
+                            var _new = $( $(this).attr('href') );
+                            _new.fadeToggle(150, 'linear');
                             _new.addClass('active-tab');
-                        });
+                        }
                     });
                 ");
+            // End Not Coding Standard
         }
 
         /**
@@ -796,49 +805,49 @@
         protected function renderFormActionLinks()
         {
             $content    = $this->renderApplyLink();
-            $content   .= $this->renderCancelLink();
+            $content   .= $this->renderBackLink();
             $content    = ZurmoHtml::tag('div', array('class' => 'form-toolbar'), $content);
             $content    = ZurmoHtml::tag('div', array('class' => 'view-toolbar-container clearfix'), $content);
             return $content;
         }
 
         /**
-         * Render Cancel Action Link
+         * Render Back Action Link
          * @return string
          */
-        protected function renderCancelLink()
+        protected function renderBackLink()
         {
-            $this->registerCancelScript();
-            $label  = ZurmoHtml::tag('span', array('class' => 'z-label'), $this->renderCancelLinkLabel());
-            $link   = ZurmoHtml::link($label, '#', $this->resolveCancelLinkHtmlOptions());
+            $this->registerBackScript();
+            $label  = ZurmoHtml::tag('span', array('class' => 'z-label'), $this->renderBackLinkLabel());
+            $link   = ZurmoHtml::link($label, '#', $this->resolveBackLinkHtmlOptions());
             return $link;
         }
 
         /**
-         * Resolve Cancel Link html options
+         * Resolve Back Link html options
          * @return array
          */
-        protected function resolveCancelLinkHtmlOptions()
+        protected function resolveBackLinkHtmlOptions()
         {
-            return array('id' => $this->resolveCancelLinkId(), 'class' => 'cancel-button');
+            return array('id' => $this->resolveBackLinkId(), 'class' => 'cancel-button');
         }
 
         /**
-         * Resolve link id for Cancel Link
+         * Resolve link id for back Link
          * @return string
          */
-        protected function resolveCancelLinkId()
+        protected function resolveBackLinkId()
         {
-            return 'elementEditFormCancelLink';
+            return 'elementEditFormBackLink';
         }
 
         /**
-         * Render Label for Cancel Link
+         * Render Label for Back Link
          * @return string
          */
-        protected function renderCancelLinkLabel()
+        protected function renderBackLinkLabel()
         {
-            return Zurmo::t('Core', 'Cancel');
+            return Zurmo::t('Core', 'Back');
         }
 
         /**
@@ -920,12 +929,12 @@
         }
 
         /**
-         * Register javascript snippet to handle clicking cancel link
+         * Register javascript snippet to handle clicking back link
          */
-        protected function registerCancelScript()
+        protected function registerBackScript()
         {
-            Yii::app()->clientScript->registerScript('cancelLinkClick', "
-                $('#" . $this->resolveCancelLinkId() . "').unbind('click.cancelLinkClick').bind('click.cancelLinkClick', function()
+            Yii::app()->clientScript->registerScript('backLinkClick', "
+                $('#" . $this->resolveBackLinkId() . "').unbind('click.backLinkClick').bind('click.backLinkClick', function()
                 {
                     hideElementEditFormOverlay();
                     $('#" . BuilderCanvasWizardView::ELEMENTS_CONTAINER_ID . "').show();
@@ -989,6 +998,7 @@
             //$ajaxArray['cache']         = 'false'; //todo: should by default be used.
             $ajaxArray['url']           = $this->resolveFormActionUrl();
             $ajaxArray['type']          = 'POST';
+            // Begin Not Coding Standard
             $ajaxArray['data'] = 'js:$("#' .  $this->resolveApplyLinkId() . '").closest("form").serialize()';
             $ajaxArray['beforeSend']    = "js:function()
                                         {
@@ -1005,6 +1015,7 @@
                                             emailTemplateEditor.canvasChanged();
                                             emailTemplateEditor.addPlaceHolderForEmptyCells();
                                         }";
+            // End Not Coding Standard
             return $ajaxArray;
         }
 
@@ -1032,7 +1043,6 @@
          */
         protected function renderBeforeFormLayout(ZurmoActiveForm $form)
         {
-
         }
 
         /**
@@ -1041,7 +1051,6 @@
          */
         protected function renderAfterFormLayout(ZurmoActiveForm $form)
         {
-
         }
 
         /**
@@ -1132,7 +1141,7 @@
             {
                 $params     = $defaultParams;
             }
-            else if (ArrayUtil::getArrayValue($params, 'mergeDefault'))
+            elseif (ArrayUtil::getArrayValue($params, 'mergeDefault'))
             {
                 $params     = CMap::mergeArray($defaultParams, $params);
             }
@@ -1312,17 +1321,17 @@
 
         public function validate($attribute, $value)
         {
-            if (isset($this->getRules()[$attribute]))
+            $rules = $this->getRules();
+            if (isset($rules[$attribute]))
             {
                 try
                 {
-                    return call_user_func(array($this, $this->getRules()[$attribute]), $value);
+                    return call_user_func(array($this, $rules[$attribute]), $value);
                 }
                 catch (Exception $exception)
                 {
                     throw new NotImplementedException();
                 }
-
             }
             return true;
         }
@@ -1335,7 +1344,8 @@
                          'line-height'      => 'validateInteger',
                          'border-top-width' => 'validateInteger',
                          'divider-padding'  => 'validateInteger',
-                         'height'           => 'validateInteger');
+                         'height'           => 'validateInteger',
+                         'href'             => 'validateUrl');
         }
 
 //todo: properly use Cvalidator for this
@@ -1355,6 +1365,20 @@
             }
         }
 
+        protected function validateUrl($value)
+        {
+            if ($value == null)
+            {
+                return true;
+            }
+            $validator = new CUrlValidator();
+            if (!$validator->validateValue($value))
+            {
+                return Zurmo::t('EmailTemplatesModule', 'Use a valid URL.');
+            }
+            return true;
+        }
+
         public static function getPropertiesSuffixMappedArray()
         {
             //TODO: @sergio: We need to move this to some rules class
@@ -1365,17 +1389,20 @@
                 'border-width'      => 'px',
                 'border-top-width'  => 'px',
                 'divider-padding'   => 'px',
+                'height'            => 'px',
+                'width'             => 'px',
             );
             return $mappedArray;
         }
 
         protected function sanitizeProperties(array & $properties)
         {
-            foreach($properties as $key => $value)
+            $propertiesMappedArray = static::getPropertiesSuffixMappedArray();
+            foreach ($properties as $key => $value)
             {
-                if (isset(static::getPropertiesSuffixMappedArray()[$key]))
+                if (isset($propertiesMappedArray[$key]))
                 {
-                    $properties[$key] .= static::getPropertiesSuffixMappedArray()[$key];
+                    $properties[$key] .= $propertiesMappedArray[$key];
                 }
             }
         }

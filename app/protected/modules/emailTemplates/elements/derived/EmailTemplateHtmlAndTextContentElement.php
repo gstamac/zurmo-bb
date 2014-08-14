@@ -46,7 +46,7 @@
 
         const TEXT_CONTENT_INPUT_NAME   = 'textContent';
 
-        public $plugins = array('fontfamily', 'fontsize', 'fontcolor', 'mergetags');
+        public $plugins = array('fontfamily', 'fontsize', 'fontcolor', 'mergetags', 'imagegallery');
 
         public static function getModelAttributeNames()
         {
@@ -165,19 +165,21 @@
             }
             else
             {
+                // Begin Not Coding Standard
                 Yii::app()->clientScript->registerScript($scriptName, "
                         $('.redactor-iframe').load(function(){
                             var contentHeight = $('.redactor-iframe').contents().find('body').outerHeight();
                             $('.redactor-iframe').height(contentHeight + 50);
                         });
                     ");
+                // End Not Coding Standard
             }
         }
 
         protected function renderControlNonEditable()
         {
             assert('$this->attribute == null');
-            $textContent    = $this->model->textContent;
+            $textContent    = nl2br(Yii::app()->format->text($this->model->textContent));
             $activeTab      = $this->getActiveTab();
             $htmlContent    = $this->renderNonEditableHtmlContentArea();
             $content        = $this->resolveTabbedContent($textContent, $htmlContent, $activeTab);
@@ -195,11 +197,25 @@
 
         protected function getActiveTab()
         {
-            if (empty($this->model->textContent) && (!$this->resolveSelectiveLoadOfTabs() || $this->isPastedHtmlTemplate()))
+            // TODO: @Shoaibi: High: Refactor this
+            if ($this->resolveSelectiveLoadOfTabs() && isset($this->form))
+            {
+                if ($this->isPastedHtmlTemplate() && $this->isHtmlContentNotEmptyOrBothContentsEmpty())
+                {
+                    return 'html';
+                }
+                return 'text';
+            }
+            if ($this->isHtmlContentNotEmptyOrBothContentsEmpty())
             {
                 return 'html';
             }
             return 'text';
+        }
+
+        protected function isHtmlContentNotEmptyOrBothContentsEmpty()
+        {
+            return (!empty($this->model->htmlContent) || (empty($this->model->textContent) && empty($this->model->htmlContent)));
         }
 
         protected function renderEditableHtmlContentArea()
@@ -232,6 +248,7 @@
             $htmlOptions['name']     = $this->getEditableInputName(static::HTML_CONTENT_INPUT_NAME);
             $cClipWidget             = new CClipWidget();
             $cClipWidget->beginClip("Redactor");
+            // Begin Not Coding Standard
             $cClipWidget->widget('application.core.widgets.Redactor', array(
                                 'htmlOptions'           => $htmlOptions,
                                 'content'               => $htmlContent,
@@ -247,6 +264,7 @@
                                     $(".redactor_box iframe").height(contentHeight + 50);
                                 }'
             ));
+            // End Not Coding Standard
             $cClipWidget->endClip();
             $content                 = ZurmoHtml::label($this->renderHtmlContentAreaLabel(), $id);
             $content                .= $cClipWidget->getController()->clips['Redactor'];

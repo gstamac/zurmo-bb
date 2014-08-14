@@ -53,5 +53,5 @@
         {
             return $className::APPLICATION_REQUEST;
         }
-     }
+    }
 ?>

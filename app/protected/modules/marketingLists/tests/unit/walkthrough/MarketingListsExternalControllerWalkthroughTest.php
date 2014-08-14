@@ -48,7 +48,7 @@
         {
             parent::setUpBeforeClass();
             SecurityTestHelper::createSuperAdmin();
-            ReadPermissionsOptimizationUtil::rebuild();
+            AllPermissionsOptimizationUtil::rebuild();
         }
 
         /**
@@ -205,9 +205,7 @@
                 'keyTwo'    => 'valueTwo',
                 'keyThree'  => 'ValueThree',
             );
-            $resolveHashForQueryStringArrayFunction = static::getProtectedMethod('EmailMessageActivityUtil',
-                                                                                    'resolveHashForQueryStringArray');
-            $hash       = $resolveHashForQueryStringArrayFunction->invokeArgs(null, array($queryStringArray));
+            $hash                   = StringUtil::resolveHashForQueryStringArray($queryStringArray);
             $this->setGetArray(array(
                 'hash'    => $hash,
             ));
@@ -225,9 +223,7 @@
                 'keyTwo'    => 'valueTwo',
                 'keyThree'  => 'ValueThree',
             );
-            $resolveHashForQueryStringArrayFunction = static::getProtectedMethod('EmailMessageActivityUtil',
-                                                                                    'resolveHashForQueryStringArray');
-            $hash       = $resolveHashForQueryStringArrayFunction->invokeArgs(null, array($queryStringArray));
+            $hash                   = StringUtil::resolveHashForQueryStringArray($queryStringArray);
             $this->setGetArray(array(
                 'hash'    => $hash,
             ));
@@ -245,9 +241,7 @@
                 'keyTwo'    => 'valueTwo',
                 'keyThree'  => 'ValueThree',
             );
-            $resolveHashForQueryStringArrayFunction = static::getProtectedMethod('EmailMessageActivityUtil',
-                                                                                    'resolveHashForQueryStringArray');
-            $hash       = $resolveHashForQueryStringArrayFunction->invokeArgs(null, array($queryStringArray));
+            $hash                   = StringUtil::resolveHashForQueryStringArray($queryStringArray);
             $this->setGetArray(array(
                 'hash'    => $hash,
             ));
@@ -265,9 +259,7 @@
                 'keyTwo'    => 'valueTwo',
                 'keyThree'  => 'ValueThree',
             );
-            $resolveHashForQueryStringArrayFunction = static::getProtectedMethod('EmailMessageActivityUtil',
-                                                                                    'resolveHashForQueryStringArray');
-            $hash       = $resolveHashForQueryStringArrayFunction->invokeArgs(null, array($queryStringArray));
+            $hash                   = StringUtil::resolveHashForQueryStringArray($queryStringArray);
             $this->setGetArray(array(
                 'hash'    => $hash,
             ));
@@ -284,7 +276,7 @@
             $contact    = ContactTestHelper::createContactByNameForOwner('contact 01', Yii::app()->user->userModel);
             Yii::app()->user->userModel = null;
             $personId   = $contact->getClassId('Person');
-            $hash       = EmailMessageActivityUtil::resolveHashForUnsubscribeAndManageSubscriptionsUrls($personId, 100, 1, 'AutoresponderItem', false);
+            $hash       = GlobalMarketingFooterUtil::resolveHash($personId, 100, 1, 'AutoresponderItem', false);
             $this->setGetArray(array(
                 'hash'    => $hash,
             ));
@@ -301,7 +293,7 @@
             $contact    = ContactTestHelper::createContactByNameForOwner('contact 02', Yii::app()->user->userModel);
             Yii::app()->user->userModel = null;
             $personId   = $contact->getClassId('Person');
-            $hash       = EmailMessageActivityUtil::resolveHashForUnsubscribeAndManageSubscriptionsUrls($personId, 100, 1, 'AutoresponderItem', false);
+            $hash       = GlobalMarketingFooterUtil::resolveHash($personId, 100, 1, 'AutoresponderItem', false);
             $this->setGetArray(array(
                 'hash'    => $hash,
             ));
@@ -318,7 +310,7 @@
             $contact    = ContactTestHelper::createContactByNameForOwner('contact 03', Yii::app()->user->userModel);
             Yii::app()->user->userModel = null;
             $personId   = $contact->getClassId('Person');
-            $hash       = EmailMessageActivityUtil::resolveHashForUnsubscribeAndManageSubscriptionsUrls($personId, 100, 1, 'AutoresponderItem', false);
+            $hash       = GlobalMarketingFooterUtil::resolveHash($personId, 100, 1, 'AutoresponderItem', false);
             $this->setGetArray(array(
                 'hash'    => $hash,
             ));
@@ -334,14 +326,12 @@
             $contact    = ContactTestHelper::createContactByNameForOwner('contact 04', Yii::app()->user->userModel);
             Yii::app()->user->userModel = null;
             $personId   = $contact->getClassId('Person');
-            $hash       = EmailMessageActivityUtil::resolveHashForUnsubscribeAndManageSubscriptionsUrls($personId, 100, 1, 'AutoresponderItem', false);
+            $hash       = GlobalMarketingFooterUtil::resolveHash($personId, 100, 1, 'AutoresponderItem', false);
             $this->setGetArray(array(
                 'hash'    => $hash,
             ));
             $content = $this->runControllerWithNoExceptionsAndGetContent($this->manageSubscriptionsUrl);
             $this->assertTrue(strpos($content, '<title>ZurmoCRM - Manage Subscriptions</title>') !== false);
-            $this->assertTrue(strpos($content, '<div id="MarketingListsManageSubscriptionsPageView" ' .
-                                                    'class="ZurmoPageView PageView">') !== false);
             $this->assertTrue(strpos($content, '<div class="GridView">') !== false);
             $this->assertTrue(strpos($content, '<div id="HeaderLinksView">') === false);
             $this->assertTrue(strpos($content, '<div id="MarketingListsManageSubscriptionsListView" ' .
@@ -357,7 +347,7 @@
                                                     'SubscriptionListView-toggleUnsubscribed"') !== false);
             $this->assertTrue(strpos($content, '/marketingLists/external/optOut?hash=') !== false);
             $this->assertTrue(strpos($content, '>Unsubscribe All/OptOut</a>') !== false);
-            $this->assertTrue(strpos($content, '<div id="FooterView">') !== false);
+            $this->assertTrue(strpos($content, '<footer id="FooterView">') !== false);
             $this->assertTrue(strpos($content, '<a href="http://www.zurmo.com" id="credit-link" ' .
                                                     'class="clearfix">') !== false);
             $this->assertTrue(strpos($content, '<span>Copyright &#169; Zurmo Inc., 2014. ' .
@@ -377,7 +367,7 @@
                                                                                     'from@domain.com',
                                                                                     true);
             Yii::app()->user->userModel = null;
-            $hash       = EmailMessageActivityUtil::resolveHashForUnsubscribeAndManageSubscriptionsUrls(100, $marketingList->id, 1,
+            $hash       = GlobalMarketingFooterUtil::resolveHash(100, $marketingList->id, 1,
                                                                                             'AutoresponderItem', false);
             $this->setGetArray(array(
                 'hash'    => $hash,
@@ -398,7 +388,7 @@
                                                                                     'from@domain.com',
                                                                                     false);
             Yii::app()->user->userModel = null;
-            $hash       = EmailMessageActivityUtil::resolveHashForUnsubscribeAndManageSubscriptionsUrls(100, $marketingList->id, 1,
+            $hash       = GlobalMarketingFooterUtil::resolveHash(100, $marketingList->id, 1,
                                                                                             'AutoresponderItem', false);
             $this->setGetArray(array(
                 'hash'    => $hash,
@@ -419,7 +409,7 @@
                                                                                     'from@domain.com',
                                                                                     true);
             Yii::app()->user->userModel = null;
-            $hash       = EmailMessageActivityUtil::resolveHashForUnsubscribeAndManageSubscriptionsUrls(100, $marketingList->id, 1,
+            $hash       = GlobalMarketingFooterUtil::resolveHash(100, $marketingList->id, 1,
                                                                                             'AutoresponderItem', false);
             $this->setGetArray(array(
                 'hash'    => $hash,
@@ -440,7 +430,7 @@
                                                                                     'from@domain.com',
                                                                                     false);
             Yii::app()->user->userModel = null;
-            $hash       = EmailMessageActivityUtil::resolveHashForUnsubscribeAndManageSubscriptionsUrls(100, $marketingList->id, 1,
+            $hash       = GlobalMarketingFooterUtil::resolveHash(100, $marketingList->id, 1,
                                                                                             'AutoresponderItem', false);
             $this->setGetArray(array(
                 'hash'    => $hash,
@@ -470,15 +460,13 @@
                 MarketingListMemberTestHelper::createMarketingListMember($unsubscribed, $marketingList, $contact);
             }
             Yii::app()->user->userModel = null;
-            $hash       = EmailMessageActivityUtil::resolveHashForUnsubscribeAndManageSubscriptionsUrls($personId, $marketingList->id, 1,
+            $hash       = GlobalMarketingFooterUtil::resolveHash($personId, $marketingList->id, 1,
                                                                                             'AutoresponderItem', false);
             $this->setGetArray(array(
                 'hash'    => $hash,
             ));
             $content    = $this->runControllerWithNoExceptionsAndGetContent($this->manageSubscriptionsUrl);
             $this->assertTrue(strpos($content, '<title>ZurmoCRM - Manage Subscriptions</title>') !== false);
-            $this->assertTrue(strpos($content, '<div id="MarketingListsManageSubscriptionsPageView" ' .
-                                                    'class="ZurmoPageView PageView">') !== false);
             $this->assertTrue(strpos($content, '<div class="GridView">') !== false);
             $this->assertTrue(strpos($content, '<div id="HeaderLinksView">') === false);
             $this->assertTrue(strpos($content, '<div id="MarketingListsManageSubscriptionsListView" ' .
@@ -494,7 +482,7 @@
                                                     'SubscriptionListView-toggleUnsubscribed"') !== false);
             $this->assertTrue(strpos($content, '/marketingLists/external/optOut?hash=') !== false);
             $this->assertTrue(strpos($content, '>Unsubscribe All/OptOut</a></td>') !== false);
-            $this->assertTrue(strpos($content, '<div id="FooterView">') !== false);
+            $this->assertTrue(strpos($content, '<footer id="FooterView">') !== false);
             $this->assertTrue(strpos($content, '<a href="http://www.zurmo.com" id="credit-link" ' .
                                                     'class="clearfix">') !== false);
             $this->assertTrue(strpos($content, '<span>Copyright &#169; Zurmo Inc., 2014. ' .
@@ -543,7 +531,7 @@
             $member[0]->delete();
             $personId       = $contact->getClassId('Person');
             Yii::app()->user->userModel = null;
-            $hash           = EmailMessageActivityUtil::resolveHashForUnsubscribeAndManageSubscriptionsUrls($personId, $marketingList->id, 1,
+            $hash           = GlobalMarketingFooterUtil::resolveHash($personId, $marketingList->id, 1,
                                                                                             'AutoresponderItem', false);
             $this->setGetArray(array(
                 'hash'    => $hash,
@@ -575,7 +563,7 @@
             $personId       = $contact->getClassId('Person');
             Yii::app()->user->userModel = null;
             // we set modelId to 0 and createNewActivity to true, so if it tries to create activity it will throw NotFoundException
-            $hash           = EmailMessageActivityUtil::resolveHashForUnsubscribeAndManageSubscriptionsUrls($personId, $marketingListId, 0,
+            $hash           = GlobalMarketingFooterUtil::resolveHash($personId, $marketingListId, 0,
                                                                                             'AutoresponderItem', true);
             $this->setGetArray(array(
                 'hash'    => $hash,
@@ -618,7 +606,7 @@
             $this->assertEquals(0, $member[0]->unsubscribed);
             $personId       = $contact->getClassId('Person');
             Yii::app()->user->userModel = null;
-            $hash           = EmailMessageActivityUtil::resolveHashForUnsubscribeAndManageSubscriptionsUrls($personId, $marketingListId, 1,
+            $hash           = GlobalMarketingFooterUtil::resolveHash($personId, $marketingListId, 1,
                                                                                             'AutoresponderItem', false);
             $this->setGetArray(array(
                 'hash'    => $hash,
@@ -678,7 +666,7 @@
                                                                             $personId);
             $this->assertEmpty($autoresponderItemActivities);
             Yii::app()->user->userModel = null;
-            $hash           = EmailMessageActivityUtil::resolveHashForUnsubscribeAndManageSubscriptionsUrls($personId,
+            $hash           = GlobalMarketingFooterUtil::resolveHash($personId,
                                                                                 $marketingListId,
                                                                                 $autoresponderItem->id,
                                                                                 'AutoresponderItem',
@@ -749,7 +737,7 @@
                                                                             $personId);
             $this->assertEmpty($autoresponderItemActivities);
             Yii::app()->user->userModel = null;
-            $hash           = EmailMessageActivityUtil::resolveHashForUnsubscribeAndManageSubscriptionsUrls($personId, $marketingListId, 1,
+            $hash           = GlobalMarketingFooterUtil::resolveHash($personId, $marketingListId, 1,
                                                                                             'AutoresponderItem', false);
             $this->setGetArray(array(
                 'hash'    => $hash,
@@ -799,7 +787,7 @@
             $this->assertEquals(1, $member[0]->unsubscribed);
             $personId       = $contact->getClassId('Person');
             Yii::app()->user->userModel = null;
-            $hash           = EmailMessageActivityUtil::resolveHashForUnsubscribeAndManageSubscriptionsUrls($personId, $marketingListId, 1,
+            $hash           = GlobalMarketingFooterUtil::resolveHash($personId, $marketingListId, 1,
                                                                                             'AutoresponderItem', false);
             $this->setGetArray(array(
                 'hash'    => $hash,
@@ -843,7 +831,7 @@
             $this->assertEquals(1, $member[0]->unsubscribed);
             $personId       = $contact->getClassId('Person');
             Yii::app()->user->userModel = null;
-            $hash           = EmailMessageActivityUtil::resolveHashForUnsubscribeAndManageSubscriptionsUrls($personId, $marketingListId, 1,
+            $hash           = GlobalMarketingFooterUtil::resolveHash($personId, $marketingListId, 1,
                                                                                             'AutoresponderItem', false);
             $this->setGetArray(array(
                 'hash'    => $hash,
@@ -876,7 +864,7 @@
             $member[0]->delete();
             $personId       = $contact->getClassId('Person');
             Yii::app()->user->userModel = null;
-            $hash           = EmailMessageActivityUtil::resolveHashForUnsubscribeAndManageSubscriptionsUrls($personId, $marketingListId, 1,
+            $hash           = GlobalMarketingFooterUtil::resolveHash($personId, $marketingListId, 1,
                                                                                             'AutoresponderItem', false);
             $this->setGetArray(array(
                 'hash'    => $hash,
@@ -921,7 +909,7 @@
             $member[0]->delete();
             $personId       = $contact->getClassId('Person');
             Yii::app()->user->userModel = null;
-            $hash           = EmailMessageActivityUtil::resolveHashForUnsubscribeAndManageSubscriptionsUrls($personId, $marketingListId, 1,
+            $hash           = GlobalMarketingFooterUtil::resolveHash($personId, $marketingListId, 1,
                                                                                             'AutoresponderItem', false);
             $this->setGetArray(array(
                 'hash'    => $hash,
@@ -958,7 +946,7 @@
                 }
             }
             Yii::app()->user->userModel = null;
-            $hash           = EmailMessageActivityUtil::resolveHashForUnsubscribeAndManageSubscriptionsUrls($personId, $marketingListIds[0],
+            $hash           = GlobalMarketingFooterUtil::resolveHash($personId, $marketingListIds[0],
                                                                                         1, 'AutoresponderItem', false);
             $this->setGetArray(array(
                 'hash'    => $hash,
@@ -1033,7 +1021,7 @@
                                                                                                     1);
             $this->assertNotEmpty($member);
             Yii::app()->user->userModel = null;
-            $hash           = EmailMessageActivityUtil::resolveHashForUnsubscribeAndManageSubscriptionsUrls($personId, $marketingListId, 1,
+            $hash           = GlobalMarketingFooterUtil::resolveHash($personId, $marketingListId, 1,
                                                                                             'AutoresponderItem', false);
             $this->setGetArray(array(
                 'hash'    => $hash,
@@ -1069,18 +1057,14 @@
                 'preview'   => 1,
             ));
             $content = $this->runControllerWithExitExceptionAndGetContent($this->unsubscribeUrl);
-            $this->assertTrue(strpos($content, '<div id="MarketingListsExternalActionsPageView" ' .
-                                                'class="ZurmoPageView PageView">') !== false);
             $this->assertTrue(strpos($content, '<div class="GridView">') !== false);
-            $this->assertTrue(strpos($content, '<div id="HeaderLinksView">') !== false);
-            $this->assertTrue(strpos($content, '<div id="corp-logo">') !== false);
             $this->assertTrue(strpos($content, '<div id="MarketingListsExternalActionsPreviewView" ' .
                                                 'class="splash-view SplashView">') !== false);
             $this->assertTrue(strpos($content, '<div class="Warning">') !== false);
             $this->assertTrue(strpos($content, '<h2>Not so fast!</h2>') !== false);
             $this->assertTrue(strpos($content, '<div class="large-icon">') !== false);
             $this->assertTrue(strpos($content, '<p>Access denied due to preview mode being active.</p>') !== false);
-            $this->assertTrue(strpos($content, '<div id="FooterView">') !== false);
+            $this->assertTrue(strpos($content, '<footer id="FooterView">') !== false);
         }
 
         /**
@@ -1093,18 +1077,14 @@
                 'preview'   => 1,
             ));
             $content = $this->runControllerWithExitExceptionAndGetContent($this->subscribeUrl);
-            $this->assertTrue(strpos($content, '<div id="MarketingListsExternalActionsPageView" ' .
-                                                'class="ZurmoPageView PageView">') !== false);
             $this->assertTrue(strpos($content, '<div class="GridView">') !== false);
-            $this->assertTrue(strpos($content, '<div id="HeaderLinksView">') !== false);
-            $this->assertTrue(strpos($content, '<div id="corp-logo">') !== false);
             $this->assertTrue(strpos($content, '<div id="MarketingListsExternalActionsPreviewView" ' .
                                                 'class="splash-view SplashView">') !== false);
             $this->assertTrue(strpos($content, '<div class="Warning">') !== false);
             $this->assertTrue(strpos($content, '<h2>Not so fast!</h2>') !== false);
             $this->assertTrue(strpos($content, '<div class="large-icon">') !== false);
             $this->assertTrue(strpos($content, '<p>Access denied due to preview mode being active.</p>') !== false);
-            $this->assertTrue(strpos($content, '<div id="FooterView">') !== false);
+            $this->assertTrue(strpos($content, '<footer id="FooterView">') !== false);
         }
 
         /**
@@ -1117,18 +1097,14 @@
                 'preview'   => 1,
             ));
             $content = $this->runControllerWithExitExceptionAndGetContent($this->optOutUrl);
-            $this->assertTrue(strpos($content, '<div id="MarketingListsExternalActionsPageView" ' .
-                                                'class="ZurmoPageView PageView">') !== false);
             $this->assertTrue(strpos($content, '<div class="GridView">') !== false);
-            $this->assertTrue(strpos($content, '<div id="HeaderLinksView">') !== false);
-            $this->assertTrue(strpos($content, '<div id="corp-logo">') !== false);
             $this->assertTrue(strpos($content, '<div id="MarketingListsExternalActionsPreviewView" ' .
                                                 'class="splash-view SplashView">') !== false);
             $this->assertTrue(strpos($content, '<div class="Warning">') !== false);
             $this->assertTrue(strpos($content, '<h2>Not so fast!</h2>') !== false);
             $this->assertTrue(strpos($content, '<div class="large-icon">') !== false);
             $this->assertTrue(strpos($content, '<p>Access denied due to preview mode being active.</p>') !== false);
-            $this->assertTrue(strpos($content, '<div id="FooterView">') !== false);
+            $this->assertTrue(strpos($content, '<footer id="FooterView">') !== false);
         }
 
         /**
@@ -1141,18 +1117,14 @@
                 'preview'   => 1,
             ));
             $content = $this->runControllerWithExitExceptionAndGetContent($this->manageSubscriptionsUrl);
-            $this->assertTrue(strpos($content, '<div id="MarketingListsExternalActionsPageView" ' .
-                                                'class="ZurmoPageView PageView">') !== false);
             $this->assertTrue(strpos($content, '<div class="GridView">') !== false);
-            $this->assertTrue(strpos($content, '<div id="HeaderLinksView">') !== false);
-            $this->assertTrue(strpos($content, '<div id="corp-logo">') !== false);
             $this->assertTrue(strpos($content, '<div id="MarketingListsExternalActionsPreviewView" ' .
                                                 'class="splash-view SplashView">') !== false);
             $this->assertTrue(strpos($content, '<div class="Warning">') !== false);
             $this->assertTrue(strpos($content, '<h2>Not so fast!</h2>') !== false);
             $this->assertTrue(strpos($content, '<div class="large-icon">') !== false);
             $this->assertTrue(strpos($content, '<p>Access denied due to preview mode being active.</p>') !== false);
-            $this->assertTrue(strpos($content, '<div id="FooterView">') !== false);
+            $this->assertTrue(strpos($content, '<footer id="FooterView">') !== false);
         }
     }
 ?>

@@ -62,9 +62,22 @@
 
         protected function resolveWrapperTdNonEditableByContent($content, array $properties = array())
         {
+            $this->resolveContentWhenColumnIsEmpty($content);
             $content        = parent::resolveWrapperTdNonEditableByContent($content, $properties);
-            $content        .= ZurmoHtml::tag('td', $this->resolveNonEditableExpanderTdHtmlOptions(), '');
+            $content       .= ZurmoHtml::tag('td', $this->resolveNonEditableExpanderTdHtmlOptions(), '');
             return $content;
+        }
+
+        /**
+         * When the color is empty we need to add an extra div for the drop area to be visible
+         * @param $content
+         */
+        protected function resolveContentWhenColumnIsEmpty(& $content)
+        {
+            if ($this->renderForCanvas && empty($content))
+            {
+                $content = '<div class="element-wrapper empty-element-wrapper"></div>';
+            }
         }
 
         protected function resolveNonEditableContentWrappingTdHtmlOptions()

@@ -130,7 +130,7 @@
 
         protected function renderMetaTag()
         {
-            return '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />';
+            return '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />'; // Not Coding Standard
         }
 
         protected function renderCss()
@@ -143,8 +143,10 @@
         protected function renderBuilderCssTools()
         {
             $cs = Yii::app()->getClientScript();
-            $baseUrl = Yii::app()->themeManager->baseUrl . '/default';
-            $cs->registerCssFile($baseUrl . '/css/builder-iframe-tools.css');
+            $themeName = Yii::app()->theme->name;
+            $baseUrl   = Yii::app()->themeManager->baseUrl . '/default';
+            $cs->registerCssFile($baseUrl . '/css/builder-iframe-tools.css' .
+                ZurmoAssetManager::getCssAndJavascriptHashQueryString("themes/$themeName/css/builder-iframe-tools.css"));
         }
 
         protected function renderLess()
@@ -178,7 +180,6 @@
                 "</style>";
                 return $iconsFont;
             }
-
         }
 
         protected function resolveCanvasGlobalCssPath()

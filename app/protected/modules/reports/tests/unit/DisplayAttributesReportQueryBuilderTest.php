@@ -316,9 +316,9 @@
                 Report::TYPE_ROWS_AND_COLUMNS);
             $displayAttribute->attributeIndexOrDerivedType  = 'owner___lastName';
             $content                               = $builder->makeQueryContent(array($displayAttribute));
-            $this->assertEquals("select {$q}reportmodeltestitem{$q}.{$q}id{$q} reportmodeltestitemid ", $content);
-            $this->assertEquals(0, $joinTablesAdapter->getFromTableJoinCount());
-            $this->assertEquals(0, $joinTablesAdapter->getLeftTableJoinCount());
+            $this->assertEquals("select {$q}_user{$q}.{$q}id{$q} _userid ", $content);
+            $this->assertEquals(1, $joinTablesAdapter->getFromTableJoinCount());
+            $this->assertEquals(1, $joinTablesAdapter->getLeftTableJoinCount());
 
             //Two display attributes that are casted up several levels
             $joinTablesAdapter                     = new RedBeanModelJoinTablesQueryAdapter('ReportModelTestItem');
@@ -331,9 +331,9 @@
                 Report::TYPE_ROWS_AND_COLUMNS);
             $displayAttribute2->attributeIndexOrDerivedType = 'modifiedByUser___lastName';
             $content                               = $builder->makeQueryContent(array($displayAttribute, $displayAttribute2));
-            $this->assertEquals("select {$q}reportmodeltestitem{$q}.{$q}id{$q} reportmodeltestitemid ", $content);
-            $this->assertEquals(0, $joinTablesAdapter->getFromTableJoinCount());
-            $this->assertEquals(0, $joinTablesAdapter->getLeftTableJoinCount());
+            $this->assertEquals("select {$q}_user{$q}.{$q}id{$q} _userid, {$q}_user1{$q}.{$q}id{$q} _user1id ", $content);
+            $this->assertEquals(3, $joinTablesAdapter->getFromTableJoinCount());
+            $this->assertEquals(2, $joinTablesAdapter->getLeftTableJoinCount());
         }
 
         public function testNonRelatedNonDerivedAttributeNested()
@@ -395,9 +395,9 @@
                 Report::TYPE_ROWS_AND_COLUMNS);
             $displayAttribute->attributeIndexOrDerivedType  = 'hasOne___owner___lastName';
             $content                               = $builder->makeQueryContent(array($displayAttribute));
-            $this->assertEquals("select {$q}reportmodeltestitem2{$q}.{$q}id{$q} reportmodeltestitem2id ", $content);
+            $this->assertEquals("select {$q}_user{$q}.{$q}id{$q} _userid ", $content);
             $this->assertEquals(0, $joinTablesAdapter->getFromTableJoinCount());
-            $this->assertEquals(1, $joinTablesAdapter->getLeftTableJoinCount());
+            $this->assertEquals(3, $joinTablesAdapter->getLeftTableJoinCount());
 
             //Two display attributes that are casted up several levels
             $joinTablesAdapter                     = new RedBeanModelJoinTablesQueryAdapter('ReportModelTestItem');
@@ -410,9 +410,9 @@
                 Report::TYPE_ROWS_AND_COLUMNS);
             $displayAttribute2->attributeIndexOrDerivedType = 'hasOne___modifiedByUser___lastName';
             $content                               = $builder->makeQueryContent(array($displayAttribute, $displayAttribute2));
-            $this->assertEquals("select {$q}reportmodeltestitem2{$q}.{$q}id{$q} reportmodeltestitem2id ", $content);
+            $this->assertEquals("select {$q}_user{$q}.{$q}id{$q} _userid, {$q}_user1{$q}.{$q}id{$q} _user1id ", $content);
             $this->assertEquals(0, $joinTablesAdapter->getFromTableJoinCount());
-            $this->assertEquals(1, $joinTablesAdapter->getLeftTableJoinCount());
+            $this->assertEquals(6, $joinTablesAdapter->getLeftTableJoinCount());
             //Add third display attribute on the base model
             $joinTablesAdapter                     = new RedBeanModelJoinTablesQueryAdapter('ReportModelTestItem');
             $selectQueryAdapter                    = new RedBeanModelSelectQueryAdapter();
@@ -427,10 +427,10 @@
                 Report::TYPE_ROWS_AND_COLUMNS);
             $displayAttribute3->attributeIndexOrDerivedType = 'modifiedByUser___lastName';
             $content        = $builder->makeQueryContent(array($displayAttribute, $displayAttribute2, $displayAttribute3));
-            $compareContent = "select {$q}reportmodeltestitem2{$q}.{$q}id{$q} reportmodeltestitem2id, {$q}reportmodeltestitem{$q}.{$q}id{$q} reportmodeltestitemid ";
+            $compareContent = "select {$q}_user{$q}.{$q}id{$q} _userid, {$q}_user1{$q}.{$q}id{$q} _user1id, {$q}_user2{$q}.{$q}id{$q} _user2id ";
             $this->assertEquals($compareContent, $content);
-            $this->assertEquals(0, $joinTablesAdapter->getFromTableJoinCount());
-            $this->assertEquals(1, $joinTablesAdapter->getLeftTableJoinCount());
+            $this->assertEquals(3, $joinTablesAdapter->getFromTableJoinCount());
+            $this->assertEquals(7, $joinTablesAdapter->getLeftTableJoinCount());
         }
 
         public function testDisplayCalculationAttributes()
@@ -1211,6 +1211,42 @@
             $this->assertEquals($compareContent, $content);
             $this->assertEquals(0, $joinTablesAdapter->getFromTableJoinCount());
             $this->assertEquals(5, $joinTablesAdapter->getLeftTableJoinCount());
+        }
+
+        public function testTwoAttributesDerivedRelationViaCastedUpModelAttributeThatJoinsCorrectlyWithLeftJoinOnActivityItem()
+        {
+            $q                                      = DatabaseCompatibilityUtil::getQuote();
+            $joinTablesAdapter                      = new RedBeanModelJoinTablesQueryAdapter('Account');
+            $selectQueryAdapter                     = new RedBeanModelSelectQueryAdapter();
+            $builder                                = new DisplayAttributesReportQueryBuilder($joinTablesAdapter, $selectQueryAdapter);
+            $displayAttribute                       = new DisplayAttributeForReportForm('AccountsModule', 'Account',
+                                                      Report::TYPE_ROWS_AND_COLUMNS);
+            $displayAttribute->attributeIndexOrDerivedType   = 'meetings___category';
+            $displayAttribute2                               = new DisplayAttributeForReportForm('AccountsModule', 'Account',
+                                                               Report::TYPE_ROWS_AND_COLUMNS);
+            $displayAttribute2->attributeIndexOrDerivedType  = 'meetings___name';
+            $content                                = $builder->makeQueryContent(array($displayAttribute, $displayAttribute2));
+            $compareContent                         = "select {$q}meeting{$q}.{$q}id{$q} meetingid ";
+            $this->assertEquals($compareContent, $content);
+            $leftTablesAndAliases                  = $joinTablesAdapter->getLeftTablesAndAliases();
+
+            $this->assertEquals(3, $joinTablesAdapter->getFromTableJoinCount());
+            $this->assertEquals(3, $joinTablesAdapter->getLeftTableJoinCount());
+
+            $this->assertEquals('activity_item',  $leftTablesAndAliases[0]['tableAliasName']);
+            $this->assertEquals('item_id',        $leftTablesAndAliases[0]['tableJoinIdName']);
+            $this->assertEquals('item',           $leftTablesAndAliases[0]['onTableAliasName']);
+            $this->assertEquals('id',             $leftTablesAndAliases[0]['onTableJoinIdName']);
+
+            $this->assertEquals('activity',       $leftTablesAndAliases[1]['tableAliasName']);
+            $this->assertEquals('id',             $leftTablesAndAliases[1]['tableJoinIdName']);
+            $this->assertEquals('activity_item',  $leftTablesAndAliases[1]['onTableAliasName']);
+            $this->assertEquals('activity_id',    $leftTablesAndAliases[1]['onTableJoinIdName']);
+
+            $this->assertEquals('meeting',        $leftTablesAndAliases[2]['tableAliasName']);
+            $this->assertEquals('activity_id',    $leftTablesAndAliases[2]['tableJoinIdName']);
+            $this->assertEquals('activity',       $leftTablesAndAliases[2]['onTableAliasName']);
+            $this->assertEquals('id',             $leftTablesAndAliases[2]['onTableJoinIdName']);
         }
 
         public function testDerivedRelationViaCastedUpModelAttributeThatCastsDownAndSkipsAModelOne()

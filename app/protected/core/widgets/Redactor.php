@@ -36,11 +36,13 @@
 
     class Redactor extends ZurmoWidget
     {
-        public $scriptFile      = array('redactor.js');
+        const LINK_FOR_INSERT_CLASS = 'image-gallery-modal-insert';
 
-        public $cssFile         = array('redactor.css');
+        public $scriptFile          = array('redactor.js');
 
-        public $assetFolderName = 'redactor';
+        public $cssFile             = array('redactor.css');
+
+        public $assetFolderName     = 'redactor';
 
         public $htmlOptions;
 
@@ -51,7 +53,9 @@
 
         public $buttons         = "['html', '|', 'formatting', 'bold', 'italic', 'deleted', '|',
                                    'unorderedlist', 'orderedlist', 'outdent', 'indent', '|', 'table', 'link', '|',
-                                   'alignleft', 'aligncenter', 'alignright', '|', 'horizontalrule', '|', 'image']";
+                                   'alignleft', 'aligncenter', 'alignright', '|', 'horizontalrule']";
+
+        public $pastePlainText  = "true";
 
         public $visual          = "true";
 
@@ -101,10 +105,16 @@
 
         public $textareaKeydownCallback;
 
+        public $imageUploadErrorCallback;
+
+        public $urlForImageGallery;
+
         public function run()
         {
-            $id         = $this->htmlOptions['id'];
-            $name       = $this->htmlOptions['name'];
+            $id                 = $this->htmlOptions['id'];
+            $name               = $this->htmlOptions['name'];
+            $linkForInsertClass = static::LINK_FOR_INSERT_CLASS;
+            $urlForImageGallery = Yii::app()->createUrl('zurmo/imageModel/modalList/');
             unset($this->htmlOptions['name']);
             $javaScript = "
                     $(document).ready(
@@ -118,13 +128,15 @@
                                 {$this->renderRedactorParamForInit('syncAfterCallback')}
                                 {$this->renderRedactorParamForInit('syncBeforeCallback')}
                                 {$this->renderRedactorParamForInit('textareaKeydownCallback')}
+                                {$this->renderRedactorParamForInit('imageUploadErrorCallback')}
                                 {$this->renderRedactorParamForInit('plugins')}
                                 {$this->renderRedactorParamForInit('toolbarExternal')}
                                 {$this->renderRedactorParamForInit('fullpage')}
-				                {$this->renderRedactorParamForInit('allowedTags')}
+                                {$this->renderRedactorParamForInit('allowedTags')}
                                 {$this->renderRedactorParamForInit('deniedTags')}
                                 {$this->renderRedactorParamForInit('iframe')}
                                 {$this->renderRedactorParamForInit('css')}
+                                {$this->renderRedactorParamForInit('urlForImageGallery')}
                                 buttons:            {$this->buttons},
                                 cleanup:            {$this->cleanup},
                                 convertDivs:        {$this->convertDivs},
@@ -133,11 +145,14 @@
                                 minHeight:          {$this->minHeight},
                                 observeImages:      {$this->observeImages},
                                 paragraphy:         {$this->paragraphy},
+                                pastePlainText:     {$this->pastePlainText},
                                 removeEmptyTags:    {$this->removeEmptyTags},
                                 visual:             {$this->visual},
                                 tidyHtml:           {$this->tidyHtml},
                                 wym:                {$this->wym},
                                 xhtml:              {$this->xhtml},
+                                linkForInsertClass: '{$linkForInsertClass}',
+                                urlForImageGallery: '{$urlForImageGallery}',
                             });
                         }
                     );";
@@ -151,7 +166,7 @@
             $paramValue = $this->$paramName;
             if (isset($paramValue))
             {
-                $config = "{$paramName}: {$paramValue},";
+                $config = "{$paramName}: {$paramValue},"; // Not Coding Standard
                 return $config;
             }
         }

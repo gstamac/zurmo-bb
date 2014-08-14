@@ -67,7 +67,7 @@
          * The selector for the input where is stored the related moduleClassName
          * @var string
          */
-        public $moduleClassNameSelector;
+        public $modelClassNameSelector;
 
         /**
          * @return string
@@ -134,9 +134,9 @@
 
         protected function resolveUrl(& $url)
         {
-            if ($this->moduleClassNameSelector !== null)
+            if ($this->modelClassNameSelector !== null)
             {
-                $url = "'" . $url . "&moduleClassName='+$('{$this->moduleClassNameSelector}').val()";
+                $url = "'" . $url . "&modelClassName='+$('{$this->modelClassNameSelector}').val()";
             }
             else
             {
@@ -161,6 +161,7 @@
             $cs->registerCssFile(Yii::app()->getClientScript()->getCoreScriptUrl() . '/treeview/jquery.treeview.css');
             Yii::app()->clientScript->registerScript('mergeTagsScript' . $this->uniqueId,
                                                      $this->renderTreeViewAjaxScriptContent());
+            // Begin Not Coding Standard
             $script = '
                 $(document).ready(function(){
                     $(".item-to-place").off("mousemove");
@@ -168,9 +169,8 @@
                         $(this).draggable({
                             helper: function(event){
                                 var label = $(event.target).html();
-                                var width = $(".wrapper").width() * 0.5 - 55;
+                                var width = $(event.target).width() + 50;
                                 var clone = $(\'<div class="dynamic-row clone">\' + label + \'</div>\');
-                                //clone.width(width);
                                 clone.animate({ width : width}, 250);
                                 $("body").append(clone);
                                 return clone;
@@ -188,8 +188,10 @@
                         });
                     });
                 ';
-            if($this->textContentId != null)
+            // End Not Coding Standard
+            if ($this->textContentId != null)
             {
+                // Begin Not Coding Standard
                 $script.='if ($("#' . $this->textContentId . '").data("droppable"))
                                 {
                                     $("#' . $this->textContentId . '").droppable("destroy");
@@ -211,9 +213,11 @@
                                         droparea.value = str1 + dropText + str3;
                                     }
                                 });';
+                // End Not Coding Standard
             }
-            if($this->htmlContentId != null)
+            if ($this->htmlContentId != null)
             {
+                // Begin Not Coding Standard
                 $script.='if ($("#' . $this->htmlContentId . '").parent().data("droppable"))
                                 {
                                     $("#' . $this->htmlContentId . '").parent().droppable("destroy");
@@ -225,8 +229,10 @@
                                     var dropText = ui.draggable.data("value");
                                     var node = document.createTextNode(dropText);
                                     $("#' . $this->htmlContentId . '").redactor("insertNode", node);
+                                    $("#' . $this->htmlContentId . '").redactor("sync");
                                 }
                             });';
+                // End Not Coding Standard
             }
             $script .= '});';
             Yii::app()->clientScript->registerScript('mergeTagsDragDropScript' . $this->uniqueId, $script);
@@ -234,9 +240,9 @@
 
         protected function getViewStyle()
         {
-            if($this->hideByDefault)
+            if ($this->hideByDefault)
             {
-                return 'style=display:none;';
+                return 'style=display:none;'; // Not Coding Standard
             }
         }
     }

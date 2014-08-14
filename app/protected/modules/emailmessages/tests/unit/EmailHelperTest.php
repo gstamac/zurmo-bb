@@ -77,6 +77,8 @@
                 Yii::app()->emailHelper->setOutboundSettings();
                 Yii::app()->emailHelper->init();
             }
+            // Delete item from jobQueue, that is created when new user is created
+            Yii::app()->jobQueue->deleteAll();
         }
 
         public function testSend()
@@ -92,7 +94,7 @@
             $this->assertEquals(0, Yii::app()->emailHelper->getSentCount());
             $queuedJobs = Yii::app()->jobQueue->getAll();
             $this->assertEquals(1, count($queuedJobs));
-            $this->assertEquals('ProcessOutboundEmail', $queuedJobs[0][0]);
+            $this->assertEquals('ProcessOutboundEmail', $queuedJobs[0][0]['jobType']);
         }
 
         /**
@@ -104,7 +106,7 @@
             Yii::app()->user->userModel = $super;
 
             //add a message in the outbox_error folder.
-            $emailMessage = EmailMessageTestHelper::createDraftSystemEmail('a test email 2', $super);
+            $emailMessage         = EmailMessageTestHelper::createDraftSystemEmail('a test email 2', $super);
             $box                  = EmailBox::resolveAndGetByName(EmailBox::NOTIFICATIONS_NAME);
             $emailMessage->folder = EmailFolder::getByBoxAndType($box, EmailFolder::TYPE_OUTBOX_ERROR);
             $emailMessage->save();
@@ -114,6 +116,31 @@
             Yii::app()->emailHelper->sendQueued();
             $this->assertEquals(0, Yii::app()->emailHelper->getQueuedCount());
             $this->assertEquals(2, Yii::app()->emailHelper->getSentCount());
+
+            //add a message in the outbox folder.
+            $emailMessage         = EmailMessageTestHelper::createDraftSystemEmail('a test email 3', $super);
+            $box                  = EmailBox::resolveAndGetByName(EmailBox::NOTIFICATIONS_NAME);
+            $emailMessage->folder = EmailFolder::getByBoxAndType($box, EmailFolder::TYPE_OUTBOX);
+            $emailMessage->save();
+            //add a message in the outbox_error folder.
+            $emailMessage         = EmailMessageTestHelper::createDraftSystemEmail('a test email 4', $super);
+            $box                  = EmailBox::resolveAndGetByName(EmailBox::NOTIFICATIONS_NAME);
+            $emailMessage->folder = EmailFolder::getByBoxAndType($box, EmailFolder::TYPE_OUTBOX_ERROR);
+            $emailMessage->save();
+            //add a message in the outbox_error folder.
+            $emailMessage         = EmailMessageTestHelper::createDraftSystemEmail('a test email 5', $super);
+            $box                  = EmailBox::resolveAndGetByName(EmailBox::NOTIFICATIONS_NAME);
+            $emailMessage->folder = EmailFolder::getByBoxAndType($box, EmailFolder::TYPE_OUTBOX_ERROR);
+            $emailMessage->save();
+
+            $this->assertEquals(3, Yii::app()->emailHelper->getQueuedCount());
+            $this->assertEquals(2, Yii::app()->emailHelper->getSentCount());
+            Yii::app()->emailHelper->sendQueued(1);
+            $this->assertEquals(2, Yii::app()->emailHelper->getQueuedCount());
+            $this->assertEquals(3, Yii::app()->emailHelper->getSentCount());
+            Yii::app()->emailHelper->sendQueued(2);
+            $this->assertEquals(0, Yii::app()->emailHelper->getQueuedCount());
+            $this->assertEquals(5, Yii::app()->emailHelper->getSentCount());
         }
 
         /**
@@ -125,10 +152,10 @@
             Yii::app()->user->userModel = $super;
             $emailMessage = EmailMessageTestHelper::createDraftSystemEmail('a test email 2', $super);
             $this->assertEquals(0, Yii::app()->emailHelper->getQueuedCount());
-            $this->assertEquals(2, Yii::app()->emailHelper->getSentCount());
+            $this->assertEquals(5, Yii::app()->emailHelper->getSentCount());
             Yii::app()->emailHelper->sendImmediately($emailMessage);
             $this->assertEquals(0, Yii::app()->emailHelper->getQueuedCount());
-            $this->assertEquals(3, Yii::app()->emailHelper->getSentCount());
+            $this->assertEquals(6, Yii::app()->emailHelper->getSentCount());
         }
 
         /**
@@ -158,6 +185,7 @@
             try
             {
                 $emailHelper->loadOutboundSettingsFromUserEmailAccount($billy);
+                $this->fail();
             }
             catch (NotFoundException $e)
             {
@@ -168,7 +196,8 @@
             EmailMessageTestHelper::createEmailAccount($billy);
             $emailHelper->loadOutboundSettingsFromUserEmailAccount($billy);
             $this->assertEquals('smtp', $emailHelper->outboundType);
-            $this->assertEquals(25, $emailHelper->outboundPort);
+            $this->assertEquals(Yii::app()->params['emailTestAccounts']['smtpSettings']['outboundPort'], $emailHelper->outboundPort);
+            //outboundHost was set on @testLoadOutboundSettingsFromUserEmailAccount
             $this->assertEquals('xxx', $emailHelper->outboundHost);
             $this->assertEquals($emailHelper->defaultTestToAddress, $emailHelper->fromAddress);
             $this->assertEquals(strval($billy), $emailHelper->fromName);
@@ -234,12 +263,12 @@
                 $this->assertEquals(0, $imapStats->Nmsgs);
 
                 $this->assertEquals(1, Yii::app()->emailHelper->getQueuedCount());
-                $this->assertEquals(3, Yii::app()->emailHelper->getSentCount());
-                Yii::app()->emailHelper->sendQueued($emailMessage);
+                $this->assertEquals(6, Yii::app()->emailHelper->getSentCount());
+                Yii::app()->emailHelper->sendQueued();
                 $job = new ProcessOutboundEmailJob();
                 $this->assertTrue($job->run());
                 $this->assertEquals(0, Yii::app()->emailHelper->getQueuedCount());
-                $this->assertEquals(4, Yii::app()->emailHelper->getSentCount());
+                $this->assertEquals(7, Yii::app()->emailHelper->getSentCount());
 
                 sleep(30);
                 Yii::app()->imap->connect();
@@ -283,16 +312,56 @@
                 $emailMessage->save();
 
                 $this->assertEquals(1, Yii::app()->emailHelper->getQueuedCount());
-                $this->assertEquals(4, Yii::app()->emailHelper->getSentCount());
+                $this->assertEquals(7, Yii::app()->emailHelper->getSentCount());
                 Yii::app()->emailHelper->sendQueued();
                 $this->assertEquals(0, Yii::app()->emailHelper->getQueuedCount());
-                $this->assertEquals(4, Yii::app()->emailHelper->getSentCount());
+                $this->assertEquals(7, Yii::app()->emailHelper->getSentCount());
                 $this->assertTrue($emailMessage->folder->isSame(EmailFolder::getByBoxAndType($box, EmailFolder::TYPE_OUTBOX_FAILURE)));
             }
             else
             {
                 $this->markTestSkipped();
             }
+        }
+
+        public function testSendMessagePopulatesEmailAccountSettings()
+        {
+            $jane                      = User::getByUsername('jane');
+            Yii::app()->user->userModel = $jane;
+            $emailHelper = new EmailHelper;
+            EmailMessageTestHelper::createEmailAccount($jane);
+            $emailAccount = EmailAccount::getByUserAndName($jane);
+            $emailAccount->useCustomOutboundSettings = true;
+            $emailAccount->outboundType     = 'abc';
+            $emailAccount->outboundPort     = 11;
+            $emailAccount->outboundHost     = 'dumb.domain';
+            $emailAccount->outboundUsername = 'jane';
+            $emailAccount->outboundPassword = 'janepass';
+            $emailAccount->outboundSecurity = 'ssl';
+            $emailAccount->save();
+
+            $emailMessage = EmailMessageTestHelper::createOutboxEmail(
+                                $jane,
+                                'Test email',
+                                'Raw content',
+                                'Html content',
+                                'Zurmo',
+                                Yii::app()->emailHelper->outboundUsername,
+                                'John Doe',
+                                Yii::app()->params['emailTestAccounts']['userImapSettings']['imapUsername']);
+            $emailMessage->account = $emailAccount;
+            $emailMessage->save();
+
+            $this->assertEquals(1, Yii::app()->emailHelper->getQueuedCount());
+            $this->assertEquals(0, Yii::app()->emailHelper->getSentCount());
+            Yii::app()->emailHelper->sendQueued();
+
+            $job = new ProcessOutboundEmailJob();
+            $this->assertTrue($job->run());
+            //Since user email account has invalid settings message is not sent
+            $this->assertContains('Connection could not be established with host dumb.domain', strval($emailMessage->error));
+            $this->assertEquals(1, Yii::app()->emailHelper->getQueuedCount());
+            $this->assertEquals(0, Yii::app()->emailHelper->getSentCount());
         }
 
         public function testResolveAndGetDefaultFromAddress()

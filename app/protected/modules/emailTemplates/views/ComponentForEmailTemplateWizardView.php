@@ -141,7 +141,7 @@
         {
             $this->wrapContentInTableCell($hiddenElements, array('colspan' => 2));
             $this->wrapContentInTableRow($hiddenElements);
-            $content                .= $hiddenElements;
+            $content .= $hiddenElements;
         }
 
         protected function wrapContentForLeftSideBar(& $content, $prefix = null)
@@ -178,18 +178,18 @@
         }
 
         public static function resolveAdditionalAjaxOptions($formName, $validationInputId, $progressPerStep,
-                                                            $stepCount, $nextPageClassName)
+                                                            $stepCount, $nextPageClassName, $model)
         {
             $errorCallback          = static::resolveErrorAjaxCallback();
             $successCallback        = static::resolveSuccessAjaxCallback($formName, $validationInputId, $progressPerStep,
-                                                                            $stepCount, $nextPageClassName);
+                                                                            $stepCount, $nextPageClassName, $model);
             $completeCallback       = static::resolveCompleteAjaxCallback($formName);
             $ajaxArray              = CMap::mergeArray($errorCallback, $successCallback, $completeCallback);
             return $ajaxArray;
         }
 
         protected static function resolveSuccessAjaxCallback($formName, $validationInputId, $progressPerStep,
-                                                             $stepCount, $nextPageClassName)
+                                                             $stepCount, $nextPageClassName, $model)
         {
             $ajaxArray          = array();
             if (isset($nextPageClassName))
@@ -197,7 +197,7 @@
                 $callback           = static::resolveSuccessAjaxCallbackForPageTransition($formName, $nextPageClassName,
                                                                                             $validationInputId,
                                                                                             $progressPerStep,
-                                                                                            $stepCount);
+                                                                                            $stepCount, $model);
                 $callback           = "js:function(data)
                                         {
                                             ${callback}
@@ -209,10 +209,10 @@
 
         protected static function resolveSuccessAjaxCallbackForPageTransition($formName, $nextPageClassName,
                                                                               $validationInputId, $progressPerStep,
-                                                                              $stepCount)
+                                                                              $stepCount, $model)
         {
             $ownClassName   = get_called_class();
-            $progress       = ($stepCount + 1) * $progressPerStep;
+            $progress       = ($stepCount + 2) * $progressPerStep;
             $script         = "
                         $('#" . $validationInputId . "').val('" .  $nextPageClassName::resolveValidationScenario() . "');
                         $('#" . $ownClassName . "').hide();
@@ -221,6 +221,7 @@
                         $('.StepsAndProgressBarForWizardView').find('.current-step').removeClass('current-step')
                                                                 .next().addClass('current-step');
                         ";
+            Yii::app()->custom->resolveAdditionalScriptContentForEmailTemplate($stepCount, $script);
             return $script;
         }
 
@@ -253,15 +254,17 @@
                                             LabelUtil::getTranslationParamsForAllModules());
             }
             $ajaxArray                  = array();
+            // Begin Not Coding Standard
             $ajaxArray['error']       = "js:function(data)
                                         {
                                             $('#FlashMessageBar').jnotifyAddMessage({
-                                                text: '" . $message . "',
+                                                text: \"" . $message . "\",
                                                 permanent: true,
                                                 clickOverlay : true,
                                                 showIcon: false,
                                             });
                                         }";
+            // End Not Coding Standard
             return $ajaxArray;
         }
 
@@ -273,11 +276,6 @@
         protected static function resolveCanvasActionUrl($id = 0)
         {
             return static::resolveRelativeUrl('renderCanvas', array('id' => $id));
-        }
-
-        protected static function resolveBaseTemplateOptionsUrl()
-        {
-            return static::resolveRelativeUrl('renderBaseTemplateOptions');
         }
 
         protected static function resolvePreviewActionUrl()
@@ -297,7 +295,6 @@
 
         public static function resolveValidationScenario()
         {
-
         }
 
         public static function redirectAfterSave()
@@ -307,7 +304,6 @@
 
         public static function resolvePreviousPageScript(& $script)
         {
-
         }
     }
 ?>

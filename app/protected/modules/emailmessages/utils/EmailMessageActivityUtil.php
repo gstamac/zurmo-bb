@@ -39,35 +39,6 @@
      */
     class EmailMessageActivityUtil
     {
-        const VALID_HASH_PATTERN    = '~^[A-Z0-9\+=/ ]+~i'; // Not Coding Standard
-
-        protected static $baseQueryStringArray;
-
-        /**
-         * @param bool $tracking
-         * @param string $content
-         * @param int $modelId
-         * @param $modelType
-         * @param int $personId
-         * @param int $marketingListId
-         * @param bool $isHtmlContent
-         * @return bool
-         */
-        public static function resolveContentForTrackingAndFooter($tracking, & $content, $modelId, $modelType, $personId,
-                                                                            $marketingListId, $isHtmlContent = false)
-        {
-            assert('is_int($modelId)');
-            assert('is_int($marketingListId)');
-            $trackingAdded = static::resolveContentForTracking($tracking, $content, $modelId, $modelType,
-                                                                                            $personId, $isHtmlContent);
-            if (!$trackingAdded)
-            {
-                return false;
-            }
-            static::resolveContentForUnsubscribeAndManageSubscriptionsUrls($content, $personId, $marketingListId, $modelId, $modelType, $isHtmlContent);
-            return true;
-        }
-
         /**
          * @param $hash
          * @param bool $validateQueryStringArray
@@ -79,7 +50,7 @@
                                                                                             $validateForTracking = true)
         {
             $hash = base64_decode($hash);
-            if (static::isValidHash($hash))
+            if (StringUtil::isValidHash($hash))
             {
                 $queryStringArray   = array();
                 $decryptedString    = ZurmoPasswordSecurityUtil::decrypt($hash);
@@ -115,23 +86,6 @@
             return static::processActivityFromQueryStringArray($queryStringArray);
         }
 
-        protected static function resolveContentForTracking($tracking, & $content, $modelId, $modelType, $personId,
-                                                                                                        $isHtmlContent)
-        {
-            if (!$tracking)
-            {
-                return true;
-            }
-            if (strpos($content, static::resolveBaseTrackingUrl()) !== false) // it already contains few tracking  urls in the content
-            {
-                return false;
-            }
-            static::$baseQueryStringArray = static::resolveBaseQueryStringArray($modelId, $modelType, $personId);
-            static::resolveContentForEmailOpenTracking($content, $isHtmlContent);
-            static::resolveContentForLinkClickTracking($content, $isHtmlContent);
-            return true;
-        }
-
         protected static function processActivityFromQueryStringArray($queryStringArray)
         {
             $activityUpdated = static::createOrUpdateActivity($queryStringArray);
@@ -142,11 +96,29 @@
             $trackingType = static::resolveTrackingTypeByQueryStringArray($queryStringArray);
             if ($trackingType === EmailMessageActivity::TYPE_CLICK)
             {
-                return array('redirect' => true, 'url' => $queryStringArray['url']);
+                // this shouldn't be here, its here to suppose no-scheme urls from previous versions' database
+                $url    = StringUtil::addSchemeIfMissing($queryStringArray['url']);
+                return array('redirect' => true, 'url' => $url);
             }
             else
             {
                 return array('redirect' => false, 'imagePath' => PlaceholderImageUtil::resolveOneByOnePixelImagePath());
+            }
+        }
+
+        protected static function resolveTrackingTypeByQueryStringArray($queryStringArray)
+        {
+            if (!empty($queryStringArray['type']))
+            {
+                return $queryStringArray['type'];
+            }
+            elseif (!empty($queryStringArray['url']))
+            {
+                return EmailMessageActivity::TYPE_CLICK;
+            }
+            else
+            {
+                return EmailMessageActivity::TYPE_OPEN;
             }
         }
 
@@ -198,6 +170,11 @@
             }
         }
 
+        public static function resolveModelClassNameByModelType($modelType)
+        {
+            return $modelType . 'Activity';
+        }
+
         protected static function createNewActivity($queryStringArray)
         {
             $type = static::resolveTrackingTypeByQueryStringArray($queryStringArray);
@@ -207,345 +184,25 @@
             return $modelClassName::createNewActivity($type, $modelId, $personId, $url, $sourceIP);
         }
 
-        protected static function resolveContentForEmailOpenTracking(& $content, $isHtmlContent = false)
-        {
-            if (!$isHtmlContent)
-            {
-                return false;
-            }
-            $hash               = static::resolveHashForQueryStringArray(static::$baseQueryStringArray);
-            $trackingUrl        = static::resolveAbsoluteTrackingUrlByHash($hash);
-            $applicationName    = ZurmoConfigurationUtil::getByModuleName('ZurmoModule', 'applicationName');
-            $imageTag           = ZurmoHtml::image($trackingUrl, $applicationName, array('width' => 1, 'height' => 1));
-            $imageTag           = ZurmoHtml::tag('br') . $imageTag;
-            if ($bodyTagPosition = strpos($content, '</body>'))
-            {
-                $content = substr_replace($content , $imageTag . '</body>' , $bodyTagPosition, strlen('</body>'));
-            }
-            else
-            {
-                $content .= $imageTag;
-            }
-            return true;
-        }
-
-        protected static function resolveContentForLinkClickTracking(& $content, $isHtmlContent = false)
-        {
-            static::resolvePlainLinksForClickTracking($content, $isHtmlContent);
-            static::resolveHrefLinksForClickTracking($content, $isHtmlContent);
-        }
-
-        protected static function resolvePlainLinksForClickTracking(& $content, $isHtmlContent)
-        {
-            $spacePrefixedAndSuffixedLinkRegex = static::getPlainLinkRegex($isHtmlContent);
-            if ($isHtmlContent)
-            {
-                $callBack = 'static::resolveTrackingUrlForMatchedPlainLinkArrayWithHtmlContent';
-            }
-            else
-            {
-                $callBack = 'static::resolveTrackingUrlForMatchedHrefLinkArray';
-            }
-            $content = preg_replace_callback($spacePrefixedAndSuffixedLinkRegex,
-                                             $callBack,
-                                             $content);
-            if ($content === null)
-            {
-                throw new NotSupportedException();
-            }
-        }
-
-        protected static function resolveHrefLinksForClickTracking(& $content, $isHtmlContent)
-        {
-            if ($isHtmlContent)
-            {
-                $hrefPrefixedLinkRegex  = static::getHrefLinkRegex();
-                $content = preg_replace_callback($hrefPrefixedLinkRegex,
-                                                 'static::resolveTrackingUrlForMatchedHrefLinkArray',
-                                                 $content);
-                if ($content === null)
-                {
-                    throw new NotSupportedException();
-                }
-            }
-        }
-
-        protected static function resolveTrackingUrlForMatchedPlainLinkArray($matches)
-        {
-            $matchPosition  = strpos($matches[0], $matches[2]);
-            $prefix = substr($matches[1], 0, $matchPosition);
-            return $prefix . static::resolveTrackingUrlForLink(trim($matches[2])) . ' ';
-        }
-
-        protected static function resolveTrackingUrlForMatchedPlainLinkArrayWithHtmlContent($matches)
-        {
-            $matchPosition  = strpos($matches[0], $matches[2]);
-            $prefix = substr($matches[1], 0, $matchPosition);
-            $trackingUrl = $prefix . '<a href="' . static::resolveTrackingUrlForLink(trim($matches[2])) . '">' . trim($matches[2]) . '</a> ';
-            return $trackingUrl;
-        }
-
-        protected static function resolveTrackingUrlForMatchedHrefLinkArray($matches)
-        {
-            $quotes         = $matches[1];
-            $prefixLength   = strpos($matches[0], 'href=' . $matches[1]);
-            $prefix         = substr($matches[0], 0, $prefixLength + 5);
-            return $prefix . $quotes . static::resolveTrackingUrlForLink($matches[2]) . $quotes;
-        }
-
-        protected static function resolveTrackingUrlForLink($link)
-        {
-            $queryStringArray = static::$baseQueryStringArray;
-            $queryStringArray['url'] = $link;
-            $hash = static::resolveHashForQueryStringArray($queryStringArray);
-            $link = static::resolveAbsoluteTrackingUrlByHash($hash);
-            return $link;
-        }
-
-        protected static function resolveAbsoluteTrackingUrlByHash($hash)
-        {
-            return Yii::app()->createAbsoluteUrl(static::resolveBaseTrackingUrl(), array('id' => $hash));
-        }
-
-        protected static function resolveBaseTrackingUrl()
-        {
-            return '/tracking/default/track';
-        }
-
-        protected static function resolveHashForQueryStringArray($queryStringArray)
-        {
-            $queryString            = http_build_query($queryStringArray);
-            $encryptedString        = ZurmoPasswordSecurityUtil::encrypt($queryString);
-            if (!$encryptedString || !static::isValidHash($encryptedString))
-            {
-                throw new NotSupportedException();
-            }
-            $encryptedString        = base64_encode($encryptedString);
-            return $encryptedString;
-        }
-
-        protected static function resolveBaseQueryStringArray($modelId, $modelType, $personId)
-        {
-            return compact('modelId', 'modelType', 'personId');
-        }
-
-        protected static function getBaseLinkRegex()
-        {
-            // Begin Not Coding Standard
-            $baseLinkRegex = <<<PTN
-(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/)))
-PTN;
-            // (?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))
-            return $baseLinkRegex;
-            // End Not Coding Standard
-        }
-
-        protected static function getPlainLinkRegex($isHtmlContent)
-        {
-            $baseLinkRegex  = static::getBaseLinkRegex();
-            // plain links would either be on new line or have a space before them.
-            // we don't care about "here is a linkhttp://www.yahoo.com" for now.
-            $plainLinkRegex = '(\n|\r|\r\n|\s)' . $baseLinkRegex;
-            if ($isHtmlContent)
-            {
-                $plainLinkRegex = substr($plainLinkRegex, 0, -1) . '(?!(?>[^<]*(?:<(?!/?a\b)[^<]*)*)</a>))';
-            }
-            $linkRegex = '%' . $plainLinkRegex . '%i';
-            return $linkRegex;
-        }
-
-        protected static function getHrefLinkRegex()
-        {
-            $baseLinkRegex  = static::getBaseLinkRegex();
-            $hrefPrefixedLinkRegex  = '<a [^>]*href=(\'|")' . $baseLinkRegex . '(\'|")'; // Not Coding Standard
-            $linkRegex = '%' . $hrefPrefixedLinkRegex . '%i';
-            return $linkRegex;
-        }
-
-        protected static function resolveTrackingTypeByQueryStringArray($queryStringArray)
-        {
-            if (!empty($queryStringArray['type']))
-            {
-                return $queryStringArray['type'];
-            }
-            elseif (!empty($queryStringArray['url']))
-            {
-                return EmailMessageActivity::TYPE_CLICK;
-            }
-            else
-            {
-                return EmailMessageActivity::TYPE_OPEN;
-            }
-        }
-
-        protected static function resolveContentForUnsubscribeAndManageSubscriptionsUrls(& $content, $personId,
-                                                                                         $marketingListId, $modelId,
-                                                                                         $modelType, $isHtmlContent)
-        {
-            $unsubscribePlaceholder         = GlobalMarketingFooterUtil::UNSUBSCRIBE_URL_PLACEHOLDER;
-            $manageSubscriptionsPlaceholder = GlobalMarketingFooterUtil::MANAGE_SUBSCRIPTIONS_URL_PLACEHOLDER;
-            $replaceExisting    = false;
-            if (strpos($content, $unsubscribePlaceholder) !== false ||
-                strpos($content, $manageSubscriptionsPlaceholder) !== false)
-            {
-                $replaceExisting = true;
-            }
-            static::resolveUnsubscribeAndManageSubscriptionPlaceholders($content, $personId, $marketingListId, $modelId,
-                                                                    $modelType, $isHtmlContent, $replaceExisting, false);
-        }
-
-        /**
-         * @param $content
-         * @param $personId
-         * @param $marketingListId
-         * @param $modelId
-         * @param $modelType
-         * @param $isHtmlContent
-         * @param $replaceExisting
-         * @param bool $preview
-         */
-        public static function resolveUnsubscribeAndManageSubscriptionPlaceholders(& $content, $personId,
-                                                                                      $marketingListId, $modelId,
-                                                                                      $modelType, $isHtmlContent,
-                                                                                      $replaceExisting = false,
-                                                                                      $preview = false)
-        {
-            $hash                           = static::resolveHashForUnsubscribeAndManageSubscriptionsUrls($personId,
-                                                                                            $marketingListId, $modelId,
-                                                                                            $modelType, !$preview);
-            $unsubscribeUrl                 = static::resolveUnsubscribeUrl($hash, $preview);
-            $manageSubscriptionsUrl         = static::resolveManageSubscriptionsUrl($hash, $preview);
-            static::resolvePlaceholderUrlsForHtmlContent($unsubscribeUrl, $manageSubscriptionsUrl, $isHtmlContent);
-            if ($replaceExisting)
-            {
-                static::resolveUnsubscribeAndManageSubscriptionPlaceholdersToUrls($content,
-                                                                                  $unsubscribeUrl,
-                                                                                  $manageSubscriptionsUrl);
-            }
-            else
-            {
-                $placeholderContent = static::resolveDefaultFooterPlaceholderContentByType($isHtmlContent);
-                static::resolveUnsubscribeAndManageSubscriptionPlaceholdersToUrls($placeholderContent, $unsubscribeUrl,
-                                                                                                $manageSubscriptionsUrl);
-                StringUtil::prependNewLine($placeholderContent, $isHtmlContent);
-                $content            .= $placeholderContent;
-            }
-        }
-
-        protected static function resolvePlaceholderUrlsForHtmlContent(& $unsubscribeUrl,& $manageSubscriptionsUrl,
-                                                                                                        $isHtmlContent)
-        {
-            static::resolveUnsubscribeUrlForHtmlContent($unsubscribeUrl, $isHtmlContent);
-            static::resolveManageSubscriptionsUrlForHtmlContent($manageSubscriptionsUrl, $isHtmlContent);
-        }
-
-        protected static function resolveUnsubscribeUrlForHtmlContent(& $unsubscribeUrl, $isHtmlContent)
-        {
-            if ($isHtmlContent)
-            {
-                $unsubscribeTranslated          = Zurmo::t('Core', 'Unsubscribe');
-                $unsubscribeUrl = ZurmoHtml::link($unsubscribeTranslated, $unsubscribeUrl);
-            }
-        }
-
-        protected static function resolveManageSubscriptionsUrlForHtmlContent(& $manageSubscriptionsUrl, $isHtmlContent)
-        {
-            if ($isHtmlContent)
-            {
-                $manageSubscriptionsTranslated  = Zurmo::t('MarketingListsModule', 'Manage Subscriptions');
-                $manageSubscriptionsUrl = ZurmoHtml::link($manageSubscriptionsTranslated, $manageSubscriptionsUrl);
-            }
-        }
-
-        protected static function resolveUnsubscribeAndManageSubscriptionPlaceholdersToUrls(& $content,
-                                                                                            $unsubscribeUrl,
-                                                                                            $manageSubscriptionsUrl)
-        {
-            static::resolveUnsubscribePlaceholderToUrl($content, $unsubscribeUrl);
-            static::resolveManageSubscriptionsPlaceholderToUrl($content, $manageSubscriptionsUrl);
-        }
-
-        protected static function resolveUnsubscribePlaceholderToUrl(& $content, $unsubscribeUrl)
-        {
-            $placeholder      = GlobalMarketingFooterUtil::UNSUBSCRIBE_URL_PLACEHOLDER;
-            $content          = str_replace($placeholder, $unsubscribeUrl, $content);
-        }
-
-        protected static function resolveManageSubscriptionsPlaceholderToUrl(& $content, $manageSubscriptionsUrl)
-        {
-            $placeholder    = GlobalMarketingFooterUtil::MANAGE_SUBSCRIPTIONS_URL_PLACEHOLDER;
-            $content        = str_replace($placeholder, $manageSubscriptionsUrl, $content);
-        }
-
-        protected static function resolveDefaultFooterPlaceholderContentByType($isHtmlContent)
-        {
-            return GlobalMarketingFooterUtil::getContentByType($isHtmlContent, true);
-        }
-
-        public static function resolveHashForUnsubscribeAndManageSubscriptionsUrls($personId, $marketingListId, $modelId,
-                                                                                   $modelType, $createNewActivity = true)
-        {
-            $queryStringArray       = compact('personId', 'marketingListId', 'modelId', 'modelType', 'createNewActivity');
-            return static::resolveHashForQueryStringArray($queryStringArray);
-        }
-
-        protected static function resolveUnsubscribeUrl($hash, $preview)
-        {
-            $baseUrl = static::resolveUnsubscribeBaseUrl();
-            return static::resolveAbsoluteUrlWithHashAndPreviewForFooter($baseUrl, $hash, $preview);
-        }
-
-        protected static function resolveManageSubscriptionsUrl($hash, $preview)
-        {
-            $baseUrl = static::resolveManageSubscriptionsBaseUrl();
-            return static::resolveAbsoluteUrlWithHashAndPreviewForFooter($baseUrl, $hash, $preview);
-        }
-
-        protected static function resolveAbsoluteUrlWithHashAndPreviewForFooter($baseUrl, $hash, $preview)
-        {
-            $routeParams   = static::resolveFooterUrlParams($hash, $preview);
-            return Yii::app()->createAbsoluteUrl($baseUrl, $routeParams);
-        }
-
-        protected static function resolveFooterUrlParams($hash, $preview)
-        {
-            $routeParams    = array('hash'  => $hash);
-            if ($preview)
-            {
-                $routeParams['preview'] = intval($preview);
-            }
-            return $routeParams;
-        }
-
-        protected static function resolveUnsubscribeBaseUrl()
-        {
-            return '/marketingLists/external/unsubscribe';
-        }
-
-        protected static function resolveManageSubscriptionsBaseUrl()
-        {
-            return '/marketingLists/external/manageSubscriptions';
-        }
-
         protected static function validateAndResolveFullyQualifiedQueryStringArrayForTracking(& $queryStringArray)
         {
             $rules = array(
-                        'modelId'       => array(
-                            'required'      => true,
-                        ),
-                        'modelType'     => array(
-                            'required'      => true,
-                        ),
-                        'personId'      => array(
-                            'required'      => true,
-                        ),
-                        'url'           => array(
-                            'defaultValue'  => null,
-                        ),
-                        'type'           => array(
-                            'defaultValue'  => null,
-                        ),
-                    );
+                'modelId'       => array(
+                    'required'      => true,
+                ),
+                'modelType'     => array(
+                    'required'      => true,
+                ),
+                'personId'      => array(
+                    'required'      => true,
+                ),
+                'url'           => array(
+                    'defaultValue'  => null,
+                ),
+                'type'           => array(
+                    'defaultValue'  => null,
+                ),
+            );
             static::validateQueryStringArrayAgainstRulesArray($queryStringArray, $rules);
         }
 
@@ -588,36 +245,6 @@ PTN;
                     }
                 }
             }
-        }
-
-        /**
-         * @param $modelType
-         * @return string
-         */
-        public static function resolveModelClassNameByModelType($modelType)
-        {
-            return $modelType . 'Activity';
-        }
-
-        protected static function replaceSpacesWithPlusSymbol(& $hash)
-        {
-            // + in url often becomes space, we need to reverse that.
-            $hash = str_replace(' ', '+', $hash); // Not Coding Standard
-        }
-
-        protected static function isValidHash($hash)
-        {
-            if (empty($hash))
-            {
-                return false;
-            }
-            $matches = array();
-            $matchesCount = preg_match_all(static::VALID_HASH_PATTERN, $hash, $matches);
-            if (!$matchesCount || ($matches[0][0] !== $hash))
-            {
-                return false;
-            }
-            return true;
         }
     }
 ?>

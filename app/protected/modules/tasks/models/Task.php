@@ -125,6 +125,7 @@
                 ),
                 'elements' => array(
                     'completedDateTime' => 'DateTime',
+                    'description'       => 'TextArea',
                     'dueDateTime'       => 'DateTime',
                     'requestedByUser'   => 'User',
                     'comment'           => 'Comment',
@@ -210,13 +211,21 @@
         {
             if (parent::beforeSave())
             {
-                $this->resolveStatusAndSetCompletedFields();
                 $this->resolveAndSetDefaultSubscribers();
                 return true;
             }
             else
             {
                 return false;
+            }
+        }
+
+        public function __set($attributeName, $value)
+        {
+            parent::__set($attributeName, $value);
+            if ($attributeName == 'status')
+            {
+                $this->resolveStatusAndSetCompletedFields();
             }
         }
 
@@ -286,7 +295,10 @@
 
         protected function afterSave()
         {
-            $this->processNotificationsToBeSent();
+            if ($this->getScenario() != 'importModel')
+            {
+                $this->processNotificationsToBeSent();
+            }
             if ($this->getScenario() != 'kanbanViewButtonClick' && $this->getScenario() != 'kanbanViewDrag')
             {
                 TasksUtil::checkKanbanTypeByStatusAndUpdateIfRequired($this);

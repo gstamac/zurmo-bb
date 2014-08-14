@@ -88,9 +88,9 @@
         public static function getBuiltTypeDropDownArray()
         {
             return array(
-                static::BUILT_TYPE_PLAIN_TEXT_ONLY  => Zurmo::t('EmailTemplatesModule', 'Use Plain Text'),
-                static::BUILT_TYPE_PASTED_HTML      => Zurmo::t('EmailTemplatesModule', 'Use HTML'),
-                static::BUILT_TYPE_BUILDER_TEMPLATE => Zurmo::t('EmailTemplatesModule', 'Use Template Builder'),
+                static::BUILT_TYPE_BUILDER_TEMPLATE => Zurmo::t('EmailTemplatesModule', 'Template Builder'),
+                static::BUILT_TYPE_PLAIN_TEXT_ONLY  => Zurmo::t('EmailTemplatesModule', 'Plain Text'),
+                static::BUILT_TYPE_PASTED_HTML      => Zurmo::t('EmailTemplatesModule', 'HTML'),
             );
         }
 
@@ -101,6 +101,16 @@
             if (!empty($dropDownArray[$type]))
             {
                 return Yii::app()->format->text($dropDownArray[$type]);
+            }
+        }
+
+        public static function getNonEditableBuiltTypeStringContent($builtType)
+        {
+            assert('is_int($builtType) || $builtType == null');
+            $dropDownArray = self::getBuiltTypeDropDownArray();
+            if (!empty($dropDownArray[$builtType]))
+            {
+                return Yii::app()->format->text($dropDownArray[$builtType]);
             }
         }
 
@@ -145,6 +155,7 @@
                     'htmlContent',
                     'textContent',
                     'serializedData',
+                    'isFeatured',
                 ),
                 'rules' => array(
                     array('type',                       'required'),
@@ -171,12 +182,12 @@
                     array('htmlContent',                'type',    'type' => 'string'),
                     array('textContent',                'type',    'type' => 'string'),
                     array('htmlContent',                'StripDummyHtmlContentFromOtherwiseEmptyFieldValidator'),
-                    array('htmlContent',                'EmailTemplateAtLeastOneContentAreaRequiredValidator'),
                     array('textContent',                'EmailTemplateAtLeastOneContentAreaRequiredValidator'),
                     array('htmlContent',                'EmailTemplateMergeTagsValidator'),
                     array('textContent',                'EmailTemplateMergeTagsValidator'),
                     array('serializedData',             'type', 'type' => 'string'),
                     array('serializedData',             'EmailTemplateSerializedDataValidator'),
+                    array('isFeatured',                 'type',     'type'  => 'boolean'),
                 ),
                 'elements' => array(
                     'htmlContent'                   => 'TextArea',
@@ -227,10 +238,10 @@
         }
 
         /**
-         * Returns PredefinedTemplates
-         * @return Array of EmailTemplate models
+         * Returns the SearchAttributeData array to search for all predefinedBuilderTemplates
+         * @return array
          */
-        public static function getPredefinedBuilderTemplates()
+        public static function getPredefinedBuilderTemplatesSearchAttributeData()
         {
             $searchAttributeData = array();
             $searchAttributeData['clauses'] = array(
@@ -246,18 +257,63 @@
                 ),
             );
             $searchAttributeData['structure'] = '1 and 2';
+            return $searchAttributeData;
+        }
+
+        /**
+         * Returns PredefinedTemplates
+         * @return Array of EmailTemplate models
+         */
+        public static function getPredefinedBuilderTemplates()
+        {
+            $searchAttributeData              = static::getPredefinedBuilderTemplatesSearchAttributeData();
             $joinTablesAdapter                = new RedBeanModelJoinTablesQueryAdapter(get_called_class());
             $where = RedBeanModelDataProvider::makeWhere(get_called_class(), $searchAttributeData, $joinTablesAdapter);
             return self::getSubset($joinTablesAdapter, null, null, $where, 'name');
         }
 
+        protected static function bypassReadPermissionsOptimizationToSqlQueryBasedOnWhere($where)
+        {
+            $q                 = DatabaseCompatibilityUtil::getQuote();
+            $builtTemplateType = static::BUILT_TYPE_BUILDER_TEMPLATE;
+            $isNull            = SQLOperatorUtil::resolveOperatorAndValueForNullOrEmpty('isNull');
+            $expectedWhere     = "({$q}emailtemplate{$q}.{$q}builttype{$q} = {$builtTemplateType}) and " .
+                                 "({$q}emailtemplate{$q}.{$q}modelclassname{$q} {$isNull})";
+            if ($where == $expectedWhere)
+            {
+                return true;
+            }
+            return parent::bypassReadPermissionsOptimizationToSqlQueryBasedOnWhere($where);
+        }
+
+        public function checkPermissionsHasAnyOf($requiredPermissions, User $user = null)
+        {
+            if ($user == null)
+            {
+                $user = Yii::app()->user->userModel;
+            }
+            $effectivePermissions = $this->getEffectivePermissions($user);
+            if (($effectivePermissions & $requiredPermissions) == 0)
+            {
+                $this->setTreatCurrentUserAsOwnerForPermissions(true);
+                if (!$this->isPredefinedBuilderTemplate())
+                {
+                    throw new AccessDeniedSecurityException($user, $requiredPermissions, $effectivePermissions);
+                }
+                else
+                {
+                    //Do nothing
+                }
+            }
+        }
+
         /**
+         * Returns the SearchAttributeData array to search for all previouslyCreatedBuilderTemplates
          * @param null $modelClassName
          * @param bool $includeDrafts
-         * @param null $limit number of previously created templates
-         * @return Array of EmailTemplate models
+         * @return array
          */
-        public static function getPreviouslyCreatedBuilderTemplates($modelClassName = null, $includeDrafts = false, $limit = null)
+        public static function getPreviouslyCreatedBuilderTemplateSearchAttributeData($modelClassName = null, $includeDrafts = false)
         {
             $searchAttributeData = array();
             $searchAttributeData['clauses'] = array(
@@ -294,8 +350,20 @@
                 );
             }
             $searchAttributeData['structure'] .= ' and 3';
-            $joinTablesAdapter                = new RedBeanModelJoinTablesQueryAdapter(get_called_class());
-            $where = RedBeanModelDataProvider::makeWhere(get_called_class(), $searchAttributeData, $joinTablesAdapter);
+            return $searchAttributeData;
+        }
+
+        /**
+         * @param null $modelClassName
+         * @param bool $includeDrafts
+         * @param null $limit number of previously created templates
+         * @return Array of EmailTemplate models
+         */
+        public static function getPreviouslyCreatedBuilderTemplates($modelClassName = null, $includeDrafts = false, $limit = null)
+        {
+            $searchAttributeData    = static::getPreviouslyCreatedBuilderTemplateSearchAttributeData($modelClassName, $includeDrafts);
+            $joinTablesAdapter      = new RedBeanModelJoinTablesQueryAdapter(get_called_class());
+            $where                  = RedBeanModelDataProvider::makeWhere(get_called_class(), $searchAttributeData, $joinTablesAdapter);
             return self::getSubset($joinTablesAdapter, null, $limit, $where, 'name');
         }
 
@@ -389,6 +457,19 @@
             {
                 $this->htmlContent  = EmailTemplateSerializedDataToHtmlUtil::resolveHtmlBySerializedData($this->serializedData, false);
             }
+        }
+
+        public function validate(array $attributeNames = null, $ignoreRequiredValidator = false, $validateAll = false)
+        {
+            if ($validateAll == false)
+            {
+                $metadata               = static::getMetadata();
+                $excludedMembers        = array('textContent');
+                $members                = $metadata['EmailTemplate']['members'];
+                // ignore content fields, we validate them inside the wizard form anyway.
+                $attributeNames         = array_diff($members, $excludedMembers);
+            }
+            return parent::validate($attributeNames, $ignoreRequiredValidator);
         }
     }
 ?>

@@ -328,7 +328,7 @@
             $this->assertTrue($job->run());
             $queuedJobs = Yii::app()->jobQueue->getAll();
             $this->assertEquals(1, count($queuedJobs));
-            $this->assertEquals('Export', $queuedJobs[5][0]);
+            $this->assertEquals('Export', $queuedJobs[5][0]['jobType']);
 
             $exportItem = ExportItem::getById($id);
             $fileModel = $exportItem->exportFileModel;
@@ -364,12 +364,12 @@
             $this->assertTrue($job->run());
             $queuedJobs = Yii::app()->jobQueue->getAll();
             $this->assertEquals(1, count($queuedJobs));
-            $this->assertEquals('Export', $queuedJobs[5][0]);
+            $this->assertEquals('Export', $queuedJobs[5][0]['jobType']);
             //Third run is need to mark the exportItem as complete
             $this->assertTrue($job->run());
             $queuedJobs = Yii::app()->jobQueue->getAll();
             $this->assertEquals(1, count($queuedJobs));
-            $this->assertEquals('Export', $queuedJobs[5][0]);
+            $this->assertEquals('Export', $queuedJobs[5][0]['jobType']);
 
             $exportItem = ExportItem::getById($id);
             $fileModel = $exportItem->exportFileModel;
@@ -447,7 +447,7 @@
             $this->assertTrue($job->run());
             $queuedJobs = Yii::app()->jobQueue->getAll();
             $this->assertEquals(1, count($queuedJobs));
-            $this->assertEquals('Export', $queuedJobs[5][0]);
+            $this->assertEquals('Export', $queuedJobs[5][0]['jobType']);
 
             $exportItem = ExportItem::getById($id1);
             $fileModel = $exportItem->exportFileModel;
@@ -482,7 +482,7 @@
             $this->assertTrue($job->run());
             $queuedJobs = Yii::app()->jobQueue->getAll();
             $this->assertEquals(1, count($queuedJobs));
-            $this->assertEquals('Export', $queuedJobs[5][0]);
+            $this->assertEquals('Export', $queuedJobs[5][0]['jobType']);
 
             //The second item is processed
             $exportItem = ExportItem::getById($id2);
@@ -509,7 +509,7 @@
             SecurityTestHelper::createAccounts();
             $billy = User::getByUsername('billy');
             Yii::app()->user->userModel = $billy;
-            ReadPermissionsOptimizationUtil::rebuild();
+            AllPermissionsOptimizationUtil::rebuild();
 
             $numberOfUserNotifications = Notification::getCountByTypeAndUser('ExportProcessCompleted', $billy);
 
@@ -547,10 +547,10 @@
             $this->assertTrue($account->save());
 
             $job = new ExportJob();
-            //ReadPermissionSubscriptionQuickUpdate should get added to jobQueue
-            $this->assertEquals(1, count(Yii::app()->jobQueue->getAll()));
+            //ReadPermissionSubscriptionUpdate should get added to jobQueue
+            $this->assertEquals(0, count(Yii::app()->jobQueue->getAll()));
             $this->assertTrue($job->run());
-            $this->assertEquals(1, count(Yii::app()->jobQueue->getAll()));
+            $this->assertEquals(0, count(Yii::app()->jobQueue->getAll()));
             $exportItem = ExportItem::getById($id);
             $fileModel = $exportItem->exportFileModel;
 

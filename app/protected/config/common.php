@@ -180,7 +180,6 @@
                         INSTANCE_ROOT . DIRECTORY_SEPARATOR . 'protected/core/widgets/assets/calendar/Calendar.js',
                         INSTANCE_ROOT . DIRECTORY_SEPARATOR . 'protected/core/widgets/assets/colorPicker/iris.js',
                         INSTANCE_ROOT . DIRECTORY_SEPARATOR . 'protected/core/widgets/assets/colorPicker/color.js',
-
                     )
                 ),
                 //Add scripts here that do not need to load when using an ajax request such as a modal search box.  The scripts
@@ -252,6 +251,9 @@
             ),
             'phoneHelper' => array(
                 'class'          => 'application.core.components.PhoneHelper',
+            ),
+            'readPermissionSubscriptionObserver' => array(
+                'class' => 'application.modules.zurmo.observers.ReadPermissionSubscriptionObserver',
             ),
             'request' => array(
                 'class' => 'application.core.components.ZurmoHttpRequest',
@@ -446,10 +448,12 @@
         ),
 
         'params' => array(
-            'redBeanVersion'     => '3.2',
-            'yiiVersion'         => '1.1.13',
-            'memcacheServers'    => $memcacheServers,
-            'supportedLanguages' => array(
+            'redBeanVersion'            => '3.2',
+            'yiiVersion'                => '1.1.13',
+            'memcacheServers'           => $memcacheServers,
+            // enable if you want to clear memcache data with clearCache=1 // Not Coding Standard
+            'hasDedicatedMemcachePool'  => false,
+            'supportedLanguages'        => array(
                 'en' => 'English',
                 'es' => 'Spanish',
                 'it' => 'Italian',
@@ -457,8 +461,11 @@
                 'de' => 'German',
             ),
             'sentryDsn'    => 'http://5232100222bc4404b368026413df2d9a:47f7a2f1542348d68bea7b00f2261ede@sentry.zurmo.com/2',
+            'processNamedSecurableActualPermissionsAsNonOptimized' => false,
+            'processReadMungeAsWriteMunge' => false,
+            'showFlashMessageWhenSecurityCacheShouldBeRebuilt' => false,
         ),
-        'preload' => array(
+        'preload'                       => array(
             'browser',
             'sanitizer',
             'log'
