@@ -34,21 +34,73 @@
      * "Copyright Zurmo Inc. 2014. All rights reserved".
      ********************************************************************************/
 
-    class MarketingListMembersMassSubscribeProgressView extends MassEditProgressView
+    /**
+     * User interface element for selecting multiple groups and users using type ahead element
+     *
+     */
+    class MultipleGroupsAndUsersElement extends MultiSelectRelatedModelsAutoCompleteElement
     {
-        protected function getMessagePrefix()
+        protected function getFormName()
         {
-            return Zurmo::t('Core', 'Subscribing');
+            return null;
         }
 
-        protected function getCompleteMessageSuffix()
+        protected function getUnqualifiedNameForIdField()
         {
-            return Zurmo::t('Core', 'subscribed successfully');
+            return '[GroupsAndUsers][ids]';
         }
 
-        protected function headerLabelPrefixContent()
+        protected function getUnqualifiedIdForIdField()
         {
-            return Zurmo::t('Core', 'Mass Subscribe');
+            return '_GroupsAndUsers_ids';
+        }
+
+        protected function assertModelType()
+        {
+            assert('$this->model instanceof RedBeanModel');
+        }
+
+        protected function getFormattedAttributeLabel()
+        {
+            return Yii::app()->format->text(Zurmo::t('ZurmoModule', 'Groups And Users'));
+        }
+
+        public static function getDisplayName()
+        {
+            return Zurmo::t('ZurmoModule', 'Groups And Users');
+        }
+
+        protected function getWidgetSourceUrl()
+        {
+            return  Yii::app()->createUrl('home/default/autoCompleteGroupsAndUsers');
+        }
+
+        protected function getWidgetHintText()
+        {
+            return Zurmo::t('ZurmoModule', 'Type a group name or user email address',
+                                            LabelUtil::getTranslationParamsForAllModules());
+        }
+
+        protected function getRelatedRecords()
+        {
+            return array();
+        }
+
+        protected function getRelationName()
+        {
+            return null;
+        }
+
+        protected function getEditableInputId($attributeName = null, $relationAttributeName = null)
+        {
+            $inputPrefix = $this->resolveInputIdPrefix();
+            return $inputPrefix . $this->getUnqualifiedIdForIdField();
+        }
+
+        protected function getEditableInputName($attributeName = null, $relationAttributeName = null)
+        {
+            $inputPrefix = $this->resolveInputNamePrefix();
+            return $inputPrefix . $this->getUnqualifiedNameForIdField();
         }
     }
 ?>

@@ -34,36 +34,26 @@
      * "Copyright Zurmo Inc. 2014. All rights reserved".
      ********************************************************************************/
 
-    class MarketingListMembersSubscribeMenuActionElement extends MarketingListMembersActionMenuActionElement
+    class PushLayoutLinkActionElement extends MenuActionElement
     {
-        protected function getSelectedMenuNameSuffix()
+        public function getActionType()
         {
-            return '-massSubscribeSelected';
-        }
-
-        protected function getAllMenuNameSuffix()
-        {
-            return '-massSubscribeAll';
-        }
-
-        protected function getActionId()
-        {
-            return 'massSubscribe';
-        }
-
-        protected function getScriptNameSuffixForSelectedMenu()
-        {
-            return '-listViewMassActionSubscribeSelected';
-        }
-
-        protected function getScriptNameSuffixForAllMenu()
-        {
-            return '-listViewMassActionSubscribeAll';
+            return 'Edit';
         }
 
         protected function getDefaultLabel()
         {
-            return Zurmo::t('Core', 'Subscribe');
+            return Zurmo::t('HomeModule', 'Push Layout');
+        }
+
+        protected function getDefaultRoute()
+        {
+            return Yii::app()->createUrl($this->moduleId . '/' . $this->controllerId . '/pushLayout/', array('id' => $this->modelId));
+        }
+
+        public function getElementValue()
+        {
+            return $this->route;
         }
     }
 ?>

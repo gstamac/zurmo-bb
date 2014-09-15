@@ -34,7 +34,7 @@
      * "Copyright Zurmo Inc. 2014. All rights reserved".
      ********************************************************************************/
 
-    class MarketingListMembersMassSubscribeView extends MarketingListMembersMassEditActionView
+    class PushDashboardEditView extends EditView
     {
         public static function getDefaultMetadata()
         {
@@ -42,19 +42,29 @@
                 'global' => array(
                     'toolbar' => array(
                         'elements' => array(
-                            array('type' => 'MarketingListMembersSubscribeButton',
-                                'htmlOptions' => 'eval:$this->getSubmitButtonHtmlOptions()',
-                            ),
+                            array('type' => 'SaveButton'),
+                            array('type' => 'CancelLink'),
                         ),
+                    ),
+                    'panelsDisplayType' => FormLayout::PANELS_DISPLAY_TYPE_ALL,
+                    'panels' => array(
+                        array(
+                            'rows' => array(
+                                array('cells' =>
+                                    array(
+                                        array(
+                                            'elements' => array(
+                                                array('attributeName' => 'null', 'type' => 'MultipleGroupsAndUsers'),
+                                            ),
+                                        ),
+                                    )
+                                ),
+                            ),
+                         ),
                     ),
                 ),
             );
-            return CMap::mergeArray(parent::getDefaultMetadata(), $metadata);
-        }
-
-        protected function renderItemOperationType()
-        {
-            return 'subscription';
+            return $metadata;
         }
     }
 ?>
