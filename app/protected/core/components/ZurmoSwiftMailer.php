@@ -183,5 +183,205 @@
             $this->clearAddresses();
             return $result;
         }
+
+        public function __construct(EmailMessage $emailMessage, EmailAccount $emailAccount)
+        {
+            $this->populateSettings($emailAccount);
+            $this->populateMessage($emailMessage);
+        }
+
+        protected function populateSettings(EmailAccount $emailAccount)
+        {
+            if ($emailAccount->useCustomOutboundSettings)
+            {
+                $this->host     = $emailAccount->outboundHost;
+                $this->port     = $emailAccount->outboundPort;
+                $this->username = $emailAccount->outboundUsername;
+                $this->password = ZurmoPasswordSecurityUtil::decrypt($emailAccount->outboundPassword);
+                $this->security = $emailAccount->outboundSecurity;
+            }
+            else
+            {
+                $outboundSettings = static::getOutboundSettings();
+                $this->mailer   = $outboundSettings['outboundType'];
+                $this->host     = $outboundSettings['outboundHost'];
+                $this->port     = $outboundSettings['outboundPort'];
+                $this->username = $outboundSettings['outboundUsername'];
+                $this->password = $outboundSettings['outboundPassword'];
+                $this->security = $outboundSettings['outboundSecurity'];
+            }
+        }
+
+        public function populateMessage(EmailMessage $emailMessage)
+        {
+            $this->Subject  = $emailMessage->subject;
+            $this->headers  = unserialize($emailMessage->headers);
+            if (!empty($emailMessage->content->textContent))
+            {
+                $this->altBody  = $emailMessage->content->textContent;
+            }
+            if (!empty($emailMessage->content->htmlContent))
+            {
+                $this->body       = ZurmoCssInlineConverterUtil::convertAndPrettifyEmailByHtmlContent(
+                    $emailMessage->content->htmlContent,
+                    'cssin');//for the time being it should be $this->htmlConverter in emailHelper
+            }
+            $this->From = array($emailMessage->sender->fromAddress => $emailMessage->sender->fromName);
+            foreach ($emailMessage->recipients as $recipient)
+            {
+                $this->addAddressByType($recipient->toAddress, $recipient->toName, $recipient->type);
+            }
+
+            if (isset($emailMessage->files) && !empty($emailMessage->files))
+            {
+                foreach ($emailMessage->files as $file)
+                {
+                    $this->attachDynamicContent($file->fileContent->content, $file->name, $file->type);
+                    //$emailMessage->attach($attachment);
+                }
+            }
+        }
+
+        /**
+         *
+         */
+        public static function getOutboundSettings()
+        {
+            $settingsToLoad = array(
+                                        'outboundType',
+                                        'outboundHost',
+                                        'outboundPort',
+                                        'outboundUsername',
+                                        'outboundPassword',
+                                        'outboundSecurity'
+                                    );
+            $settings = array();
+            foreach ($settingsToLoad as $keyName)
+            {
+                if ($keyName == 'outboundPassword')
+                {
+                    $encryptedKeyValue = ZurmoConfigurationUtil::getByModuleName('EmailMessagesModule', $keyName);
+                    if ($encryptedKeyValue !== '' && $encryptedKeyValue !== null)
+                    {
+                        $keyValue = ZurmoPasswordSecurityUtil::decrypt($encryptedKeyValue);
+                    }
+                    else
+                    {
+                        $keyValue = null;
+                    }
+                }
+                else
+                {
+                    $keyValue = ZurmoConfigurationUtil::getByModuleName('EmailMessagesModule', $keyName);
+                }
+                if (null !== $keyValue)
+                {
+                    $this->$keyName = $keyValue;
+                    $settings[$keyName] = $keyValue;
+                }
+                else
+                {
+                    $settings[$keyName] = null;
+                }
+            }
+        }
+
+        /**
+         * Resolve mailer by campaign or autoresponder email account setting if marketing option is configured.
+         * @param EmailMessage $emailMessage
+         */
+        public function resolveMailerByCampaignOrAutoresponderEmailAccount(EmailMessage $emailMessage)
+        {
+            if(($itemData = EmailMessageUtil::getCampaignOrAutoresponderDataByEmailMessage($emailMessage)) != null)
+            {
+                list($itemId, $itemClass, $personId) = $itemData;
+                $campaignOrAutoresponderItem = $itemClass::getById($itemId);
+                $userEmailAccount = EmailAccount::resolveAndGetByUserAndName($campaignOrAutoresponderItem->campaign->owner, null, false);
+                $useAutoresponderOrCampaignOwnerMailSettings = (bool)ZurmoConfigurationUtil::getByModuleName('MarketingModule', 'UseAutoresponderOrCampaignOwnerMailSettings');
+                if($userEmailAccount->outboundUsername != ''
+                        && $userEmailAccount->outboundPassword != ''
+                            && $useAutoresponderOrCampaignOwnerMailSettings === true)
+                {
+                    $this->username = $userEmailAccount->outboundUsername;
+                    $this->password = ZurmoPasswordSecurityUtil::decrypt($userEmailAccount->outboundPassword);
+                    $this->host     = $userEmailAccount->outboundHost;
+                    $this->port     = $userEmailAccount->outboundPort;
+                }
+            }
+        }
+
+        public function sendEmail(EmailMessage $emailMessage)
+        {
+            try
+            {
+                $this->resolveMailerByCampaignOrAutoresponderEmailAccount($emailMessage);
+                $emailMessage->sendAttempts = $emailMessage->sendAttempts + 1;
+                $acceptedRecipients         = $this->send();
+                // Code below is quick fix, we need to think about better solution
+                // Here is related PT story: https://www.pivotaltracker.com/projects/380027#!/stories/45841753
+                if ($acceptedRecipients != $emailMessage->recipients->count() && $acceptedRecipients <= 0)
+                {
+                    $content = Zurmo::t('EmailMessagesModule', 'Response from Server') . "\n";
+                    foreach ($this->getSendResponseLog() as $logMessage)
+                    {
+                        $content .= $logMessage . "\n";
+                    }
+                    $emailMessageSendError = new EmailMessageSendError();
+                    $data                  = array();
+                    $data['message']                       = $content;
+                    $emailMessageSendError->serializedData = serialize($data);
+                    $emailMessage->folder                  = EmailFolder::getByBoxAndType($emailMessage->folder->emailBox,
+                                                                                          EmailFolder::TYPE_OUTBOX_ERROR);
+                    $emailMessage->error                   = $emailMessageSendError;
+                }
+                else
+                {
+                    $emailMessage->error        = null;
+                    $emailMessage->folder       = EmailFolder::getByBoxAndType($emailMessage->folder->emailBox, EmailFolder::TYPE_SENT);
+                    $emailMessage->sentDateTime = DateTimeUtil::convertTimestampToDbFormatDateTime(time());
+                }
+            }
+            catch (OutboundEmailSendException $e)
+            {
+                $emailMessageSendError = new EmailMessageSendError();
+                $data = array();
+                $data['code']                          = $e->getCode();
+                $data['message']                       = $e->getMessage();
+                //$data['trace']                         = $e->getPrevious();
+                $emailMessageSendError->serializedData = serialize($data);
+                $emailMessage->folder   = EmailFolder::getByBoxAndType($emailMessage->folder->emailBox, EmailFolder::TYPE_OUTBOX_ERROR);
+                $emailMessage->error    = $emailMessageSendError;
+            }
+            $this->updateEmailMessageForSending($emailMessage, (bool) ($emailMessage->id > 0));
+        }
+
+        /**
+         * Updates the email message using stored procedure
+         * @param EmailMessage $emailMessage
+         */
+        protected function updateEmailMessageForSending(EmailMessage $emailMessage, $useSQL = false)
+        {
+            if (!$useSQL)
+            {
+                Yii::log("EmailMessage should have been saved by this point. Anyways, saving now", CLogger::LEVEL_INFO);
+                // we save it and return. No need to call SP as the message is saved already;
+                $emailMessage->save(false);
+                return;
+            }
+            $nowTimestamp       = "'" . DateTimeUtil::convertTimestampToDbFormatDateTime(time()) . "'";
+            $sendAttempts       = ($emailMessage->sendAttempts)? $emailMessage->sendAttempts : 1;
+            $sentDateTime       = ($emailMessage->sentDateTime)? "'" . $emailMessage->sentDateTime . "'" : 'null';
+            $serializedData     = ($emailMessage->error->serializedData)?
+                                                            "'" . $emailMessage->error->serializedData . "'" : 'null';
+            $sql                    = '`update_email_message_for_sending`(
+                                                                        ' . $emailMessage->id . ',
+                                                                        ' . $sendAttempts . ',
+                                                                        ' . $sentDateTime . ',
+                                                                        ' . $emailMessage->folder->id . ',
+                                                                        ' . $serializedData . ',
+                                                                        ' . $nowTimestamp .')';
+            ZurmoDatabaseCompatibilityUtil::callProcedureWithoutOuts($sql);
+            $emailMessage->forget();
+        }
     }
 ?>

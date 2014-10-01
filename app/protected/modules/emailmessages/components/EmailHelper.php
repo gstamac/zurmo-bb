@@ -228,23 +228,28 @@
          * @throws FailedToSaveModelException
          * @return null
          */
-        public function sendImmediately(EmailMessage $emailMessage)
+        public function sendImmediately(EmailMessage $emailMessage, $user = null)
         {
             if ($emailMessage->folder->type == EmailFolder::TYPE_SENT)
             {
                 throw new NotSupportedException();
             }
-            $mailer             = $this->getOutboundMailer();
-            $this->populateMailer($mailer, $emailMessage);
-            $this->sendEmail($mailer, $emailMessage);
-            $this->updateEmailMessageForSending($emailMessage, (bool) ($emailMessage->id > 0));
+            $mailer     = ZurmoMailerFactory::resolveMailer($emailMessage, $user);
+            //$mailer = ZurmoMailerFactory::resolveMailerByEmailMessage($emailMessage); //in here we can look at the related email->account, etc. and run
+            //the logic sequence to determine which mailer to retrieve.
+            //$mailer             = $this->getOutboundMailer();
+           // $this->populateMailer($mailer, $emailMessage, $this->htmlConverter); //just passing in htmlConverter for the time being
+            //$mailer->populateMessage($emailMessage);
+            //$this->sendEmail($mailer, $emailMessage);
+            $mailer->sendMail($emailMessage);
+            //$this->updateEmailMessageForSending($emailMessage, (bool) ($emailMessage->id > 0));
         }
 
         /**
          * Updates the email message using stored procedure
          * @param EmailMessage $emailMessage
          */
-        protected function updateEmailMessageForSending(EmailMessage $emailMessage, $useSQL = false)
+        /*protected function updateEmailMessageForSending(EmailMessage $emailMessage, $useSQL = false)
         {
             if (!$useSQL)
             {
@@ -267,10 +272,11 @@
                                                                         ' . $nowTimestamp .')';
             ZurmoDatabaseCompatibilityUtil::callProcedureWithoutOuts($sql);
             $emailMessage->forget();
-        }
+        }*/
 
         protected function populateMailer(Mailer $mailer, EmailMessage $emailMessage)
         {
+            /**
             $mailer->mailer   = $this->outboundType;
             $mailer->host     = $this->outboundHost;
             $mailer->port     = $this->outboundPort;
@@ -278,6 +284,8 @@
             $mailer->password = $this->outboundPassword;
             $mailer->security = $this->outboundSecurity;
             $this->resolveMailerFromEmailAccount($mailer, $emailMessage->account);
+             * */
+            /**
             $mailer->Subject  = $emailMessage->subject;
             $mailer->headers  = unserialize($emailMessage->headers);
             if (!empty($emailMessage->content->textContent))
@@ -304,9 +312,10 @@
                     //$emailMessage->attach($attachment);
                 }
             }
+             * */
         }
 
-        protected function resolveMailerFromEmailAccount(Mailer $mailer, EmailAccount $emailAccount)
+        /*protected function resolveMailerFromEmailAccount(Mailer $mailer, EmailAccount $emailAccount)
         {
             if ($emailAccount->useCustomOutboundSettings)
             {
@@ -316,9 +325,9 @@
                 $mailer->password = ZurmoPasswordSecurityUtil::decrypt($emailAccount->outboundPassword);
                 $mailer->security = $emailAccount->outboundSecurity;
             }
-        }
+        }*/
 
-        protected function sendEmail(Mailer $mailer, EmailMessage $emailMessage)
+        /*protected function sendEmail(Mailer $mailer, EmailMessage $emailMessage)
         {
             try
             {
@@ -360,14 +369,14 @@
                 $emailMessage->folder   = EmailFolder::getByBoxAndType($emailMessage->folder->emailBox, EmailFolder::TYPE_OUTBOX_ERROR);
                 $emailMessage->error    = $emailMessageSendError;
             }
-        }
+        }*/
 
-        protected function getOutboundMailer()
+        /*protected function getOutboundMailer()
         {
             $mailer = new ZurmoSwiftMailer();
             $mailer->init();
             return $mailer;
-        }
+        }*/
 
         /**
          * Prepare message content.
@@ -420,7 +429,7 @@
          * @param Mailer $mailer
          * @param EmailMessage $emailMessage
          */
-        protected function resolveMailerByCampaignOrAutoresponderEmailAccount(Mailer $mailer, EmailMessage $emailMessage)
+        /*protected function resolveMailerByCampaignOrAutoresponderEmailAccount(Mailer $mailer, EmailMessage $emailMessage)
         {
             if(($itemData = EmailMessageUtil::getCampaignOrAutoresponderDataByEmailMessage($emailMessage)) != null)
             {
@@ -438,6 +447,6 @@
                     $mailer->port     = $userEmailAccount->outboundPort;
                 }
             }
-        }
+        }*/
     }
 ?>
