@@ -34,62 +34,54 @@
      * "Copyright Zurmo Inc. 2014. All rights reserved".
      ********************************************************************************/
 
-    /**
-     * A job for create campaign items for campaigns
-     */
-    class CampaignGenerateDueCampaignItemsJob extends AutoresponderOrCampaignBaseJob
+    class OwnedSecurableTestItem3 extends OwnedSecurableItem
     {
-        /**
-         * @see BaseJob::$loadJobQueueOnCleanupAndFallback
-         * @var bool
-         */
-        protected static $loadJobQueueOnCleanupAndFallback = true;
-
-        /**
-         * @returns Translated label that describes this job type.
-         */
-        public static function getDisplayName()
+        public function __toString()
         {
-           return Zurmo::t('CampaignsModule', 'Generate campaign items');
-        }
-
-        /**
-         * @see parent::resolveJobsForQueue()
-         */
-        public static function resolveJobsForQueue()
-        {
-            parent::resolveJobsForQueue();
-            $pageSize       = static::JOB_QUEUE_PAGE_SIZE;
-            $offset         = 0;
-            $timeStamp      = time();
-            do
+            if (trim($this->member) == '')
             {
-                $campaigns = Campaign::getByStatusAndSendingTime(
-                                Campaign::STATUS_ACTIVE, $timeStamp, $pageSize, $offset, false);
-                $offset    = $offset + $pageSize;
-                if (is_array($campaigns) && count($campaigns) > 0)
-                {
-                    foreach ($campaigns as $campaign)
-                    {
-                        Yii::app()->jobQueue->resolveToAddJobTypeByModelByDateTimeAttribute($campaign, 'sendOnDateTime',
-                                                'CampaignGenerateDueCampaignItems');
-                    }
-                }
+                return Zurmo::t('Core', '(Unnamed)');
             }
-            while (is_array($campaigns) && count($campaigns) > 0);
+            return $this->member;
         }
 
-        /**
-         * @see BaseJob::run()
-         */
-        public function run()
+        public static function getDefaultMetadata()
         {
-            return CampaignItemsUtil::generateCampaignItemsForDueCampaigns();
+            $metadata = parent::getDefaultMetadata();
+            $metadata[__CLASS__] = array(
+                'members' => array(
+                    'member',
+                    'member2'
+                ),
+                'rules' => array(
+                    array('member', 'required'),
+                    array('member', 'type', 'type' => 'string'),
+                    array('member', 'length', 'max' => 255),
+                    array('member2', 'type', 'type' => 'string'),
+                    array('member2', 'length', 'max' => 255),
+                ),
+            );
+            return $metadata;
         }
 
-        public static function jobExecutionInQueueDependsOnTime()
+        public static function getModuleClassName()
+        {
+            return 'ZurmoModule';
+        }
+
+        public static function isTypeDeletable()
         {
             return true;
+        }
+
+        public function onAfterOwnerChange(CEvent $event)
+        {
+            parent::__set('member', 'onAfterOwnerChange');
+        }
+
+        public function onBeforeOwnerChange(CEvent $event)
+        {
+            parent::__set('member2', 'onBeforeOwnerChange');
         }
     }
 ?>
