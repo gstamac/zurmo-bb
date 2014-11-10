@@ -81,36 +81,40 @@
             );
         }
 
+        private static function getServicesToCheckOnlyAfterInstallation()
+        {
+            return array(
+                'FilePermissionsAfterInstall',
+                'HostInfo',
+            );
+        }
+
+        private static function getServicesToExcludeCheckAfterInstallation()
+        {
+            return array(
+                'FilePermissions'
+            );
+        }
+
+        private static function sanitizeServicesToExcludeCheckAfterInstallation(array & $services)
+        {
+            $servicesToExclude  = static::getServicesToExcludeCheckAfterInstallation();
+            foreach ($servicesToExclude as $serviceName)
+            {
+                if (($key = array_search($serviceName, $services)) !== false)
+                {
+                    unset($services[$key]);
+                }
+            }
+        }
+
         private static function getServicesToCheckAfterInstallation()
         {
-            return array(   'WebServer',
-                            'Php',
-                            'PhpTimeZone',
-                            'PhpMemoryBytes',
-                            'PhpFileUploads',
-                            'PhpUploadSize',
-                            'PhpPostSize',
-                            'ServerVariable',
-                            'PCRE',
-                            'SPL',
-                            'Ctype',
-                            'FilePermissionsAfterInstall',
-                            'InstanceFolders',
-                            'APC',
-                            'Soap',
-                            'Curl',
-                            'Yii',
-                            'RedBean',
-                            'MbString',
-                            'Memcache',
-                            'SetIncludePath',
-                            'IMAP',
-                            'Pdo',
-                            'PdoMysql',
-                            'Ldap',
-                            'Mcrypt',
-                            'HostInfo'
-            );
+            $services = CMap::mergeArray(static::getServicesToCheck(),
+                                            static::getAdditionalServicesToCheck(),
+                                            static::getServicesToCheckOnlyAfterInstallation());
+            static::sanitizeServicesToExcludeCheckAfterInstallation($services);
+            return $services;
         }
 
         private static function getAdditionalServicesToCheck()
@@ -146,8 +150,13 @@
 
         public static function checkServicesAfterInstallationAndGetResultsDataForDisplay()
         {
-            $servicesToCheck = self::getServicesToCheckAfterInstallation();
-            return static::processServicesAndGetResultsData($servicesToCheck);
+            $servicesToCheck            = self::getServicesToCheckAfterInstallation();
+            $form                       = new InstallSettingsForm();
+            list(, $form->databaseHostname, $form->databasePort, $form->databaseName) =
+                array_values(RedBeanDatabase::getDatabaseInfoFromDsnString(Yii::app()->db->connectionString));
+            $form->databaseUsername     = Yii::app()->db->username;
+            $form->databasePassword     = Yii::app()->db->password;
+            return static::processServicesAndGetResultsData($servicesToCheck, $form);
         }
 
         protected static function processServicesAndGetResultsData(array $servicesToCheck, $form = null)

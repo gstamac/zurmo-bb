@@ -384,9 +384,9 @@
                 self::assertMetadataIsValid($metadata);
             }
             // Save the mixed in Person metadata.
-            $modelClassName = 'Person';
-            if (isset($metadata[$modelClassName]))
+            if (isset($metadata['Person']))
             {
+                $modelClassName = 'Person';
                 try
                 {
                     $globalMetadata = GlobalMetadata::getByClassName($modelClassName);
@@ -400,7 +400,7 @@
                 $saved = $globalMetadata->save();
                 assert('$saved');
             }
-            else
+            if (isset($metadata['User']))
             {
                 parent::setMetadata($metadata);
             }
@@ -512,7 +512,8 @@
 
         protected static function translatedAttributeLabels($language)
         {
-            return array_merge(parent::translatedAttributeLabels($language),
+            return array_merge(Person::getTranslatedAttributeLabels($language),
+                    array_merge(parent::translatedAttributeLabels($language),
                 array(
                     'currency'            => Zurmo::t('ZurmoModule', 'Currency',                array(), null, $language),
                     'emailAccounts'       => Zurmo::t('EmailMessagesModule', 'Email Accounts',          array(), null, $language),
@@ -537,7 +538,7 @@
                     'username'            => Zurmo::t('ZurmoModule', 'Username',                array(), null, $language),
                     'lastLoginDateTime'   => Zurmo::t('UsersModule', 'Last Login',              array(), null, $language),
                 )
-            );
+            ));
         }
 
         public function getActualRight($moduleName, $rightName)
@@ -912,36 +913,9 @@
             return true;
         }
 
-        public static function getActiveUserCount()
+        public static function getActiveUserCount($includeRootUser = false)
         {
-            $searchAttributeData['clauses'] = array(
-                1 => array(
-                    'attributeName'        => 'isActive',
-                    'operatorType'         => 'equals',
-                    'value'                => true,
-                ),
-                2 => array(
-                    'attributeName'        => 'isRootUser',
-                    'operatorType'         => 'equals',
-                    'value'                => 0,
-                ),
-                3 => array(
-                    'attributeName'        => 'isRootUser',
-                    'operatorType'         => 'isNull',
-                    'value'                => null,
-                ),
-                4 => array(
-                    'attributeName'        => 'isSystemUser',
-                    'operatorType'         => 'equals',
-                    'value'                => 0,
-                ),
-                5 => array(
-                    'attributeName'        => 'isSystemUser',
-                    'operatorType'         => 'isNull',
-                    'value'                => null,
-                )
-            );
-            $searchAttributeData['structure'] = '1 and (2 or 3) and (4 or 5)';
+            $searchAttributeData    = self::makeActiveUsersQuerySearchAttributeData($includeRootUser);
             $joinTablesAdapter = new RedBeanModelJoinTablesQueryAdapter('User');
             $where = RedBeanModelDataProvider::makeWhere('User', $searchAttributeData, $joinTablesAdapter);
             return static::getCount($joinTablesAdapter, $where, null);
@@ -1059,8 +1033,13 @@
             }
             if ($this->isActive != $isActive)
             {
-               $this->unrestrictedSet('isActive', $isActive);
-               $this->save();
+                $data = array(strval($this), array('isActive'),
+                                BooleanUtil::boolToString((boolean) $this->isActive),
+                                BooleanUtil::boolToString((boolean) $isActive));
+                AuditEvent::logAuditEvent('ZurmoModule', ZurmoModule::AUDIT_EVENT_ITEM_MODIFIED,
+                    $data, $this);
+                $this->unrestrictedSet('isActive', $isActive);
+                $this->save();
             }
         }
 
