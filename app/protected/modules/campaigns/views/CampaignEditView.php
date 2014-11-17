@@ -174,7 +174,7 @@
             {
                 $content .= ZurmoHtml::tag('div', array('class' => 'left-column'), $this->renderMergeTagsContent());
                 $element = new EmailTemplateHtmlAndTextContentElement($model, $attribute , $form);
-                $element->plugins = array('fontfamily', 'fontsize', 'fontcolor');
+                $element->plugins = array('fontfamily', 'fontsize', 'fontcolor', 'imagegallery');
             }
             if ($form !== null)
             {
@@ -285,7 +285,7 @@
         {
             assert('$form instanceof ZurmoActiveForm');
             $content = "<h3>".Zurmo::t('ZurmoModule', 'Rights and Permissions') . '</h3><div id="owner-box">';
-            if($this->isCampaignEditable())
+            if ($this->isCampaignEditable())
             {
                 $element = new UserElement($this->getModel(), 'owner', $form);
             }
