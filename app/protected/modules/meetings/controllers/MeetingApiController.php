@@ -73,7 +73,7 @@
             $result    =  $this->processGetModifiedItems($params['data']);
             Yii::app()->apiHelper->sendResponse($result);
         }
-        
+
         /**
          * Get all meetings attendees including users, contacts, opportunities and accounts
          */
@@ -107,7 +107,6 @@
                 throw new ApiException($message);
             }
             return $result;
-
         }
 
         /**
@@ -120,10 +119,14 @@
             $data         = array();
             foreach ($meeting->userAttendees as $attendee)
             {
-                $item = array('id' => $attendee->id);
+                $item = array();
+                $item['id']        = $attendee->id;
+                $item['firstName'] = $attendee->firstName;
+                $item['lastName']  = $attendee->lastName;
+                $item['username']  = $attendee->username;
                 if ($attendee->primaryEmail->emailAddress != null)
                 {
-                    $item['email'] = $attendee->primaryEmail->emailAddress;
+                    $item['email']     = $attendee->primaryEmail->emailAddress;
                 }
                 $data['User'][] = $item;
             }
@@ -150,11 +153,22 @@
                         {
                             $modelDerivationPathToItem  = RuntimeUtil::getModelDerivationPathToItem($activityClassName);
                             $castedDownModel            = $activityItem->castDown(array($modelDerivationPathToItem));
-                            $item = array('id' => $castedDownModel->id);
-                            if ($castedDownModel instanceof Contact && $castedDownModel->primaryEmail->emailAddress != null)
+                            $item = array();
+                            $item['id'] = $castedDownModel->id;
+                            if ($castedDownModel instanceof Contact)
                             {
-                                $item['email'] = $castedDownModel->primaryEmail->emailAddress;
+                                if ($castedDownModel->primaryEmail->emailAddress != null)
+                                {
+                                    $item['email']     = $castedDownModel->primaryEmail->emailAddress;
+                                }
+                                $item['firstName'] = $castedDownModel->firstName;
+                                $item['lastName']  = $castedDownModel->lastName;
                             }
+                            elseif ($castedDownModel instanceof Account || $castedDownModel instanceof Opportunity)
+                            {
+                                $item['name'] = $castedDownModel->name;
+                            }
+
                             $data[$activityClassName][] = $item;
                         }
                         catch (NotFoundException $e)

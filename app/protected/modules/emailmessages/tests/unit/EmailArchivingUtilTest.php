@@ -572,5 +572,133 @@ Cc: 'John Wein' <john@example.com>, Peter Smith <peter@example.com>
             $this->assertEquals($subjectUTF8, $emailMessage->subject);
             //$this->assertTrue($emailMessage->save(false));
         }
+
+        public function testCreateEmailMessageSender()
+        {
+            $user    = UserTestHelper::createBasicUser('senderTestUser');
+            Yii::app()->user->userModel = $user;
+            $account = AccountTestHelper::createAccountByNameForOwner('senderAccount', $user);
+            $account->primaryEmail->emailAddress   = 'senderemail@example.org';
+            $this->assertTrue($account->save());
+
+            $contact = ContactTestHelper::createContactByNameForOwner('SenderContact', $user);
+            $contact->primaryEmail->emailAddress   = 'senderemail@example.org';
+            $this->assertTrue($contact->save());
+
+            $senderInfo = array('name' => 'Sender Name', 'email' => 'senderemail@example.org');
+
+            $emailMessageSender = EmailArchivingUtil::createEmailMessageSender($senderInfo, true, true, true);
+            $this->assertTrue($emailMessageSender instanceof EmailMessageSender);
+            $this->assertEquals($emailMessageSender->fromAddress, $senderInfo['email']);
+            $this->assertEquals($emailMessageSender->fromName, $senderInfo['name']);
+            $this->assertTrue($emailMessageSender->personsOrAccounts[0]->isSame($contact));
+            $this->assertTrue($emailMessageSender->personsOrAccounts[1]->isSame($account));
+            $this->assertEquals($emailMessageSender->personsOrAccounts->count(), 2);
+
+            // Test when user can't access Contacts
+            $emailMessageSender = EmailArchivingUtil::createEmailMessageSender($senderInfo, false, true, true);
+            $this->assertEquals($emailMessageSender->fromAddress, $senderInfo['email']);
+            $this->assertEquals($emailMessageSender->fromName, $senderInfo['name']);
+            $this->assertEquals($emailMessageSender->personsOrAccounts->count(), 1);
+            $this->assertTrue($emailMessageSender->personsOrAccounts[0]->isSame($account));
+
+            // Test when user can't access Contacts
+            $emailMessageSender = EmailArchivingUtil::createEmailMessageSender($senderInfo, false, true, false);
+            $this->assertEquals($emailMessageSender->fromAddress, $senderInfo['email']);
+            $this->assertEquals($emailMessageSender->fromName, $senderInfo['name']);
+            $this->assertEquals($emailMessageSender->personsOrAccounts->count(), 0);
+
+            $senderInfo = array('name' => 'Sender Name 2', 'email' => 'senderemail2@example.org');
+            $emailMessageSender = EmailArchivingUtil::createEmailMessageSender($senderInfo, true, true, true);
+            $this->assertTrue($emailMessageSender instanceof EmailMessageSender);
+            $this->assertEquals($emailMessageSender->fromAddress, $senderInfo['email']);
+            $this->assertEquals($emailMessageSender->fromName, $senderInfo['name']);
+            $this->assertEquals($emailMessageSender->personsOrAccounts->count(), 0);
+        }
+
+        public function testCreateEmailMessageRecipient()
+        {
+            $user    = UserTestHelper::createBasicUser('recipientTestUser');
+            Yii::app()->user->userModel = $user;
+            $account = AccountTestHelper::createAccountByNameForOwner('RecipientAccount', $user);
+            $account->primaryEmail->emailAddress   = 'recipientemail@example.org';
+            $this->assertTrue($account->save());
+
+            $contact = ContactTestHelper::createContactByNameForOwner('RecipientContact', $user);
+            $contact->primaryEmail->emailAddress   = 'recipientemail@example.org';
+            $this->assertTrue($contact->save());
+
+            $recipientInfo = array('name' => 'Recipient Name', 'email' => 'recipientemail@example.org',
+                                   'type' => EmailMessageRecipient::TYPE_CC);
+
+            $emailMessageRecipient = EmailArchivingUtil::createEmailMessageRecipient($recipientInfo, true, true, true);
+            $this->assertTrue($emailMessageRecipient instanceof EmailMessageRecipient);
+            $this->assertEquals($emailMessageRecipient->toAddress, $recipientInfo['email']);
+            $this->assertEquals($emailMessageRecipient->toName, $recipientInfo['name']);
+            $this->assertEquals($emailMessageRecipient->type, $recipientInfo['type']);
+            $this->assertTrue($emailMessageRecipient->personsOrAccounts[0]->isSame($contact));
+            $this->assertTrue($emailMessageRecipient->personsOrAccounts[1]->isSame($account));
+            $this->assertEquals($emailMessageRecipient->personsOrAccounts->count(), 2);
+
+            // Test when user can't access Contacts
+            $recipientInfo['type'] = EmailMessageRecipient::TYPE_TO;
+            $emailMessageRecipient = EmailArchivingUtil::createEmailMessageRecipient($recipientInfo, false, true, true);
+            $this->assertTrue($emailMessageRecipient instanceof EmailMessageRecipient);
+            $this->assertEquals($emailMessageRecipient->toAddress, $recipientInfo['email']);
+            $this->assertEquals($emailMessageRecipient->toName, $recipientInfo['name']);
+            $this->assertEquals($emailMessageRecipient->type, $recipientInfo['type']);
+            $this->assertEquals($emailMessageRecipient->personsOrAccounts->count(), 1);
+            $this->assertTrue($emailMessageRecipient->personsOrAccounts[0]->isSame($account));
+
+            // Test when user can't access Contacts
+            $recipientInfo['type'] = EmailMessageRecipient::TYPE_BCC;
+            $emailMessageRecipient = EmailArchivingUtil::createEmailMessageRecipient($recipientInfo, false, true, false);
+            $this->assertTrue($emailMessageRecipient instanceof EmailMessageRecipient);
+            $this->assertEquals($emailMessageRecipient->toAddress, $recipientInfo['email']);
+            $this->assertEquals($emailMessageRecipient->toName, $recipientInfo['name']);
+            $this->assertEquals($emailMessageRecipient->type, $recipientInfo['type']);
+            $this->assertEquals($emailMessageRecipient->personsOrAccounts->count(), 0);
+
+            $recipientInfo = array('name' => 'Recipient Name', 'email' => 'recipientemail2@example.org',
+                                   'type' => EmailMessageRecipient::TYPE_CC);
+            $emailMessageRecipient = EmailArchivingUtil::createEmailMessageRecipient($recipientInfo, true, true, true);
+            $this->assertTrue($emailMessageRecipient instanceof EmailMessageRecipient);
+            $this->assertEquals($emailMessageRecipient->toAddress, $recipientInfo['email']);
+            $this->assertEquals($emailMessageRecipient->toName, $recipientInfo['name']);
+            $this->assertEquals($emailMessageRecipient->type, $recipientInfo['type']);
+            $this->assertEquals($emailMessageRecipient->personsOrAccounts->count(), 0);
+        }
+
+        public function testCreateEmailAttachment()
+        {
+            $user    = UserTestHelper::createBasicUser('attachmentTestUser');
+            Yii::app()->user->userModel = $user;
+            $imapMessage = new ImapMessage();
+
+            $pathToFiles = Yii::getPathOfAlias('application.modules.emailMessages.tests.unit.files');
+            $filePath_1  = $pathToFiles . DIRECTORY_SEPARATOR . 'table.csv';
+            $data['attachments'] =
+                array(
+                    array('filename' => 'table.csv', 'attachment' => file_get_contents($filePath_1))
+                );
+            $imapMessage->attachments = $data['attachments'];
+            $file = EmailArchivingUtil::createEmailAttachment($imapMessage->attachments[0]);
+            $this->assertTrue($file instanceof FileModel);
+            $this->assertEquals($file->name, $imapMessage->attachments[0]['filename']);
+            $this->assertTrue($file->fileContent instanceof FileContent);
+            $this->assertEquals($file->fileContent->content, $imapMessage->attachments[0]['attachment']);
+            $this->assertEquals($file->type, 'text/csv');
+            $this->assertEquals($file->size, strlen($imapMessage->attachments[0]['attachment']));
+
+            // Test with not allowed extension
+            $imapMessage = new ImapMessage();
+            $data['attachments'] =
+                array(
+                    array('filename' => 'table.abc', 'attachment' => 'notAllowed')
+                );
+            $imapMessage->attachments = $data['attachments'];
+            $file = EmailArchivingUtil::createEmailAttachment($imapMessage->attachments[0]);
+            $this->assertFalse($file);
+        }
     }
 ?>
