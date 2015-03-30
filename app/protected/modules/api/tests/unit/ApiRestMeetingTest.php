@@ -493,14 +493,6 @@
             $notAllowedUser->setRight('UsersModule', UsersModule::RIGHT_LOGIN_VIA_WEB_API);
             $saved = $notAllowedUser->save();
 
-            $authenticationData = $this->login('steven', 'steven');
-            $headers = array(
-                'Accept: application/json',
-                'ZURMO_SESSION_ID: ' . $authenticationData['sessionId'],
-                'ZURMO_TOKEN: ' . $authenticationData['token'],
-                'ZURMO_API_REQUEST_TYPE: REST',
-            );
-
             $everyoneGroup = Group::getByName(Group::EVERYONE_GROUP_NAME);
             $this->assertTrue($everyoneGroup->save());
 
@@ -954,6 +946,125 @@
             $this->assertEquals('Second Meeting', $response['data']['items'][0]['name']);
         }
 
+        public function testCreateWithRelations()
+        {
+            $super = User::getByUsername('super');
+            Yii::app()->user->userModel = $super;
+
+            $everyoneGroup = Group::getByName(Group::EVERYONE_GROUP_NAME);
+            $this->assertTrue($everyoneGroup->save());
+
+            $john = UserTestHelper::createBasicUser('John');
+            $john->setRight('UsersModule', UsersModule::RIGHT_LOGIN_VIA_WEB_API);
+            $john->setRight('MeetingsModule', MeetingsModule::getAccessRight());
+            $john->setRight('MeetingsModule', MeetingsModule::getCreateRight());
+            $saved = $john->save();
+            $this->assertTrue($saved);
+
+            $contact  = ContactTestHelper::createContactByNameForOwner('Simon', $super);
+            $contact2  = ContactTestHelper::createContactByNameForOwner('Simona', $john);
+            $contactItemId = $contact->getClassId('Item');
+            $contact2ItemId = $contact2->getClassId('Item');
+
+            $authenticationData = $this->login();
+            $headers = array(
+                'Accept: application/json',
+                'ZURMO_SESSION_ID: ' . $authenticationData['sessionId'],
+                'ZURMO_TOKEN: ' . $authenticationData['token'],
+                'ZURMO_API_REQUEST_TYPE: REST',
+            );
+
+            $categories = array(
+                'Meeting',
+                'Call',
+            );
+            $categoryFieldData = CustomFieldData::getByName('MeetingCategories');
+            $categoryFieldData->serializedData = serialize($categories);
+            $this->assertTrue($categoryFieldData->save());
+
+            $startStamp             = DateTimeUtil::convertTimestampToDbFormatDateTime(time()  + 10000);
+            $endStamp               = DateTimeUtil::convertTimestampToDbFormatDateTime(time() + 11000);
+
+            $data['name']           = "Meeting with relations for super user";
+            $data['startDateTime']  = $startStamp;
+            $data['endDateTime']    = $endStamp;
+            $data['category']['value'] = $categories[1];
+
+            $data['modelRelations'] = array(
+                'activityItems' => array(
+                    array(
+                        'action' => 'add',
+                        'modelId' => $contact->id,
+                        'modelClassName' => 'Contact'
+                    ),
+                ),
+                'userAttendees' => array(
+                    array(
+                        'action' => 'add',
+                        'modelId' => $john->id,
+                        'modelClassName' => 'User'
+                    ),
+                )
+            );
+
+            $response = $this->createApiCallWithRelativeUrl('create/', 'POST', $headers, array('data' => $data));
+            $response = json_decode($response, true);
+            $this->assertEquals(ApiResponse::STATUS_SUCCESS, $response['status']);
+            $this->assertEquals($data['name'], $response['data']['name']);
+            $this->assertEquals($data['startDateTime'], $response['data']['startDateTime']);
+            $this->assertEquals($data['endDateTime'], $response['data']['endDateTime']);
+
+            RedBeanModel::forgetAll();
+            $meeting = Meeting::getById($response['data']['id']);
+            $this->assertEquals(1, count($meeting->activityItems));
+            $this->assertEquals($contactItemId, $meeting->activityItems[0]->id);
+            $this->assertEquals(1, count($meeting->userAttendees));
+            $this->assertEquals($john->id, $meeting->userAttendees[0]->id);
+
+            // Now test with regular user
+            $authenticationData = $this->login('john', 'john');
+            $headers = array(
+                'Accept: application/json',
+                'ZURMO_SESSION_ID: ' . $authenticationData['sessionId'],
+                'ZURMO_TOKEN: ' . $authenticationData['token'],
+                'ZURMO_API_REQUEST_TYPE: REST',
+            );
+            $data = array();
+            $data['name']           = "Meeting with relations for regular user";
+            $data['startDateTime']  = $startStamp;
+            $data['endDateTime']    = $endStamp;
+            $data['category']['value'] = $categories[1];
+            $data['modelRelations'] = array(
+                'activityItems' => array(
+                    array(
+                        'action' => 'add',
+                        'modelId' => $contact2->id,
+                        'modelClassName' => 'Contact'
+                    ),
+                ),
+                'userAttendees' => array(
+                    array(
+                        'action' => 'add',
+                        'modelId' => $super->id,
+                        'modelClassName' => 'User'
+                    ),
+                )
+            );
+            $response = $this->createApiCallWithRelativeUrl('create/', 'POST', $headers, array('data' => $data));
+            $response = json_decode($response, true);
+            $this->assertEquals(ApiResponse::STATUS_SUCCESS, $response['status']);
+            $this->assertEquals($data['name'], $response['data']['name']);
+            $this->assertEquals($data['startDateTime'], $response['data']['startDateTime']);
+            $this->assertEquals($data['endDateTime'], $response['data']['endDateTime']);
+
+            RedBeanModel::forgetAll();
+            $meeting = Meeting::getById($response['data']['id']);
+            $this->assertEquals(1, count($meeting->activityItems));
+            $this->assertEquals($contact2ItemId, $meeting->activityItems[0]->id);
+            $this->assertEquals(1, count($meeting->userAttendees));
+            $this->assertEquals($super->id, $meeting->userAttendees[0]->id);
+        }
+
         public function testEditMeetingWithIncompleteData()
         {
             $super = User::getByUsername('super');
@@ -1311,97 +1422,13 @@
             $this->assertContains($meetingId3, $response['data']['items']);
         }
 
-        public function stestGetAttendees()
+        public function testGetMeetingWithAttendees()
         {
             $super = User::getByUsername('super');
             Yii::app()->user->userModel = $super;
             $evelina  = UserTestHelper::createBasicUser('Evelina');
             $amelia  = UserTestHelper::createBasicUser('Amelia');
-            $amelia->primaryEmail->emailAddress = 'super@example.com';
-            $this->assertTrue($amelia->save());
-            $contact1 = ContactTestHelper::createContactByNameForOwner('TestContact1', $super);
-            $contact2 = ContactTestHelper::createContactByNameForOwner('TestContact2', $super);
-
-            $contact2->primaryEmail->emailAddress = 'aaa@example.com';
-            $this->assertTrue($contact2->save());
-
-            $authenticationData = $this->login();
-            $headers = array(
-                'Accept: application/json',
-                'ZURMO_SESSION_ID: ' . $authenticationData['sessionId'],
-                'ZURMO_TOKEN: ' . $authenticationData['token'],
-                'ZURMO_API_REQUEST_TYPE: REST',
-            );
-
-            $meeting = MeetingTestHelper::createMeetingByNameForOwner('Meeting With User Attendees', $super);
-
-            $response = $this->createApiCallWithRelativeUrl('getAttendees/?id=' . $meeting->id, 'GET', $headers);
-            $response = json_decode($response, true);
-
-            $this->assertEquals(ApiResponse::STATUS_SUCCESS, $response['status']);
-            $this->assertEmpty($response['data']);
-
-            $meeting->activityItems->add($contact1);
-            $meeting->activityItems->add($contact2);
-            $this->assertTrue($meeting->save());
-            $response = $this->createApiCallWithRelativeUrl('getAttendees/?id=' . $meeting->id, 'GET', $headers);
-            $response = json_decode($response, true);
-            $this->assertEquals(ApiResponse::STATUS_SUCCESS, $response['status']);
-            $this->assertEquals(2, count($response['data']['Contact']));
-            $this->assertEquals($contact1->id, $response['data']['Contact'][0]['id']);
-            $this->assertEquals($contact1->firstName, $response['data']['Contact'][0]['firstName']);
-            $this->assertEquals($contact1->lastName, $response['data']['Contact'][0]['lastName']);
-            $this->assertEquals($contact2->id, $response['data']['Contact'][1]['id']);
-            $this->assertEquals($contact2->firstName, $response['data']['Contact'][1]['firstName']);
-            $this->assertEquals($contact2->lastName, $response['data']['Contact'][1]['lastName']);
-            $this->assertEquals($contact2->primaryEmail->emailAddress, $response['data']['Contact'][1]['email']);
-
-            $meeting->userAttendees->add($evelina);
-            $meeting->userAttendees->add($amelia);
-            $this->assertTrue($meeting->save());
-            $response = $this->createApiCallWithRelativeUrl('getAttendees/?id=' . $meeting->id, 'GET', $headers);
-            $response = json_decode($response, true);
-            $this->assertEquals(ApiResponse::STATUS_SUCCESS, $response['status']);
-            $this->assertEquals(2, count($response['data']['Contact']));
-            $this->assertEquals($contact1->id, $response['data']['Contact'][0]['id']);
-            $this->assertEquals($contact1->firstName, $response['data']['Contact'][0]['firstName']);
-            $this->assertEquals($contact1->lastName, $response['data']['Contact'][0]['lastName']);
-            $this->assertEquals($contact2->id, $response['data']['Contact'][1]['id']);
-            $this->assertEquals($contact2->firstName, $response['data']['Contact'][1]['firstName']);
-            $this->assertEquals($contact2->lastName, $response['data']['Contact'][1]['lastName']);
-            $this->assertEquals(2, count($response['data']['User']));
-            $this->assertEquals($evelina->id, $response['data']['User'][0]['id']);
-            $this->assertEquals($evelina->firstName, $response['data']['User'][0]['firstName']);
-            $this->assertEquals($evelina->lastName, $response['data']['User'][0]['lastName']);
-            $this->assertEquals($evelina->username, $response['data']['User'][0]['username']);
-            $this->assertEquals($amelia->id, $response['data']['User'][1]['id']);
-            $this->assertEquals($amelia->primaryEmail->emailAddress, $response['data']['User'][1]['email']);
-            $this->assertEquals($amelia->firstName, $response['data']['User'][1]['firstName']);
-            $this->assertEquals($amelia->lastName, $response['data']['User'][1]['lastName']);
-            $this->assertEquals($amelia->username, $response['data']['User'][1]['username']);
-
-            // Test with opportunity and account activity items
-            $account = AccountTestHelper::createAccountByNameForOwner('FirstAccount', $super);
-            $opportunity = OpportunityTestHelper::createOpportunityByNameForOwner('TestOpportunity', $super);
-            $meeting2 = MeetingTestHelper::createMeetingByNameForOwner('Meeting With Account and Opportunity', $super);
-            $meeting2->activityItems->add($account);
-            $meeting2->activityItems->add($opportunity);
-            $this->assertTrue($meeting2->save());
-            $response = $this->createApiCallWithRelativeUrl('getAttendees/?id=' . $meeting2->id, 'GET', $headers);
-            $response = json_decode($response, true);
-            $this->assertEquals($account->id, $response['data']['Account'][0]['id']);
-            $this->assertEquals($account->name, $response['data']['Account'][0]['name']);
-            $this->assertEquals($opportunity->id, $response['data']['Opportunity'][0]['id']);
-            $this->assertEquals($opportunity->name, $response['data']['Opportunity'][0]['name']);
-        }
-
-        public function testCreateMeetingWithAttendees()
-        {
-            $super = User::getByUsername('super');
-            Yii::app()->user->userModel = $super;
-            $evelina  = UserTestHelper::createBasicUser('Evelina');
-            $amelia  = UserTestHelper::createBasicUser('Amelia');
-            $amelia->primaryEmail->emailAddress = 'super@example.com';
+            $amelia->primaryEmail->emailAddress = 'amelia@example.com';
             $this->assertTrue($amelia->save());
             $contact1 = ContactTestHelper::createContactByNameForOwner('TestContact3', $super);
             $contact2 = ContactTestHelper::createContactByNameForOwner('TestContact4', $super);
@@ -1422,7 +1449,13 @@
             $response = json_decode($response, true);
 
             $this->assertEquals(ApiResponse::STATUS_SUCCESS, $response['status']);
-            $this->assertFalse(isset($response['data']['attendees']));
+            $this->assertTrue(isset($response['data']['attendees']));
+            $this->assertEquals(1, count($response['data']['attendees']['Organizer']));
+            $this->assertEquals($super->id, $response['data']['attendees']['Organizer'][0]['id']);
+            $this->assertEquals($super->firstName, $response['data']['attendees']['Organizer'][0]['firstName']);
+            $this->assertEquals($super->lastName, $response['data']['attendees']['Organizer'][0]['lastName']);
+            $this->assertEquals($super->username, $response['data']['attendees']['Organizer'][0]['username']);
+            $this->assertFalse(isset($response['data']['attendees']['Organizer'][0]['email']));
 
             $meeting->activityItems->add($contact1);
             $meeting->activityItems->add($contact2);
@@ -1462,6 +1495,11 @@
             $this->assertEquals($amelia->firstName, $response['data']['attendees']['User'][1]['firstName']);
             $this->assertEquals($amelia->lastName, $response['data']['attendees']['User'][1]['lastName']);
             $this->assertEquals($amelia->username, $response['data']['attendees']['User'][1]['username']);
+            $this->assertEquals(1, count($response['data']['attendees']['Organizer']));
+            $this->assertEquals($super->id, $response['data']['attendees']['Organizer'][0]['id']);
+            $this->assertEquals($super->firstName, $response['data']['attendees']['Organizer'][0]['firstName']);
+            $this->assertEquals($super->lastName, $response['data']['attendees']['Organizer'][0]['lastName']);
+            $this->assertEquals($super->username, $response['data']['attendees']['Organizer'][0]['username']);
 
             // Test with opportunity and account activity items
             $account = AccountTestHelper::createAccountByNameForOwner('Account 2', $super);
@@ -1488,6 +1526,43 @@
             $this->assertEquals($account->name, $response['data']['items'][0]['attendees']['Account'][0]['name']);
             $this->assertEquals($opportunity->id, $response['data']['items'][0]['attendees']['Opportunity'][0]['id']);
             $this->assertEquals($opportunity->name, $response['data']['items'][0]['attendees']['Opportunity'][0]['name']);
+
+            // Test with regular user if he can get user attendees
+            $michael = UserTestHelper::createBasicUser('Michael');
+            $michael->primaryEmail->emailAddress = 'michael@example.com';
+            $this->assertTrue($michael->save());
+            $michael->setRight('UsersModule', UsersModule::RIGHT_LOGIN_VIA_WEB_API);
+            $michael->setRight('MeetingsModule', MeetingsModule::getAccessRight());
+            $michael->setRight('MeetingsModule', MeetingsModule::getCreateRight());
+            $saved = $michael->save();
+            $this->assertTrue($saved);
+
+            $michaelMeeting = MeetingTestHelper::createMeetingByNameForOwner('Meeting 4 With User', $michael);
+            $michaelMeeting->userAttendees->add($evelina);
+            $this->assertTrue($michaelMeeting->save());
+
+            $authenticationData = $this->login('michael', 'michael');
+            $headers = array(
+                'Accept: application/json',
+                'ZURMO_SESSION_ID: ' . $authenticationData['sessionId'],
+                'ZURMO_TOKEN: ' . $authenticationData['token'],
+                'ZURMO_API_REQUEST_TYPE: REST',
+            );
+
+            $response = $this->createApiCallWithRelativeUrl('read/?id=' . $michaelMeeting->id, 'GET', $headers);
+            $response = json_decode($response, true);
+            $this->assertEquals(ApiResponse::STATUS_SUCCESS, $response['status']);
+            $this->assertEquals(1, count($response['data']['attendees']['User']));
+            $this->assertEquals($evelina->id, $response['data']['attendees']['User'][0]['id']);
+            $this->assertEquals($evelina->firstName, $response['data']['attendees']['User'][0]['firstName']);
+            $this->assertEquals($evelina->lastName, $response['data']['attendees']['User'][0]['lastName']);
+            $this->assertEquals($evelina->username, $response['data']['attendees']['User'][0]['username']);
+            $this->assertEquals(1, count($response['data']['attendees']['Organizer']));
+            $this->assertEquals($michael->id, $response['data']['attendees']['Organizer'][0]['id']);
+            $this->assertEquals($michael->firstName, $response['data']['attendees']['Organizer'][0]['firstName']);
+            $this->assertEquals($michael->lastName, $response['data']['attendees']['Organizer'][0]['lastName']);
+            $this->assertEquals($michael->username, $response['data']['attendees']['Organizer'][0]['username']);
+            $this->assertEquals($michael->primaryEmail->emailAddress, $response['data']['attendees']['Organizer'][0]['email']);
         }
 
         protected function getApiControllerClassName()
