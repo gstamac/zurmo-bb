@@ -178,7 +178,12 @@
                in_array($this->valueType, self::getValueTypesWhereValueIsRequired()) ||
                ($this->getValueElementType() == 'BooleanForWizardStaticDropDown' ||
                $this->getValueElementType()  == 'UserNameId' ||
-               ($this->getValueElementType() == 'MixedDateTypesForReport' && $this->valueType == null))) &&
+               ($this->getValueElementType() == 'MixedDateTypesForReport' && $this->valueType == null) ||
+               ($this->getValueElementType() == 'MixedLoggedInUserTypesAndUsers' &&
+                   ($this->valueType == null ||
+                    $this->valueType == MixedLoggedInUserTypesAndUsersSearchFormAttributeMappingRules::TYPE_SELECT_USER
+                   )
+               ))) &&
                $this->value == null)
             {
                 $this->addError('value', Zurmo::t('Core', 'Value cannot be blank.'));
@@ -235,7 +240,9 @@
          */
         public function validateValueType()
         {
-            if ($this->getValueElementType() == 'MixedDateTypesForReport' && $this->valueType == null)
+            if (
+                ($this->getValueElementType() == 'MixedDateTypesForReport' && $this->valueType == null) ||
+                ($this->getValueElementType() == 'MixedLoggedInUserTypesAndUsers' && $this->valueType == null))
             {
                 $this->addError('valueType', Zurmo::t('ZurmoModule', 'Type cannot be blank.'));
                 return false;
@@ -330,7 +337,10 @@
          */
         protected static function getValueTypesWhereValueIsRequired()
         {
-            return MixedDateTypesSearchFormAttributeMappingRules::getValueTypesWhereValueIsRequired();
+            return array_merge(
+                    MixedDateTypesSearchFormAttributeMappingRules::getValueTypesWhereValueIsRequired(),
+                    MixedLoggedInUserTypesAndUsersSearchFormAttributeMappingRules::getValueTypesWhereValueIsRequired()
+                );
         }
 
         /**
