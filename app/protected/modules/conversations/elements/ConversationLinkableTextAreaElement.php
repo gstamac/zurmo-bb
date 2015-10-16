@@ -35,65 +35,17 @@
      ********************************************************************************/
 
     /**
-     * Element for displaying available models to filter a latest activity view on.
+     * Display the comment text area input box.
      */
-    class LatestActivitiesMashableFilterRadioElement extends Element
+    class ConversationLinkableTextAreaElement extends TextAreaElement
     {
         /**
-         * Renders the setting as a radio list.
-         * @return A string containing the element's content.
+         * Override to convert url to link
+         * @return The element's content.
          */
-        protected function renderControlEditable()
-        {
-            assert('$this->model instanceof LatestActivitiesConfigurationForm');
-            $content = $this->form->radioButtonList(
-                $this->model,
-                $this->attribute,
-                $this->getArray(),
-                $this->getEditableHtmlOptions()
-            );
-            return $content;
-        }
-
         protected function renderControlNonEditable()
         {
-            throw new NotImplementedException();
-        }
-
-        /**
-         * Override to ensure label is pointing to the right input id
-         * @return A string containing the element's label
-         */
-        protected function renderLabel()
-        {
-            if ($this->form === null)
-            {
-                throw new NotImplementedException();
-            }
-            $for = ZurmoHtml::ID_PREFIX . $this->getEditableInputId();
-            return $this->form->labelEx($this->model, $this->attribute, array('for' => $for));
-        }
-
-        public function getEditableHtmlOptions()
-        {
-            $htmlOptions = array(
-                'name'         => $this->getEditableInputName(),
-                'id'           => $this->getEditableInputId(),
-                'separator'    => '',
-                'template'     => '{input}{label}',
-                'uncheckValue' => null
-            );
-            return $htmlOptions;
-        }
-
-        protected function getArray()
-        {
-            $data = array(LatestActivitiesConfigurationForm::FILTERED_BY_ALL => Zurmo::t('ActivitiesModule', 'All Activities'));
-            foreach ($this->model->mashableModelClassNamesAndDisplayLabels as $modelClassName => $displayLabel)
-            {
-                $data[$modelClassName] = $displayLabel;
-            }
-            return $data;
+            return TextUtil::textWithUrlToTextWithLink($this->model->{$this->attribute});
         }
     }
 ?>
