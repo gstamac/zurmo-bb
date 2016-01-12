@@ -35,45 +35,32 @@
      ********************************************************************************/
 
     /**
-     * A  NotificationRules to manage when a new comment is added to a task
+     * Class for working the task status
      */
-    class TaskNewCommentNotificationRules extends TaskNotificationRules
+    class ProjectForTaskListViewColumnAdapter extends TextListViewColumnAdapter
     {
-        protected $allowSendingEmail    = true;
-        protected $allowDuplicates      = true;
-
         /**
-         * @returns Translated label that describes this rule type.
+         * @return array
          */
-        public function getDisplayName()
+        public function renderGridViewData()
         {
-            return Zurmo::t('TasksModule', 'New Task Comments');
-        }
-
-        /**
-         * @return The type of the NotificationRules
-         */
-        public function getType()
-        {
-            return 'TaskNewComment';
-        }
-
-        public function getTooltipId()
-        {
-            return 'task-new-comment-notification-tooltip';
-        }
-
-        public function getTooltipTitle()
-        {
-            return Zurmo::t('UsersModule', 'Notify me of new comments on Tasks I am following.');
-        }
-
-        /**
-         * @inheritdoc
-         */
-        public function getSubjectForEmailNotification()
-        {
-            return Zurmo::t('TasksModule', 'NEW COMMENT {relatedModel}: {task}', $this->getParamsForEmailSubject());
+            if ($this->getIsLink())
+            {
+                return array(
+                    'name' => $this->attribute,
+                    'type' => 'raw',
+                    'value' => $this->view->getRelatedLinkString(
+                        '$data->' . $this->attribute, $this->attribute, 'projects'),
+                );
+            }
+            else
+            {
+                return array(
+                    'name'  => $this->attribute,
+                    'value' => 'strval($data->' . $this->attribute . ')',
+                    'type'  => 'raw',
+                );
+            }
         }
     }
 ?>

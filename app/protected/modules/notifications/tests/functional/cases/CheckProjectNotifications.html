@@ -19,7 +19,7 @@
     <td>45000</td>
     <td></td>
 </tr>
-<!--create project and assign Jill as owner-->
+<!--create project and assign to Jill-->
 <tr>
     <td>open</td>
     <td>index.php/projects/default/create</td>
@@ -86,9 +86,9 @@
     <td>Jill Smith</td>
 </tr>
 <tr>
-    <td>assertText</td>
+    <td>assertElementPresent</td>
     <td>link=Jill Smith</td>
-    <td>Jill Smith</td>
+    <td></td>
 </tr>
 <tr>
     <td>click</td>
@@ -132,9 +132,9 @@
     <td></td>
 </tr>
 <tr>
-    <td>assertText</td>
+    <td>assertElementPresent</td>
     <td>link=Edit</td>
-    <td>Edit</td>
+    <td></td>
 </tr>
 <tr>
     <td>clickAndWait</td>
@@ -166,7 +166,7 @@
     <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
     <td>30000</td>
 </tr>
-<!--create task, change status and add comment-->
+<!--create task-->
 <tr>
     <td>click</td>
     <td>//nav[contains(@class, 'pillbox clearfix')]/div[3]/a/span</td>
@@ -193,9 +193,9 @@
     <td>test description</td>
 </tr>
 <tr>
-    <td>assertText</td>
+    <td>assertElementPresent</td>
     <td>link=More Details</td>
-    <td>More Details</td>
+    <td></td>
 </tr>
 <tr>
     <td>click</td>
@@ -243,9 +243,9 @@
     <td>Jill Smith</td>
 </tr>
 <tr>
-    <td>assertText</td>
+    <td>assertElementPresent</td>
     <td>link=Jill Smith</td>
-    <td>Jill Smith</td>
+    <td></td>
 </tr>
 <tr>
     <td>click</td>
@@ -276,36 +276,6 @@
     <td>waitForCondition</td>
     <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
     <td>30000</td>
-</tr>
-<tr>
-    <td>select</td>
-    <td>id=Task_status_value</td>
-    <td>label=In Progress</td>
-</tr>
-<tr>
-    <td>waitForElementPresent</td>
-    <td>Comment_description</td>
-    <td></td>
-</tr>
-<tr>
-    <td>type</td>
-    <td>Comment_description</td>
-    <td>comment added by Super User</td>
-</tr>
-<tr>
-    <td>click</td>
-    <td>link=Comment</td>
-    <td></td>
-</tr>
-<tr>
-    <td>waitForTextPresent</td>
-    <td>comment added by Super User</td>
-    <td></td>
-</tr>
-<tr>
-    <td>assertTextPresent</td>
-    <td>comment added by Super User</td>
-    <td></td>
 </tr>
 <!--login as Jill and check notifications-->
 <tr>
@@ -380,28 +350,43 @@
 </tr>
 <tr>
     <td>waitForTextPresent</td>
+    <td>Project Task AddedNew task, creating task for testing notifications ${randomSuffix}, was created for project, 'creating project for testing notifications ${randomSuffix}'. Created by Super User</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForTextPresent</td>
     <td>New TasksThe task, 'creating task for testing notifications ${randomSuffix}', is now owned by you.</td>
     <td></td>
 </tr>
 <tr>
-    <td>waitForTextPresent</td>
-    <td>Project Task AddedNew task, creating task for testing notifications ${randomSuffix}, was created for project, 'creating project for testing notifications ${randomSuffix}'. Created by Super User</td>
-    <td></td>
+	<td>click</td>
+	<td>//div[@id='list-view']/div[2]/table/tbody/tr[1]/td[1]/label/input</td>
+	<td></td>
 </tr>
 <tr>
-    <td>waitForTextPresent</td>
-    <td>Project Task AddedNew task, creating task for testing notifications ${randomSuffix}, was created for project, 'creating project for testing notifications ${randomSuffix}'. Created by Super User</td>
-    <td></td>
+	<td>click</td>
+	<td>//div[@id='list-view']/div[2]/table/tbody/tr[2]/td[1]/label/input</td>
+	<td></td>
 </tr>
 <tr>
-    <td>waitForTextPresent</td>
-    <td>New Task CommentsSuper User has commented on the task 'creating task for testing notifications ${randomSuffix}':</td>
-    <td></td>
+	<td>click</td>
+	<td>//div[@id='list-view']/div[2]/table/tbody/tr[3]/td[1]/label/input</td>
+	<td></td>
 </tr>
 <tr>
-    <td>waitForTextPresent</td>
-    <td>comment added by Super User</td>
-    <td></td>
+	<td>click</td>
+	<td>//div[@id='list-view']/div[2]/table/tbody/tr[4]/td[1]/label/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Delete selected</td>
+	<td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
 </tr>
 <!--go to user profile and disable notifications-->
 <tr>
@@ -459,8 +444,8 @@
     <td>save</td>
     <td></td>
 </tr>
-<!--sign in as Super User and check notifications when settings are disabled-->
-<!--create project and assign Jill as owner-->
+<!--check notifications when settings are disabled-->
+<!--create project and assign to Jill-->
 <tr>
     <td>open</td>
     <td>index.php/zurmo/default/login</td>
@@ -506,7 +491,6 @@
     <td>//ul[@id='user-header-menu']/li/a/span</td>
     <td>super</td>
 </tr>
-
 <tr>
     <td>open</td>
     <td>index.php/projects/default/create</td>
@@ -573,9 +557,9 @@
     <td>Jill Smith</td>
 </tr>
 <tr>
-    <td>assertText</td>
+    <td>assertElementPresent</td>
     <td>link=Jill Smith</td>
-    <td>Jill Smith</td>
+    <td></td>
 </tr>
 <tr>
     <td>click</td>
@@ -619,9 +603,9 @@
     <td></td>
 </tr>
 <tr>
-    <td>assertText</td>
+    <td>assertElementPresent</td>
     <td>link=Edit</td>
-    <td>Edit</td>
+    <td></td>
 </tr>
 <tr>
     <td>clickAndWait</td>
@@ -653,7 +637,7 @@
     <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
     <td>30000</td>
 </tr>
-<!--create task, change status and add comment-->
+<!--create task-->
 <tr>
     <td>click</td>
     <td>//nav[contains(@class, 'pillbox clearfix')]/div[3]/a/span</td>
@@ -672,7 +656,7 @@
 <tr>
     <td>type</td>
     <td>Task_name</td>
-    <td>creating another task for testing notifications ${randomSuffix}</td>
+    <td>creating task for testing notifications ${randomSuffix}</td>
 </tr>
 <tr>
     <td>type</td>
@@ -680,9 +664,9 @@
     <td>test description</td>
 </tr>
 <tr>
-    <td>assertText</td>
+    <td>assertElementPresent</td>
     <td>link=More Details</td>
-    <td>More Details</td>
+    <td></td>
 </tr>
 <tr>
     <td>click</td>
@@ -730,9 +714,9 @@
     <td>Jill Smith</td>
 </tr>
 <tr>
-    <td>assertText</td>
+    <td>assertElementPresent</td>
     <td>link=Jill Smith</td>
-    <td>Jill Smith</td>
+    <td></td>
 </tr>
 <tr>
     <td>click</td>
@@ -763,36 +747,6 @@
     <td>waitForCondition</td>
     <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
     <td>30000</td>
-</tr>
-<tr>
-    <td>select</td>
-    <td>id=Task_status_value</td>
-    <td>label=In Progress</td>
-</tr>
-<tr>
-    <td>waitForElementPresent</td>
-    <td>Comment_description</td>
-    <td></td>
-</tr>
-<tr>
-    <td>type</td>
-    <td>Comment_description</td>
-    <td>another comment added by Super User</td>
-</tr>
-<tr>
-    <td>click</td>
-    <td>link=Comment</td>
-    <td></td>
-</tr>
-<tr>
-    <td>waitForTextPresent</td>
-    <td>comment added by Super User</td>
-    <td></td>
-</tr>
-<tr>
-    <td>assertTextPresent</td>
-    <td>comment added by Super User</td>
-    <td></td>
 </tr>
 <!--login as Jill and check notifications-->
 <tr>
@@ -867,13 +821,28 @@
 </tr>
 <tr>
     <td>waitForTextNotPresent</td>
-    <td>Project Task AddedNew task, creating another task for testing notifications ${randomSuffix}, was created for project, 'creating new project for testing notifications ${randomSuffix}'. Created by Super User</td>
+    <td>Project Task AddedNew task, creating task for testing notifications ${randomSuffix}, was created for project, 'creating new project for testing notifications ${randomSuffix}'. Created by Super User</td>
     <td></td>
 </tr>
 <tr>
-    <td>assertText</td>
+    <td>waitForTextPresent</td>
+    <td>New TasksThe task, 'creating task for testing notifications ${randomSuffix}', is now owned by you.</td>
+    <td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='list-view']/div[2]/table/tbody/tr[1]/td[1]/label/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Delete selected</td>
+	<td></td>
+</tr>
+<tr>
+    <td>assertElementPresent</td>
     <td>link=Sign out</td>
-    <td>Sign out</td>
+    <td></td>
 </tr>
 <tr>
     <td>click</td>
@@ -885,7 +854,7 @@
     <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
     <td>30000</td>
 </tr>
-<!--sign in as Super User and check notifications-->
+<!--sign in as Super User-->
 <tr>
     <td>open</td>
     <td>index.php/zurmo/default/login</td>
