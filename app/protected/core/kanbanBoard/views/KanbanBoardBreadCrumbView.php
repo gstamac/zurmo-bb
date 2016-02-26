@@ -56,6 +56,10 @@
             {
                 return Zurmo::t('ContactsModule', 'ContactsModulePluralLabel', LabelUtil::getTranslationParamsForAllModules());
             }
+            elseif ($this->moduleId == 'leads')
+            {
+                return Zurmo::t('LeadsModule', 'LeadsModulePluralLabel', LabelUtil::getTranslationParamsForAllModules());
+            }
             elseif ($this->moduleId == 'opportunities')
             {
                 return Zurmo::t('OpportunitiesModule', 'OpportunitiesModulePluralLabel', LabelUtil::getTranslationParamsForAllModules());

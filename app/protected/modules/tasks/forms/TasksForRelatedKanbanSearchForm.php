@@ -34,59 +34,16 @@
      * "Copyright Zurmo Inc. 2015. All rights reserved".
      ********************************************************************************/
      /**
-      * Task search form
+      * Task search form by related models
       */
-    class TasksSearchForm extends OwnedSearchForm
-    {
-        public $uniqueIdentifier;
-        
-        public $hideOlderCompletedItems;
+    class TasksForRelatedKanbanSearchForm extends TasksSearchForm
+    {   
+        public $relationModel;
 
-        /**
-         * @return string
-         */
-        protected static function getRedBeanModelClassName()
+        public function __construct(Task $model, OwnedSecurableItem $relationModel = null)
         {
-            return 'Task';
-        }
-
-        public function __construct(Task $model)
-        {
+            $this->relationModel = $relationModel;
             parent::__construct($model);
         }
-
-        public function rules()
-        {
-            return array_merge(parent::rules(), array(
-                array('uniqueIdentifier', 'safe'),
-                array('hideOlderCompletedItems', 'boolean'),
-            ));
-        }
-
-        public function attributeLabels()
-        {
-            return array_merge(parent::attributeLabels(), array(
-                'uniqueIdentifier' => Zurmo::t('Core', 'Id'),
-                'hideOlderCompletedItems' => Zurmo::t('ZurmoModule', 'Hide Completed'),
-            ));
-        }
-
-        public function getAttributesMappedToRealAttributesMetadata()
-        {
-            return array_merge(parent::getAttributesMappedToRealAttributesMetadata(), array(
-                'uniqueIdentifier' => array(
-                    array('id')
-                ),
-                'hideOlderCompletedItems' => 'resolveEntireMappingByRules',
-            ));
-        }
-        
-        protected static function getSearchFormAttributeMappingRulesTypes()
-        {
-            return array_merge(parent::getSearchFormAttributeMappingRulesTypes(), 
-                               array('hideOlderCompletedItems' => 'HideOlderCompletedItems'));
-        }
-        
-        
     }
 ?>
