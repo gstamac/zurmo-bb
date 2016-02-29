@@ -141,7 +141,8 @@
                                                                           'width':600}); return true;},
                     success  : function(data)
                     {
-                        jQuery('#modalContainer').html(data)
+                        jQuery('#modalContainer').html(data);
+                        jQuery('.ui-dialog .ui-dialog-content').css('height', 'auto');
                         //Since the home page for some reason cannot render this properly in beforeShow, we are using a trick.
                         setTimeout('addSpansToDatesOnCalendar(\"' + inst.id + '\")', 100);
                     },
