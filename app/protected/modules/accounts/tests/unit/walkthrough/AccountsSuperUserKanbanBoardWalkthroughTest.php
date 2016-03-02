@@ -35,9 +35,9 @@
      ********************************************************************************/
 
     /**
-     * Leads Module Walkthrough spefically testing the kanban board list for task in detail view
+     * Accounts Module Walkthrough spefically testing the kanban board list for task in detail view
      */
-    class LeadsSuperUserKanbanBoardWalkthroughTest extends ZurmoWalkthroughBaseTest
+    class AccountsSuperUserKanbanBoardWalkthroughTest extends ZurmoWalkthroughBaseTest
     {
         public static function setUpBeforeClass()
         {
@@ -47,20 +47,23 @@
             Yii::app()->user->userModel = $super;
 
             //Setup test data owned by the super user.
-            LeadTestHelper::createLeadbyNameForOwner('superLead',  $super);
-            LeadTestHelper::createLeadbyNameForOwner('superLead1',  $super);
+            $account = AccountTestHelper::createAccountByNameForOwner('superAccount', $super);
+            $account1 = AccountTestHelper::createAccountByNameForOwner('superAccount1', $super);
+
+            //Setup test data owned by the super user.
+            ContactTestHelper::createContactWithAccountByNameForOwner('superContact', $super, $account);
         }
 
-        public function testKanbanViewForOpportunityDetails()
+        public function testKanbanViewForContactDetails()
         {
             $super          = $this->logoutCurrentUserLoginNewUserAndGetByUsername('super');
-            $superLeadId    = self::getModelIdByModelNameAndName('Contact', 'superLead superLeadson');
-            $lead           = Contact::getById($superLeadId);
+            $superAccountId = self::getModelIdByModelNameAndName ('Account', 'superAccount');
+            $account        = Account::getById($superAccountId);
 
-            $task = TaskTestHelper::createTaskWithOwnerAndRelatedItem('MyTask', $super, $lead, Task::STATUS_IN_PROGRESS);
-            $taskNew = TaskTestHelper::createTaskWithOwnerAndRelatedItem('MyTask New', $super, $lead, Task::STATUS_NEW);
+            $task = TaskTestHelper::createTaskWithOwnerAndRelatedItem('MyTask', $super, $account, Task::STATUS_IN_PROGRESS);
+            $taskNew = TaskTestHelper::createTaskWithOwnerAndRelatedItem('MyTask New', $super, $account, Task::STATUS_NEW);
             $this->setGetArray(array('id' => $task->id, 'kanbanBoard' => '1'));
-            $content = $this->runControllerWithNoExceptionsAndGetContent('leads/default/details');
+            $content = $this->runControllerWithNoExceptionsAndGetContent('accounts/default/details');
             $matcher = array(
                 'tag' => 'h4',
                 //Multiple ancestors
@@ -76,6 +79,8 @@
                 'content' => 'MyTask New'
             );
             $this->assertTag($matcher, $content);
+            
+            $this->assertContains('<a id="hide-completed-search-link" href="#">Hide Completed</a>', $content);
         }
         
         public function testStickySearchActions()
@@ -84,17 +89,17 @@
             StickySearchUtil::clearDataByKey('TasksForRelatedKanbanSearchView');
             $value = StickySearchUtil::getDataByKey('TasksForRelatedKanbanSearchView');
             $this->assertNull($value);
-            $superLeadId = self::getModelIdByModelNameAndName ('Contact', 'superLead1 superLead1son');
-            $lead        = Contact::getById($superLeadId);
-            $task = TaskTestHelper::createTaskWithOwnerAndRelatedItem('MyTask', $super, $lead, Task::STATUS_IN_PROGRESS);
-            $taskNew = TaskTestHelper::createTaskWithOwnerAndRelatedItem('MyTask New', $super, $lead, Task::STATUS_NEW);
+            $superAccount1Id = self::getModelIdByModelNameAndName ('Account', 'superAccount1');
+            $account        = Account::getById($superAccount1Id);
+            $task = TaskTestHelper::createTaskWithOwnerAndRelatedItem('MyTask', $super, $account, Task::STATUS_IN_PROGRESS);
+            $taskNew = TaskTestHelper::createTaskWithOwnerAndRelatedItem('MyTask New', $super, $account, Task::STATUS_NEW);
             // Asserting the kanban board contains both tasks before search
             $this->resetPostArray();
             $this->setGetArray(array(
-                'id' => $superLeadId,
+                'id' => $superAccount1Id,
                 'kanbanBoard' => '1',
             ));
-            $content                = $this->runControllerWithNoExceptionsAndGetContent('leads/default/details');
+            $content                = $this->runControllerWithNoExceptionsAndGetContent('accounts/default/details');
             $this->assertContains('<a id="hide-completed-search-link" href="#">Hide Completed</a>', $content);
             $matcher = array(
                 'tag' => 'h4',
@@ -129,10 +134,10 @@
             // Asserting the kanban board contains only one task after search is done
             $this->resetPostArray();
             $this->setGetArray(array(
-                'id' => $superLeadId,
+                'id' => $superAccount1Id,
                 'kanbanBoard' => '1',
             ));
-            $content                = $this->runControllerWithNoExceptionsAndGetContent('leads/default/details');
+            $content                = $this->runControllerWithNoExceptionsAndGetContent('accounts/default/details');
             $this->assertContains('<a id="hide-completed-search-link" href="#">Hide Completed</a>', $content);
             $matcher = array(
                 'tag' => 'h4',
