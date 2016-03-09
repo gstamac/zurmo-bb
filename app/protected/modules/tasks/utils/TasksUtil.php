@@ -440,6 +440,35 @@
                                                                     $controller, $listView, $breadCrumbLinks, 'KanbanBoardBreadCrumbView'));
             return $view;
         }
+        
+        /**
+         * Resolve overall task kanban view
+         * @param ZurmoModuleController $controller
+         * @param TasksForRelatedKanbanView $kanbanView
+         * @param ZurmoDefaultPageView $pageView
+         * @param TasksSearchForm $searchForm
+         * @param $dataProvider
+         * @return ZurmoDefaultPageView
+         */
+        public static function resolveOverallTaskKanbanView($controller,
+                                                    $kanbanView, $pageView,
+                                                    $searchForm, $dataProvider)
+        {
+            assert('$controller instanceof ZurmoModuleController');
+            assert('is_string($kanbanView)');
+            assert('is_string($pageView)');
+            $breadCrumbLinks = array();
+            $kanbanItem                 = new KanbanItem();
+            $kanbanBoard                = new TaskOverallKanbanBoard($kanbanItem, 'type');
+            $kanbanBoard->setIsActive();
+            $params['redirectUrl']      = null;
+            $listView                   = new $kanbanView($controller->getId(), 'tasks', 'Task', $dataProvider,
+                                                            $params, null, array(), $kanbanBoard, $searchForm);
+            $view                       = new $pageView(ZurmoDefaultViewUtil::
+                                                             makeViewWithBreadcrumbsForCurrentUser(
+                                                                    $controller, $listView, $breadCrumbLinks, 'KanbanBoardBreadCrumbView'));
+            return $view;
+        }
 
         public static function resolveRelatedAdditionalSearchMetadata($searchForm, & $metadata, $relationAttributeName)
         {
