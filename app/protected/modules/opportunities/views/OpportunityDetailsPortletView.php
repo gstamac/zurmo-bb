@@ -156,7 +156,7 @@
         {
             return $this->renderWrapperAndActionElementMenu();
         }
-        
+
         protected function renderBeforeFormLayoutForDetailsContent()
         {
             return OpportunityDetailsViewUtil::renderBeforeFormLayoutForDetailsContent($this->getModel());

@@ -44,8 +44,7 @@
             $timeInStageDisplayContent = DateTimeUtil::
                     getTimeSinceDisplayContent($model->stageModifiedDateTime, true);
             $timeInStage = " (" . Zurmo::t('OpportunitiesModule', 'Time in current stage: ') . $timeInStageDisplayContent . ")";
-            
-            
+
             $content = ZurmoHtml::tag('p', array('class' => 'before-form-details-content'), $timeInStage);
             return $content;
         }
