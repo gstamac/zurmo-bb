@@ -43,16 +43,16 @@
          * For the moment we keep 3 different methods for list views, related list views and kanban views.
          * Since a front end engineer has to do improvements it'll be more clear like this if the content
          * has to be slightly different. We could eventually merge into one, once the front end work is completed.
-         * 
+         *
          */
-        
+
         public static function renderTimeInStageForListView($model)
         {
             $stageRottingValueInDays    = OpportunitiesModule::getRottingByStageValue($model->stage->value);
             $timeInStageInDays          = DateTimeUtil::getTimeSinceInDays($model->stageModifiedDateTime);
             $timeInStageDisplayContent  = DateTimeUtil::getTimeSinceDisplayContent($model->stageModifiedDateTime, true);
             $span                       = ZurmoHtml::tag('span', array(), $timeInStageDisplayContent);
-            
+
             if (OpportunitiesModule::isRottingMappingEnabled() && $stageRottingValueInDays != 0)
             {
                 if ($timeInStageInDays < $stageRottingValueInDays)
@@ -71,18 +71,18 @@
                 $class      = 'opportunity-time-stage';
                 $content    = $span;
             }
-            
+
             $content    = ZurmoHtml::tag('div', compact('class'), $content);
             return $content;
         }
-        
+
         public static function renderTimeInStageForRelatedListView($model)
         {
             $stageRottingValueInDays    = OpportunitiesModule::getRottingByStageValue($model->stage->value);
             $timeInStageInDays          = DateTimeUtil::getTimeSinceInDays($model->stageModifiedDateTime);
             $timeInStageDisplayContent  = DateTimeUtil::getTimeSinceDisplayContent($model->stageModifiedDateTime, true);
             $span                       = ZurmoHtml::tag('span', array(), $timeInStageDisplayContent);
-            
+
             if (OpportunitiesModule::isRottingMappingEnabled() && $stageRottingValueInDays != 0)
             {
                 if ($timeInStageInDays < $stageRottingValueInDays)
@@ -101,17 +101,17 @@
                 $class      = 'opportunity-time-stage-related';
                 $content    = Zurmo::t('OpportunitiesModule', 'Time in stage') . ': ' . $span;
             }
-            
+
             $content    = ZurmoHtml::tag('div', compact('class'), $content);
             return $content;
         }
-        
+
         public static function renderTimeInStageForKanbanView($model)
         {
             $stageRottingValueInDays    = OpportunitiesModule::getRottingByStageValue($model->stage->value);
             $timeInStageInDays          = DateTimeUtil::getTimeSinceInDays($model->stageModifiedDateTime);
             $timeInStageDisplayContent  = DateTimeUtil::getTimeSinceDisplayContent($model->stageModifiedDateTime, true);
-            
+
             if (OpportunitiesModule::isRottingMappingEnabled() && $stageRottingValueInDays != 0)
             {
                 if ($timeInStageInDays < $stageRottingValueInDays)
@@ -130,7 +130,7 @@
                 $class      = 'opportunity-time-stage-kanban';
                 $content    = Zurmo::t('OpportunitiesModule', 'Time in stage') . ': ' . $timeInStageDisplayContent;
             }
-            
+
             $content    = ZurmoHtml::tag('div', compact('class'), $content);
             return $content;
         }

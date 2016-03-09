@@ -126,7 +126,7 @@
                 $user                 = User::getById(intval($id));
                 if (UserAccessUtil::resolveCanCurrentUserAccessRootUser($user, false) &&
                     UserAccessUtil::resolveAccessingASystemUser($user, false) &&
-                    UserAccessUtil::resolveCanCurrentUserAccessAndManageUsers($user,false))
+                    UserAccessUtil::resolveCanCurrentUserAccessAndManageUsers($user, false))
                 {
                     $userAvatarForm       = new UserAvatarForm($user);
                     $this->attemptToValidateAjaxFromPost($userAvatarForm, 'UserAvatarForm');

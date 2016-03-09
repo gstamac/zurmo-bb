@@ -387,7 +387,7 @@
             $this->assertEquals('Opportunity', $modelClassNames[0]);
             $this->assertEquals('OpportunityStarred', $modelClassNames[1]);
         }
-        
+
         /**
          * @expectedException NotSupportedException
          */

@@ -144,7 +144,7 @@
          */
         public function renderOverMaxCountText($totalCount)
         {
-            $label = Zurmo::t('Core', 
+            $label = Zurmo::t('Core',
                 'Too many results to display. Showing the first {maxCount} of {totalCount} records. Try filtering your search or switching to the grid view.',
                 array('{maxCount}' => static::getMaxCount(), '{totalCount}' => $totalCount));
             $content  = '<div class="general-issue-notice"><span class="icon-notice"></span><p>';
