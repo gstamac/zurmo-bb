@@ -35,43 +35,59 @@
      ********************************************************************************/
 
     /**
-     * Action bar view for the tasks search and list user interface.
+     * Class for showing a message and create link when there are no tasks visible to the logged
+     * in user when going to tasks overall kanban view
      */
-    class SecuredActionBarForTasksSearchAndListView extends SecuredActionBarForSearchAndListView
+    class ZeroTasksYetView extends ZeroModelsYetView
     {
         /**
-         * @return array
+         * @param string $controllerId
+         * @param string $moduleId
+         * @param string $modelClassName
          */
-        public static function getDefaultMetadata()
+        public function __construct($controllerId, $moduleId, $modelClassName)
         {
-            $metadata = array(
-                'global' => array(
-                    'toolbar' => array(
-                        'elements' => array(
-                            array('type'        => 'CreateTaskMenu',
-                                  'ajaxOptions' => 'eval:TasksUtil::resolveAjaxOptionsForModalView("Create", $this->listViewGridId)'),
-                            array('type'  => 'MassEditMenu',
-                                  'listViewGridId' => 'eval:$this->listViewGridId',
-                                  'pageVarName' => 'eval:$this->pageVarName',
-                                  'iconClass'   => 'icon-edit'),
-                            array('type'  => 'ExportMenu',
-                                  'listViewGridId' => 'eval:$this->listViewGridId',
-                                  'pageVarName' => 'eval:$this->pageVarName',
-                                  'iconClass'   => 'icon-export'),
-                            array('type'  => 'MassDeleteMenu',
-                                  'listViewGridId' => 'eval:$this->listViewGridId',
-                                  'pageVarName' => 'eval:$this->pageVarName',
-                                  'iconClass'   => 'icon-delete'),
-                        ),
-                    ),
-                    'secondToolbar' => array(
-                        'elements' => array(
-                            array('type'  => 'ListViewTypesToggleLink'),
-                        ),
-                    ),
-                ),
-            );
-            return $metadata;
+            assert('is_string($controllerId)');
+            assert('is_string($moduleId)');
+            assert('is_string($modelClassName)');
+            $this->controllerId   = $controllerId;
+            $this->moduleId       = $moduleId;
+            $this->modelClassName = $modelClassName;
+        }
+
+        /**
+         * Gets create link display label
+         * @return string
+         */
+        protected function getCreateLinkDisplayLabel()
+        {
+            return null;
+        }
+
+        /**
+         * Gets message content
+         * @return string
+         */
+        protected function getMessageContent()
+        {
+            $params = LabelUtil::getTranslationParamsForAllModules();
+            return Zurmo::t('TasksModule',
+                            '<h2>"Nothing is so fatiguing as the eternal hanging on of an uncompleted task."</h2>' .
+                            '<i>- William James</i>' .
+                            '<div class="large-icon"></div><p>' .
+                            'Don\'t be fatigued by your uncompleted tasks. <br/>
+                                Create a task record and keep track of it until you complete it.</p>', $params);
+        }
+
+        /**
+         * Renders content for zero model view
+         * @return string
+         */
+        protected function renderContent()
+        {
+            $params  = $this->getCreateLinkParams();
+            $content = ZurmoHtml::tag('div', array('class' => $this->getIconName()), $this->getMessageContent());
+            return $content;
         }
     }
 ?>
