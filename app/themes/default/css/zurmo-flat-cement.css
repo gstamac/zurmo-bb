@@ -2226,7 +2226,8 @@ body.sandbox-mode .AppContent {
   width: 100%;
   display: table;
 }
-#TasksForRelatedKanbanSearchView {
+#TasksForRelatedKanbanSearchView,
+#TasksKanbanSearchView {
   float: none;
 }
 #MashableInboxActionBarForViews > div,

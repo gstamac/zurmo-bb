@@ -35,43 +35,41 @@
      ********************************************************************************/
 
     /**
-     * Action bar view for the tasks search and list user interface.
+     * Helper class to work with TaskOverallKanbanBoard views
      */
-    class SecuredActionBarForTasksSearchAndListView extends SecuredActionBarForSearchAndListView
+    class TaskOverallKanbanBoard extends KanbanBoard
     {
+        /**
+         * @param RedBeanModel $model
+         * @param string $groupByAttribute
+         * @throws NotSupportedException
+         */
+        public function __construct(RedBeanModel $model, $groupByAttribute)
+        {
+            $this->model            = $model;
+            $this->groupByAttribute = $groupByAttribute;
+            $this->groupByDataAndTranslatedLabels = KanbanItem::getTypeDropDownArray();
+            $this->groupByAttributeVisibleValues  = array_keys($this->groupByDataAndTranslatedLabels);
+        }
+
+        /**
+         * @return string
+         */
+        public static function getGridViewWidgetPath()
+        {
+            return 'application.modules.tasks.widgets.TaskKanbanBoardExtendedGridView';
+        }
+
         /**
          * @return array
          */
-        public static function getDefaultMetadata()
+        public function getGridViewParams()
         {
-            $metadata = array(
-                'global' => array(
-                    'toolbar' => array(
-                        'elements' => array(
-                            array('type'        => 'CreateTaskMenu',
-                                  'ajaxOptions' => 'eval:TasksUtil::resolveAjaxOptionsForModalView("Create", $this->listViewGridId)'),
-                            array('type'  => 'MassEditMenu',
-                                  'listViewGridId' => 'eval:$this->listViewGridId',
-                                  'pageVarName' => 'eval:$this->pageVarName',
-                                  'iconClass'   => 'icon-edit'),
-                            array('type'  => 'ExportMenu',
-                                  'listViewGridId' => 'eval:$this->listViewGridId',
-                                  'pageVarName' => 'eval:$this->pageVarName',
-                                  'iconClass'   => 'icon-export'),
-                            array('type'  => 'MassDeleteMenu',
-                                  'listViewGridId' => 'eval:$this->listViewGridId',
-                                  'pageVarName' => 'eval:$this->pageVarName',
-                                  'iconClass'   => 'icon-delete'),
-                        ),
-                    ),
-                    'secondToolbar' => array(
-                        'elements' => array(
-                            array('type'  => 'ListViewTypesToggleLink'),
-                        ),
-                    ),
-                ),
-            );
-            return $metadata;
+            return array('groupByAttribute'               => $this->groupByAttribute,
+                         'groupByAttributeVisibleValues'  => $this->groupByAttributeVisibleValues,
+                         'groupByDataAndTranslatedLabels' => $this->groupByDataAndTranslatedLabels,
+                         'selectedTheme'                  => $this->getSelectedTheme(),
+                    );
         }
     }
 ?>
