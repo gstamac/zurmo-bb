@@ -153,14 +153,7 @@
         {
             assert('is_string($renderType)');
             $title = self::getModalTitleForProduct($renderType);
-            if ($renderType == "Details")
-            {
-                $extraCloseScriptForModalAjaxOptions = null;
-            }
-            else
-            {
-                $extraCloseScriptForModalAjaxOptions = static::resolveExtraCloseScriptForModalAjaxOptions($sourceId);
-            }
+            $extraCloseScriptForModalAjaxOptions = static::resolveExtraCloseScriptForModalAjaxOptions($sourceId);
             return   ModalView::getAjaxOptionsForModalLink($title, self::getModalContainerId(), 'auto', 600,
                 'center top+25', $class = "'product-dialog'", // Not Coding Standard
                 $extraCloseScriptForModalAjaxOptions);

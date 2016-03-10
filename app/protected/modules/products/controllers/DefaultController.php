@@ -63,7 +63,7 @@
                         ZurmoBaseController::REQUIRED_ATTRIBUTES_FILTER_PATH . ' + modalCreateFromRelation, modalCreate,
                                             ModalEdit',
                         'moduleClassName' => get_class($this->getModule()),
-                        'viewClassName'   => 'TaskModalEditView',
+                        'viewClassName'   => 'ProductModalEditView',
                         'isModal'         => true,
                     ),
                     array(
@@ -519,8 +519,8 @@
             {
                 $product = Product::getById(intval($id));
             }
-            $this->attemptToValidateAndSaveFromModalDetails($product);
             $this->attemptToSaveModelFromPost($product, null, false);
+            $this->processModalDetails($product);
         }
 
         /**

@@ -197,7 +197,7 @@
 
         protected function getFormLayoutUniqueId()
         {
-            return 'product-details-view-form';
+            return 'product-modal-details-view-form';
         }
 
         /**
