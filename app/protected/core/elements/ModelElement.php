@@ -174,6 +174,18 @@
                                        $(".model-select-icon", context).fadeOut(100);
                                        $(this).makeOrRemoveTogglableSpinner(true, context);
                                   }',
+                    'create'    => 'js: function(event, ui)
+                                  {
+                                       var context = $("#' . $this->getIdForTextField() . '");
+                                       context.data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+                                            if(item.id == null){
+                                                item.value = null;
+                                            };
+                                            return $("<li>")
+                                            .append($("<a>").text(item.label))
+                                            .appendTo(ul);
+                                        };
+                                  }',
                     'open'     => 'js: function(event, ui)
                                   {
                                        var context = $("#' . $this->getIdForTextField() . '").parent();
