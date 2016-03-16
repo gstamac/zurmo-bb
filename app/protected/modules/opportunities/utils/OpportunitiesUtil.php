@@ -49,11 +49,19 @@
         public static function renderTimeInStageForListView($model)
         {
             $stageRottingValueInDays    = OpportunitiesModule::getRottingByStageValue($model->stage->value);
-            $timeInStageInDays          = DateTimeUtil::getTimeSinceInDays($model->stageModifiedDateTime);
-            $timeInStageDisplayContent  = DateTimeUtil::getTimeSinceDisplayContent($model->stageModifiedDateTime, true);
+            if ($model->stageModifiedDateTime == null)
+            {
+                $timeInStageInDays          = null;
+                $timeInStageDisplayContent  = Zurmo::t('OpportunitiesModule', 'Unknown');
+            }
+            else
+            {
+                $timeInStageInDays          = DateTimeUtil::getTimeSinceInDays($model->stageModifiedDateTime);
+                $timeInStageDisplayContent  = DateTimeUtil::getTimeSinceDisplayContent($model->stageModifiedDateTime, true);
+            }
             $span                       = ZurmoHtml::tag('span', array(), $timeInStageDisplayContent);
 
-            if (OpportunitiesModule::isRottingMappingEnabled() && $stageRottingValueInDays != 0)
+            if (OpportunitiesModule::isRottingMappingEnabled() && $stageRottingValueInDays != 0 && $timeInStageInDays !== null)
             {
                 if ($timeInStageInDays < $stageRottingValueInDays)
                 {
@@ -79,11 +87,19 @@
         public static function renderTimeInStageForRelatedListView($model)
         {
             $stageRottingValueInDays    = OpportunitiesModule::getRottingByStageValue($model->stage->value);
-            $timeInStageInDays          = DateTimeUtil::getTimeSinceInDays($model->stageModifiedDateTime);
-            $timeInStageDisplayContent  = DateTimeUtil::getTimeSinceDisplayContent($model->stageModifiedDateTime, true);
+            if ($model->stageModifiedDateTime == null)
+            {
+                $timeInStageInDays          = null;
+                $timeInStageDisplayContent  = Zurmo::t('OpportunitiesModule', 'Unknown');
+            }
+            else
+            {
+                $timeInStageInDays          = DateTimeUtil::getTimeSinceInDays($model->stageModifiedDateTime);
+                $timeInStageDisplayContent  = DateTimeUtil::getTimeSinceDisplayContent($model->stageModifiedDateTime, true);
+            }
             $span                       = ZurmoHtml::tag('span', array(), $timeInStageDisplayContent);
 
-            if (OpportunitiesModule::isRottingMappingEnabled() && $stageRottingValueInDays != 0)
+            if (OpportunitiesModule::isRottingMappingEnabled() && $stageRottingValueInDays != 0 && $timeInStageInDays !== null)
             {
                 if ($timeInStageInDays < $stageRottingValueInDays)
                 {
@@ -109,10 +125,18 @@
         public static function renderTimeInStageForKanbanView($model)
         {
             $stageRottingValueInDays    = OpportunitiesModule::getRottingByStageValue($model->stage->value);
-            $timeInStageInDays          = DateTimeUtil::getTimeSinceInDays($model->stageModifiedDateTime);
-            $timeInStageDisplayContent  = DateTimeUtil::getTimeSinceDisplayContent($model->stageModifiedDateTime, true);
+            if ($model->stageModifiedDateTime == null)
+            {
+                $timeInStageInDays          = null;
+                $timeInStageDisplayContent  = Zurmo::t('OpportunitiesModule', 'Unknown');
+            }
+            else
+            {
+                $timeInStageInDays          = DateTimeUtil::getTimeSinceInDays($model->stageModifiedDateTime);
+                $timeInStageDisplayContent  = DateTimeUtil::getTimeSinceDisplayContent($model->stageModifiedDateTime, true);
+            }
 
-            if (OpportunitiesModule::isRottingMappingEnabled() && $stageRottingValueInDays != 0)
+            if (OpportunitiesModule::isRottingMappingEnabled() && $stageRottingValueInDays != 0 && $timeInStageInDays !== null)
             {
                 if ($timeInStageInDays < $stageRottingValueInDays)
                 {
