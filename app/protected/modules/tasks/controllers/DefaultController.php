@@ -67,7 +67,7 @@
                 if (isset($searchFormClassName) && class_exists($searchFormClassName))
                 {
                     $searchForm      = new $searchFormClassName($task);
-                    $stickySearchKey = $searchFormClassName; // We need to change this
+                    $stickySearchKey = 'TasksSearchView'; // We need to change this
                 }
                 else
                 {
