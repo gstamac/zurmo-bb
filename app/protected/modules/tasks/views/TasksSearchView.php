@@ -101,11 +101,7 @@
                                                 'title' => $title,
                                                ),
                                           '?');
-            $qtip        = new ZurmoTip(array('options' => array('position' => array('my' => 'bottom right', 'at' => 'top left'),
-                                                                 'hide'     => array('event' => 'unfocus'),
-                                                                 'show'     => array('event' => 'click')
-
-                )));
+            $qtip        = new ZurmoTip();
             $qtip->addQTip("#HideOlderCompletedItems");
             return $content;
         }
