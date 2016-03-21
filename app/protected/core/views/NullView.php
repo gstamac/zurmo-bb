@@ -50,6 +50,9 @@
             return false;
         }
 
+        /*
+         * To be removed..
+         */
         protected function renderContent()
         {
             return '';

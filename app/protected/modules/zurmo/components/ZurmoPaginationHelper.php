@@ -96,12 +96,12 @@
          * The report results drill-down page size
          */
         protected $_reportResultsSubListPageSize;
-        
+
         /**
          * When a mass subscribe must complete using a progress bar, this is how many are processed at once.
          */
         protected $_massSubscribeProgressPageSize;
-        
+
         /**
          * The kanban board page size
          */
@@ -212,7 +212,7 @@
         {
             $this->_massSubscribeProgressPageSize = $value;
         }
-        
+
         /**
          * This is set from the value in the application common config file. It is used as the final fall back
          * if no other configuration settings are found.
@@ -221,7 +221,7 @@
         {
             $this->_kanbanBoardPageSize = $value;
         }
-        
+
         /**
          * Call method to get the active value for a particular pagination type. If the active value doesnt exist
          * as a state on the currenet user, set the active value from the configuration

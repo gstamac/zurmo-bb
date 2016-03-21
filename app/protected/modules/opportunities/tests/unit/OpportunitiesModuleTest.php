@@ -53,7 +53,7 @@
             $stageFieldData->serializedData = serialize($stageValues);
             $this->assertTrue($stageFieldData->save());
         }
-        
+
         /**
          * @depends testCreateStageValues
          */
@@ -74,7 +74,7 @@
             $this->assertEquals(100, OpportunitiesModule::getProbabilityByStageValue ('Closed Won'));
             $this->assertEquals(0, OpportunitiesModule::getProbabilityByStageValue ('Closed Lost'));
         }
-        
+
         /**
          * @depends testCreateStageValues
          */
@@ -95,7 +95,7 @@
             $this->assertEquals(0, OpportunitiesModule::getRottingByStageValue ('Closed Won'));
             $this->assertEquals(0, OpportunitiesModule::getRottingByStageValue ('Closed Lost'));
         }
-        
+
         /**
          * @depends testCreateStageValues
          */
