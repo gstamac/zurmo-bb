@@ -76,7 +76,7 @@
             $this->assertEquals(1, count($users));
             $this->assertEquals($user->id, $users[0]->id);
         }
-        
+
         public function testGetUsersByAnyEmailAddress()
         {
             $user = UserTestHelper::createBasicUser('Mickey');
@@ -183,7 +183,7 @@
             $users = UserSearch::getUsersByPartialFullNameOrUsername('lion');
             $this->assertEquals(1, count($users));
         }
-        
+
         /**
          * @depends testGetUsersByPartialFullNameOrUsername
          */
@@ -199,7 +199,7 @@
             $user->secondaryEmail->optOut       = 1;
             $user->secondaryEmail->isInvalid    = 0;
             $this->assertTrue($user->save());
-            
+
             $users = UserSearch::getUsersByPartialFullNameOrAnyEmailAddress('Smit', 10);
             $this->assertEquals(1, count($users));
             $users = UserSearch::getUsersByPartialFullNameOrAnyEmailAddress('Ben', 10);
