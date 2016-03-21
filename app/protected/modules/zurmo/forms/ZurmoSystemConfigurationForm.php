@@ -44,7 +44,7 @@
         public $outboundEmailBatchSize;
 
         public $listPageSizeMaxLimit;
-        
+
         public $kanbanBoardPageSizeMaxLimit;
 
         public function rules()
