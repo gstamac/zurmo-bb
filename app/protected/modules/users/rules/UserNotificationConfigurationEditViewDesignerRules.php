@@ -34,25 +34,11 @@
      * "Copyright Zurmo Inc. 2015. All rights reserved".
      ********************************************************************************/
 
-    /**
-     * For a given contact, display the meetings in a calendar.
-     */
-    class UpcomingMeetingsForContactCalendarView extends UpcomingMeetingsRelatedCalendarView
+    class UserNotificationConfigurationEditViewDesignerRules extends DesignerRules
     {
-        protected function getRelationAttributeName()
+        public function allowEditInLayoutTool()
         {
-            return 'Contact';
-        }
-
-        public static function getDisplayDescription()
-        {
-            return Zurmo::t('MeetingsModule', 'MeetingsModulePluralLabel For ContactsModuleSingularLabel',
-                        LabelUtil::getTranslationParamsForAllModules());
-        }
-
-        public static function getAllowedOnPortletViewClassNames()
-        {
-            return array('ContactDetailsAndRelationsView', 'LeadDetailsAndRelationsView');
+            return false;
         }
     }
 ?>
