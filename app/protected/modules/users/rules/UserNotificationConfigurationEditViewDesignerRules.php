@@ -34,28 +34,11 @@
      * "Copyright Zurmo Inc. 2015. All rights reserved".
      ********************************************************************************/
 
-    /**
-     * A view that contains no content. Used to fill spaces in a grid
-     * or other view that does not require content.
-     */
-    class NullView extends View
+    class UserNotificationConfigurationEditViewDesignerRules extends DesignerRules
     {
-        /**
-         * Overridden from View, specifies that NullView is not unique
-         * to a page.
-         * @see View::isUniqueToAPage()
-         */
-        public function isUniqueToAPage()
+        public function allowEditInLayoutTool()
         {
             return false;
-        }
-
-        /*
-         * To be removed..
-         */
-        protected function renderContent()
-        {
-            return '';
         }
     }
 ?>

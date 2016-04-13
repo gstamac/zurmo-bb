@@ -70,7 +70,7 @@
             $validated = $form->validate(array('automaticProbabilityMappingDisabled'));
             $this->assertTrue($validated);
         }
-        
+
         public function testValidateStageToRottingMapping()
         {
             $form      = new OpportunitiesModuleForm();
@@ -86,7 +86,7 @@
             $this->assertTrue($validated);
             $this->assertEquals(0, count($form->getErrors()));
         }
-        
+
         public function testOpportunityRottingMappingEnabledIsBoolean()
         {
             $form      = new OpportunitiesModuleForm();

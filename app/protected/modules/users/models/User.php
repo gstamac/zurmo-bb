@@ -871,7 +871,7 @@
                 isset($this->secondaryEmail) && !empty($this->secondaryEmail->emailAddress) &&
                 $this->primaryEmail->emailAddress == $this->secondaryEmail->emailAddress)
             {
-                $this->secondaryEmail->addError('emailAddress', 
+                $this->secondaryEmail->addError('emailAddress',
                         Zurmo::t('UsersModule', 'Secondary email address cannot be the same as the primary email address.'));
                 $hasErrors = true;
             }

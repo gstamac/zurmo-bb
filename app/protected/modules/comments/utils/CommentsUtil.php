@@ -202,7 +202,7 @@
             else
             {
                 $text = CommentsUtil::replaceMentionedUsernamesWithFullNamesAndLinksInComments($text);
-                $breaks = array("<br />","<br>","<br/>", "</p>");
+                $breaks = array("<br />","<br>","<br/>", "</p>"); // Not Coding Standard
                 $text = str_ireplace($breaks, "\r\n", $text);
                 $text = strip_tags($text);
             }
