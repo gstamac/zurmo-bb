@@ -68,11 +68,13 @@
                 {
                     $searchForm      = new $searchFormClassName($task);
                     $stickySearchKey = 'TasksSearchView'; // We need to change this
+                    $securedActionBar = 'SecuredActionBarForRelatedTasksSearchAndListView';
                 }
                 else
                 {
                     $searchForm      = new TasksSearchForm($task);
                     $stickySearchKey = 'TasksSearchView';
+                    $securedActionBar = 'SecuredActionBarForTasksSearchAndListView';
                 }
 
                 $listAttributesSelector         = new ListAttributesSelector('TasksListView', get_class($this->getModule()));
@@ -98,9 +100,8 @@
                 }
                 else
                 {
-                    $mixedView  = $this->makeActionBarSearchAndListView($searchForm, $dataProvider,
-                                       'SecuredActionBarForTasksSearchAndListView',
-                                        null, null, null);
+                    $mixedView  = $this->makeActionBarSearchAndListView($searchForm, $dataProvider, $securedActionBar,
+                                                                        null, null, null);
                     $view       = new TasksPageView(ZurmoDefaultViewUtil::
                                                         makeStandardViewForCurrentUser(
                                                             $this, $mixedView));
