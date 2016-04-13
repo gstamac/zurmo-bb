@@ -144,7 +144,7 @@
             $users = User::getSubset($joinTablesAdapter, null, $pageSize, $where);
             return $users;
         }
-        
+
         /**
          * @param string $emailAddress
          * @param null|string $operatorType

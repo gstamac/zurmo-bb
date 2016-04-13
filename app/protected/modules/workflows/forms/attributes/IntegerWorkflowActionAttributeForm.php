@@ -69,7 +69,7 @@
             $data[static::TYPE_STATIC]      = Zurmo::t('WorkflowsModule', 'As');
             return $data;
         }
-        
+
         /**
          * Value is required based on the type. Override in children as needed to add more scenarios.
          * @return bool

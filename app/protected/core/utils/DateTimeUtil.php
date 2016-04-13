@@ -134,7 +134,7 @@
             $timeSince      = $nowTimeStamp - $dateTimeStamp;
             return floor($timeSince / 86400);
         }
-        
+
         /**
          * Convert month to a display label. If the month is invalid then it just returns the month passed in.
          * @param string $month

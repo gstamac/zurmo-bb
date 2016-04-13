@@ -46,7 +46,7 @@
         }
 
         public function testZurmoPaginationHelper()
-        {   
+        {
             $pager = new ZurmoPaginationHelper();
             $pager->setListPageSize(11);
             $pager->setSubListPageSize(12);

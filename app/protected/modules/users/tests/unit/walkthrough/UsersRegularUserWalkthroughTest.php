@@ -80,10 +80,10 @@
 
             //Access to edit other User and Role should fail.
             $this->runControllerShouldResultInAccessFailureAndGetContent('users/default/edit');
-            
+
             //Access to General Configuration of other User and Role should fail.
             $this->runControllerShouldResultInAccessFailureAndGetContent('users/default/configurationEdit');
-            
+
             //Access to Security Overview of other User and Role should fail.
             $this->runControllerShouldResultInAccessFailureAndGetContent('users/default/securityDetails');
 
@@ -125,7 +125,7 @@
             $this->setGetArray(array('id' => $bUser->id));
             //Access to edit other User and Role should fail.
             $this->runControllerShouldResultInAccessFailureAndGetContent('users/default/edit');
-            
+
             //Now test peon with elevated rights to tabs /other available rights
             //such as convert lead
             //Now test peon with elevated permissions to models.
