@@ -34,9 +34,9 @@
      * "Copyright Zurmo Inc. 2015. All rights reserved".
      ********************************************************************************/
     /**
-     * Kanban view for tasks related to account/contact/lead/opportunity
+     * Kanban view for tasks
      */
-    abstract class TasksForRelatedKanbanView extends SecuredRelatedListView
+    class TasksKanbanView extends SecuredListView
     {
         /**
          * Override to have the default
@@ -57,13 +57,7 @@
                 'global' => array(
                     'toolbar' => array(
                         'elements' => array(
-                            array('type'        => 'RelatedKanbanViewDetailsMenu',
-                                  'iconClass'   => 'icon-details',
-                                  'id'          => 'RelatedKanbanViewActionMenu',
-                                  'itemOptions' => array('class' => 'hasDetailsFlyout'),
-                                  'model'       => 'eval:$this->params["relationModel"]',
-                            ),
-                            array('type'                => 'CreateTaskFromRelatedKanbanModalMenu',
+                            array('type'                => 'CreateTaskMenu',
                                   'routeModuleId'       => 'eval:$this->moduleId',
                                   'routeParameters'     => 'eval:$this->getCreateLinkRouteParameters()',
                                   'ajaxOptions'         => 'eval:TasksUtil::resolveAjaxOptionsForModalView("Create", $this->getGridViewId())',
@@ -113,7 +107,6 @@
             $this->gridId                 = $this->getGridId();
             $this->setKanbanBoard($kanbanBoard);
             $this->params                 = $params;
-            $this->modelId                = $params["relationModel"]->id;
             $this->searchFormModel        = $searchModel;
             if($this->searchFormModel !== null)
             {
@@ -121,6 +114,19 @@
             }
         }
 
+        /**
+         * @return string
+         */
+        protected function getKanbanBoardTitle()
+        {
+            return null;
+        }
+        
+        protected function getCreateLinkRouteParameters()
+        {
+            return array();
+        }
+        
         /**
          * Renders content for a list view. Utilizes a CActiveDataprovider
          * and a CGridView widget.
@@ -142,9 +148,7 @@
             TasksUtil::resolveShouldOpenToTask($this->getGridId());
             $content    .= $cClipWidget->getController()->clips['ListView'] . "\n";
             $content .= $this->renderScripts();
-            $zeroModelView = new ZeroTasksForRelatedModelYetView($this->controllerId,
-                                                                 $this->moduleId, 'Task',
-                                                                 get_class($this->params['relationModel']));
+            $zeroModelView = new ZeroTasksYetView($this->controllerId, $this->moduleId, 'Task');
             $content .= $zeroModelView->render();
             $content .= $this->renderUIOverLayBlock();
             return $content;
@@ -211,15 +215,6 @@
         protected function makeSearchAttributeData()
         {
             $searchAttributeData = array();
-            $searchAttributeData['clauses'] = array(
-                1 => array(
-                    'attributeName'        => 'activityItems',
-                    'relatedAttributeName' => 'id',
-                    'operatorType'         => 'equals',
-                    'value'                => (int)$this->params['relationModel']->getClassId('Item'),
-                )
-            );
-            $searchAttributeData['structure'] = '1';
             return $searchAttributeData;
         }
 
@@ -244,15 +239,6 @@
                                                           $this->moduleId,
                                                           $this->getActionModuleClassName());
             return $content;
-        }
-
-        /**
-         * Gets relation attribute name
-         * @return null
-         */
-        protected function getRelationAttributeName()
-        {
-            return null;
         }
 
         /**
@@ -282,17 +268,10 @@
         protected function renderActionElementBar($renderedInForm)
         {
             $kanbanActive = false;
-            if ($this->params['relationModuleId'] == 'projects')
+            $getData = GetUtil::getData();
+            if (isset($getData['kanbanBoard']) && $getData['kanbanBoard'] == 1)
             {
-                $kanbanActive = true;
-            }
-            else
-            {
-                $getData = GetUtil::getData();
-                if (isset($getData['kanbanBoard']) && $getData['kanbanBoard'] == 1)
-                {
-                   $kanbanActive = true;
-                }
+               $kanbanActive = true;
             }
 
             if ($kanbanActive)
@@ -326,7 +305,7 @@
          */
         protected function getGridId()
         {
-            return $this->getRelationAttributeName() . '-tasks-kanban-view';
+            return 'overall-tasks-kanban-view';
         }
 
         /**
@@ -351,12 +330,12 @@
 
         protected function resolveShouldRenderActionBarLinksForKanbanBoard()
         {
+            $active = DetailsAndRelationsViewTypesToggleLinkActionElement::TYPE_KANBAN_BOARD;
             if ($this->shouldRenderActionBarLinksForKanbanBoard())
             {
-                return ZurmoDefaultViewUtil::renderActionBarLinksForKanbanBoard($this->controllerId,
-                    $this->params['relationModuleId'],
-                    (int)$this->params['relationModel']->id,
-                    true);
+                $toggleLinkActionElement = new ListViewTypesToggleLinkActionElement(
+                                            $this->controllerId, $this->moduleId, $modelId=0, array('active' => $active));
+                return $toggleLinkActionElement->render();
             }
         }
 
@@ -393,12 +372,12 @@
             if ($this->dataProvider->getTotalItemCount() == 0)
             {
                 $script  = "$('#" . $this->getGridId() . "').hide();";
-                $script .= "$('#ZeroTasksForRelatedModelYetView').show();";
+                $script .= "$('#ZeroTasksYetView').show();";
             }
             else
             {
                 $script  = "$('#" . $this->getGridId() . "').show();";
-                $script .= "$('#ZeroTasksForRelatedModelYetView').hide();";
+                $script .= "$('#ZeroTasksYetView').hide();";
             }
             Yii::app()->clientScript->registerScript('taskKanbanDetailScript', $script);
         }
@@ -416,12 +395,12 @@
                         if($("#" + id).find(".kanban-card").length > 0)
                         {
                             $("#' . $this->getGridId() . '").show();
-                            $("#ZeroTasksForRelatedModelYetView").hide();
+                            $("#ZeroTasksYetView").hide();
                         }
                         else
                         {
                             $("#' . $this->getGridId() . '").hide();
-                            $("#ZeroTasksForRelatedModelYetView").show();
+                            $("#ZeroTasksYetView").show();
                         }
                         $(this).makeSmallLoadingSpinner(true, "#' . $this->getGridId() . '");
                         $(".ui-overlay-block").fadeOut(50);
@@ -478,7 +457,8 @@
          */
         protected function renderSearchView()
         {
-            return Yii::app()->custom->renderKanbanSearchView($this->searchFormModel, $this->params);
+            $searchView = new TasksKanbanSearchView($this->searchFormModel, 'Task');
+            return $searchView->render();
         }
         
         public static function getDefaultPageSize()

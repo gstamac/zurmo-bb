@@ -109,10 +109,33 @@
             }
             else
             {
+                $pageSize       = TasksForRelatedKanbanView::getDefaultPageSize();
+                $task           = new Task(false);
+                $searchForm     = new TasksForRelatedKanbanSearchForm($task, $account);
+                $stickySearchKey = 'TasksForRelatedKanbanSearchView';
+                $dataProvider = $this->resolveSearchDataProvider(
+                    $searchForm,
+                    $pageSize,
+                    null,
+                    $stickySearchKey
+                );
                 $view = TasksUtil::resolveTaskKanbanViewForRelation($account, $this->getModule()->getId(), $this,
-                                                                        'TasksForAccountKanbanView', 'AccountsPageView');
+                                                                    'TasksForAccountKanbanView', 'AccountsPageView',
+                                                                    $searchForm, $dataProvider);
             }
             echo $view->render();
+        }
+        
+        /**
+         * This method is called prior to creation of data provider in order to add 
+         * search metadata for related model. Used in actionDetails for Kanban view.
+         */
+        protected function resolveFilteredByMetadataBeforeMakingDataProvider($searchForm, & $metadata)
+        {
+            if ($searchForm instanceof TasksForRelatedKanbanSearchForm)
+            {
+                TasksUtil::resolveRelatedAdditionalSearchMetadata($searchForm, $metadata, 'activityItems');
+            }
         }
 
         public function actionCreate()

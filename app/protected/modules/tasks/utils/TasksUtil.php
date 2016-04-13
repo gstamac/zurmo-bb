@@ -412,11 +412,14 @@
          * @param ZurmoModuleController $controller
          * @param TasksForRelatedKanbanView $kanbanView
          * @param ZurmoDefaultPageView $pageView
+         * @param TasksSearchForm $searchForm
+         * @param $dataProvider
          * @return ZurmoDefaultPageView
          */
         public static function resolveTaskKanbanViewForRelation($model,
                                                                 $moduleId, $controller,
-                                                                $kanbanView, $pageView)
+                                                                $kanbanView, $pageView,
+                                                                $searchForm, $dataProvider)
         {
             assert('$model instanceof RedBeanModel');
             assert('is_string($moduleId)');
@@ -430,14 +433,81 @@
             $params['relationModel']    = $model;
             $params['relationModuleId'] = $moduleId;
             $params['redirectUrl']      = null;
-            $listView                   = new $kanbanView($controller->getId(), 'tasks', 'Task', null,
-                                                            $params, null, array(), $kanbanBoard);
+            $listView                   = new $kanbanView($controller->getId(), 'tasks', 'Task', $dataProvider,
+                                                            $params, null, array(), $kanbanBoard, $searchForm);
+            $view                       = new $pageView(ZurmoDefaultViewUtil::
+                                                             makeViewWithBreadcrumbsForCurrentUser(
+                                                                    $controller, $listView, $breadCrumbLinks, 'KanbanBoardBreadCrumbView'));
+            return $view;
+        }
+        
+        /**
+         * Resolve overall task kanban view
+         * @param ZurmoModuleController $controller
+         * @param TasksForRelatedKanbanView $kanbanView
+         * @param ZurmoDefaultPageView $pageView
+         * @param TasksSearchForm $searchForm
+         * @param $dataProvider
+         * @return ZurmoDefaultPageView
+         */
+        public static function resolveOverallTaskKanbanView($controller,
+                                                    $kanbanView, $pageView,
+                                                    $searchForm, $dataProvider)
+        {
+            assert('$controller instanceof ZurmoModuleController');
+            assert('is_string($kanbanView)');
+            assert('is_string($pageView)');
+            $breadCrumbLinks = array();
+            $kanbanItem                 = new KanbanItem();
+            $kanbanBoard                = new TaskOverallKanbanBoard($kanbanItem, 'type');
+            $kanbanBoard->setIsActive();
+            $params['redirectUrl']      = null;
+            $listView                   = new $kanbanView($controller->getId(), 'tasks', 'Task', $dataProvider,
+                                                            $params, null, array(), $kanbanBoard, $searchForm);
             $view                       = new $pageView(ZurmoDefaultViewUtil::
                                                              makeViewWithBreadcrumbsForCurrentUser(
                                                                     $controller, $listView, $breadCrumbLinks, 'KanbanBoardBreadCrumbView'));
             return $view;
         }
 
+        public static function resolveRelatedAdditionalSearchMetadata($searchForm, & $metadata, $relationAttributeName)
+        {
+            if ($relationAttributeName == 'project')
+            {
+                $value = (int)$searchForm->relationModel->id;
+            }
+            else
+            {
+                $value = (int)$searchForm->relationModel->getClassId('Item');
+            }
+            $additionalMetaData = array(
+                    'attributeName'        => $relationAttributeName,
+                    'relatedAttributeName' => 'id',
+                    'operatorType'         => 'equals',
+                    'value'                => $value,
+            );
+            
+            $clausesCount = 0;
+            if (isset($metadata['clauses']))
+            {
+                $clausesCount = count($metadata['clauses']);
+                $metadata['clauses'][count($metadata['clauses']) + 1] = $additionalMetaData;
+            }
+            else
+            {
+                $metadata['clauses'][1] = $additionalMetaData;
+            }
+            if ($clausesCount == 0)
+            {
+                $metadata['structure'] =  '(1)';
+            }
+            else
+            {
+                $count = $clausesCount + 1;
+                $metadata['structure'] =  $metadata['structure'] . ' and (' . $count . ')';
+            }
+        }
+        
         /**
          * Register script for task detail link. This would be called from both kanban and open task portlet
          * @param string $sourceId

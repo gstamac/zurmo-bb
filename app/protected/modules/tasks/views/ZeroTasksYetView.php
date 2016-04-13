@@ -33,60 +33,61 @@
      * feasible for technical reasons, the Appropriate Legal Notices must display the words
      * "Copyright Zurmo Inc. 2015. All rights reserved".
      ********************************************************************************/
-     /**
-      * Task search form
-      */
-    class TasksSearchForm extends OwnedSearchForm
+
+    /**
+     * Class for showing a message and create link when there are no tasks visible to the logged
+     * in user when going to tasks overall kanban view
+     */
+    class ZeroTasksYetView extends ZeroModelsYetView
     {
-        public $uniqueIdentifier;
-        
-        public $hideOlderCompletedItems;
+        /**
+         * @param string $controllerId
+         * @param string $moduleId
+         * @param string $modelClassName
+         */
+        public function __construct($controllerId, $moduleId, $modelClassName)
+        {
+            assert('is_string($controllerId)');
+            assert('is_string($moduleId)');
+            assert('is_string($modelClassName)');
+            $this->controllerId   = $controllerId;
+            $this->moduleId       = $moduleId;
+            $this->modelClassName = $modelClassName;
+        }
 
         /**
+         * Gets create link display label
          * @return string
          */
-        protected static function getRedBeanModelClassName()
+        protected function getCreateLinkDisplayLabel()
         {
-            return 'Task';
+            return null;
         }
 
-        public function __construct(Task $model)
+        /**
+         * Gets message content
+         * @return string
+         */
+        protected function getMessageContent()
         {
-            parent::__construct($model);
+            $params = LabelUtil::getTranslationParamsForAllModules();
+            return Zurmo::t('TasksModule',
+                            '<h2>"Nothing is so fatiguing as the eternal hanging on of an uncompleted task."</h2>' .
+                            '<i>- William James</i>' .
+                            '<div class="large-icon"></div><p>' .
+                            'Don\'t be fatigued by your uncompleted tasks. <br/>
+                                Create a task record and keep track of it until you complete it.</p>', $params);
         }
 
-        public function rules()
+        /**
+         * Renders content for zero model view
+         * @return string
+         */
+        protected function renderContent()
         {
-            return array_merge(parent::rules(), array(
-                array('uniqueIdentifier', 'safe'),
-                array('hideOlderCompletedItems', 'boolean'),
-            ));
+            $params  = $this->getCreateLinkParams();
+            $content = ZurmoHtml::tag('div', array('class' => $this->getIconName()), $this->getMessageContent());
+            return $content;
         }
-
-        public function attributeLabels()
-        {
-            return array_merge(parent::attributeLabels(), array(
-                'uniqueIdentifier' => Zurmo::t('Core', 'Id'),
-                'hideOlderCompletedItems' => Zurmo::t('ZurmoModule', 'Hide Completed'),
-            ));
-        }
-
-        public function getAttributesMappedToRealAttributesMetadata()
-        {
-            return array_merge(parent::getAttributesMappedToRealAttributesMetadata(), array(
-                'uniqueIdentifier' => array(
-                    array('id')
-                ),
-                'hideOlderCompletedItems' => 'resolveEntireMappingByRules',
-            ));
-        }
-        
-        protected static function getSearchFormAttributeMappingRulesTypes()
-        {
-            return array_merge(parent::getSearchFormAttributeMappingRulesTypes(), 
-                               array('hideOlderCompletedItems' => 'HideOlderCompletedItems'));
-        }
-        
-        
     }
 ?>

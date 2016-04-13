@@ -58,50 +58,69 @@
 
         public function actionList($searchFormClassName = null)
         {
-            $pageSize                       = Yii::app()->pagination->resolveActiveForCurrentUserByType(
-                                              'listPageSize', get_class($this->getModule()));
-            $task                           = new Task(false);
-
-            if (isset($searchFormClassName) && class_exists($searchFormClassName))
+            if (KanbanUtil::isKanbanRequest() === false)
             {
-                $searchForm      = new $searchFormClassName($task);
-                $stickySearchKey = $searchFormClassName; // We need to change this
-            }
-            else
-            {
-                $searchForm      = new TasksSearchForm($task);
-                $stickySearchKey = 'TasksSearchView';
-            }
+                $pageSize                       = Yii::app()->pagination->resolveActiveForCurrentUserByType(
+                                                                'listPageSize', get_class($this->getModule()));
+                $task                           = new Task(false);
 
-            $listAttributesSelector         = new ListAttributesSelector('TasksListView', get_class($this->getModule()));
-            $searchForm->setListAttributesSelector($listAttributesSelector);
-
-            $dataProvider  = $this->resolveSearchDataProvider(
-                                                        $searchForm,
-                                                        $pageSize,
-                                                        null,
-                                                        $stickySearchKey
-                                                    );
-            if ((isset($_GET['ajax']) && $_GET['ajax'] == 'list-view'))
-            {
-                if (isset($_GET['openToTaskId']))
+                if (isset($searchFormClassName) && class_exists($searchFormClassName))
                 {
-                    unset($_GET['openToTaskId']);
+                    $searchForm      = new $searchFormClassName($task);
+                    $stickySearchKey = 'TasksSearchView'; // We need to change this
                 }
-                $mixedView  = $this->makeListView(
-                            $searchForm,
-                            $dataProvider
-                        );
-                $view       = new TasksPageView($mixedView);
+                else
+                {
+                    $searchForm      = new TasksSearchForm($task);
+                    $stickySearchKey = 'TasksSearchView';
+                }
+
+                $listAttributesSelector         = new ListAttributesSelector('TasksListView', get_class($this->getModule()));
+                $searchForm->setListAttributesSelector($listAttributesSelector);
+
+                $dataProvider  = $this->resolveSearchDataProvider(
+                                                            $searchForm,
+                                                            $pageSize,
+                                                            null,
+                                                            $stickySearchKey
+                                                        );
+                if ((isset($_GET['ajax']) && $_GET['ajax'] == 'list-view'))
+                {
+                    if (isset($_GET['openToTaskId']))
+                    {
+                        unset($_GET['openToTaskId']);
+                    }
+                    $mixedView  = $this->makeListView(
+                                $searchForm,
+                                $dataProvider
+                            );
+                    $view       = new TasksPageView($mixedView);
+                }
+                else
+                {
+                    $mixedView  = $this->makeActionBarSearchAndListView($searchForm, $dataProvider,
+                                       'SecuredActionBarForTasksSearchAndListView',
+                                        null, null, null);
+                    $view       = new TasksPageView(ZurmoDefaultViewUtil::
+                                                        makeStandardViewForCurrentUser(
+                                                            $this, $mixedView));
+                }
             }
             else
             {
-                $mixedView  = $this->makeActionBarSearchAndListView($searchForm, $dataProvider,
-                                   'SecuredActionBarForTasksSearchAndListView',
-                                    null, null, null);
-                $view       = new TasksPageView(ZurmoDefaultViewUtil::
-                                                    makeStandardViewForCurrentUser(
-                                                        $this, $mixedView));
+                $pageSize       = TasksForRelatedKanbanView::getDefaultPageSize();
+                $task           = new Task(false);
+                $searchForm     = new TasksSearchForm($task);
+                $stickySearchKey = 'TasksKanbanSearchView';
+                $dataProvider = $this->resolveSearchDataProvider(
+                    $searchForm,
+                    $pageSize,
+                    null,
+                    $stickySearchKey
+                );
+                $view = TasksUtil::resolveOverallTaskKanbanView($this,
+                                                        'TasksKanbanView', 'TasksPageView',
+                                                        $searchForm, $dataProvider);
             }
             echo $view->render();
         }

@@ -33,60 +33,43 @@
      * feasible for technical reasons, the Appropriate Legal Notices must display the words
      * "Copyright Zurmo Inc. 2015. All rights reserved".
      ********************************************************************************/
-     /**
-      * Task search form
-      */
-    class TasksSearchForm extends OwnedSearchForm
+
+    /**
+     * Helper class to work with TaskOverallKanbanBoard views
+     */
+    class TaskOverallKanbanBoard extends KanbanBoard
     {
-        public $uniqueIdentifier;
-        
-        public $hideOlderCompletedItems;
+        /**
+         * @param RedBeanModel $model
+         * @param string $groupByAttribute
+         * @throws NotSupportedException
+         */
+        public function __construct(RedBeanModel $model, $groupByAttribute)
+        {
+            $this->model            = $model;
+            $this->groupByAttribute = $groupByAttribute;
+            $this->groupByDataAndTranslatedLabels = KanbanItem::getTypeDropDownArray();
+            $this->groupByAttributeVisibleValues  = array_keys($this->groupByDataAndTranslatedLabels);
+        }
 
         /**
          * @return string
          */
-        protected static function getRedBeanModelClassName()
+        public static function getGridViewWidgetPath()
         {
-            return 'Task';
+            return 'application.modules.tasks.widgets.TaskKanbanBoardExtendedGridView';
         }
 
-        public function __construct(Task $model)
+        /**
+         * @return array
+         */
+        public function getGridViewParams()
         {
-            parent::__construct($model);
+            return array('groupByAttribute'               => $this->groupByAttribute,
+                         'groupByAttributeVisibleValues'  => $this->groupByAttributeVisibleValues,
+                         'groupByDataAndTranslatedLabels' => $this->groupByDataAndTranslatedLabels,
+                         'selectedTheme'                  => $this->getSelectedTheme(),
+                    );
         }
-
-        public function rules()
-        {
-            return array_merge(parent::rules(), array(
-                array('uniqueIdentifier', 'safe'),
-                array('hideOlderCompletedItems', 'boolean'),
-            ));
-        }
-
-        public function attributeLabels()
-        {
-            return array_merge(parent::attributeLabels(), array(
-                'uniqueIdentifier' => Zurmo::t('Core', 'Id'),
-                'hideOlderCompletedItems' => Zurmo::t('ZurmoModule', 'Hide Completed'),
-            ));
-        }
-
-        public function getAttributesMappedToRealAttributesMetadata()
-        {
-            return array_merge(parent::getAttributesMappedToRealAttributesMetadata(), array(
-                'uniqueIdentifier' => array(
-                    array('id')
-                ),
-                'hideOlderCompletedItems' => 'resolveEntireMappingByRules',
-            ));
-        }
-        
-        protected static function getSearchFormAttributeMappingRulesTypes()
-        {
-            return array_merge(parent::getSearchFormAttributeMappingRulesTypes(), 
-                               array('hideOlderCompletedItems' => 'HideOlderCompletedItems'));
-        }
-        
-        
     }
 ?>
