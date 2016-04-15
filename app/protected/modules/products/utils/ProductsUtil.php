@@ -222,7 +222,6 @@
         {
             assert('is_string($controllerId) || $controllerId === null');
             assert('is_string($moduleId)  || $moduleId === null');
-            assert('is_string($moduleClassName)');
 
             $label =  StringUtil::getChoppedStringContent($product->name, ProductElementUtil::PRODUCT_NAME_LENGTH_IN_PORTLET_VIEW);
             if (ActionSecurityUtil::canCurrentUserPerformAction('Details', $product))
