@@ -37,7 +37,7 @@
       * Task search form by related models
       */
     class TasksForRelatedKanbanSearchForm extends TasksSearchForm
-    {   
+    {
         public $relationModel;
 
         public function __construct(Task $model, OwnedSecurableItem $relationModel = null)

@@ -146,7 +146,7 @@
         }
 
         /**
-         * This method is called prior to creation of data provider in order to add 
+         * This method is called prior to creation of data provider in order to add
          * search metadata for related model. Used in actionDetails for Kanban view.
          */
         protected function resolveFilteredByMetadataBeforeMakingDataProvider($searchForm, & $metadata)
@@ -156,7 +156,7 @@
                 TasksUtil::resolveRelatedAdditionalSearchMetadata($searchForm, $metadata, 'activityItems');
             }
         }
-        
+
         public function actionCreate()
         {
             $titleBarAndEditView = $this->makeEditAndDetailsView(

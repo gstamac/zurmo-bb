@@ -480,7 +480,7 @@
         {
             return Yii::app()->custom->renderKanbanSearchView($this->searchFormModel, $this->params);
         }
-        
+
         public static function getDefaultPageSize()
         {
             return static::$defaultPageSize;

@@ -47,9 +47,9 @@
             }
             return 1;
         }
-        
+
         /**
-         * 
+         *
          * @param string $attributeName
          * @param array $attributeAndRelations
          * @param mixed $value
@@ -58,7 +58,7 @@
         {
             assert('is_string($attributeName)');
             assert('$attributeAndRelations == "resolveEntireMappingByRules"');
-            
+
             if ($value == true)
             {
                 $realAttributeName      = 'completedDateTime';
@@ -66,14 +66,14 @@
                 $todayMinusThirtyDays   = static::calculateNewDateByDaysFromNow(-30);
                 $greaterThanValue       = DateTimeUtil::convertDateIntoTimeZoneAdjustedDateTimeBeginningOfDay($todayMinusThirtyDays);
                 $attributeAndRelations  = array(array($realAttributeName, null, 'greaterThanOrEqualTo', $greaterThanValue),
-                                                array($realAttributeName1, null, 'equals', 'resolveValueByRules'),);
+                                                array($realAttributeName1, null, 'equals', 'resolveValueByRules'));
             }
             else
             {
                 $attributeAndRelations = array();
             }
         }
-        
+
         /**
          * Given an integer representing a count of days from the present day, returns a DB formatted date stamp based
          * on that calculation. This is a wrapper method for @see DateTimeCalculatorUtil::calculateNewByDaysFromNow
@@ -85,7 +85,7 @@
             return   DateTimeCalculatorUtil::calculateNewByDaysFromNow($daysFromNow,
                      new DateTime(null, new DateTimeZone(Yii::app()->timeZoneHelper->getForCurrentUser())));
         }
-        
+
         /**
          * Override so that it shows up as a checkbox and not a dropdown since normally checkboxes are converted to
          * dropdowns in search views.

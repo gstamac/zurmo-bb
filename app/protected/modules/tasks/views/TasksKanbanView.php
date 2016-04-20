@@ -121,12 +121,12 @@
         {
             return null;
         }
-        
+
         protected function getCreateLinkRouteParameters()
         {
             return array();
         }
-        
+
         /**
          * Renders content for a list view. Utilizes a CActiveDataprovider
          * and a CGridView widget.
@@ -460,7 +460,7 @@
             $searchView = new TasksKanbanSearchView($this->searchFormModel, 'Task');
             return $searchView->render();
         }
-        
+
         public static function getDefaultPageSize()
         {
             return static::$defaultPageSize;

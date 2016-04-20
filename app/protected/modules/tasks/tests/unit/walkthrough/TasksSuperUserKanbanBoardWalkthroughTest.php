@@ -51,7 +51,7 @@
 
             //Setup test data owned by the super user.
             self::$task = TaskTestHelper::createTaskByNameForOwner('Main Task', $super);
-            
+
             //Setup default dashboard.
             Dashboard::getByLayoutIdAndUser(Dashboard::DEFAULT_USER_LAYOUT_ID, $super);
         }
@@ -104,7 +104,7 @@
             self::$task = Task::getById($id);
             $this->assertEquals(Task::STATUS_IN_PROGRESS, self::$task->status);
         }
-        
+
         /**
          * @depends testUpdateAttributeValueAction
          */
@@ -114,7 +114,7 @@
             StickySearchUtil::clearDataByKey('TasksKanbanSearchView');
             $value      = StickySearchUtil::getDataByKey('TasksKanbanSearchView');
             $this->assertNull($value);
-            
+
             $task1      = TaskTestHelper::createTaskByNameForOwner('Task 1', $super);
             $task2      = TaskTestHelper::createTaskByNameForOwner('Task 2', $super);
             // Asserting the kanban board contains both tasks before search
@@ -143,15 +143,15 @@
                 'modelClassName' => 'Task',
                 'viewClassName' => 'TasksKanbanSearchView',
             ));
-            $this->setPostArray(array('TasksSearchForm' => 
-                                        array('dynamicClauses' => array(array('attributeIndexOrDerivedType'=>'name',
-                                                                        'name'=>'Task 1',
-                                                                        'structurePosition'=>'1',
-                                                                        ),),
+            $this->setPostArray(array('TasksSearchForm' =>
+                                        array('dynamicClauses' => array(array('attributeIndexOrDerivedType' => 'name',
+                                                                        'name' => 'Task 1',
+                                                                        'structurePosition' => '1',
+                                                                        )),
                                             'anyMixedAttributesScope' => array('All'),
-                                            'dynamicStructure'=>'1',
+                                            'dynamicStructure' => '1',
                                         ),
-                                     'ajax'=>'search-form',));
+                                     'ajax' => 'search-form'));
 
             $content    = $this->runControllerWithNoExceptionsAndGetContent('zurmo/default/validateDynamicSearch', true);
             // Asserting the kanban board contains only one task after search is done
@@ -177,10 +177,10 @@
             $this->assertNotTag($matcher, $content);
             $data       = StickySearchUtil::getDataByKey('TasksKanbanSearchView');
             $compareData = array(
-                'dynamicClauses' => array(array('attributeIndexOrDerivedType'=>'name',
-                                                                        'name'=>'Task 1',
-                                                                        'structurePosition'=>'1',
-                                                                        ),),
+                'dynamicClauses' => array(array('attributeIndexOrDerivedType' => 'name',
+                                                                        'name' => 'Task 1',
+                                                                        'structurePosition' => '1',
+                                                                        )),
                 'dynamicStructure'                   => '1',
                 'anyMixedAttributesScope'            => null,
                 SearchForm::SELECTED_LIST_ATTRIBUTES => null,
