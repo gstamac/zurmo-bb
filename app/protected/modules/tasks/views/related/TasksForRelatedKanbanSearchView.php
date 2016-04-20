@@ -37,9 +37,9 @@
     class TasksForRelatedKanbanSearchView extends TasksSearchView
     {
         protected function renderConfigSaveAjax($formName)
-        {   
+        {
             $relatedModelClassName = get_class($this->model->getKanbanBoard()->getRelatedModel());
-            if($relatedModelClassName == 'Project')
+            if ($relatedModelClassName == 'Project')
             {
                 $gridId = 'project-tasks-kanban-view';
             }
@@ -89,9 +89,9 @@
                     $('#" . $this->getClearingSearchInputId() . "').val('');
                     ";
         }
-        
+
         protected function renderSavedSearchList()
-        {   
+        {
             $savedSearches = SavedSearch::getByOwnerAndViewClassName(Yii::app()->user->userModel, get_class($this));
             $idOrName      = static::getSavedSearchListDropDown();
             $htmlOptions   = array('id' => $idOrName, 'empty' => Zurmo::t('ZurmoModule', 'Load a saved search'));
@@ -124,7 +124,7 @@
             $this->renderSavedSearchDropDownOnChangeScript($idOrName, $this->model->loadSavedSearchUrl);
             return $content;
         }
-        
+
         /**
          * @return string
          */

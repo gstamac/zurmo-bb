@@ -136,7 +136,8 @@
                                 'url'  : '{$url}' + '&id=' + productId,
                                 'beforeSend' : {$ajaxOptions['beforeSend']},
                                 'update'     : '{$ajaxOptions['update']}',
-                                'success': function(html){
+                                'success': function(html)
+                                {
                                     jQuery('#{$modalId}').html(html);
                                 }
                             });

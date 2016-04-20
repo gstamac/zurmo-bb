@@ -39,7 +39,7 @@
     class TasksSearchForm extends OwnedSearchForm
     {
         public $uniqueIdentifier;
-        
+
         public $hideOlderCompletedItems;
 
         /**
@@ -80,13 +80,11 @@
                 'hideOlderCompletedItems' => 'resolveEntireMappingByRules',
             ));
         }
-        
+
         protected static function getSearchFormAttributeMappingRulesTypes()
         {
-            return array_merge(parent::getSearchFormAttributeMappingRulesTypes(), 
+            return array_merge(parent::getSearchFormAttributeMappingRulesTypes(),
                                array('hideOlderCompletedItems' => 'HideOlderCompletedItems'));
         }
-        
-        
     }
 ?>

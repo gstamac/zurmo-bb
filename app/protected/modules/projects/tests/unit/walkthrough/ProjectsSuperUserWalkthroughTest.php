@@ -154,7 +154,7 @@
                 //success
             }
         }
-        
+
         public function testSuperUserDetailsAction()
         {
             $super                                      = $this->logoutCurrentUserLoginNewUserAndGetByUsername('super');
@@ -194,15 +194,15 @@
                 'modelClassName' => 'Task',
                 'viewClassName' => 'TasksForRelatedKanbanSearchView',
             ));
-            $this->setPostArray(array('TasksForRelatedKanbanSearchForm' => 
-                                        array('dynamicClauses' => array(array('attributeIndexOrDerivedType'=>'name',
-                                                                        'name'=>'MyTask New',
-                                                                        'structurePosition'=>'1',
-                                                                        ),),
+            $this->setPostArray(array('TasksForRelatedKanbanSearchForm' =>
+                                        array('dynamicClauses' => array(array('attributeIndexOrDerivedType' => 'name',
+                                                                        'name' => 'MyTask New',
+                                                                        'structurePosition' => '1',
+                                                                        )),
                                             'anyMixedAttributesScope' => array('All'),
-                                            'dynamicStructure'=>'1',
+                                            'dynamicStructure' => '1',
                                         ),
-                                     'ajax'=>'search-form',));
+                                     'ajax' => 'search-form'));
 
             $content                = $this->runControllerWithNoExceptionsAndGetContent('zurmo/default/validateDynamicSearch', true);
             $this->setGetArray(array('id' => $projects[0]->id));
@@ -226,10 +226,10 @@
             $this->assertNotTag($matcher, $content);
             $data = StickySearchUtil::getDataByKey('TasksForRelatedKanbanSearchView');
             $compareData = array(
-                'dynamicClauses' => array(array('attributeIndexOrDerivedType'=>'name',
-                                                                        'name'=>'MyTask New',
-                                                                        'structurePosition'=>'1',
-                                                                        ),),
+                'dynamicClauses' => array(array('attributeIndexOrDerivedType' => 'name',
+                                                                        'name' => 'MyTask New',
+                                                                        'structurePosition' => '1',
+                                                                        )),
                 'dynamicStructure'                   => '1',
                 'anyMixedAttributesScope'            => null,
                 SearchForm::SELECTED_LIST_ATTRIBUTES => null,

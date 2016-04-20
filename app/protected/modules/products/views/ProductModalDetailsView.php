@@ -189,7 +189,6 @@
             return null;
         }
 
-
         public static function getDesignerRulesType()
         {
             return 'ProductModalDetailsView';
