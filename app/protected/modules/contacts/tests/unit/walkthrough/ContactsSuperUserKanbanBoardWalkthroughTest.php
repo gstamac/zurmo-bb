@@ -79,10 +79,10 @@
                 'content' => 'MyTask New'
             );
             $this->assertTag($matcher, $content);
-            
+
             $this->assertContains('<a id="hide-completed-search-link" href="#">Hide Completed</a>', $content);
         }
-        
+
         public function testStickySearchActions()
         {
             $super = $this->logoutCurrentUserLoginNewUserAndGetByUsername('super');
@@ -120,15 +120,15 @@
                 'modelClassName' => 'Task',
                 'viewClassName' => 'TasksForRelatedKanbanSearchView',
             ));
-            $this->setPostArray(array('TasksForRelatedKanbanSearchForm' => 
-                                        array('dynamicClauses' => array(array('attributeIndexOrDerivedType'=>'name',
-                                                                        'name'=>'MyTask New',
-                                                                        'structurePosition'=>'1',
-                                                                        ),),
+            $this->setPostArray(array('TasksForRelatedKanbanSearchForm' =>
+                                        array('dynamicClauses' => array(array('attributeIndexOrDerivedType' => 'name',
+                                                                        'name' => 'MyTask New',
+                                                                        'structurePosition' => '1',
+                                                                        )),
                                             'anyMixedAttributesScope' => array('All'),
-                                            'dynamicStructure'=>'1',
+                                            'dynamicStructure' => '1',
                                         ),
-                                     'ajax'=>'search-form',));
+                                     'ajax' => 'search-form'));
 
             $content                = $this->runControllerWithNoExceptionsAndGetContent('zurmo/default/validateDynamicSearch', true);
             // Asserting the kanban board contains only one task after search is done
@@ -155,10 +155,10 @@
             $this->assertNotTag($matcher, $content);
             $data = StickySearchUtil::getDataByKey('TasksForRelatedKanbanSearchView');
             $compareData = array(
-                'dynamicClauses' => array(array('attributeIndexOrDerivedType'=>'name',
-                                                                        'name'=>'MyTask New',
-                                                                        'structurePosition'=>'1',
-                                                                        ),),
+                'dynamicClauses' => array(array('attributeIndexOrDerivedType' => 'name',
+                                                                        'name' => 'MyTask New',
+                                                                        'structurePosition' => '1',
+                                                                        )),
                 'dynamicStructure'                   => '1',
                 'anyMixedAttributesScope'            => null,
                 SearchForm::SELECTED_LIST_ATTRIBUTES => null,

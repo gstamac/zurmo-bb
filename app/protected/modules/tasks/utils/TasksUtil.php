@@ -440,7 +440,7 @@
                                                                     $controller, $listView, $breadCrumbLinks, 'KanbanBoardBreadCrumbView'));
             return $view;
         }
-        
+
         /**
          * Resolve overall task kanban view
          * @param ZurmoModuleController $controller
@@ -486,7 +486,7 @@
                     'operatorType'         => 'equals',
                     'value'                => $value,
             );
-            
+
             $clausesCount = 0;
             if (isset($metadata['clauses']))
             {
@@ -507,7 +507,7 @@
                 $metadata['structure'] =  $metadata['structure'] . ' and (' . $count . ')';
             }
         }
-        
+
         /**
          * Register script for task detail link. This would be called from both kanban and open task portlet
          * @param string $sourceId

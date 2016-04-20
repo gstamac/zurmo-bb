@@ -88,7 +88,7 @@
                          'relatedModelId'                 => $this->relatedModel->id,
                          'relatedModelClassName'          => $this->relatedModelClassName);
         }
-        
+
         public function getRelatedModel()
         {
             return $this->relatedModel;

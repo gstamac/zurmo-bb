@@ -37,7 +37,7 @@
     class TasksKanbanSearchView extends TasksSearchView
     {
         protected function renderConfigSaveAjax($formName)
-        {   
+        {
             $gridId = 'overall-tasks-kanban-view';
             return "var inputId = '" . static::getSavedSearchListDropDown() . "';
                     if (data.id != undefined)
@@ -81,7 +81,7 @@
                     $('#" . $this->getClearingSearchInputId() . "').val('');
                     ";
         }
-        
+
         protected function renderSavedSearchList()
         {
             $savedSearches = SavedSearch::getByOwnerAndViewClassName(Yii::app()->user->userModel, get_class($this));
@@ -112,7 +112,7 @@
             $this->renderSavedSearchDropDownOnChangeScript($idOrName, $this->model->loadSavedSearchUrl);
             return $content;
         }
-        
+
         /**
          * @return string
          */
