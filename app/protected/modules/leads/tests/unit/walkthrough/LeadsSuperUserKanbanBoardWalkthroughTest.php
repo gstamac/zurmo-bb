@@ -48,6 +48,7 @@
 
             //Setup test data owned by the super user.
             LeadTestHelper::createLeadbyNameForOwner('superLead',  $super);
+            LeadTestHelper::createLeadbyNameForOwner('superLead1',  $super);
         }
 
         public function testKanbanViewForOpportunityDetails()
@@ -75,6 +76,90 @@
                 'content' => 'MyTask New'
             );
             $this->assertTag($matcher, $content);
+        }
+
+        public function testStickySearchActions()
+        {
+            $super = $this->logoutCurrentUserLoginNewUserAndGetByUsername('super');
+            StickySearchUtil::clearDataByKey('TasksForRelatedKanbanSearchView');
+            $value = StickySearchUtil::getDataByKey('TasksForRelatedKanbanSearchView');
+            $this->assertNull($value);
+            $superLeadId = self::getModelIdByModelNameAndName ('Contact', 'superLead1 superLead1son');
+            $lead        = Contact::getById($superLeadId);
+            $task = TaskTestHelper::createTaskWithOwnerAndRelatedItem('MyTask', $super, $lead, Task::STATUS_IN_PROGRESS);
+            $taskNew = TaskTestHelper::createTaskWithOwnerAndRelatedItem('MyTask New', $super, $lead, Task::STATUS_NEW);
+            // Asserting the kanban board contains both tasks before search
+            $this->resetPostArray();
+            $this->setGetArray(array(
+                'id' => $superLeadId,
+                'kanbanBoard' => '1',
+            ));
+            $content                = $this->runControllerWithNoExceptionsAndGetContent('leads/default/details');
+            $this->assertContains('<a id="hide-completed-search-link" href="#">Hide Completed</a>', $content);
+            $matcher = array(
+                'tag' => 'h4',
+                //Multiple ancestors
+                'ancestor' => array('tag' => 'li', 'id' => 'items_' . $taskNew->id, 'tag' => 'ul', 'id' => 'task-sortable-rows-1'),
+                'content' => 'MyTask New'
+            );
+            $this->assertTag($matcher, $content);
+            $matcher = array(
+                'tag' => 'h4',
+                //Multiple ancestors
+                'ancestor' => array('tag' => 'li', 'id' => 'items_' . $task->id, 'tag' => 'ul', 'id' => 'task-sortable-rows-3'),
+                'content' => 'MyTask'
+            );
+            $this->assertTag($matcher, $content);
+            $this->setGetArray(array(
+                'formModelClassName' => 'TasksForRelatedKanbanSearchForm',
+                'modelClassName' => 'Task',
+                'viewClassName' => 'TasksForRelatedKanbanSearchView',
+            ));
+            $this->setPostArray(array('TasksForRelatedKanbanSearchForm' =>
+                                        array('dynamicClauses' => array(array('attributeIndexOrDerivedType' => 'name',
+                                                                        'name' => 'MyTask New',
+                                                                        'structurePosition' => '1',
+                                                                        )),
+                                            'anyMixedAttributesScope' => array('All'),
+                                            'dynamicStructure' => '1',
+                                        ),
+                                     'ajax' => 'search-form'));
+
+            $content                = $this->runControllerWithNoExceptionsAndGetContent('zurmo/default/validateDynamicSearch', true);
+            // Asserting the kanban board contains only one task after search is done
+            $this->resetPostArray();
+            $this->setGetArray(array(
+                'id' => $superLeadId,
+                'kanbanBoard' => '1',
+            ));
+            $content                = $this->runControllerWithNoExceptionsAndGetContent('leads/default/details');
+            $this->assertContains('<a id="hide-completed-search-link" href="#">Hide Completed</a>', $content);
+            $matcher = array(
+                'tag' => 'h4',
+                //Multiple ancestors
+                'ancestor' => array('tag' => 'li', 'id' => 'items_' . $taskNew->id, 'tag' => 'ul', 'id' => 'task-sortable-rows-1'),
+                'content' => 'MyTask New'
+            );
+            $this->assertTag($matcher, $content);
+            $matcher = array(
+                'tag' => 'h4',
+                //Multiple ancestors
+                'ancestor' => array('tag' => 'li', 'id' => 'items_' . $task->id, 'tag' => 'ul', 'id' => 'task-sortable-rows-3'),
+                'content' => 'MyTask'
+            );
+            $this->assertNotTag($matcher, $content);
+            $data = StickySearchUtil::getDataByKey('TasksForRelatedKanbanSearchView');
+            $compareData = array(
+                'dynamicClauses' => array(array('attributeIndexOrDerivedType' => 'name',
+                                                                        'name' => 'MyTask New',
+                                                                        'structurePosition' => '1',
+                                                                        )),
+                'dynamicStructure'                   => '1',
+                'anyMixedAttributesScope'            => null,
+                SearchForm::SELECTED_LIST_ATTRIBUTES => null,
+                'savedSearchId'                      => null,
+            );
+            $this->assertEquals($compareData, $data);
         }
     }
 ?>

@@ -219,6 +219,10 @@
             {
                 return $pageSize;
             }
+            if ($searchModel instanceof TasksForRelatedKanbanSearchForm)
+            {
+                return $pageSize;
+            }
             if ($searchModel->getKanbanBoard() !== null && $searchModel->getKanbanBoard()->getIsActive())
             {
                 $pageSize = KanbanBoardExtendedGridView::resolvePageSizeForMaxCount();
