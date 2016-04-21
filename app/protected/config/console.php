@@ -36,6 +36,7 @@
 
     // This is the configuration for zurmoc console application.
     // Any writable CConsoleApplication properties can be configured here.
+    //
     $common_config = CMap::mergeArray(
         require('main.php'),
         array(
