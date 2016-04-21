@@ -2226,6 +2226,10 @@ body.sandbox-mode .AppContent {
   width: 100%;
   display: table;
 }
+#TasksForRelatedKanbanSearchView,
+#TasksKanbanSearchView {
+  float: none;
+}
 #MashableInboxActionBarForViews > div,
 #ActionBarSearchAndListView > div {
   position: relative;
@@ -3997,6 +4001,9 @@ div.wide.form label.hasCheckBox {
 }
 .search-form-tools > a {
   margin-right: 25px;
+}
+.search-form-tools #hide-completed-search-link {
+  margin-right: 0px;
 }
 #more-search-linkmodal,
 #more-search-link {

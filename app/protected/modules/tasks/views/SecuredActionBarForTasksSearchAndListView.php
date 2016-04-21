@@ -64,6 +64,11 @@
                                   'iconClass'   => 'icon-delete'),
                         ),
                     ),
+                    'secondToolbar' => array(
+                        'elements' => array(
+                            array('type'  => 'ListViewTypesToggleLink'),
+                        ),
+                    ),
                 ),
             );
             return $metadata;

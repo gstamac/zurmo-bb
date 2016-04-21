@@ -423,7 +423,7 @@
                             $("#' . $this->getGridId() . '").hide();
                             $("#ZeroTasksForRelatedModelYetView").show();
                         }
-                        $(this).makeLargeLoadingSpinner(false, ".ui-overlay-block");
+                        $(this).makeSmallLoadingSpinner(true, "#' . $this->getGridId() . '");
                         $(".ui-overlay-block").fadeOut(50);
                         ' . TaskKanbanBoardExtendedGridView::registerKanbanColumnSortableScript() . '
                     }';
@@ -458,7 +458,7 @@
             // Begin Not Coding Standard
             return 'js:function(id, options){
                             $(".ui-overlay-block").fadeIn(50);
-                            $(this).makeLargeLoadingSpinner(true, ".ui-overlay-block");
+                            $(this).makeSmallLoadingSpinner(true, "#' . $this->getGridId() . '");
                     }';
             // End Not Coding Standard
         }
@@ -479,6 +479,11 @@
         protected function renderSearchView()
         {
             return Yii::app()->custom->renderKanbanSearchView($this->searchFormModel, $this->params);
+        }
+
+        public static function getDefaultPageSize()
+        {
+            return static::$defaultPageSize;
         }
     }
 ?>
