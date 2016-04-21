@@ -111,7 +111,7 @@
             $this->assertTrue(isset($validationErrors['secondaryEmail']));
             $this->assertTrue(isset($validationErrors['secondaryEmail']['emailAddress']));
             $this->assertEquals('Email address already exists in system.', $validationErrors['secondaryEmail']['emailAddress'][0]);
-            
+
             // Try to save user without email address
             $user3 = new User();
             $user3->username = 'userc';

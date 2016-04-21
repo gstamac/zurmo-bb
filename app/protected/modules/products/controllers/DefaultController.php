@@ -58,7 +58,14 @@
                         ZurmoBaseController::REQUIRED_ATTRIBUTES_FILTER_PATH . ' + create, createFromRelation, edit',
                         'moduleClassName' => get_class($this->getModule()),
                         'viewClassName'   => $viewClassName,
-                   ),
+                    ),
+                    array(
+                        ZurmoBaseController::REQUIRED_ATTRIBUTES_FILTER_PATH . ' + modalCreateFromRelation, modalCreate,
+                                            ModalEdit',
+                        'moduleClassName' => get_class($this->getModule()),
+                        'viewClassName'   => 'ProductModalEditView',
+                        'isModal'         => true,
+                    ),
                     array(
                         static::ZERO_MODELS_CHECK_FILTER_PATH . ' + list, index',
                         'controller'                 => $this,
@@ -458,6 +465,116 @@
             );
             echo ModalSearchListControllerUtil::
                 setAjaxModeAndRenderModalSearchList($this, $modalListLinkProvider);
+        }
+
+        /**
+         * Create product from related view
+         * @param null $relationAttributeName
+         * @param null $relationModelId
+         * @param null $relationModuleId
+         */
+        public function actionModalCreateFromRelation($relationAttributeName = null, $relationModelId = null,
+                                                      $relationModuleId = null)
+        {
+            $product  = new Product();
+            $product  = $this->resolveNewModelByRelationInformation($product, $relationAttributeName,
+                    (int)$relationModelId, $relationModuleId);
+            $this->processProductEdit($product);
+        }
+
+        /**
+         * Saves product in the modal view
+         * @param string $relationAttributeName
+         * @param string $relationModelId
+         * @param string $relationModuleId
+         */
+        public function actionModalSaveFromRelation($relationAttributeName, $relationModelId, $relationModuleId, $id = null)
+        {
+            if ($id == null)
+            {
+                $product  = new Product();
+                $product  = $this->resolveNewModelByRelationInformation($product, $relationAttributeName,
+                        (int)$relationModelId,
+                        $relationModuleId);
+                $isNewModel = true;
+            }
+            else
+            {
+                $product   = Product::getById(intval($id));
+                $isNewModel = false;
+            }
+            $this->attemptToSaveModelFromPost($product, null, false);
+        }
+
+        /**
+         * Saves product in the modal view
+         */
+        public function actionModalSave($id = null)
+        {
+            if ($id == null)
+            {
+                $product = new Product();
+            }
+            else
+            {
+                $product = Product::getById(intval($id));
+            }
+            $this->attemptToSaveModelFromPost($product, null, false);
+            $this->processModalDetails($product);
+        }
+
+        /**
+         * Edit product from related view
+         * @param string $id
+         */
+        public function actionModalEdit($id)
+        {
+            $product = Product::getById(intval($id));
+            ControllerSecurityUtil::resolveAccessCanCurrentUserWriteModel($product);
+            $this->processProductEdit($product);
+        }
+
+        /**
+         * Process Product Edit
+         * @param Product $product
+         */
+        protected function processProductEdit(Product $product)
+        {
+            if (RightsUtil::canUserAccessModule('ProductsModule', Yii::app()->user->userModel))
+            {
+                if (isset($_POST['ajax']) && $_POST['ajax'] == 'product-modal-edit-form')
+                {
+                    $controllerUtil   = static::getZurmoControllerUtil();
+                    $controllerUtil->validateAjaxFromPost($product, 'Product');
+                    Yii::app()->getClientScript()->setToAjaxMode();
+                    Yii::app()->end(0, false);
+                }
+                else
+                {
+                    echo ModalEditAndDetailsControllerUtil::setAjaxModeAndRenderModalEditView($this,
+                        'ProductModalEditView',
+                        $product);
+                }
+            }
+        }
+
+        /**
+         * Loads modal view from related view
+         * @param string $id
+         */
+        public function actionModalDetails($id)
+        {
+            $product = Product::getById(intval($id));
+            ControllerSecurityUtil::resolveAccessCanCurrentUserReadModel($product);
+            AuditEvent::logAuditEvent('ZurmoModule', ZurmoModule::AUDIT_EVENT_ITEM_VIEWED, array(strval($product), 'ProductsModule'), $product);
+            $this->processModalDetails($product);
+        }
+
+        protected function processModalDetails(Product $product)
+        {
+            echo ModalEditAndDetailsControllerUtil::setAjaxModeAndRenderModalDetailsView($this, 'ProductModalDetailsView',
+                $product,
+                'Details');
         }
     }
 ?>

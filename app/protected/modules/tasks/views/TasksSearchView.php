@@ -71,5 +71,92 @@
         {
             return 'TasksSearchForm';
         }
+        
+        protected function renderFormBottomPanelExtraLinks()
+        {
+            $content = parent::renderFormBottomPanelExtraLinks();
+            $content .= $this->renderHideOlderCompletedItemsInputContent();
+            return $content;
+        }
+        
+        protected function renderHideOlderCompletedItemsInputContent()
+        {
+            $modelClassName = $this->listModelClassName;
+            $model = new $modelClassName;
+            if ($this->showAdvancedSearch && $model instanceof Task)
+            {
+                $content = ZurmoHtml::link(Zurmo::t('Core', 'Hide Completed'), '#', 
+                                                    array('id' => 'hide-completed-search-link' . $this->gridIdSuffix));
+                $content .= $this->renderTooltipContentForHideOlderCompletedItems();
+                return $content;
+            }
+        }
+
+        protected function renderTooltipContentForHideOlderCompletedItems()
+        {
+            $title       = 'Hide items which have been completed for more than 30 days.';
+            $content     = ZurmoHtml::tag('span',
+                                          array('id'    => 'HideOlderCompletedItems',
+                                                'class' => 'tooltip',
+                                                'title' => $title,
+                                               ),
+                                          '?');
+            $qtip        = new ZurmoTip();
+            $qtip->addQTip("#HideOlderCompletedItems");
+            return $content;
+        }
+        
+        protected function agetExtraRenderFormBottomPanelScriptPart()
+        {
+            $script = parent::agetExtraRenderFormBottomPanelScriptPart();
+            $modelClassName = $this->listModelClassName;
+            $model = new $modelClassName;
+            if ($this->showAdvancedSearch && $model instanceof Task)
+            {
+                // Begin Not Coding Standard
+                $script .= "
+                    $('#hide-completed-search-link" . $this->gridIdSuffix . "').unbind('click');
+                    $('#hide-completed-search-link" . $this->gridIdSuffix . "').bind('click',  function(event){
+                        $(this).closest('form').find('.search-view-1').show();
+                        if (!hasHideCompletedItemsFieldAlreadySelected())
+                        {
+                            var rowCounter = $('#rowCounter-search-form').val();
+                            $('#addExtraAdvancedSearchRowButton-" . $this->getSearchFormId() . "').click();
+                            var checkExist = setInterval(function() {
+                                if ($('#" . get_class($this->model) . "_dynamicClauses_' + rowCounter + '_attributeIndexOrDerivedType').length) {
+                                    $('#" . get_class($this->model) . "_dynamicClauses_' + rowCounter + '_attributeIndexOrDerivedType').val('hideOlderCompletedItems').change();
+                                    clearInterval(checkExist);
+                                    var checkExist2 = setInterval(function() {
+                                        if ($('#" . get_class($this->model) . "_dynamicClauses_' + rowCounter + '_hideOlderCompletedItems').length) {
+                                            $('#" . get_class($this->model) . "_dynamicClauses_' + rowCounter + '_hideOlderCompletedItems').click();
+                                            $('#" . get_class($this->model) . "_dynamicClauses_' + rowCounter + '_hideOlderCompletedItems').parent().addClass('c_on');
+
+                                            clearInterval(checkExist2);
+                                        }
+                                    }, 20)
+                                }
+                            }, 20);
+                        }
+                        return false;
+                    }
+                    );
+                    function hasHideCompletedItemsFieldAlreadySelected()
+                    {
+                        var hasHideCompletedItemsField = false;
+                        $('#hide-completed-search-link').closest('form').find('.attribute-dropdown').each(function() {
+                          console.log($(this).val());
+                            if ($(this).val() == 'hideOlderCompletedItems')
+                            {
+                              hasHideCompletedItemsField = true
+                              return false; // To break each loop
+                            }
+                        })
+                        return hasHideCompletedItemsField;
+                    }
+                ";
+                // End Not Coding Standard
+            }
+            return $script;
+        }
     }
 ?>

@@ -40,6 +40,8 @@
     {
         public $uniqueIdentifier;
 
+        public $hideOlderCompletedItems;
+
         /**
          * @return string
          */
@@ -57,6 +59,7 @@
         {
             return array_merge(parent::rules(), array(
                 array('uniqueIdentifier', 'safe'),
+                array('hideOlderCompletedItems', 'boolean'),
             ));
         }
 
@@ -64,6 +67,7 @@
         {
             return array_merge(parent::attributeLabels(), array(
                 'uniqueIdentifier' => Zurmo::t('Core', 'Id'),
+                'hideOlderCompletedItems' => Zurmo::t('ZurmoModule', 'Hide Completed'),
             ));
         }
 
@@ -73,7 +77,14 @@
                 'uniqueIdentifier' => array(
                     array('id')
                 ),
+                'hideOlderCompletedItems' => 'resolveEntireMappingByRules',
             ));
+        }
+
+        protected static function getSearchFormAttributeMappingRulesTypes()
+        {
+            return array_merge(parent::getSearchFormAttributeMappingRulesTypes(),
+                               array('hideOlderCompletedItems' => 'HideOlderCompletedItems'));
         }
     }
 ?>

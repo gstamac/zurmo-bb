@@ -53,10 +53,10 @@
         public function onCreated()
         {
             parent::onCreated();
-            $this->unrestrictedSet('stageModifiedDateTime',  
+            $this->unrestrictedSet('stageModifiedDateTime',
                                     DateTimeUtil::convertTimestampToDbFormatDateTime(time()));
         }
-        
+
         public function onModified()
         {
             parent::onModified();
@@ -64,11 +64,11 @@
                     $this->stage->originalAttributeValues['value'] != "" &&
                     $this->getScenario() != 'importModel')
             {
-                $this->unrestrictedSet('stageModifiedDateTime',  
+                $this->unrestrictedSet('stageModifiedDateTime',
                                     DateTimeUtil::convertTimestampToDbFormatDateTime(time()));
             }
         }
-        
+
         protected function beforeSave()
         {
             if (parent::beforeSave())
@@ -125,7 +125,7 @@
                 'source'      => Zurmo::t('ContactsModule',      'Source',   array(), null, $language),
                 'stage'       => Zurmo::t('ZurmoModule',         'Stage',  array(), null, $language),
                 'tasks'       => Zurmo::t('TasksModule',         'TasksModulePluralLabel', $params, null, $language),
-                'stageModifiedDateTime' 
+                'stageModifiedDateTime'
                               => Zurmo::t('OpportunitiesModule', 'Stage Modified Date Time',  array(), null, $language)));
         }
 
@@ -237,7 +237,7 @@
                 $this->probability = OpportunitiesModule::getProbabilityByStageValue($this->stage->value);
             }
         }
-        
+
         /**
          * Override to handle the set read-only stageModifiedDateTime attribute on the import scenario.
          * (non-PHPdoc)

@@ -115,7 +115,7 @@
                 Yii::app()->end(0, false);
             }
         }
-        
+
         /**
          * @see ActionBarForUserEditAndDetailsView, most pill box links are only available to a user viewing the profile
          * under certain conditions.
@@ -145,11 +145,11 @@
                 return false;
             }
         }
-        
+
         public static function doesCurrentUserHaveAccessAndManageRights()
         {
-            if( RightsUtil::canUserAccessModule('UsersModule', Yii::app()->user->userModel) &&
-                RightsUtil::doesUserHaveAllowByRightName('UsersModule', 
+            if (RightsUtil::canUserAccessModule('UsersModule', Yii::app()->user->userModel) &&
+                RightsUtil::doesUserHaveAllowByRightName('UsersModule',
                     UsersModule::RIGHT_MANAGE_USERS, Yii::app()->user->userModel) )
             {
                 return true;
