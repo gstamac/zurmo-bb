@@ -138,11 +138,13 @@
                                                                           'modal': true,
                                                                           'height': 'auto',
                                                                           'position': { my: \"center\", at: \"center\", of: window },
-                                                                          'width':600}); return true;},
+                                                                          'width':600,
+                                                                          'closeText':''}); return true;},
                     success  : function(data)
                     {
                         jQuery('#modalContainer').html(data);
                         jQuery('.ui-dialog .ui-dialog-content').css('height', 'auto');
+                        jQuery('.ui-dialog-titlebar-close .ui-button-text').remove();
                         //Since the home page for some reason cannot render this properly in beforeShow, we are using a trick.
                         setTimeout('addSpansToDatesOnCalendar(\"' + inst.id + '\")', 100);
                     },
