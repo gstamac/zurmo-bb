@@ -130,6 +130,7 @@
                     'position' : {$position},
                     'dialogClass' : {$class},
                     'height' : {$heightContent},
+                    'closeText':'',
                     'open': function( event, ui ) {
                         jQuery('#{$containerId}').parent().addClass('openingModal');
                         // prevent dialog scrolls to top under Chrome, IE
@@ -138,6 +139,7 @@
                         });
                         $('.ui-dialog .ui-dialog-content').css('height', 'auto');
                         $('.ui-dialog .ui-dialog-content').css('display', 'block');
+                        $('.ui-dialog-titlebar-close .ui-button-text').remove();
                         $('#{$containerId}').dialog('moveToTop');
                         var zIndex = jQuery('#{$containerId}').parent().css('zIndex');
                         zIndex = zIndex - 1;
