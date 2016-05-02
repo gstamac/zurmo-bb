@@ -218,7 +218,7 @@
             }
             return false;
         }
-        
+
         public static function getStageToRottingMappingData()
         {
             $metadata = static::getMetadata();

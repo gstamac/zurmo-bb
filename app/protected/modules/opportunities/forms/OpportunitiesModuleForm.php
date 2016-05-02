@@ -83,7 +83,7 @@
             }
             return $valid;
         }
-        
+
         public function validateStageToRottingMapping()
         {
             $validator = new RedBeanModelTypeValidator();

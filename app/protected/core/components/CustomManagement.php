@@ -158,7 +158,9 @@
          */
         public function renderKanbanSearchView($searchFormModel, $params)
         {
-            return null;
+            assert('$searchFormModel instanceof TasksSearchForm');
+            $searchView = new TasksForRelatedKanbanSearchView($searchFormModel, 'Task');
+            return $searchView->render();
         }
 
         /**

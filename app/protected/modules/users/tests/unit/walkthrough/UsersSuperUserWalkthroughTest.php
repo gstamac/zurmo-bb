@@ -443,7 +443,7 @@
             $this->assertEquals('test@zurmo.com', $user->primaryEmail->emailAddress);
             $this->assertEquals('test1@zurmo.com', $user->secondaryEmail->emailAddress);
         }
-        
+
         /**
          * @depends testSuperUserCreateAction
          */
@@ -474,7 +474,7 @@
                                       'locale'             => array('value' => ''),
                                       'timeZone'           => array('value' => 'America/Chicago'),
                                       'currency'           => array('id' => '1'),
-                                      'userStatus'         => 'Active',  
+                                      'userStatus'         => 'Active',
                                       'primaryEmail'       => array('emailAddress' => 'test@zurmo.com',
                                                                     'optOut' => '0',
                                                                     'isInvalid' => '0'),
@@ -487,7 +487,7 @@
             $this->assertEquals('Body', $user->lastName);
             $this->assertEquals('test@zurmo.com', $user->primaryEmail->emailAddress);
             $this->assertEquals('test2@zurmo.com', $user->secondaryEmail->emailAddress);
-            
+
             $this->setGetArray(array('id' => $user->id));
             $this->setPostArray(array('User' =>
                                 array(
@@ -495,7 +495,7 @@
                                       'firstName'          => 'Some',
                                       'lastName'           => 'Body',
                                       'username'           => 'somenewuser',
-                                      'userStatus'         => 'Active',  
+                                      'userStatus'         => 'Active',
                                       'primaryEmail'       => array('emailAddress' => 'test@zurmo.com',
                                                                     'optOut' => '0',
                                                                     'isInvalid' => '0'),
@@ -504,7 +504,7 @@
                                                                     'isInvalid' => '0') )));
             $content = $this->runControllerWithNoExceptionsAndGetContent('users/default/edit');
             $this->assertContains('Secondary email address cannot be the same as the primary email address.', $content);
-            
+
             $this->setPostArray(array('UserPasswordForm' =>
                                 array('firstName'          => 'Some1',
                                       'lastName'           => 'Body1',
@@ -526,7 +526,7 @@
             $this->assertEquals('Body1', $user->lastName);
             $this->assertEquals('test22@zurmo.com', $user->primaryEmail->emailAddress);
             $this->assertEquals('test23@zurmo.com', $user->secondaryEmail->emailAddress);
-            
+
             $this->setGetArray(array('id' => $user->id));
             $this->setPostArray(array('User' =>
                                 array(
@@ -534,7 +534,7 @@
                                       'firstName'          => 'Some',
                                       'lastName'           => 'Body',
                                       'username'           => 'somenewuser',
-                                      'userStatus'         => 'Active',  
+                                      'userStatus'         => 'Active',
                                       'primaryEmail'       => array('emailAddress' => 'test@zurmo.com',
                                                                     'optOut' => '0',
                                                                     'isInvalid' => '0'),
