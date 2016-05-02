@@ -3217,6 +3217,7 @@ input[type="button"]:hover:after {
   margin: 0 !important;
   z-index: 1002;
   border: 1px solid #CCCCCC;
+  outline: 0px none;
   background: #fff;
   -webkit-box-shadow: 0 0 15px 0 rgba(51,51,51,0.25);
   -moz-box-shadow: 0 0 15px 0 rgba(51,51,51,0.25);
@@ -3296,11 +3297,23 @@ input[type="button"]:hover:after {
   -moz-opacity: 1;
   opacity: 1;
   display: block;
+  border: none;
+  background: none;
+  outline: 0px none;
   z-index: 11000;
 }
 .ui-dialog .ui-dialog-titlebar-close:hover {
   border: none;
   background: none;
+  cursor: pointer;
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+}
+.ui-dialog .ui-dialog-titlebar-close::-moz-focus-inner {
+  outline: 0px none;
+  border: none;
 }
 .ui-dialog .ui-dialog-titlebar-close .ui-icon-closethick {
   background: transparent url("../images/widget-close-btn.png") left top no-repeat;
@@ -3319,19 +3332,6 @@ input[type="button"]:hover:after {
   -moz-transform: translate(0px,0);
   -webkit-transform: translate3d(0px,0,0);
   transform: translate(0px,0);
-}
-.ui-dialog .ui-dialog-titlebar-close .ui-icon-closethick:hover {
-  -webkit-transform: scale(1.2);
-  -moz-transform: scale(1.2);
-  -ms-transform: scale(1.2);
-  transform: scale(1.2);
-  background: transparent url("../images/widget-close-btn.png") left top no-repeat;
-}
-.ui-dialog .ui-dialog-titlebar-close .ui-icon-closethick:active {
-  -webkit-transform: scale(.9);
-  -moz-transform: scale(.9);
-  -ms-transform: scale(.9);
-  transform: scale(.9);
 }
 .big-spinner {
   margin: 15px 50%;
