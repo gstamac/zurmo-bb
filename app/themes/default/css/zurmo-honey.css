@@ -3337,6 +3337,9 @@ input[type="button"]:hover:after {
   -webkit-transform: translate3d(0px,0,0);
   transform: translate(0px,0);
 }
+.ui-dialog .ui-dialog-content {
+  height: auto !important;
+}
 .big-spinner {
   margin: 15px 50%;
   display: block;
