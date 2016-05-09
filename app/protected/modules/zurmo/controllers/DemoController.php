@@ -158,5 +158,122 @@
                 throw new NotSupportedException();
             }
         }
+        
+        /**
+         * Special method to load account for functional test.
+         */
+        public function actionLoadAccountSampler()
+        {
+            if (!Group::isUserASuperAdministrator(Yii::app()->user->userModel))
+            {
+                throw new NotSupportedException();
+            }
+            
+            $account         = new Account();
+            $account->name   = "Test Account For Functional";
+            $account->owner  = Yii::app()->user->userModel;
+            $saved           = $account->save();
+            assert('$saved');
+            if (!$saved)
+            {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /**
+         * Special method to load lead for functional test.
+         */
+        public function actionLoadLeadSampler()
+        {
+            if (!Group::isUserASuperAdministrator(Yii::app()->user->userModel))
+            {
+                throw new NotSupportedException();
+            }
+            
+            $contact             = new Contact();
+            $contact->firstName  = "Test Lead";
+            $contact->lastName   = "For Functional";
+            $contact->owner      = Yii::app()->user->userModel;
+            $contact->state      = LeadsUtil::getStartingState();
+            $saved           = $contact->save();
+            assert('$saved');
+            if (!$saved)
+            {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /**
+         * Special method to load contact for functional test.
+         */
+        public function actionLoadContactSampler()
+        {
+            if (!Group::isUserASuperAdministrator(Yii::app()->user->userModel))
+            {
+                throw new NotSupportedException();
+            }
+            
+            $contact             = new Contact();
+            $contact->firstName  = "Test Contact";
+            $contact->lastName   = "For Functional";
+            $contact->owner      = Yii::app()->user->userModel;
+            $contact->state      = ContactsUtil::getStartingState();
+            $saved           = $contact->save();
+            assert('$saved');
+            if (!$saved)
+            {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /**
+         * Special method to load opportunity for functional test.
+         */
+        public function actionLoadOpportunitySampler()
+        {
+            if (!Group::isUserASuperAdministrator(Yii::app()->user->userModel))
+            {
+                throw new NotSupportedException();
+            }
+            
+            $currencies                 = Currency::getAll();
+            $currencyValue              = new CurrencyValue();
+            $currencyValue->value       = 500.54;
+            $currencyValue->currency    = $currencies[0];
+            $opportunity                = new Opportunity();
+            $opportunity->owner         = Yii::app()->user->userModel;
+            $opportunity->name          = "Test Opportunity For Functional";
+            $opportunity->amount        = $currencyValue;
+            $opportunity->closeDate     = '2011-01-01'; //eventually fix to make correct format
+            $opportunity->stage->value  = 'Negotiating';
+            $saved           = $opportunity->save();
+            assert('$saved');
+            if (!$saved)
+            {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /**
+         * Special method to load project for functional test.
+         */
+        public function actionLoadProjectSampler()
+        {
+            if (!Group::isUserASuperAdministrator(Yii::app()->user->userModel))
+            {
+                throw new NotSupportedException();
+            }
+            
+            $project         = new Project();
+            $project->name   = "Test Project For Functional";
+            $project->status = Project::STATUS_ACTIVE;
+            $project->owner  = Yii::app()->user->userModel;
+            $saved           = $project->save();
+            assert('$saved');
+            if (!$saved)
+            {
+                throw new NotSupportedException();
+            }
+        }
     }
 ?>
