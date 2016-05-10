@@ -41,7 +41,7 @@
     {
         public static function renderBeforeFormLayoutForDetailsContent($model)
         {
-            if ($model->stageModifiedDateTime == null)
+            if ($model->stageModifiedDateTime == '0000-00-00 00:00:00')
             {
                 $timeInStageDisplayContent = Zurmo::t('OpportunitiesModule', 'Unknown');
             }
