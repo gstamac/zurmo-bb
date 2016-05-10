@@ -72,11 +72,16 @@
 					<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
 					<td>30000</td>
 				</tr>
-				<!--edit project-->
+				<!--delete project-->
 				<tr>
 					<td>waitForText</td>
 					<td>//html/body/section/div[1]/div[2]/h1/span/span</td>
 					<td>Test Project ${randomSuffix}</td>
+				</tr>
+				<tr>
+					<td>setSpeed</td>
+					<td>3000</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>clickAndWait</td>
@@ -97,6 +102,11 @@
 					<td>waitForCondition</td>
 					<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
 					<td>30000</td>
+				</tr>
+				<tr>
+					<td>setSpeed</td>
+					<td>0</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>waitForText</td>
