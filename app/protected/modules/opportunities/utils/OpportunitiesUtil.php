@@ -49,7 +49,7 @@
         public static function renderTimeInStageForListView($model)
         {
             $stageRottingValueInDays    = OpportunitiesModule::getRottingByStageValue($model->stage->value);
-            if ($model->stageModifiedDateTime == null)
+            if ($model->stageModifiedDateTime == '0000-00-00 00:00:00')
             {
                 $timeInStageInDays          = null;
                 $timeInStageDisplayContent  = Zurmo::t('OpportunitiesModule', 'Unknown');
@@ -87,7 +87,7 @@
         public static function renderTimeInStageForRelatedListView($model)
         {
             $stageRottingValueInDays    = OpportunitiesModule::getRottingByStageValue($model->stage->value);
-            if ($model->stageModifiedDateTime == null)
+            if ($model->stageModifiedDateTime == '0000-00-00 00:00:00')
             {
                 $timeInStageInDays          = null;
                 $timeInStageDisplayContent  = Zurmo::t('OpportunitiesModule', 'Unknown');
@@ -125,7 +125,7 @@
         public static function renderTimeInStageForKanbanView($model)
         {
             $stageRottingValueInDays    = OpportunitiesModule::getRottingByStageValue($model->stage->value);
-            if ($model->stageModifiedDateTime == null)
+            if ($model->stageModifiedDateTime == '0000-00-00 00:00:00')
             {
                 $timeInStageInDays          = null;
                 $timeInStageDisplayContent  = Zurmo::t('OpportunitiesModule', 'Unknown');
