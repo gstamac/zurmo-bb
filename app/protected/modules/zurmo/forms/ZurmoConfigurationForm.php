@@ -54,6 +54,7 @@
         public $reCaptchaPrivateKey;
         public $reCaptchaPublicKey;
         public $kanbanBoardPageSize;
+        public $taskKanbanBoardPageSize;
 
         public function rules()
         {
@@ -87,6 +88,9 @@
                 array('kanbanBoardPageSize',                    'required'),
                 array('kanbanBoardPageSize',                    'type',      'type' => 'integer'),
                 array('kanbanBoardPageSize',                    'numerical', 'min' => 1, 'max' => ZurmoKanbanConfigurationUtil::getBatchSize()),
+                array('taskKanbanBoardPageSize',                'required'),
+                array('taskKanbanBoardPageSize',                'type',      'type' => 'integer'),
+                array('taskKanbanBoardPageSize',                'numerical', 'min' => 1, 'max' => ZurmoTaskKanbanConfigurationUtil::getBatchSize()),
             );
         }
 
@@ -108,6 +112,7 @@
                 'reCaptchaPrivateKey'                    => Zurmo::t('ZurmoModule', 'ReCaptcha Private Key'),
                 'reCaptchaPublicKey'                     => Zurmo::t('ZurmoModule', 'ReCaptcha Public Key'),
                 'kanbanBoardPageSize'                    => Zurmo::t('ZurmoModule', 'Opportunity Kanban items'),
+                'taskKanbanBoardPageSize'                => Zurmo::t('ZurmoModule', 'Task Kanban items'),
             );
         }
     }

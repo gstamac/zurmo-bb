@@ -416,10 +416,10 @@
         protected function resolveConfigForDataProvider()
         {
             return array(
-                            'pagination' => array(
-                                'pageSize' => static::$defaultPageSize,
-                        )
-                    );
+                    'pagination' => array(
+                        'pageSize' => (int) Yii::app()->pagination->getGlobalValueByType('taskKanbanBoardPageSize'),
+                )
+            );
         }
 
         protected function renderUIOverLayBlock()
@@ -463,7 +463,7 @@
 
         public static function getDefaultPageSize()
         {
-            return static::$defaultPageSize;
+            return (int) Yii::app()->pagination->getGlobalValueByType('taskKanbanBoardPageSize');
         }
     }
 ?>
