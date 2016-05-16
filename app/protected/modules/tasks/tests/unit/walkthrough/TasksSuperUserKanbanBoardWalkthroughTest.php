@@ -111,8 +111,8 @@
         public function testStickySearchActions()
         {
             $super      = $this->logoutCurrentUserLoginNewUserAndGetByUsername('super');
-            StickySearchUtil::clearDataByKey('TasksKanbanSearchView');
-            $value      = StickySearchUtil::getDataByKey('TasksKanbanSearchView');
+            StickySearchUtil::clearDataByKey('TasksSearchView');
+            $value      = StickySearchUtil::getDataByKey('TasksSearchView');
             $this->assertNull($value);
 
             $task1      = TaskTestHelper::createTaskByNameForOwner('Task 1', $super);
@@ -141,7 +141,7 @@
             $this->setGetArray(array(
                 'formModelClassName' => 'TasksSearchForm',
                 'modelClassName' => 'Task',
-                'viewClassName' => 'TasksKanbanSearchView',
+                'viewClassName' => 'TasksSearchView',
             ));
             $this->setPostArray(array('TasksSearchForm' =>
                                         array('dynamicClauses' => array(array('attributeIndexOrDerivedType' => 'name',
@@ -175,7 +175,7 @@
                 'content' => 'Task 2'
             );
             $this->assertNotTag($matcher, $content);
-            $data       = StickySearchUtil::getDataByKey('TasksKanbanSearchView');
+            $data       = StickySearchUtil::getDataByKey('TasksSearchView');
             $compareData = array(
                 'dynamicClauses' => array(array('attributeIndexOrDerivedType' => 'name',
                                                                         'name' => 'Task 1',
