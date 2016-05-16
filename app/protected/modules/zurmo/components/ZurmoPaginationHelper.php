@@ -103,9 +103,14 @@
         protected $_massSubscribeProgressPageSize;
 
         /**
-         * The kanban board page size
+         * The opportunity kanban board page size
          */
         protected $_kanbanBoardPageSize;
+        
+        /**
+         * The task kanban board page size
+         */
+        protected $_taskKanbanBoardPageSize;
 
         /**
          * This is set from the value in the application common config file. It is used as the final fall back
@@ -220,6 +225,15 @@
         public function setKanbanBoardPageSize($value)
         {
             $this->_kanbanBoardPageSize = $value;
+        }
+        
+        /**
+         * This is set from the value in the application common config file. It is used as the final fall back
+         * if no other configuration settings are found.
+         */
+        public function setTaskKanbanBoardPageSize($value)
+        {
+            $this->_taskKanbanBoardPageSize = $value;
         }
 
         /**
@@ -356,7 +370,7 @@
             return array('listPageSize', 'subListPageSize', 'modalListPageSize', 'massEditProgressPageSize',
                          'autoCompleteListPageSize', 'importPageSize', 'dashboardListPageSize', 'apiListPageSize',
                          'massDeleteProgressPageSize', 'reportResultsListPageSize', 'reportResultsSubListPageSize',
-                         'massSubscribeProgressPageSize', 'kanbanBoardPageSize');
+                         'massSubscribeProgressPageSize', 'kanbanBoardPageSize', 'taskKanbanBoardPageSize');
         }
     }
 ?>
