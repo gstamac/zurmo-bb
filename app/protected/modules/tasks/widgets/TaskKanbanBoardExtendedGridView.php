@@ -146,7 +146,7 @@
          */
         protected function registerScripts()
         {
-
+            
         }
 
         /**
@@ -465,7 +465,16 @@
          */
         protected function isMaxCountCheckRequired()
         {
-            return false;
+            return true;
+        }
+        
+        /**
+         * @return int
+         */
+        public static function getMaxCount()
+        {
+            $maxCount = Yii::app()->pagination->getGlobalValueByType('taskKanbanBoardPageSize');
+            return (int) $maxCount;
         }
     }
 ?>
