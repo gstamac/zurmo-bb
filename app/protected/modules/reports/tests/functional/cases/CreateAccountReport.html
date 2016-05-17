@@ -125,11 +125,6 @@
     <td>label=Last 7 Days</td>
 </tr>
 <tr>
-    <td>waitForCondition</td>
-    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-    <td>30000</td>
-</tr>
-<tr>
     <td>verifySelectedLabel</td>
     <td>RowsAndColumnsReportWizardForm_Filters_0_valueType</td>
     <td>Last 7 Days</td>
@@ -138,11 +133,6 @@
     <td>click</td>
     <td>id=RowsAndColumnsReportWizardForm_Filters_0_availableAtRunTime</td>
     <td></td>
-</tr>
-<tr>
-    <td>waitForCondition</td>
-    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-    <td>30000</td>
 </tr>
 <tr>
     <td>verifyValue</td>
@@ -165,11 +155,6 @@
     <td>label=Select User</td>		
 </tr>		
 <tr>		
-    <td>waitForCondition</td>		
-    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>		
-    <td>30000</td>		
-</tr>		
-<tr>		
     <td>verifySelectedLabel</td>		
     <td>RowsAndColumnsReportWizardForm_Filters_1_valueType</td>		
     <td>Select User</td>		
@@ -183,11 +168,6 @@
     <td>click</td>		
     <td>RowsAndColumnsReportWizardForm_Filters_1_users_SelectLink</td>		
     <td></td>		
-</tr>		
-<tr>		
-    <td>waitForCondition</td>		
-    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>		
-    <td>30000</td>		
 </tr>		
 <tr>		
     <td>waitForElementPresent</td>		
@@ -205,11 +185,6 @@
     <td>\10</td>		
 </tr>		
 <tr>		
-    <td>waitForCondition</td>		
-    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>		
-    <td>30000</td>		
-</tr>		
-<tr>		
     <td>waitForText</td>		
     <td>//div[@id='list-viewmodal']/div[2]/table/tbody/tr[1]/td/a</td>		
     <td>Sam Smith</td>		
@@ -225,11 +200,6 @@
     <td></td>		
 </tr>		
 <tr>		
-    <td>waitForCondition</td>		
-    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>		
-    <td>30000</td>		
-</tr>		
-<tr>		
     <td>waitForValue</td>		
     <td>RowsAndColumnsReportWizardForm_Filters_1_stringifiedModelForValue</td>		
     <td>Sam Smith</td>		
@@ -240,11 +210,6 @@
     <td></td>		
 </tr>		
 <tr>		
-    <td>waitForCondition</td>		
-    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>		
-    <td>30000</td>		
-</tr>		
-<tr>		
     <td>verifyValue</td>		
     <td>RowsAndColumnsReportWizardForm_Filters_1_availableAtRunTime</td>		
     <td>on</td>		
@@ -253,11 +218,6 @@
     <td>click</td>
     <td>//a[@id='filterBysNextLink']/span[3]</td>
     <td></td>
-</tr>
-<tr>
-    <td>waitForCondition</td>
-    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-    <td>30000</td>
 </tr>
 <tr>
     <td>waitForTextPresent</td>
@@ -325,11 +285,6 @@
     <td></td>
 </tr>
 <tr>
-    <td>waitForCondition</td>
-    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-    <td>30000</td>
-</tr>
-<tr>
     <td>waitForTextPresent</td>
     <td>Select Ordering</td>
     <td></td>
@@ -350,11 +305,6 @@
     <td></td>
 </tr>
 <tr>
-    <td>waitForCondition</td>
-    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-    <td>30000</td>
-</tr>
-<tr>
     <td>waitForElementPresent</td>
     <td>RowsAndColumnsReportWizardForm_OrderBys_0_order</td>
     <td></td>
@@ -363,11 +313,6 @@
     <td>click</td>
     <td>//a[@id='orderBysDataNextLink']/span[3]</td>
     <td></td>
-</tr>
-<tr>
-    <td>waitForCondition</td>
-    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-    <td>30000</td>
 </tr>
 <tr>
     <td>waitForTextPresent</td>
@@ -380,19 +325,14 @@
     <td>Test Account Report ${randomSuffix}</td>
 </tr>
 <tr>
-    <td>waitForCondition</td>
-    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-    <td>30000</td>
-</tr>
-<tr>
     <td>type</td>
     <td>id=RowsAndColumnsReportWizardForm_description</td>
     <td>Test Account Report description</td>
 </tr>
 <tr>
-    <td>waitForCondition</td>
-    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-    <td>30000</td>
+    <td>setSpeed</td>
+    <td>3000</td>
+    <td></td>
 </tr>
 <tr>
     <td>click</td>
@@ -400,13 +340,13 @@
     <td></td>
 </tr>
 <tr>
-    <td>waitForCondition</td>
-    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-    <td>30000</td>
-</tr>
-<tr>
     <td>waitForTextPresent</td>
     <td>Test Account Report ${randomSuffix}</td>
+    <td></td>
+</tr>
+<tr>
+    <td>setSpeed</td>
+    <td>0</td>
     <td></td>
 </tr>
 <tr>		
