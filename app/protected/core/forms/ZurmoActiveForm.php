@@ -164,6 +164,7 @@
                 'model'                => $this->resolveModelClassNameForError($model),
                 'name'                 => $attribute,
                 'enableAjaxValidation' => $enableAjaxValidation,
+                'summary'              => true,
             );
             $optionNames = array(
                 'validationDelay',
