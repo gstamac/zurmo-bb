@@ -2721,6 +2721,12 @@ td {
 #list-view .items-wrapper {
   border: 1px solid #dfdfdf;
 }
+.type-kanban-opportunities .items-wrapper {
+  display: block !important;
+}
+.type-kanban-opportunities .items-wrapper .items {
+  table-layout: auto !important;
+}
 .items-wrapper {
   width: 100%;
   display: table;
