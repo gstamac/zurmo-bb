@@ -205,7 +205,7 @@
             $params = array(
                 'id' => $this->getGridViewId(),
                 'htmlOptions' => array(
-                    'class' => 'cgrid-view ' . $this->getTypeCssClassForCGridView()
+                    'class' => 'cgrid-view ' . $this->getTypeCssClassForCGridView() . $this->getKanbanCssClassForCGridView()
                 ),
                 'loadingCssClass'      => 'loading',
                 'dataProvider'         => $this->getDataProvider(),
@@ -232,6 +232,18 @@
         protected function getTypeCssClassForCGridView()
         {
             return 'type-' . $this->moduleId;
+        }
+        
+        protected function getKanbanCssClassForCGridView()
+        {
+            if ($this->kanbanBoard != null && $this->kanbanBoard->getIsActive())
+            {
+                return ' type-kanban-' . $this->moduleId;
+            }
+            else
+            {
+                return '';
+            }
         }
 
         protected static function getGridTemplate()
