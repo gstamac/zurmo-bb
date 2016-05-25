@@ -46,6 +46,8 @@
         public $listPageSizeMaxLimit;
 
         public $kanbanBoardPageSizeMaxLimit;
+        
+        public $taskKanbanBoardPageSizeMaxLimit;
 
         public function rules()
         {
@@ -62,6 +64,9 @@
                 array('kanbanBoardPageSizeMaxLimit',            'required'),
                 array('kanbanBoardPageSizeMaxLimit',            'type', 'type' => 'integer'),
                 array('kanbanBoardPageSizeMaxLimit',            'numerical', 'min' => 1),
+                array('taskKanbanBoardPageSizeMaxLimit',        'required'),
+                array('taskKanbanBoardPageSizeMaxLimit',        'type', 'type' => 'integer'),
+                array('taskKanbanBoardPageSizeMaxLimit',        'numerical', 'min' => 1),
             );
         }
 
@@ -75,7 +80,8 @@
                                                                       'Outbound EmailMessagesModuleSingularLabel batch size',
                                                                        LabelUtil::getTranslationParamsForAllModules()),
                 'listPageSizeMaxLimit'                    => Zurmo::t('ZurmoModule', 'List page size maximum limit'),
-                'kanbanBoardPageSizeMaxLimit'             => Zurmo::t('ZurmoModule', 'Kanban page size maximum limit'),
+                'kanbanBoardPageSizeMaxLimit'             => Zurmo::t('ZurmoModule', 'Opportunity Kanban page size maximum limit'),
+                'taskKanbanBoardPageSizeMaxLimit'         => Zurmo::t('ZurmoModule', 'Task Kanban page size maximum limit'),
             );
         }
     }
