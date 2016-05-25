@@ -58,6 +58,7 @@
                         'outboundEmailBatchSize'           => '',
                         'listPageSizeMaxLimit'             => '',
                         'kanbanBoardPageSizeMaxLimit'      => '',
+                        'taskKanbanBoardPageSizeMaxLimit'  => '',
                     )
                 )
             );
@@ -65,7 +66,8 @@
             $this->assertContains('Autoresponder/Campaign batch size cannot be blank.', $content);
             $this->assertContains('Outbound Email Message batch size cannot be blank.', $content);
             $this->assertContains('List page size maximum limit cannot be blank.', $content);
-            $this->assertContains('Kanban page size maximum limit cannot be blank.', $content);
+            $this->assertContains('Opportunity Kanban page size maximum limit cannot be blank.', $content);
+            $this->assertContains('Task Kanban page size maximum limit cannot be blank.', $content);
 
             //checking with proper values for required fields
             if (Yii::app()->edition == 'Community')
@@ -76,6 +78,7 @@
                                               'outboundEmailBatchSize'           => '30',
                                               'listPageSizeMaxLimit'             => '10',
                                               'kanbanBoardPageSizeMaxLimit'      => '15',
+                                              'taskKanbanBoardPageSizeMaxLimit'  => '25',
                                           )
                     )
                 );

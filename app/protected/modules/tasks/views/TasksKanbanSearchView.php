@@ -120,5 +120,13 @@
         {
             return null;
         }
+        
+        protected function getFormActionUrl()
+        {
+            return Yii::app()->createUrl('zurmo/default/validateDynamicSearch',
+                                            array('viewClassName'       => get_parent_class($this),
+                                                  'modelClassName'     => get_class($this->model->getModel()),
+                                                  'formModelClassName' => get_class($this->model)));
+        }
     }
 ?>
