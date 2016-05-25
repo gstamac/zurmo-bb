@@ -61,6 +61,7 @@
             $form->reCaptchaPrivateKey                    = ZurmoConfigurationUtil::getByModuleName('ZurmoModule', 'reCaptchaPrivateKey');
             $form->reCaptchaPublicKey                     = ZurmoConfigurationUtil::getByModuleName('ZurmoModule', 'reCaptchaPublicKey');
             $form->kanbanBoardPageSize                    = Yii::app()->pagination->getGlobalValueByType('kanbanBoardPageSize');
+            $form->taskKanbanBoardPageSize                = Yii::app()->pagination->getGlobalValueByType('taskKanbanBoardPageSize');
             return $form;
         }
 
@@ -92,6 +93,7 @@
             ZurmoConfigurationUtil::setByModuleName('ZurmoModule', 'reCaptchaPrivateKey', $form->reCaptchaPrivateKey);
             ZurmoConfigurationUtil::setByModuleName('ZurmoModule', 'reCaptchaPublicKey',  $form->reCaptchaPublicKey);
             Yii::app()->pagination->setGlobalValueByType('kanbanBoardPageSize', (int)   $form->kanbanBoardPageSize);
+            Yii::app()->pagination->setGlobalValueByType('taskKanbanBoardPageSize', (int)   $form->taskKanbanBoardPageSize);
         }
 
         public static function getRealtimeUpdatesEnabled()
