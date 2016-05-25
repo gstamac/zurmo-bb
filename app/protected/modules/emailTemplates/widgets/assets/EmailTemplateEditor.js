@@ -226,7 +226,7 @@ var emailTemplateEditor = {
             $('body').off('mousemove');
             $('body').off('mouseup');
             emailTemplateEditor.settings.isDragging = false;
-            if (elementDragged != undefined && elementDragged.is('li') && $(event.target).hasClass('ui-draggable-iframeFix')){
+            if (elementDragged != undefined && elementDragged.is('li') && $(event.target).parent().hasClass('right-side-edit-view-panel')){
                 var wrapInRow = elementDragged.data('wrap');
                 if (typeof wrapInRow == 'undefined') {
                     if( emailTemplateEditor.settings.ghost.closest('td').hasClass( emailTemplateEditor.settings.sortableRowsClass) === true ){
@@ -261,6 +261,7 @@ var emailTemplateEditor = {
             cursor: 'move',
             connectWith: iframeContents.find(connectToSelector),
             zIndex: 999999,
+            scroll: false,
             appendTo: $(emailTemplateEditor.settings.iframeSelector).contents().find('body'),
             helper: function(event, ui){
                 return $('<div class="draggable-builder-element">' + $(ui).html() + '</div>')
@@ -283,6 +284,7 @@ var emailTemplateEditor = {
             cursorAt: { top: -10, right: 60 },
             cursor: 'move',
             zIndex: 999999,
+            scroll: false,
             appendTo: $(emailTemplateEditor.settings.iframeSelector).contents().find('body'),
             helper: function(event, ui){
                 return $('<div class="draggable-builder-element">' + $(ui).html() + '</div>')            }

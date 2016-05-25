@@ -58,6 +58,7 @@
                                             'gamificationModalNotificationsEnabled'         => '1',
                                             'listPageSize'                                  => '',
                                             'kanbanBoardPageSize'                           => '',
+                                            'taskKanbanBoardPageSize'                       => '',
                                             'modalListPageSize'                             => '',
                                             'subListPageSize'                               => '',
                                             'defaultTestToEmailAddress'                     => '',
@@ -70,6 +71,7 @@
             $this->assertContains('Popup list page size cannot be blank.', $content);
             $this->assertContains('Sublist page size cannot be blank.', $content);
             $this->assertContains('Opportunity Kanban items cannot be blank.', $content);
+            $this->assertContains('Task Kanban items cannot be blank.', $content);
 
             //checking with proper values for required fields
             $super = $this->logoutCurrentUserLoginNewUserAndGetByUsername('super');
@@ -80,6 +82,7 @@
                                                 'gamificationModalNotificationsEnabled'     => '0',
                                                 'listPageSize'                              => '10',
                                                 'kanbanBoardPageSize'                       => '10',
+                                                'taskKanbanBoardPageSize'                   => '15',
                                                 'modalListPageSize'                         => '5',
                                                 'subListPageSize'                           => '5',
                                                 'defaultFromEmailAddress'                   => 'notification@zurmoalerts.com',

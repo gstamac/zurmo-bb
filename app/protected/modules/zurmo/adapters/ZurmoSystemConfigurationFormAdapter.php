@@ -51,6 +51,7 @@
             $form->outboundEmailBatchSize                 = OutboundEmailBatchSizeConfigUtil::getBatchSize();
             $form->listPageSizeMaxLimit                   = ZurmoSystemConfigurationUtil::getBatchSize();
             $form->kanbanBoardPageSizeMaxLimit            = ZurmoKanbanConfigurationUtil::getBatchSize();
+            $form->taskKanbanBoardPageSizeMaxLimit        = ZurmoTaskKanbanConfigurationUtil::getBatchSize();
             return $form;
         }
 
@@ -65,6 +66,7 @@
                 OutboundEmailBatchSizeConfigUtil::setBatchSize((int)$form->outboundEmailBatchSize);
                 ZurmoSystemConfigurationUtil::setBatchSize((int)$form->listPageSizeMaxLimit);
                 ZurmoKanbanConfigurationUtil::setBatchSize((int)$form->kanbanBoardPageSizeMaxLimit);
+                ZurmoTaskKanbanConfigurationUtil::setBatchSize((int)$form->taskKanbanBoardPageSizeMaxLimit);
             }
         }
     }

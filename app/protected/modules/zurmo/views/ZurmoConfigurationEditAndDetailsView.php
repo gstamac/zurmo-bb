@@ -108,6 +108,15 @@
                                     array(
                                         array(
                                             'elements' => array(
+                                                array('attributeName' => 'taskKanbanBoardPageSize', 'type' => 'Integer'),
+                                            ),
+                                        ),
+                                    )
+                                ),
+                                array('cells' =>
+                                    array(
+                                        array(
+                                            'elements' => array(
                                                 array('attributeName' => 'dashboardListPageSize', 'type' => 'Integer'),
                                             ),
                                         ),

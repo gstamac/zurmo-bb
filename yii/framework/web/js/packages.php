@@ -7,13 +7,16 @@
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @link http://www.yiiframework.com/
- * @copyright Copyright &copy; 2008-2011 Yii Software LLC
+ * @copyright 2008-2013 Yii Software LLC
  * @license http://www.yiiframework.com/license/
  */
 
 return array(
 	'jquery'=>array(
 		'js'=>array(YII_DEBUG ? 'jquery.js' : 'jquery.min.js'),
+	),
+	'jquery-migrate'=>array(
+		'js'=>array('jquery-migrate-1.3.0.min.js'),
 	),
 	'yii'=>array(
 		'js'=>array('jquery.yii.js'),
