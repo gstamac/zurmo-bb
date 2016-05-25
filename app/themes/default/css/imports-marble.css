@@ -7048,6 +7048,9 @@ a.user-link {
 #comment-for-task-inline-edit-form tr.template-download td {
   padding-left: 0 !important;
 }
+#comment-for-task-inline-edit-form .view-toolbar-container {
+  top: auto !important;
+}
 [id^="comment-inline-edit-form"] .left-column {
   padding: 0;
 }
@@ -13907,6 +13910,9 @@ div[id^="builderimageelement"] ~ .redactor_box iframe {
 }
 .calendar-event-tooltip .after-form-details-content {
   display: none;
+}
+.CalendarItemDetailsView .view-toolbar-container {
+  top: auto !important;
 }
 body.flat-cement * {
   box-shadow: none !important;

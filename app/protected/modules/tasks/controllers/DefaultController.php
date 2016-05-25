@@ -109,10 +109,10 @@
             }
             else
             {
-                $pageSize       = TasksForRelatedKanbanView::getDefaultPageSize();
+                $pageSize       = TasksKanbanView::getDefaultPageSize();
                 $task           = new Task(false);
                 $searchForm     = new TasksSearchForm($task);
-                $stickySearchKey = 'TasksKanbanSearchView';
+                $stickySearchKey = 'TasksSearchView';
                 $dataProvider = $this->resolveSearchDataProvider(
                     $searchForm,
                     $pageSize,

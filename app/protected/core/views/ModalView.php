@@ -69,8 +69,8 @@
         }
 
         public static function getAjaxOptionsForModalLink($title, $containerId = 'modalContainer', $height = 'auto',
-                                                          $width = 600, $position = 'center top+25', $class = "''", // Not Coding Standard
-                                                          $extraCloseScript = null)
+                                                          $width = 600, $position = array('my'=>'center top+25','at'=>'center top+25'), 
+                                                          $class = "''", $extraCloseScript = null)// Not Coding Standard
         {
             assert('is_string($containerId)');
             assert('is_string($title)');
@@ -90,7 +90,7 @@
                                                                           $containerId = 'modalContainer',
                                                                           $height = 'auto',
                                                                           $width = 600,
-                                                                          $position = 'center top+25', // Not Coding Standard
+                                                                          $position = array('my'=>'center top+25','at'=>'center top+25'), // Not Coding Standard
                                                                           $class = "''", // Not Coding Standard
                                                                           $extraCloseScript = null)
         {
@@ -118,7 +118,7 @@
                 $position = "'" . $position . "'";
             }
             $modalTitle = CJavaScript::quote($title);
-
+            
             // Begin Not Coding Standard
             return "js:function(){
                 jQuery('#{$containerId}').html('');
@@ -130,15 +130,27 @@
                     'position' : {$position},
                     'dialogClass' : {$class},
                     'height' : {$heightContent},
+                    'closeText':'',
                     'open': function( event, ui ) {
                         jQuery('#{$containerId}').parent().addClass('openingModal');
                         // prevent dialog scrolls to top under Chrome, IE
                         $('.ui-dialog-titlebar-close').mousedown(function(ev) {
                             $('#{$containerId}').dialog('close');
                         });
+                        $('.ui-dialog .ui-dialog-content').css('height', 'auto');
+                        $('.ui-dialog .ui-dialog-content').css('display', 'block');
+                        $('.ui-dialog-titlebar-close .ui-button-text').remove();
+                        $('#{$containerId}').dialog('moveToTop');
+                        var zIndex = jQuery('#{$containerId}').parent().css('zIndex');
+                        zIndex = zIndex - 1;
+                        $('.ui-widget-overlay').css('zIndex', zIndex);
                     },
                     'close': function( event, ui ) { jQuery('#{$containerId}').parent().removeClass('openingModal');
+                                                     var zIndex = jQuery('#{$containerId}').parent().css('zIndex');
+                                                     zIndex = zIndex - 2;
+                                                     $('.ui-widget-overlay').css('zIndex', zIndex);
                                                      $('#{$containerId}').dialog('destroy');
+                                                     $('#{$containerId}').css('display', 'none');
                                                      " . $extraCloseScript . "
                                                      }
                 });
