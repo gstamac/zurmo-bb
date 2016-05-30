@@ -112,6 +112,11 @@
             return !empty($timezone);
         }
 
+        public static function isMysqliInstalled()
+        {
+            return extension_loaded("mysqli");
+        }
+        
         public static function isPdoInstalled()
         {
             return extension_loaded("pdo");

@@ -74,6 +74,7 @@
                          'Memcache',
                          'SetIncludePath',
                          'IMAP',
+                         'Mysqli',
                          'Pdo',
                          'PdoMysql',
                          'Ldap',
