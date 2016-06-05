@@ -208,15 +208,24 @@
                                        }
                                   }'
                 ),
-                'htmlOptions' => array(
-                    'disabled' => $this->getDisabledValue(),
-                    'onblur' => 'clearIdFromAutoCompleteField($(this).val(), \'' . $idInputName . '\');'
-                )
+                'htmlOptions' => array_merge(
+                    array(
+                        'disabled' => $this->getDisabledValue(),
+                        'onblur' => 'clearIdFromAutoCompleteField($(this).val(), \'' . $idInputName . '\');'
+                    ), $this->resolveAdditionalHtmlOptionsForTextField($idInputName))
             ));
             $cClipWidget->endClip();
             return $cClipWidget->getController()->clips['ModelElement'];
         }
 
+        /**
+         * Override in children class if you need additional html options here.
+         */
+        protected function resolveAdditionalHtmlOptionsForTextField($idInputName)
+        {
+            return array();
+        }
+        
         protected function getAutoCompleteUrlParams()
         {
             return array();

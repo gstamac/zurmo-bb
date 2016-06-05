@@ -87,5 +87,40 @@
             }
             return false;
         }
+        
+        /**
+         * Overridden here because we need additional html options.
+         */
+        protected function resolveAdditionalHtmlOptionsForTextField($idInputName)
+        {
+            return array('onfocus' => 'clearLabelFromAutoCompleteField($(this).val(), \'' . $idInputName . '\');');
+        }
+        
+        /**
+         * Registers scripts for autocomplete text field
+         * Overridden here because we need additional function for onfocus event
+         */
+        protected function registerScriptForAutoCompleteTextField()
+        {
+            $script = "
+                function clearIdFromAutoCompleteField(value, id)
+                {
+                    if (value == '')
+                    {
+                        $('#' + id).val('');
+                        $('#' + id).parent().children('label').css('display', 'block');
+                    }
+                }
+                function clearLabelFromAutoCompleteField(value, id)
+                {
+                    $('#' + id).parent().children('label').css('display', 'none');
+                }
+            ";
+            Yii::app()->clientScript->registerScript(
+                'clearIdFromAutoCompleteField',
+                $script,
+                CClientScript::POS_END
+            );
+        }
     }
 ?>
