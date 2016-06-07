@@ -95,7 +95,7 @@
                 </tr>
                 <tr>
                     <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li[3]/div[1]/div/ul/li/ul/li/a/span</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li[4]/div[1]/div/ul/li/ul/li/a/span</td>
                     <td></td>
                 </tr>
                 <tr>
@@ -110,13 +110,8 @@
                 </tr>
                 <tr>
                     <td>waitForNotText</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li[3]/div/h3</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li[4]/div/h3</td>
                     <td>Opportunities</td>
-                </tr>
-                <tr>
-                    <td>setSpeed</td>
-                    <td>0</td>
-                    <td></td>
                 </tr>
                 <!--add portlet open tasks-->
                 <tr>
@@ -131,49 +126,23 @@
                 </tr>
                 <tr>
                     <td>waitForText</td>
-                    <td>//html/body/div[5]/div[2]/div/div/ul/li[5]/h3/a</td>
+                    <td>//html/body/div[5]/div[2]/div/div/ul/li[4]/h3/a</td>
                     <td>Opportunities</td>
                 </tr>
                 <tr>
                     <td>clickAndWait</td>
-                    <td>//html/body/div[5]/div[2]/div/div/ul/li[5]/div/a/span</td>
+                    <td>//html/body/div[5]/div[2]/div/div/ul/li[4]/div/a/span</td>
+                    <td></td>
+                </tr>
+				<tr>
+                    <td>setSpeed</td>
+                    <td>0</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>waitForText</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li[1]/div/h3</td>
                     <td>Opportunities</td>
-                </tr>
-                <!--remove portlet opportunities-->
-                <tr>
-                    <td>setSpeed</td>
-                    <td>3000</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li[1]/div[1]/div/ul/li/ul/li/a/span</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>assertConfirmation</td>
-                    <td>This portlet will be removed, ok?</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <tr>
-                    <td>waitForNotText</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li[1]/div/h3</td>
-                    <td>Opportunities</td>
-                </tr>
-                <tr>
-                    <td>setSpeed</td>
-                    <td>0</td>
-                    <td></td>
                 </tr>
                 <!--clear search result-->
                 <tr>
