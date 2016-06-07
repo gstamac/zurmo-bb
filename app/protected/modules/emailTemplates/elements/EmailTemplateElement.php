@@ -124,6 +124,7 @@
                                 $(".tabs-nav > a:eq(1)").click();
                             }
                             updateElementWithData(textContentElement, data.textContent);
+                            $(subjectElement).parent().children("label").css("display", "none");
                             updateElementWithData(subjectElement, data.subject);
                             $(htmlContentElement).redactor("set", data.htmlContent);
                             $(htmlContentElement).redactor("toggle");

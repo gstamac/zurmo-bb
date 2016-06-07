@@ -4,13 +4,13 @@
     <head profile="http://selenium-ide.openqa.org/profiles/test-case">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <link rel="selenium.base" href="http://localhost/"/>
-        <title>EditContact</title>
+        <title>ContactPortletGoogleMap</title>
     </head>
     <body>
         <table cellpadding="1" cellspacing="1" border="1">
             <thead>
                 <tr>
-                    <td rowspan="1" colspan="3">Edit Contact</td>
+                    <td rowspan="1" colspan="3">Contact Portlet Google Map</td>
                 </tr>
             </thead>
             <tbody>
@@ -97,58 +97,7 @@
                     <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
                     <td>30000</td>
                 </tr>
-                <!--edit contact-->
-                <tr>
-                    <td>setSpeed</td>
-                    <td>3000</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForTextPresent</td>
-                    <td>Jinny Jane ${randomSuffix}</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>assertText</td>
-                    <td>link=Edit</td>
-                    <td>Edit</td>
-                </tr>
-                <tr>
-                    <td>clickAndWait</td>
-                    <td>link=Edit</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>setSpeed</td>
-                    <td>0</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForElementPresent</td>
-                    <td>Contact_state_id</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>select</td>
-                    <td>Contact_state_id</td>
-                    <td>label=Qualified</td>
-                </tr>
-                <tr>
-                    <td>clickAndWait</td>
-                    <td>save</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForPageToLoad</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <!--verify values after saving contact-->
+                <!--add portlet google map-->
                 <tr>
                     <td>setSpeed</td>
                     <td>3000</td>
@@ -156,23 +105,28 @@
                 </tr>
                 <tr>
                     <td>waitForElementPresent</td>
-                    <td>//a[@id='sliding-panel-toggle']</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/nav/div[3]/a/span</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>click</td>
-                    <td>//a[@id='sliding-panel-toggle']</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/nav/div[3]/a/span</td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>waitForTextPresent</td>
-                    <td>Jinny Jane ${randomSuffix}</td>
-                    <td></td>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
                 </tr>
                 <tr>
-                    <td>assertVisible</td>
-                    <td>//div[@id='zurmoView']/div/table/tbody/tr[2]/td</td>
-                    <td>Qualified</td>
+                    <td>waitForText</td>
+                    <td>//html/body/div[5]/div[2]/div/div/ul/li[2]/h3/a</td>
+                    <td>Google Map</td>
+                </tr>
+                <tr>
+                    <td>clickAndWait</td>
+                    <td>//html/body/div[5]/div[2]/div/div/ul/li[2]/div/a/span</td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td>setSpeed</td>
@@ -180,19 +134,51 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td>open</td>
-                    <td>index.php/contacts/default?clearingSearch=1</td>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li[1]/div/h3</td>
+                    <td>Google Map</td>
+                </tr>
+                <!--remove portlet google map-->
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li[1]/div[1]/div/ul/li/ul/li/a/span</td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>waitForPageToLoad</td>
-                    <td></td>
+                    <td>assertConfirmation</td>
+                    <td>This portlet will be removed, ok?</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>waitForCondition</td>
                     <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
                     <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForNotText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li[1]/div/h3</td>
+                    <td>Google Map</td>
+                </tr>
+                <!--clear search result-->
+                <tr>
+                    <td>clickAndWait</td>
+                    <td>//html/body/section/nav/div[1]/ul/li[5]/a/span</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/form/div[5]/a[4]</td>
+                    <td>Items I Own</td>
+                </tr>
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/form/div[5]/a[3]/span[2]</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForTextNotPresent</td>
+                    <td>Criteria Selected</td>
+                    <td></td>
                 </tr>
             </tbody>
         </table>
