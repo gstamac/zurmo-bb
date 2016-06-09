@@ -185,7 +185,7 @@
          */
         public static function getDatabaseInfoFromDsnString($dsn)
         {
-            assert(preg_match("/^([^;]+):host=([^;]+);(?:port=([^;]+);)?dbname=([^;]+)/", $dsn, $matches) == 1); // Not Coding Standard
+            preg_match("/^([^;]+):host=([^;]+);(?:port=([^;]+);)?dbname=([^;]+)/", $dsn, $matches) == 1; // Not Coding Standard
             if (count($matches) == 5)
             {
                 if (empty($matches['3']))
