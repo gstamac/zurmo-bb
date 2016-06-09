@@ -72,8 +72,9 @@
         public static function recreateAccountBuildTable()
         {
             $schema = static::getReadSubscriptionTableSchemaForAccountTempTable();
+            $messageLogger = new MessageLogger();
             CreateOrUpdateExistingTableFromSchemaDefinitionArrayUtil::generateOrUpdateTableBySchemaDefinition(
-                $schema, new MessageLogger());
+                $schema, $messageLogger);
         }
 
         protected static function getReadSubscriptionTableSchemaByName($tableName)
