@@ -64,8 +64,9 @@
         public static function recreateTable($modelSubscriptionTableName)
         {
             $schema = static::getReadSubscriptionTableSchemaByName($modelSubscriptionTableName);
+            $messageLogger = new MessageLogger();
             CreateOrUpdateExistingTableFromSchemaDefinitionArrayUtil::generateOrUpdateTableBySchemaDefinition(
-                $schema, new MessageLogger());
+                $schema, $messageLogger);
         }
 
         public static function recreateAccountBuildTable()
