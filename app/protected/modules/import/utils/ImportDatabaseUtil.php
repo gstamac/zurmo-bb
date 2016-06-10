@@ -655,9 +655,10 @@
             // this dropTable is here just because as fail-safe for direct invocations from other classes.
             ZurmoRedBean::$writer->dropTableByTableName($tableName);
             $schema = static::getTableSchemaByNameAndImportColumns($tableName, $columns);
+            $messageLogger = new MessageLogger();
             CreateOrUpdateExistingTableFromSchemaDefinitionArrayUtil::generateOrUpdateTableBySchemaDefinition(
                                                                                                 $schema,
-                                                                                                new MessageLogger());
+                                                                                                $messageLogger);
         }
     }
 ?>
