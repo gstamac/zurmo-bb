@@ -345,11 +345,18 @@
             }
             else
             {
-              $success = @eval("\$return=" . $equation . ";" ); // Not Coding Standard
-              if ($success === false)
-              {
-                  return false;
-              }
+                try
+                {
+                    $success = @eval("\$return=" . $equation . ";" ); // Not Coding Standard
+                } catch (ParseError $e) 
+                {
+                    return false;
+                }
+                // php5 backward compatible
+                if ($success === false)
+                {
+                    return false;
+                }
             }
             return $return;
         }
