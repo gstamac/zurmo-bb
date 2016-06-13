@@ -146,7 +146,7 @@
          */
         protected function registerScripts()
         {
-            
+
         }
 
         /**
@@ -467,7 +467,7 @@
         {
             return true;
         }
-        
+
         /**
          * @return int
          */
