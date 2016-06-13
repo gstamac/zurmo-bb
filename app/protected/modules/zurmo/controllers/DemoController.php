@@ -158,7 +158,7 @@
                 throw new NotSupportedException();
             }
         }
-        
+
         /**
          * Special method to load account for functional test.
          */
@@ -168,7 +168,7 @@
             {
                 throw new NotSupportedException();
             }
-            
+
             $account         = new Account();
             $account->name   = "Test Account For Functional";
             $account->owner  = Yii::app()->user->userModel;
@@ -179,7 +179,7 @@
                 throw new NotSupportedException();
             }
         }
-        
+
         /**
          * Special method to load lead for functional test.
          */
@@ -189,7 +189,7 @@
             {
                 throw new NotSupportedException();
             }
-            
+
             $contact             = new Contact();
             $contact->firstName  = "Test Lead";
             $contact->lastName   = "For Functional";
@@ -202,7 +202,7 @@
                 throw new NotSupportedException();
             }
         }
-        
+
         /**
          * Special method to load contact for functional test.
          */
@@ -212,7 +212,7 @@
             {
                 throw new NotSupportedException();
             }
-            
+
             $contact             = new Contact();
             $contact->firstName  = "Test Contact";
             $contact->lastName   = "For Functional";
@@ -225,7 +225,7 @@
                 throw new NotSupportedException();
             }
         }
-        
+
         /**
          * Special method to load opportunity for functional test.
          */
@@ -235,7 +235,7 @@
             {
                 throw new NotSupportedException();
             }
-            
+
             $currencies                 = Currency::getAll();
             $currencyValue              = new CurrencyValue();
             $currencyValue->value       = 500.54;
@@ -253,7 +253,7 @@
                 throw new NotSupportedException();
             }
         }
-        
+
         /**
          * Special method to load project for functional test.
          */
@@ -263,7 +263,7 @@
             {
                 throw new NotSupportedException();
             }
-            
+
             $project         = new Project();
             $project->name   = "Test Project For Functional";
             $project->status = Project::STATUS_ACTIVE;

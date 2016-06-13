@@ -181,7 +181,7 @@
                 $primaryViewColumn = 0;
             }
 
-            $params = array_merge( 
+            $params = array_merge(
                 array(
                     'controllerId'     => $this->getId(),
                     'relationModuleId' => $this->getModule()->getId(),
@@ -203,7 +203,7 @@
         {
             return array();
         }
-        
+
         protected function makeTitleBarAndEditAndDetailsView($model, $renderType,
                                 $titleBarAndEditViewClassName = 'TitleBarAndEditAndDetailsView')
         {
