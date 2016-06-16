@@ -340,6 +340,19 @@
             }
             return false;
         }
+        
+        /**
+         * @returns true, or the memcached version if less than required, or false if not installed.
+         */
+        public static function checkMemcached($minimumRequiredVersion, /* out */ &$actualVersion)
+        {
+            $actualVersion = phpversion('memcached');
+            if ($actualVersion != false && extension_loaded('memcached'))
+            {
+                return static::checkVersion($minimumRequiredVersion, $actualVersion);
+            }
+            return false;
+        }
 
         /**
          * @returns true, or the Curl version if less than required, or false if not installed.
