@@ -55,18 +55,22 @@
 
             $model = new OwnedSecurableTestItem();
             $model->member = 'test';
-            assert($model->save()); // Not Coding Standard
+            $saved = $model->save();
+            assert('$saved');
             $model = new OwnedSecurableTestItem();
             $model->member = 'test2';
-            assert($model->save()); // Not Coding Standard
+            $saved = $model->save();
+            assert('$saved');
             $model = new OwnedSecurableTestItem();
             $model->member = 'test3';
             $model->owner  = $benny;
-            assert($model->save()); // Not Coding Standard
+            $saved = $model->save();
+            assert('$saved');
             assert(OwnedSecurableTestItem::getCount() == 3); // Not Coding Standard
             $model = new OwnedSecurableTestItem2();
             $model->member = 'test5';
-            assert($model->save()); // Not Coding Standard
+            $saved = $model->save();
+            assert('$saved');
         }
 
         public static function getDependentTestModelClassNames()

@@ -54,7 +54,8 @@
                 $account = new Account();
                 $account->name         = $name;
                 $account->officePhone  = $phone;
-                assert($account->save()); // Not Coding Standard
+                $saved = $account->save();
+                assert('$saved');
             }
         }
 

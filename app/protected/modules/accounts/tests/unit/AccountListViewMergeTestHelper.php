@@ -46,7 +46,8 @@
             );
             $industryFieldData = CustomFieldData::getByName('Industries');
             $industryFieldData->serializedData = serialize($values);
-            assert($industryFieldData->save()); // Not Coding Standard
+            $saved = $industryFieldData->save();
+            assert('$saved');
             return $values;
         }
 
@@ -59,7 +60,8 @@
             );
             $typeFieldData = CustomFieldData::getByName('AccountTypes');
             $typeFieldData->serializedData = serialize($values);
-            assert($typeFieldData->save()); // Not Coding Standard
+            $saved = $typeFieldData->save();
+            assert('$saved');
             return $values;
         }
 
@@ -91,7 +93,8 @@
             $account->shippingAddress->country      = 'Latinoland';
 
             $account->description                   = 'My First Account Description';
-            assert($account->save()); // Not Coding Standard
+            $saved = $account->save();
+            assert('$saved');
             return $account;
         }
 
@@ -122,7 +125,8 @@
             $account2->shippingAddress->postalCode  = '110005';
             $account2->shippingAddress->country     = 'India Test';
             $account2->description = 'My Second Account Description';
-            assert($account2->save()); // Not Coding Standard
+            $saved = $account2->save();
+            assert('$saved');
             return $account2;
         }
     }

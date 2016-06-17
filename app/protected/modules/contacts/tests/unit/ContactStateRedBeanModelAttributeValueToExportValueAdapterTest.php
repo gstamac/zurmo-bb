@@ -42,7 +42,7 @@
             $user = SecurityTestHelper::createSuperAdmin();
             Yii::app()->user->userModel = $user;
             $loaded = ContactsModule::loadStartingData();
-            assert($loaded); // Not Coding Standard
+            assert('$loaded');
         }
 
         public function testGetExportValue()

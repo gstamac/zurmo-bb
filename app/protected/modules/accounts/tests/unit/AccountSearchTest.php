@@ -59,7 +59,8 @@
                 $account->secondaryEmail = new Email();
                 $account->secondaryEmail->emailAddress = 'a' . strtolower($name) . '@zurmoworld.com';
                 $account->officePhone = $phone;
-                assert($account->save()); // Not Coding Standard
+                $saved = $account->save();
+                assert('$saved');
             }
         }
 

@@ -60,12 +60,14 @@
             //attach divisions to headquarters
             $headquarters->accounts->add($division1);
             $headquarters->accounts->add($division2);
-            assert($headquarters->save()); // Not Coding Standard
+            $saved = $headquarters->save();
+            assert('$saved');
 
             //attach opportunities to contacts
             $opportunity->contacts->add($ceo);
-            assert($opportunity->save()); // Not Coding Standard
-
+            $saved = $opportunity->save();
+            assert('$saved');
+            
             //Forget models to ensure relations are known on the next retrieval
             $headquarters->forget();
             $division1->forget();

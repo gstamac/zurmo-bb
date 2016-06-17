@@ -54,7 +54,7 @@
             $customFieldData = CustomFieldData::getByName('MultipleIndustries');
             $customFieldData->serializedData = serialize($values);
             $saved = $customFieldData->save();
-            assert($saved);    // Not Coding Standard
+            assert('$saved');
 
             $values = array(
                 'D',
@@ -66,7 +66,7 @@
             $customFieldData = CustomFieldData::getByName('MultipleSomethings');
             $customFieldData->serializedData = serialize($values);
             $saved = $customFieldData->save();
-            assert($saved);    // Not Coding Standard
+            assert('$saved');
         }
 
         public static function getDependentTestModelClassNames()

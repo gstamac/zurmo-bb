@@ -53,13 +53,14 @@
             $super = User::getByUsername('super');
             $super->primaryEmail = new Email();
             $super->primaryEmail->emailAddress = 'super@zurmo.com';
-            assert($super->save()); // Not Coding Standard
-
+            $saved = $super->save();
+            assert('$saved');
+            
             //Create alpha group
             $group = new Group();
             $group->name = 'Alpha';
             $saved = $group->save();
-            assert($saved); // Not Coding Standard
+            assert('$saved');
             self::$alphaGroup = $group;
 
             //Now set default permissions to owner and users in group Alpha
@@ -91,7 +92,8 @@
             self::$emailTemplate = $emailTemplate;
 
             $everyoneGroup = Group::getByName(Group::EVERYONE_GROUP_NAME);
-            assert($everyoneGroup->save()); // Not Coding Standard
+            $saved = $everyoneGroup->save();
+            assert('$saved');
         }
 
         public static function getDependentTestModelClassNames()
