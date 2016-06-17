@@ -67,7 +67,8 @@
             $currency = new Currency();
             $currency->code       = 'EUR';
             $currency->rateToBase = 2;
-            assert($currency->save()); // Not Coding Standard
+            $saved = $currency->save();
+            assert('$saved');
             self::$eurCurrencyId = $currency->id;
 
             $values = array(
@@ -81,7 +82,7 @@
             $fieldData = CustomFieldData::getByName('WorkflowTestDropDown');
             $fieldData->serializedData   = serialize($values);
             $saved = $fieldData->save();
-            assert($saved); // Not Coding Standard
+            assert('$saved');
 
             $values = array(
                 'A1',
@@ -94,7 +95,7 @@
             $fieldData = CustomFieldData::getByName('WorkflowTestRadioDropDown');
             $fieldData->serializedData   = serialize($values);
             $saved = $fieldData->save();
-            assert($saved); // Not Coding Standard
+            assert('$saved');
 
             $values = array(
                 'M1',
@@ -107,7 +108,7 @@
             $fieldData = CustomFieldData::getByName('WorkflowTestMultiDropDown');
             $fieldData->serializedData   = serialize($values);
             $saved = $fieldData->save();
-            assert($saved); // Not Coding Standard
+            assert('$saved');
 
             $values = array(
                 'M1',
@@ -120,10 +121,10 @@
             $fieldData = CustomFieldData::getByName('WorkflowTestTagCloud');
             $fieldData->serializedData   = serialize($values);
             $saved = $fieldData->save();
-            assert($saved); // Not Coding Standard
+            assert('$saved');
 
             $loaded = ContactsModule::loadStartingData();
-            assert($loaded); // Not Coding Standard
+            assert('$loaded');
             $contactStates          = ContactState::getByName('New');
             self::$newState         = $contactStates[0];
             $contactStates          = ContactState::getByName('In progress');
@@ -131,10 +132,10 @@
             self::$groupTest        = new Group();
             self::$groupTest->name  = 'test';
             $saved = self::$groupTest->save();
-            assert($saved); // Not Coding Standard
+            assert('$saved');
             $group = Group::getByName(Group::EVERYONE_GROUP_NAME);
             $saved = $group->save();
-            assert($saved); // Not Coding Standard
+            assert('$saved');
         }
 
         public static function getDependentTestModelClassNames()

@@ -45,7 +45,8 @@
             $user->username  = 'jimmy';
             $user->firstName = 'James';
             $user->lastName  = 'Boondog';
-            assert($user->save()); // Not Coding Standard
+            $saved = $user->save();
+            assert('$saved');
             BaseControlUserConfigUtil::getUserToRunAs();
             assert(AuditEvent::getCount() == 6); // Not Coding Standard
             ContactsModule::loadStartingData();

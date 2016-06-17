@@ -279,7 +279,7 @@
             $customFieldData = CustomFieldData::getByName('ReportTestDropDown');
             $customFieldData->serializedData = serialize($values);
             $saved = $customFieldData->save();
-            assert('$saved'); // Not Coding Standard
+            assert('$saved');
 
             $report = new Report();
             $report->setType(Report::TYPE_ROWS_AND_COLUMNS);
