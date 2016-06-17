@@ -43,7 +43,8 @@
             $somebody = UserTestHelper::createBasicUser('somebody');
             $somebody->setRight('AccountsModule', AccountsModule::RIGHT_ACCESS_ACCOUNTS);
             $somebody->setRight('AccountsModule', AccountsModule::RIGHT_CREATE_ACCOUNTS);
-            assert($somebody->save()); // Not Coding Standard
+            $saved = $somebody->save();
+            assert('$saved');
         }
 
         public function testGetTypeDropDownArray()

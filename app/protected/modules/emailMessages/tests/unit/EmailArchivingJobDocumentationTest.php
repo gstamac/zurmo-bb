@@ -49,18 +49,21 @@
             $user = UserTestHelper::createBasicUser('steve');
             $user->primaryEmail->emailAddress = 'steve@example.com';
             $user->setRight('ContactsModule', ContactsModule::RIGHT_ACCESS_CONTACTS);
-            assert($user->save()); // Not Coding Standard
+            $saved = $user->save();
+            assert('$saved');
 
             $contact1 = ContactTestHelper::createContactByNameForOwner('peter', $user);
             $contact1->primaryEmail->emailAddress = 'peter@example.com';
             $contact1->secondaryEmail->emailAddress = 'peter2@example.com';
-            assert($contact1->save()); // Not Coding Standard
+            $saved = $contact1->save();
+            assert('$saved');
 
             $contactsOrLeads = ContactSearch::getContactsByAnyEmailAddress('peter@example.com', null, null);
 
             $contact2 = ContactTestHelper::createContactByNameForOwner('jim', $user);
             $contact2->primaryEmail->emailAddress = 'jim@example.com';
-            assert($contact2->save()); // Not Coding Standard
+            $saved = $contact2->save();
+            assert('$saved');
 
             $nonExistingUserEmail = 'jill@example.com';
 

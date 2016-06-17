@@ -42,22 +42,27 @@
             AllPermissionsOptimizationUtil::rebuild();
             SecurityTestHelper::createSuperAdmin();
             $everyoneGroup        = Group::getByName(Group::EVERYONE_GROUP_NAME);
-            assert($everyoneGroup->save()); // Not Coding Standard
+            $saved = $everyoneGroup->save();
+            assert('$saved');
             $group1 = new Group();
             $group1->name = 'Group1';
-            assert($group1->save()); // Not Coding Standard
-
+            $saved = $group1->save();
+            assert('$saved');
+            
             $group2 = new Group();
             $group2->name = 'Group2';
-            assert($group2->save()); // Not Coding Standard
-
+            $saved = $group2->save();
+            assert('$saved');
+            
             $group3 = new Group();
             $group3->name = 'Group3';
-            assert($group3->save()); // Not Coding Standard
-
+            $saved = $group3->save();
+            assert('$saved');
+            
             $group4 = new Group();
             $group4->name = 'Group4';
-            assert($group4->save()); // Not Coding Standard
+            $saved = $group4->save();
+            assert('$saved');
         }
 
         public function testMakeByMixedPermitablesData()

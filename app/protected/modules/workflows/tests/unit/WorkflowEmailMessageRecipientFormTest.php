@@ -59,13 +59,16 @@
             $super->primaryEmail = new Email();
             $super->primaryEmail->emailAddress = 'super@zurmo.com';
             $super->manager = $superBoss;
-            assert($super->save()); // Not Coding Standard
+            $saved = $super->save();
+            assert('$saved');
             $bobby = UserTestHelper::createBasicUserWithEmailAddress('bobby');
             $bobby->manager = $bobbyBoss;
-            assert($bobby->save()); // Not Coding Standard
+            $saved = $bobby->save();
+            assert('$saved');
             $sarah = UserTestHelper::createBasicUserWithEmailAddress('sarah');
             $sarah->manager = $sarahBoss;
-            assert($sarah->save()); // Not Coding Standard
+            $saved = $sarah->save();
+            assert('$saved');
             self::$superUserId = $super->id;
             self::$bobbyUserId = $bobby->id;
             self::$sarahUserId = $sarah->id;
