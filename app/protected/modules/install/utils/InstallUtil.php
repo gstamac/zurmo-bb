@@ -1149,6 +1149,23 @@
         {
             assert('is_array($args)');
             $form            = new InstallSettingsForm();
+            $phpVersion = explode('.', phpversion());
+            if ($phpVersion[0] >= 7)
+            {
+                $memcachedServiceHelper = new MemcachedServiceHelper();
+                if (!$memcachedServiceHelper->runCheckAndGetIfSuccessful())
+                {
+                    $form->setMemcacheIsNotAvailable();
+                }
+            }
+            else
+            {
+                $memcacheServiceHelper = new MemcacheServiceHelper();
+                if (!$memcacheServiceHelper->runCheckAndGetIfSuccessful())
+                {
+                    $form->setMemcacheIsNotAvailable();
+                }
+            }
             $template        = "{message}\n";
             $messageStreamer = new MessageStreamer($template);
             $messageStreamer->setExtraRenderBytes(0);
