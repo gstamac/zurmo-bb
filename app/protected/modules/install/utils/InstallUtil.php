@@ -785,13 +785,28 @@
             // Check if user setup memcache host and port
             if ($memcacheHost && $memcachePort)
             {
-                // Check if memcache extension is installed
-                $memcacheServiceHelper = new MemcacheServiceHelper();
-                if ($memcacheServiceHelper->runCheckAndGetIfSuccessful())
+                $phpVersion = explode('.', phpversion());
+                if ($phpVersion[0] >= 7)
                 {
-                    $contents = preg_replace('/\$memcacheLevelCaching\s*=\s*false;/',
-                                             '$memcacheLevelCaching = true;',
-                                             $contents);
+                    // Check if memcached extension is installed
+                    $memcachedServiceHelper = new MemcachedServiceHelper();
+                    if ($memcachedServiceHelper->runCheckAndGetIfSuccessful())
+                    {
+                        $contents = preg_replace('/\$memcacheLevelCaching\s*=\s*false;/',
+                                                 '$memcacheLevelCaching = true;',
+                                                 $contents);
+                    }
+                }
+                else
+                {
+                    // Check if memcache extension is installed
+                    $memcacheServiceHelper = new MemcacheServiceHelper();
+                    if ($memcacheServiceHelper->runCheckAndGetIfSuccessful())
+                    {
+                        $contents = preg_replace('/\$memcacheLevelCaching\s*=\s*false;/',
+                                                 '$memcacheLevelCaching = true;',
+                                                 $contents);
+                    }
                 }
             }
 
