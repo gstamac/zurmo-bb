@@ -124,9 +124,9 @@
         public function testCheckPhp()
         {
             $expectedVersion = PHP_VERSION;
-            $this->assertFalse (InstallUtil::checkPhp('6.0.0',     $actualVersion));
+            $this->assertFalse (InstallUtil::checkPhp('8.0.0',     $actualVersion));
             $this->assertEquals($expectedVersion, $actualVersion);
-            $this->assertFalse (InstallUtil::checkPhp('5.8.0',     $actualVersion));
+            $this->assertFalse (InstallUtil::checkPhp('7.8.0',     $actualVersion));
             $this->assertEquals($expectedVersion, $actualVersion);
             $this->assertTrue(InstallUtil::checkPhp(PHP_VERSION, $actualVersion));
             $this->assertEquals($expectedVersion, $actualVersion);
@@ -757,6 +757,13 @@
             {
                 $form->setMemcacheIsNotAvailable();
             }
+            $memcacheServiceHelper = new MemcacheServiceHelper();
+            $memcachedServiceHelper = new MemcachedServiceHelper();
+            $memcacheInstalled = $memcacheServiceHelper->runCheckAndGetIfSuccessful() || $memcachedServiceHelper->runCheckAndGetIfSuccessful();
+            if (!$memcacheInstalled)
+            {
+                $form->setMemcacheIsNotAvailable();
+            }
 
             $messageStreamer = new MessageStreamer();
             $messageStreamer->setExtraRenderBytes(0);
@@ -800,7 +807,7 @@
             $this->assertRegExp('/\$password         = \''.$this->temporaryDatabasePassword.'\';/',  // Not Coding Standard
                                    $perInstanceConfiguration);
 
-            if ($memcacheOn)
+            if ($memcacheOn && $memcacheInstalled)
             {
                 $this->assertRegExp('/\$memcacheLevelCaching\s*=\s*true;/',
                                        $debugConfiguration);
