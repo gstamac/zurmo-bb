@@ -151,7 +151,7 @@
             }
             return array();
         }
-        
+
         public function actionEdit($id)
         {
             $marketingList = MarketingList::getById(intval($id));

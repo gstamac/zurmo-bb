@@ -106,7 +106,7 @@
          * The opportunity kanban board page size
          */
         protected $_kanbanBoardPageSize;
-        
+
         /**
          * The task kanban board page size
          */
@@ -226,7 +226,7 @@
         {
             $this->_kanbanBoardPageSize = $value;
         }
-        
+
         /**
          * This is set from the value in the application common config file. It is used as the final fall back
          * if no other configuration settings are found.
