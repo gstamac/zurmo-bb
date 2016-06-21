@@ -120,7 +120,7 @@
         {
             return null;
         }
-        
+
         protected function getFormActionUrl()
         {
             return Yii::app()->createUrl('zurmo/default/validateDynamicSearch',

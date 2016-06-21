@@ -159,6 +159,7 @@
             $this->registerScriptForAutoCompleteTextField();
             $cClipWidget = new CClipWidget();
             $cClipWidget->beginClip("ModelElement");
+            // Begin Not Coding Standard
             $cClipWidget->widget('zii.widgets.jui.CJuiAutoComplete', array(
                 'name'    => $this->getNameForTextField(),
                 'id'      => $this->getIdForTextField(),
@@ -166,7 +167,7 @@
                 'source'  => Yii::app()->createUrl($this->resolveModuleId() . '/' . $this->getAutoCompleteControllerId()
                                                    . '/' . static::$autoCompleteActionId, $this->getAutoCompleteUrlParams()),
                 'options' => array(
-                    'select'   => $this->getOnSelectOptionForAutoComplete($idInputName), // Not Coding Standard
+                    'select'   => $this->getOnSelectOptionForAutoComplete($idInputName),
                     'appendTo' => 'js:$("#' . $this->getIdForTextField() . '").parent().parent()',
                     'search'   => 'js: function(event, ui)
                                   {
@@ -214,6 +215,7 @@
                         'onblur' => 'clearIdFromAutoCompleteField($(this).val(), \'' . $idInputName . '\');'
                     ), $this->resolveAdditionalHtmlOptionsForTextField($idInputName))
             ));
+            // End Not Coding Standard
             $cClipWidget->endClip();
             return $cClipWidget->getController()->clips['ModelElement'];
         }
@@ -225,7 +227,7 @@
         {
             return array();
         }
-        
+
         protected function getAutoCompleteUrlParams()
         {
             return array();
