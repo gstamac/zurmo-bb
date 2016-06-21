@@ -46,7 +46,7 @@
         public $listPageSizeMaxLimit;
 
         public $kanbanBoardPageSizeMaxLimit;
-        
+
         public $taskKanbanBoardPageSizeMaxLimit;
 
         public function rules()

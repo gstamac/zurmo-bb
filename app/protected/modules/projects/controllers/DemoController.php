@@ -34,7 +34,7 @@
      * "Copyright Zurmo Inc. 2015. All rights reserved".
      ********************************************************************************/
 
-    Yii::import('application.modules.projects.controllers.DefaultController', true); 
+    Yii::import('application.modules.projects.controllers.DefaultController', true);
     class ProjectsDemoController extends ProjectsDefaultController
     {
         /**
@@ -64,7 +64,7 @@
                 sleep(2);
             }
         }
-        
+
         /**
          * Add demo tasks for the project
          * @param type $project
@@ -76,8 +76,8 @@
                 $taskName   = $i . " Test Task";
                 $task       = new Task();
                 $task->name = $taskName;
-                
-                switch ($i) 
+
+                switch ($i)
                 {
                     case 1:
                         $task->status = Task::STATUS_NEW;
@@ -95,10 +95,10 @@
                         $task->status = Task::STATUS_COMPLETED;
                         $task->completedDateTime    = '0000-00-00 00:00:00';
                 }
-                
+
                 $task->requestedByUser      = Yii::app()->user->userModel;
                 $task->owner                = Yii::app()->user->userModel;
-                $task->project              = $project; 
+                $task->project              = $project;
                 $task->save();
             }
         }

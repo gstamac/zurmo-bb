@@ -87,7 +87,7 @@
             }
             return false;
         }
-        
+
         /**
          * Overridden here because we need additional html options.
          */
@@ -95,7 +95,7 @@
         {
             return array('onfocus' => 'clearLabelFromAutoCompleteField($(this).val(), \'' . $idInputName . '\');');
         }
-        
+
         /**
          * Registers scripts for autocomplete text field
          * Overridden here because we need additional function for onfocus event
