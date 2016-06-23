@@ -623,11 +623,6 @@
                     <td>Mass Update: Opportunities</td>
                 </tr>
                 <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div/div/div/form/span</td>
-                    <td>13 records selected for updating. Please tick the boxes next to the fields you wish to update and then select the value you wish to be used.</td>
-                </tr>
-                <tr>
                     <td>click</td>
                     <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[1]/th[1]/label/input</td>
                     <td></td>
@@ -687,6 +682,11 @@
                     <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[4]/td/div/input</td>
                     <td>${month}/${date}/16</td>
                 </tr>
+				<tr>
+                    <td>setSpeed</td>
+                    <td>3000</td>
+                    <td></td>
+                </tr>
                 <tr>
                     <td>click</td>
                     <td>//html/body/section/div[1]/div/div/div/form/div/div/a/span[3]</td>
@@ -703,11 +703,16 @@
                     <td>30000</td>
                 </tr>
                 <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div/div/h3</td>
-                    <td>13 records updated successfully.</td>
+                    <td>waitForElementPresent</td>
+                    <td>//html/body/section/div[1]/div/div/div[2]/a/span</td>
+                    <td></td>
                 </tr>
-                <tr>
+				<tr>
+                    <td>setSpeed</td>
+                    <td>0</td>
+                    <td></td>
+                </tr>
+				<tr>
                     <td>click</td>
                     <td>//html/body/section/div[1]/div/div/div[2]/a/span</td>
                     <td></td>
