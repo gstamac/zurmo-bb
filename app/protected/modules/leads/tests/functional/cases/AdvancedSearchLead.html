@@ -4,13 +4,13 @@
     <head profile="http://selenium-ide.openqa.org/profiles/test-case">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <link rel="selenium.base" href="http://localhost/"/>
-        <title>AdvancedSearchOpportunity</title>
+        <title>AdvancedSearchLead</title>
     </head>
     <body>
         <table cellpadding="1" cellspacing="1" border="1">
             <thead>
                 <tr>
-                    <td rowspan="1" colspan="3">Advanced Search Opportunity</td>
+                    <td rowspan="1" colspan="3">Advanced Search Lead</td>
                 </tr>
             </thead>
             <tbody>
@@ -19,12 +19,7 @@
                     <td>45000</td>
                     <td></td>
                 </tr>
-				<tr>
-                    <td>setSpeed</td>
-                    <td>3000</td>
-                    <td></td>
-                </tr>
-                <!--go to opportunities list-->
+                <!--go to leads list view-->
                 <tr>
                     <td>open</td>
                     <td>index.php</td>
@@ -42,12 +37,12 @@
                 </tr>
                 <tr>
                     <td>waitForText</td>
-                    <td>//html/body/section/nav/div[1]/ul/li[6]/a/span</td>
-                    <td>Opportunities</td>
+                    <td>//html/body/section/nav/div[1]/ul/li[4]/a/span</td>
+                    <td>Leads</td>
                 </tr>
                 <tr>
                     <td>clickAndWait</td>
-                    <td>//html/body/section/nav/div[1]/ul/li[6]/a/span</td>
+                    <td>//html/body/section/nav/div[1]/ul/li[4]/a/span</td>
                     <td></td>
                 </tr>
                 <tr>
@@ -65,16 +60,16 @@
                     <td>//html/body/section/div[1]/div[2]/div/form/div[5]/a[4]</td>
                     <td>Items I Own</td>
                 </tr>
-                <!--check search form validation-->                
+                <!--check advanced search form validation-->
                 <tr>
                     <td>click</td>
                     <td>//html/body/section/div[1]/div[2]/div/form/div[5]/a[1]</td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>waitForElementPresent</td>
+                    <td>waitForText</td>
                     <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[4]/a/span[3]</td>
-                    <td></td>
+                    <td>Add criteria</td>
                 </tr>
                 <tr>
                     <td>click</td>
@@ -87,6 +82,11 @@
                     <td></td>
                 </tr>
                 <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[5]/a/span[3]</td>
+                    <td>Add criteria</td>
+                </tr>
+                <tr>
                     <td>click</td>
                     <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[5]/a/span[3]</td>
                     <td></td>
@@ -95,6 +95,11 @@
                     <td>waitForElementPresent</td>
                     <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[5]/div/div[1]/select</td>
                     <td></td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[6]/a/span[3]</td>
+                    <td>Add criteria</td>
                 </tr>
                 <tr>
                     <td>click</td>
@@ -108,13 +113,8 @@
                 </tr>
                 <tr>
                     <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[11]/div/a/span[3]</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[11]/div/a[1]/span[3]</td>
                     <td></td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
                 </tr>
                 <tr>
                     <td>waitForText</td>
@@ -154,11 +154,16 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td>waitForElementPresent</td>
+                    <td>waitForText</td>
                     <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[4]/a/span[3]</td>
+                    <td>Add criteria</td>
+                </tr>
+                <tr>
+                    <td>setSpeed</td>
+                    <td>3000</td>
                     <td></td>
                 </tr>
-                <!--Name-->
+                <!--first name-->
                 <tr>
                     <td>click</td>
                     <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[4]/a/span[3]</td>
@@ -172,12 +177,7 @@
                 <tr>
                     <td>select</td>
                     <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[4]/div/div[1]/select</td>
-                    <td>Name</td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
+                    <td>label=First Name</td>
                 </tr>
                 <tr>
                     <td>waitForElementPresent</td>
@@ -187,9 +187,9 @@
                 <tr>
                     <td>type</td>
                     <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[4]/div/div[2]/input</td>
-                    <td>Test Opportunity ${randomSuffix}</td>
+                    <td>Silly</td>
                 </tr>
-                <!--Amount-->
+                <!--last name-->
                 <tr>
                     <td>click</td>
                     <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[5]/a/span[3]</td>
@@ -203,34 +203,19 @@
                 <tr>
                     <td>select</td>
                     <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[5]/div/div[1]/select</td>
-                    <td>Amount</td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
+                    <td>label=Last Name</td>
                 </tr>
                 <tr>
                     <td>waitForElementPresent</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[5]/div/div[2]/div/div[1]/div/select</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[5]/div/div[2]/input</td>
                     <td></td>
-                </tr>
-                <tr>
-                    <td>waitForElementPresent</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[5]/div/div[2]/div/div[2]/input</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>select</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[5]/div/div[2]/div/div[1]/div/select</td>
-                    <td>EUR</td>
                 </tr>
                 <tr>
                     <td>type</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[5]/div/div[2]/div/div[2]/input</td>
-                    <td>500.34</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[5]/div/div[2]/input</td>
+                    <td>Sally ${randomSuffix}</td>
                 </tr>
-                <!--Account-->
+                <!--name-->
                 <tr>
                     <td>click</td>
                     <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[6]/a/span[3]</td>
@@ -244,44 +229,19 @@
                 <tr>
                     <td>select</td>
                     <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[6]/div/div[1]/select</td>
-                    <td>Account</td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
+                    <td>label=Name</td>
                 </tr>
                 <tr>
                     <td>waitForElementPresent</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[6]/div/div[2]/div/input</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[6]/div/div[2]/input</td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>sendKeys</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[6]/div/div[2]/div/input</td>
-                    <td>Test Account For Functional</td>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[6]/div/div[2]/input</td>
+                    <td>Silly Sally ${randomSuffix}</td>
                 </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[6]/div/div[2]/ul/li[1]/a</td>
-                    <td>Test Account For Functional</td>
-                </tr>
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[6]/div/div[2]/ul/li[1]/a</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>verifyValue</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[6]/div/div[2]/div/input</td>
-                    <td>Test Account For Functional</td>
-                </tr>
-                <!--Close Date-->
+                <!--status-->
                 <tr>
                     <td>click</td>
                     <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[7]/a/span[3]</td>
@@ -295,24 +255,19 @@
                 <tr>
                     <td>select</td>
                     <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[7]/div/div[1]/select</td>
-                    <td>Close Date</td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
+                    <td>label=Status</td>
                 </tr>
                 <tr>
                     <td>waitForElementPresent</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[7]/div/div[2]/div[1]/select</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[7]/div/div[2]/div/select</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>select</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[7]/div/div[2]/div[1]/select</td>
-                    <td>Today</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[7]/div/div[2]/div/select</td>
+                    <td>label=In Progress</td>
                 </tr>
-                <!--Stage-->
+                <!--job title-->
                 <tr>
                     <td>click</td>
                     <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[8]/a/span[3]</td>
@@ -326,24 +281,19 @@
                 <tr>
                     <td>select</td>
                     <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[8]/div/div[1]/select</td>
-                    <td>Stage</td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
+                    <td>label=Job Title</td>
                 </tr>
                 <tr>
                     <td>waitForElementPresent</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[8]/div/div[2]/select</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[8]/div/div[2]/input</td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>select</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[8]/div/div[2]/select</td>
-                    <td>Negotiating</td>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[8]/div/div[2]/input</td>
+                    <td>President</td>
                 </tr>
-                <!--Probability-->
+                <!--company name-->
                 <tr>
                     <td>click</td>
                     <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[9]/a/span[3]</td>
@@ -357,12 +307,7 @@
                 <tr>
                     <td>select</td>
                     <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[9]/div/div[1]/select</td>
-                    <td>Probability</td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
+                    <td>label=Company Name</td>
                 </tr>
                 <tr>
                     <td>waitForElementPresent</td>
@@ -372,9 +317,9 @@
                 <tr>
                     <td>type</td>
                     <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[9]/div/div[2]/input</td>
-                    <td>50</td>
+                    <td>Rabbit Technology</td>
                 </tr>
-                <!--Source-->
+                <!--department-->
                 <tr>
                     <td>click</td>
                     <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[10]/a/span[3]</td>
@@ -388,40 +333,19 @@
                 <tr>
                     <td>select</td>
                     <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[10]/div/div[1]/select</td>
-                    <td>Source</td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
+                    <td>label=Department</td>
                 </tr>
                 <tr>
                     <td>waitForElementPresent</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[10]/div/div[2]/select</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[10]/div/div[2]/input</td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>select</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[10]/div/div[2]/select</td>
-                    <td>Tradeshow</td>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[10]/div/div[2]/input</td>
+                    <td>Information Technology</td>
                 </tr>
-                <!--click on search button-->
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[15]/div/a[1]/span[3]</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[3]/a</td>
-                    <td>Test Opportunity ${randomSuffix}</td>
-                </tr>
-                <!--modify structure-->
+                <!--office phone-->
                 <tr>
                     <td>click</td>
                     <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[11]/a/span[3]</td>
@@ -435,32 +359,205 @@
                 <tr>
                     <td>select</td>
                     <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[11]/div/div[1]/select</td>
-                    <td>Account - Name</td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
+                    <td>label=Office Phone</td>
                 </tr>
                 <tr>
                     <td>waitForElementPresent</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[11]/div/div[2]/input[2]</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[11]/div/div[2]/input</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>type</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[11]/div/div[2]/input[2]</td>
-                    <td>Account Does Not Exist</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[11]/div/div[2]/input</td>
+                    <td>456-777-6655</td>
                 </tr>
+                <!--source-->
                 <tr>
                     <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[16]/div/a[1]/span[3]</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[12]/a/span[3]</td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
+                    <td>waitForElementPresent</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[12]/div/div[1]/select</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>select</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[12]/div/div[1]/select</td>
+                    <td>label=Source</td>
+                </tr>
+                <tr>
+                    <td>waitForElementPresent</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[12]/div/div[2]/select</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>select</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[12]/div/div[2]/select</td>
+                    <td>label=Inbound Call</td>
+                </tr>
+                <!--mobile phone-->
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[13]/a/span[3]</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForElementPresent</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[13]/div/div[1]/select</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>select</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[13]/div/div[1]/select</td>
+                    <td>label=Mobile Phone</td>
+                </tr>
+                <tr>
+                    <td>waitForElementPresent</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[13]/div/div[2]/input</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[13]/div/div[2]/input</td>
+                    <td>260-683-9374</td>
+                </tr>
+                <!--office fax-->
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[14]/a/span[3]</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForElementPresent</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[14]/div/div[1]/select</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>select</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[14]/div/div[1]/select</td>
+                    <td>label=Office Fax</td>
+                </tr>
+                <tr>
+                    <td>waitForElementPresent</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[14]/div/div[2]/input</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[14]/div/div[2]/input</td>
+                    <td>316-455-2309</td>
+                </tr>
+                <!--Any Email Address-->
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[15]/a/span[3]</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForElementPresent</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[15]/div/div[1]/select</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>select</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[15]/div/div[1]/select</td>
+                    <td>label=Any Email Address</td>
+                </tr>
+                <tr>
+                    <td>waitForElementPresent</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[15]/div/div[2]/input</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[15]/div/div[2]/input</td>
+                    <td>sally1@rabbit.com</td>
+                </tr>
+                <!--industry-->
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[16]/a/span[3]</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForElementPresent</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[16]/div/div[1]/select</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>select</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[16]/div/div[1]/select</td>
+                    <td>label=Industry</td>
+                </tr>
+                <tr>
+                    <td>waitForElementPresent</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[16]/div/div[2]/select</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>select</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[16]/div/div[2]/select</td>
+                    <td>label=Financial Services</td>
+                </tr>
+                <!--website-->
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[17]/a/span[3]</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForElementPresent</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[17]/div/div[1]/select</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>select</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[17]/div/div[1]/select</td>
+                    <td>label=Website</td>
+                </tr>
+                <tr>
+                    <td>waitForElementPresent</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[17]/div/div[2]/input</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[17]/div/div[2]/input</td>
+                    <td>http://www.rabbit.com</td>
+                </tr>
+                <!--chech search result-->
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[22]/div/a[1]</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[3]/a</td>
+                    <td>Silly Sally ${randomSuffix}</td>
+                </tr>
+                <!--modify structure-->
+                <tr>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[4]/div/div[2]/input</td>
+                    <td>Sam</td>
+                </tr>
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[21]/a</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForElementPresent</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[17]/div/div[2]/input</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[22]/div/a[1]</td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td>waitForText</td>
@@ -468,23 +565,45 @@
                     <td>No results found</td>
                 </tr>
                 <tr>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[21]/div/input</td>
+                    <td>(1 OR 2) AND 3 AND 4 AND 5 AND 6 AND 7 AND 8 AND 9 AND 10 AND 11 AND 12 AND 13 AND 14</td>
+                </tr>
+                <tr>
                     <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[15]/a</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[22]/div/a[1]</td>
                     <td></td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[3]/a</td>
+                    <td>Silly Sally ${randomSuffix}</td>
+                </tr>
+                <!--items i own-->
+                <!--change owner to super user-->
+                <tr>
+                    <td>clickAndWait</td>
+                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[7]/a</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForPageToLoad</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
                 </tr>
                 <tr>
                     <td>waitForElementPresent</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[15]/div/input</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[3]/div/div[1]/div/a/span[2]</td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>type</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[15]/div/input</td>
-                    <td>(1 AND 2 AND 3 AND 4 AND 5 AND 6 AND 7) OR 8</td>
-                </tr>
-                <tr>
                     <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[16]/div/a[1]/span[3]</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[3]/div/div[1]/div/a/span[2]</td>
                     <td></td>
                 </tr>
                 <tr>
@@ -494,35 +613,42 @@
                 </tr>
                 <tr>
                     <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[3]/a</td>
-                    <td>Test Opportunity ${randomSuffix}</td>
+                    <td>//html/body/div[4]/div[1]/span</td>
+                    <td>User Search</td>
                 </tr>
-                <!--clear search result-->
+                <tr>
+                    <td>waitForElementPresent</td>
+                    <td>//html/body/div[4]/div[2]/div/div/div[1]/div/form/div[2]/table/tbody/tr/td/input</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>sendKeys</td>
+                    <td>//html/body/div[4]/div[2]/div/div/div[1]/div/form/div[2]/table/tbody/tr/td/input</td>
+                    <td>Super User</td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/div[4]/div[2]/div/div/div[2]/div/div[2]/table/tbody/tr/td/a</td>
+                    <td>Super User</td>
+                </tr>
                 <tr>
                     <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[5]/a[3]/span[2]</td>
+                    <td>//html/body/div[4]/div[2]/div/div/div[2]/div/div[2]/table/tbody/tr/td/a</td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>waitForTextNotPresent</td>
-                    <td>Criteria Selected</td>
-                    <td></td>
+                    <td>waitForValue</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[3]/div/div[1]/div/input</td>
+                    <td>Super User</td>
                 </tr>
-                <!--Load Demo Data-->
-				<tr>
-					<td>open</td>
-					<td>index.php/zurmo/demo/loadOpportunitySampler</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForPageToLoad</td>
-					<td></td>
-					<td></td>
-				</tr>
-                <!--go to opportunities list-->
                 <tr>
-                    <td>open</td>
-                    <td>index.php</td>
+                    <td>clickAndWait</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[2]/div/div/a[1]/span[3]</td>
                     <td></td>
                 </tr>
                 <tr>
@@ -537,12 +663,18 @@
                 </tr>
                 <tr>
                     <td>waitForText</td>
-                    <td>//html/body/section/nav/div[1]/ul/li[6]/a/span</td>
-                    <td>Opportunities</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[1]/h3</td>
+                    <td>Details</td>
+                </tr>
+                <!--go to leads list view-->
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/nav/div[1]/ul/li[4]/a/span</td>
+                    <td>Leads</td>
                 </tr>
                 <tr>
                     <td>clickAndWait</td>
-                    <td>//html/body/section/nav/div[1]/ul/li[6]/a/span</td>
+                    <td>//html/body/section/nav/div[1]/ul/li[4]/a/span</td>
                     <td></td>
                 </tr>
                 <tr>
@@ -560,7 +692,18 @@
                     <td>//html/body/section/div[1]/div[2]/div/form/div[5]/a[4]</td>
                     <td>Items I Own</td>
                 </tr>
-                <!--items I own-->
+                <!--clear search result-->
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[5]/a[3]/span[2]</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForTextNotPresent</td>
+                    <td>Criteria Selected</td>
+                    <td></td>
+                </tr>
+                <!--click on items i own-->
                 <tr>
                     <td>click</td>
                     <td>//html/body/section/div[1]/div[2]/div/form/div[5]/a[4]</td>
@@ -572,29 +715,19 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td>assertSelectedLabel</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[4]/div/div[1]/select</td>
-                    <td>Only Items I Own</td>
-                </tr>
-                <tr>
-                    <td>assertChecked</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[4]/div/div[2]/label/input</td>
+                    <td>waitForElementPresent</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[9]/div/a[1]</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[9]/div/a[1]/span[3]</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[9]/div/a[1]</td>
                     <td></td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
                 </tr>
                 <tr>
                     <td>waitForText</td>
                     <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[3]/a</td>
-                    <td>Test Opportunity For Functional</td>
+                    <td>Silly Sally ${randomSuffix}</td>
                 </tr>
                 <!--clear search result-->
                 <tr>
@@ -607,18 +740,17 @@
                     <td>Criteria Selected</td>
                     <td></td>
                 </tr>
-                <!--save search by account-name -->
+                <!--save search by name -->
                 <tr>
                     <td>click</td>
                     <td>//html/body/section/div[1]/div[2]/div/form/div[5]/a[1]</td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>waitForElementPresent</td>
+                    <td>waitForText</td>
                     <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[4]/a/span[3]</td>
-                    <td></td>
+                    <td>Add criteria</td>
                 </tr>
-                <!--account-name-->
                 <tr>
                     <td>click</td>
                     <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[4]/a/span[3]</td>
@@ -632,17 +764,17 @@
                 <tr>
                     <td>select</td>
                     <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[4]/div/div[1]/select</td>
-                    <td>Account - Name</td>
+                    <td>label=Name</td>
                 </tr>
                 <tr>
                     <td>waitForElementPresent</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[4]/div/div[2]/input[2]</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[4]/div/div[2]/input</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>type</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[4]/div/div[2]/input[2]</td>
-                    <td>Test Account For Functional</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[4]/div/div[2]/input</td>
+                    <td>Silly Sally ${randomSuffix}</td>
                 </tr>
                 <tr>
                     <td>click</td>
@@ -650,46 +782,25 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <tr>
-                    <td>waitForElementPresent</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[7]/input[1]</td>
-                    <td></td>
-                </tr>
-                <tr>
                     <td>type</td>
                     <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[7]/input[1]</td>
-                    <td>SearchByAccountName</td>
+                    <td>SearchByName</td>
                 </tr>
                 <tr>
                     <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[7]/a/span[3]</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[7]/a/span[1]</td>
                     <td></td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
                 </tr>
                 <tr>
                     <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[9]/div/a[1]/span[3]</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[9]/div/a[1]</td>
                     <td></td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
                 </tr>
                 <tr>
                     <td>waitForText</td>
                     <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[3]/a</td>
-                    <td>Test Opportunity ${randomSuffix}</td>
+                    <td>Silly Sally ${randomSuffix}</td>
                 </tr>
-                <!--clear search result-->
                 <tr>
                     <td>click</td>
                     <td>//html/body/section/div[1]/div[2]/div/form/div[5]/a[3]/span[2]</td>
@@ -699,6 +810,31 @@
                     <td>waitForTextNotPresent</td>
                     <td>Criteria Selected</td>
                     <td></td>
+                </tr>
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[5]/a[1]</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[4]/a/span[3]</td>
+                    <td>Add criteria</td>
+                </tr>
+                <tr>
+                    <td>select</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[1]/select</td>
+                    <td>SearchByName</td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[3]/a</td>
+                    <td>Silly Sally ${randomSuffix}</td>
                 </tr>
                 <!--remove saved search-->
                 <tr>
@@ -707,34 +843,9 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td>waitForElementPresent</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[1]/select</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>select</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[1]/select</td>
-                    <td>SearchByAccountName</td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <tr>
                     <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[3]/a</td>
-                    <td>Test Opportunity ${randomSuffix}</td>
-                </tr>
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[5]/a[1]</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForElementPresent</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[6]/a</td>
-                    <td></td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[5]/a/span[3]</td>
+                    <td>Add criteria</td>
                 </tr>
                 <tr>
                     <td>click</td>
@@ -750,11 +861,6 @@
                     <td>click</td>
                     <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[7]/a[2]</td>
                     <td></td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
                 </tr>
                 <!--clear search result-->
                 <tr>
@@ -774,11 +880,16 @@
                     <td></td>
                 </tr>
                 <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[4]/a/span[3]</td>
+                    <td>Add criteria</td>
+                </tr>
+                <tr>
                     <td>waitForElementNotPresent</td>
                     <td>//html/body/section/div[1]/div[2]/div/form/div[3]/div[1]/select/option[2]</td>
                     <td></td>
                 </tr>
-				<tr>
+                <tr>
                     <td>setSpeed</td>
                     <td>0</td>
                     <td></td>
