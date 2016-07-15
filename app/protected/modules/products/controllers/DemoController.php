@@ -41,7 +41,7 @@
          * Special method to load each type of product.
          */
         public function actionLoadProductsSampler()
-        {
+        {   
             if (!Group::isUserASuperAdministrator(Yii::app()->user->userModel))
             {
                 throw new NotSupportedException();
@@ -50,7 +50,7 @@
             //Create test account for product functional test on related list sorting, product related view.
             $account        = new Account();
             $account->owner = Yii::app()->user->userModel;
-            $account->name  = 'My Account For Product Test';
+            $account->name  = 'Test Account For Product Test';
             $saved          = $account->save();
             if (!$saved)
             {
@@ -58,20 +58,20 @@
             }
 
             //Load 6 so there is sufficient data for product related view pagination testing.
-            for ($i = 0; $i < 8; $i++)
+            for ($i = 1; $i <= 12; $i++)
             {
                 $product                            = new Product();
-                if ($i < 6)
+                if ($i < 4)
                 {
                     $product->name                  = 'Product with open stage '. $i;
                     $product->stage->value          = 'Open';
                 }
-                elseif ($i == 6)
+                elseif ($i > 4 && $i < 8)
                 {
                     $product->name                  = 'Product with lost stage '. $i;
                     $product->stage->value          = 'Lost';
                 }
-                elseif ($i == 7)
+                else
                 {
                     $product->name                  = 'Product with won stage '. $i;
                     $product->stage->value          = 'Won';
