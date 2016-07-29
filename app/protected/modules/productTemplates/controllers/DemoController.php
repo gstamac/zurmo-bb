@@ -34,56 +34,50 @@
      * "Copyright Zurmo Inc. 2015. All rights reserved".
      ********************************************************************************/
 
-    Yii::import('application.modules.products.controllers.DefaultController', true);
-    class ProductsDemoController extends ProductsDefaultController
+    Yii::import('application.modules.productTemplates.controllers.DefaultController', true);
+    class ProductTemplatesDemoController extends ProductTemplatesDefaultController
     {
+
         /**
-         * Special method to load each type of product.
+         * Special method to load product template.
          */
-        public function actionLoadProductsSampler()
-        {   
+        public function actionLoadProductTemplatesSampler()
+        {
             if (!Group::isUserASuperAdministrator(Yii::app()->user->userModel))
             {
                 throw new NotSupportedException();
             }
 
-            //Create test account for product functional test on related list sorting, product related view.
-            $account        = new Account();
-            $account->owner = Yii::app()->user->userModel;
-            $account->name  = 'Test Account For Product Test';
-            $saved          = $account->save();
-            if (!$saved)
-            {
-                throw new NotSupportedException();
-            }
-
-            //Load 12 so there is sufficient data for product related view pagination testing.
+            //Load 12 so there is sufficient data for product template related view pagination testing.
             for ($i = 1; $i <= 12; $i++)
             {
-                $product                            = new Product();
-                if ($i < 4)
-                {
-                    $product->name                  = 'Product with open stage '. $i;
-                    $product->stage->value          = 'Open';
-                }
-                elseif ($i > 4 && $i < 8)
-                {
-                    $product->name                  = 'Product with lost stage '. $i;
-                    $product->stage->value          = 'Lost';
-                }
-                else
-                {
-                    $product->name                  = 'Product with won stage '. $i;
-                    $product->stage->value          = 'Won';
-                }
-                $product->owner                     = Yii::app()->user->userModel;
-                $product->quantity                  = mt_rand(1, 95);
-                $product->account                   = $account;
-                $product->type                      = 1;
-                $product->sellPrice->value          = 786.0;
-                $product->sellPrice->currency->code = 'USD';
-                $product->priceFrequency            = 2;
-                $saved                              = $product->save();
+
+                $currencies = Currency::getAll('id');
+                $currencyIndex                   = array_rand($currencies);
+
+                $productTemplate                            = new ProductTemplate();
+                $productTemplate->name                      = 'Product Template '. $i;
+                $productTemplate->status                    = 2;
+                $productTemplate->type                      = 1;
+                $productTemplate->priceFrequency            = 2;
+                $sellPriceFormula                           = new SellPriceFormula();
+                $sellPriceFormula->type                     = SellPriceFormula::TYPE_EDITABLE;
+                $productTemplate->sellPriceFormula          = $sellPriceFormula;
+                $currencyValue                              = new CurrencyValue();
+                $currencyValue->currency                    = $currencies[$currencyIndex];
+                $productTemplate->cost                      = $currencyValue;
+                $productTemplate->cost->value               = 200;
+                $currencyValue                              = new CurrencyValue();
+                $currencyValue->currency                    = $currencies[$currencyIndex];
+                $productTemplate->sellPrice                 = $currencyValue;
+                $productTemplate->sellPrice->value          = 200;
+                $currencyValue                              = new CurrencyValue();
+                $currencyValue->currency                    = $currencies[$currencyIndex];
+                $productTemplate->listPrice                 = $currencyValue;
+                $productTemplate->listPrice->value          = 200;
+
+                $saved                                      = $productTemplate->save();
+
                 if (!$saved)
                 {
                     throw new NotSupportedException();

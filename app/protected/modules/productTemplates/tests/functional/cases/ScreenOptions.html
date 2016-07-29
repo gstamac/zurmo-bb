@@ -4,13 +4,13 @@
     <head profile="http://selenium-ide.openqa.org/profiles/test-case">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <link rel="selenium.base" href="http://localhost/"/>
-        <title>CheckValidationOfCreateProductForm</title>
+        <title>ScreenOptions</title>
     </head>
     <body>
         <table cellpadding="1" cellspacing="1" border="1">
             <thead>
                 <tr>
-                    <td rowspan="1" colspan="3">Check Validation Of Create Product Form</td>
+                    <td rowspan="1" colspan="3">Screen Options</td>
                 </tr>
             </thead>
             <tbody>
@@ -19,7 +19,7 @@
                     <td>45000</td>
                     <td></td>
                 </tr>
-                <!--go to create product form-->
+                <!--go to catalog items list view-->
                 <tr>
                     <td>open</td>
                     <td>index.php</td>
@@ -71,18 +71,8 @@
                     <td>How do Products work in Zurmo?</td>
                 </tr>
                 <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[1]/div[1]/a[2]</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForTextPresent</td>
-                    <td>Create Product</td>
-                    <td></td>
-                </tr>
-                <tr>
                     <td>clickAndWait</td>
-                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[1]/div[1]/ul/li/a</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[1]/div[2]/a[1]/span</td>
                     <td></td>
                 </tr>
                 <tr>
@@ -97,44 +87,90 @@
                 </tr>
                 <tr>
                     <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[2]/div[1]/h1/span/span</td>
-                    <td>Create Product</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
+                    <td>How do Products work in Zurmo?</td>
                 </tr>
-                <!--check default values-->
+                <!--check screen options-->
                 <tr>
-                    <td>assertSelectedLabel</td>
-                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/form/div[1]/div[1]/div/table/tbody/tr[8]/td/div/select</td>
-                    <td>Product</td>
-                </tr>
-                <tr>
-                    <td>assertSelectedLabel</td>
-                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/form/div[1]/div[1]/div/table/tbody/tr[9]/td/div/select</td>
-                    <td>One Time</td>
+                    <td>waitForTextPresent</td>
+                    <td>is a collection of products and services your business offer.</td>
+                    <td></td>
                 </tr>
                 <tr>
-                    <td>assertSelectedLabel</td>
-                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/form/div[1]/div[1]/div/table/tbody/tr[10]/td/div/div[1]/div/select</td>
-                    <td>USD</td>
+                    <td>waitForTextPresent</td>
+                    <td>that describes and categorizes your item and lists preset pricing information</td>
+                    <td></td>
                 </tr>
                 <tr>
-                    <td>assertValue</td>
-                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/form/div[1]/div[1]/div/table/tbody/tr[10]/td/div/div[2]/input</td>
-                    <td>0</td>
+                    <td>waitForTextPresent</td>
+                    <td>record is an actual customer order. Select an existing item from the catalog or create a free-standing product</td>
+                    <td></td>
                 </tr>
                 <tr>
-                    <td>assertSelectedLabel</td>
-                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/form/div[1]/div[1]/div/table/tbody/tr[11]/td/div/select</td>
-                    <td>Open</td>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[1]/div[1]/p</td>
+                    <td>CatalogA Catalog is a collection of products and services your business offer.</td>
                 </tr>
-                <!--check form validation-->
                 <tr>
-                    <td>type</td>
-                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/form/div[1]/div[1]/div/table/tbody/tr[10]/td/div/div[2]/input</td>
-                    <td>abc</td>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[1]/div[2]/p</td>
+                    <td>Catalog ItemCreate a Catalog Item that describes and categorizes your item and lists preset pricing information</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[1]/div[3]/p</td>
+                    <td>ProductA Product record is an actual customer order. Select an existing item from the catalog or create a free-standing product</td>
+                </tr>
+                <!--dismiss screen options-->
+                <tr>
+                    <td>waitForElementPresent</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[2]/a</td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/form/div[2]/div/div/a[1]/span[3]</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[2]/a</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForTextNotPresent</td>
+                    <td>is a collection of products and services your business offer.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForTextNotPresent</td>
+                    <td>that describes and categorizes your item and lists preset pricing information</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForTextNotPresent</td>
+                    <td>record is an actual customer order. Select an existing item from the catalog or create a free-standing product</td>
+                    <td></td>
+                </tr>
+                <!--show screen options-->
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[2]/div/a/i[2]</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForTextPresent</td>
+                    <td>Screen Options</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForTextPresent</td>
+                    <td>Show intro message</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[2]/div/ul/li/div/label/input</td>
                     <td></td>
                 </tr>
                 <tr>
@@ -144,33 +180,18 @@
                 </tr>
                 <tr>
                     <td>waitForTextPresent</td>
-                    <td>Name cannot be blank.</td>
+                    <td>is a collection of products and services your business offer.</td>
                     <td></td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/form/div[1]/div[1]/div/table/tbody/tr[2]/td/div</td>
-                    <td>Name cannot be blank.</td>
                 </tr>
                 <tr>
                     <td>waitForTextPresent</td>
-                    <td>Quantity cannot be blank.</td>
+                    <td>that describes and categorizes your item and lists preset pricing information</td>
                     <td></td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/form/div[1]/div[1]/div/table/tbody/tr[3]/td/div</td>
-                    <td>Quantity cannot be blank.</td>
                 </tr>
                 <tr>
                     <td>waitForTextPresent</td>
-                    <td>Value must be float.</td>
+                    <td>record is an actual customer order. Select an existing item from the catalog or create a free-standing product</td>
                     <td></td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/form/div[1]/div[1]/div/table/tbody/tr[10]/td/div/div[2]/div</td>
-                    <td>Value must be float.</td>
                 </tr>
             </tbody>
         </table>
