@@ -4,13 +4,13 @@
     <head profile="http://selenium-ide.openqa.org/profiles/test-case">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <link rel="selenium.base" href="http://localhost/"/>
-        <title>ProductsListViewHideShowColumns</title>
+        <title>CatalogItemsListViewHideShowColumns</title>
     </head>
     <body>
         <table cellpadding="1" cellspacing="1" border="1">
             <thead>
                 <tr>
-                    <td rowspan="1" colspan="3">Products List View Hide Show Columns</td>
+                    <td rowspan="1" colspan="3">Catalog Items List View Hide Show Columns</td>
                 </tr>
             </thead>
             <tbody>
@@ -19,7 +19,7 @@
                     <td>45000</td>
                     <td></td>
                 </tr>
-                <!--go to products list view-->
+                <!--go to catalog items list view-->
                 <tr>
                     <td>open</td>
                     <td>index.php</td>
@@ -70,40 +70,14 @@
                     <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
                     <td>How do Products work in Zurmo?</td>
                 </tr>
-                <!--add account column-->
                 <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[5]/a[2]</td>
+                    <td>clickAndWait</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[1]/div[2]/a[1]/span</td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>waitForElementPresent</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
+                    <td>waitForPageToLoad</td>
                     <td></td>
-                </tr>
-                <tr>
-                    <td>waitForElementNotPresent</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[3]/select/option[4]</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>addSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Account</td>
-                </tr>
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[2]/input[1]</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForElementPresent</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[3]/select/option[4]</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[2]/div/a[2]/span[3]</td>
                     <td></td>
                 </tr>
                 <tr>
@@ -113,10 +87,10 @@
                 </tr>
                 <tr>
                     <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/thead/tr/th[5]/a</td>
-                    <td>Account</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
+                    <td>How do Products work in Zurmo?</td>
                 </tr>
-                <!--add catalog item column-->
+                <!--add created by user column-->
                 <tr>
                     <td>click</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[5]/a[2]</td>
@@ -133,64 +107,9 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Contact</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
+                    <td>addSelection</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
                     <td>label=Created By User</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Created Date Time</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Description</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Id</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Modified By User</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Modified Date Time</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Opportunity</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Price Frequency</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Sell Price</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Stage</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Type</td>
                 </tr>
                 <tr>
                     <td>click</td>
@@ -215,9 +134,9 @@
                 <tr>
                     <td>waitForText</td>
                     <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/thead/tr/th[6]/a</td>
-                    <td>Catalog Item</td>
+                    <td>Created By User</td>
                 </tr>
-                <!--add contact column-->
+                <!--add created date time column-->
                 <tr>
                     <td>click</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[5]/a[2]</td>
@@ -232,16 +151,6 @@
                     <td>waitForElementNotPresent</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[3]/select/option[6]</td>
                     <td></td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Created By User</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Created Date Time</td>
                 </tr>
                 <tr>
                     <td>removeSelection</td>
@@ -266,22 +175,17 @@
                 <tr>
                     <td>removeSelection</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Opportunity</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
                     <td>label=Price Frequency</td>
                 </tr>
                 <tr>
                     <td>removeSelection</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Sell Price</td>
+                    <td>label=Sell Price Formula</td>
                 </tr>
                 <tr>
                     <td>removeSelection</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Stage</td>
+                    <td>label=Status</td>
                 </tr>
                 <tr>
                     <td>removeSelection</td>
@@ -311,9 +215,9 @@
                 <tr>
                     <td>waitForText</td>
                     <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/thead/tr/th[7]/a</td>
-                    <td>Contact</td>
+                    <td>Created Date Time</td>
                 </tr>
-                <!--add created by user column-->
+                <!--add description column-->
                 <tr>
                     <td>click</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[5]/a[2]</td>
@@ -328,16 +232,6 @@
                     <td>waitForElementNotPresent</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[3]/select/option[7]</td>
                     <td></td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Created Date Time</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Description</td>
                 </tr>
                 <tr>
                     <td>removeSelection</td>
@@ -357,22 +251,17 @@
                 <tr>
                     <td>removeSelection</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Opportunity</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
                     <td>label=Price Frequency</td>
                 </tr>
                 <tr>
                     <td>removeSelection</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Sell Price</td>
+                    <td>label=Sell Price Formula</td>
                 </tr>
                 <tr>
                     <td>removeSelection</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Stage</td>
+                    <td>label=Status</td>
                 </tr>
                 <tr>
                     <td>removeSelection</td>
@@ -402,9 +291,9 @@
                 <tr>
                     <td>waitForText</td>
                     <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/thead/tr/th[8]/a</td>
-                    <td>Created By User</td>
+                    <td>Description</td>
                 </tr>
-                <!--add created date time column-->
+                <!--add id column-->
                 <tr>
                     <td>click</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[5]/a[2]</td>
@@ -423,16 +312,6 @@
                 <tr>
                     <td>removeSelection</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Description</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Id</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
                     <td>label=Modified By User</td>
                 </tr>
                 <tr>
@@ -443,22 +322,17 @@
                 <tr>
                     <td>removeSelection</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Opportunity</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
                     <td>label=Price Frequency</td>
                 </tr>
                 <tr>
                     <td>removeSelection</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Sell Price</td>
+                    <td>label=Sell Price Formula</td>
                 </tr>
                 <tr>
                     <td>removeSelection</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Stage</td>
+                    <td>label=Status</td>
                 </tr>
                 <tr>
                     <td>removeSelection</td>
@@ -488,9 +362,9 @@
                 <tr>
                     <td>waitForText</td>
                     <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/thead/tr/th[9]/a</td>
-                    <td>Created Date Time</td>
+                    <td>Id</td>
                 </tr>
-                <!--add description column-->
+                <!--add modified by user column-->
                 <tr>
                     <td>click</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[5]/a[2]</td>
@@ -509,22 +383,7 @@
                 <tr>
                     <td>removeSelection</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Id</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Modified By User</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
                     <td>label=Modified Date Time</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Opportunity</td>
                 </tr>
                 <tr>
                     <td>removeSelection</td>
@@ -534,12 +393,12 @@
                 <tr>
                     <td>removeSelection</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Sell Price</td>
+                    <td>label=Sell Price Formula</td>
                 </tr>
                 <tr>
                     <td>removeSelection</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Stage</td>
+                    <td>label=Status</td>
                 </tr>
                 <tr>
                     <td>removeSelection</td>
@@ -569,9 +428,9 @@
                 <tr>
                     <td>waitForText</td>
                     <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/thead/tr/th[10]/a</td>
-                    <td>Description</td>
+                    <td>Modified By User</td>
                 </tr>
-                <!--add id column-->
+                <!--add modified date time column-->
                 <tr>
                     <td>click</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[5]/a[2]</td>
@@ -590,32 +449,17 @@
                 <tr>
                     <td>removeSelection</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Modified By User</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Modified Date Time</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Opportunity</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
                     <td>label=Price Frequency</td>
                 </tr>
                 <tr>
                     <td>removeSelection</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Sell Price</td>
+                    <td>label=Sell Price Formula</td>
                 </tr>
                 <tr>
                     <td>removeSelection</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Stage</td>
+                    <td>label=Status</td>
                 </tr>
                 <tr>
                     <td>removeSelection</td>
@@ -645,9 +489,9 @@
                 <tr>
                     <td>waitForText</td>
                     <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/thead/tr/th[11]/a</td>
-                    <td>Id</td>
+                    <td>Modified Date Time</td>
                 </tr>
-                <!--add modified by user column-->
+                <!--add price frequency column-->
                 <tr>
                     <td>click</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[5]/a[2]</td>
@@ -666,27 +510,12 @@
                 <tr>
                     <td>removeSelection</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Modified Date Time</td>
+                    <td>label=Sell Price Formula</td>
                 </tr>
                 <tr>
                     <td>removeSelection</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Opportunity</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Price Frequency</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Sell Price</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Stage</td>
+                    <td>label=Status</td>
                 </tr>
                 <tr>
                     <td>removeSelection</td>
@@ -716,9 +545,9 @@
                 <tr>
                     <td>waitForText</td>
                     <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/thead/tr/th[12]/a</td>
-                    <td>Modified By User</td>
+                    <td>Price Frequency</td>
                 </tr>
-                <!--add modified date time column-->
+                <!--add sell price formula column-->
                 <tr>
                     <td>click</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[5]/a[2]</td>
@@ -737,22 +566,7 @@
                 <tr>
                     <td>removeSelection</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Opportunity</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Price Frequency</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Sell Price</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Stage</td>
+                    <td>label=Status</td>
                 </tr>
                 <tr>
                     <td>removeSelection</td>
@@ -782,9 +596,9 @@
                 <tr>
                     <td>waitForText</td>
                     <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/thead/tr/th[13]/a</td>
-                    <td>Modified Date Time</td>
+                    <td>Sell Price Formula</td>
                 </tr>
-                <!--add opportunity column-->
+                <!--add status column-->
                 <tr>
                     <td>click</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[5]/a[2]</td>
@@ -799,21 +613,6 @@
                     <td>waitForElementNotPresent</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[3]/select/option[13]</td>
                     <td></td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Price Frequency</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Sell Price</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Stage</td>
                 </tr>
                 <tr>
                     <td>removeSelection</td>
@@ -843,9 +642,9 @@
                 <tr>
                     <td>waitForText</td>
                     <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/thead/tr/th[14]/a</td>
-                    <td>Opportunity</td>
+                    <td>Status</td>
                 </tr>
-                <!--add price frequency column-->
+                <!--add type column-->
                 <tr>
                     <td>click</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[5]/a[2]</td>
@@ -860,21 +659,6 @@
                     <td>waitForElementNotPresent</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[3]/select/option[14]</td>
                     <td></td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Sell Price</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Stage</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Type</td>
                 </tr>
                 <tr>
                     <td>click</td>
@@ -899,144 +683,6 @@
                 <tr>
                     <td>waitForText</td>
                     <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/thead/tr/th[15]/a</td>
-                    <td>Price Frequency</td>
-                </tr>
-                <!--add sell price column-->
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[5]/a[2]</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForElementPresent</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForElementNotPresent</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[3]/select/option[15]</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Stage</td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Type</td>
-                </tr>
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[2]/input[1]</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForElementPresent</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[3]/select/option[15]</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[2]/div/a[2]/span[3]</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/thead/tr/th[16]/a</td>
-                    <td>Sell Price</td>
-                </tr>
-                <!--add stage column-->
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[5]/a[2]</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForElementPresent</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForElementNotPresent</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[3]/select/option[16]</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>removeSelection</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td>label=Type</td>
-                </tr>
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[2]/input[1]</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForElementPresent</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[3]/select/option[16]</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[2]/div/a[2]/span[3]</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/thead/tr/th[17]/a</td>
-                    <td>Stage</td>
-                </tr>
-                <!--add type column-->
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[5]/a[2]</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForElementPresent</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[1]/select</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForElementNotPresent</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[3]/select/option[17]</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[2]/input[1]</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForElementPresent</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[1]/table/tbody/tr/td/div/div[3]/select/option[17]</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[4]/div[2]/div/a[2]/span[3]</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/thead/tr/th[18]/a</td>
                     <td>Type</td>
                 </tr>
                 <!--reset columns-->
@@ -1062,7 +708,7 @@
                 </tr>
                 <tr>
                     <td>waitForElementNotPresent</td>
-                    <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/thead/tr/th[5]/a</td>
+                    <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/thead/tr/th[6]/a</td>
                     <td></td>
                 </tr>
             </tbody>
