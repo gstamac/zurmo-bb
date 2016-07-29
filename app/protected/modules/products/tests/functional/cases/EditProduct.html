@@ -4,13 +4,13 @@
     <head profile="http://selenium-ide.openqa.org/profiles/test-case">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <link rel="selenium.base" href="http://localhost/"/>
-        <title>EditCatalogItem</title>
+        <title>EditProduct</title>
     </head>
     <body>
         <table cellpadding="1" cellspacing="1" border="1">
             <thead>
                 <tr>
-                    <td rowspan="1" colspan="3">Edit Catalog Item</td>
+                    <td rowspan="1" colspan="3">Edit Product</td>
                 </tr>
             </thead>
             <tbody>
@@ -19,7 +19,7 @@
                     <td>45000</td>
                     <td></td>
                 </tr>
-                <!--go to catalog items list view-->
+                <!--go to products list view-->
                 <tr>
                     <td>open</td>
                     <td>index.php</td>
@@ -70,36 +70,16 @@
                     <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
                     <td>How do Products work in Zurmo?</td>
                 </tr>
-                <tr>
-                    <td>clickAndWait</td>
-                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[1]/div[2]/a[1]/span</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForPageToLoad</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
-                    <td>How do Products work in Zurmo?</td>
-                </tr>
-                <!--select catalog item created in functional test-->
+                <!--select product created in functional test-->
                 <tr>
                     <td>waitForNotText</td>
                     <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/tbody/tr/td[2]/a</td>
-                    <td>Test Catalog Item ${randomSuffix}</td>
+                    <td>Test Product ${randomSuffix}</td>
                 </tr>
                 <tr>
                     <td>sendKeys</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[2]/table/tbody/tr/td/input</td>
-                    <td>Test Catalog Item ${randomSuffix}</td>
+                    <td>Test Product ${randomSuffix}</td>
                 </tr>
                 <tr>
                     <td>waitForCondition</td>
@@ -109,14 +89,14 @@
                 <tr>
                     <td>waitForText</td>
                     <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/tbody/tr/td[2]/a</td>
-                    <td>Test Catalog Item ${randomSuffix}</td>
+                    <td>Test Product ${randomSuffix}</td>
                 </tr>
                 <tr>
                     <td>verifyValue</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[2]/table/tbody/tr/td/input</td>
-                    <td>Test Catalog Item ${randomSuffix}</td>
+                    <td>Test Product ${randomSuffix}</td>
                 </tr>
-                <!--go in detail view of catalog item-->
+                <!--go to edit view of product-->
                 <tr>
                     <td>click</td>
                     <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/tbody/tr/td[2]/a</td>
@@ -135,9 +115,9 @@
                 <tr>
                     <td>waitForText</td>
                     <td>//html/body/section/div[1]/div[2]/div[1]/h1/span/span</td>
-                    <td>Test Catalog Item ${randomSuffix}</td>
+                    <td>Test Product ${randomSuffix}</td>
                 </tr>
-                <!--edit catalog item-->
+                <!--edit product-->
                 <tr>
                     <td>waitForElementPresent</td>
                     <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/div/ul/li/ul/li[1]/a/span</td>
@@ -165,12 +145,12 @@
                 </tr>
                 <tr>
                     <td>type</td>
-                    <td>//html/body/section/div[1]/div[2]/div[1]/div/form/div[1]/div/div/table/tbody/tr[2]/td/textarea</td>
-                    <td>test description edited</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/form/div[1]/div[1]/div/table/tbody/tr[3]/td/input</td>
+                    <td>40000</td>
                 </tr>
                 <tr>
                     <td>clickAndWait</td>
-                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/form/div[2]/div/div/a[2]/span[3]</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/form/div[2]/div/div/a[1]/span[3]</td>
                     <td></td>
                 </tr>
                 <tr>
@@ -183,21 +163,16 @@
                     <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
                     <td>30000</td>
                 </tr>
-                <!--verify values after saving catalog item-->
+                <!--verify values after editing product-->
                 <tr>
                     <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[2]/div/h1/span/span</td>
-                    <td>Test Catalog Item ${randomSuffix}</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/h1/span/span</td>
+                    <td>Test Product ${randomSuffix}</td>
                 </tr>
                 <tr>
                     <td>assertText</td>
-                    <td>//html/body/section/div[1]/div[2]/div/div[2]/div/table/tbody/tr[1]/td</td>
-                    <td>Test Catalog Item ${randomSuffix}</td>
-                </tr>
-                <tr>
-                    <td>assertText</td>
-                    <td>//html/body/section/div[1]/div[2]/div/div[2]/div/table/tbody/tr[2]/td</td>
-                    <td>test description edited</td>
+                    <td>//html/body/section/div[1]/div[2]/div/div[2]/div/table/tbody/tr[3]/td</td>
+                    <td>40,000</td>
                 </tr>
                 <!--clear search result-->
                 <tr>
@@ -208,26 +183,6 @@
                 <tr>
                     <td>clickAndWait</td>
                     <td>//html/body/section/nav/div[1]/ul/li[9]/a/span</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForPageToLoad</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
-                    <td>How do Products work in Zurmo?</td>
-                </tr>
-                <tr>
-                    <td>clickAndWait</td>
-                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[1]/div[2]/a[1]/span</td>
                     <td></td>
                 </tr>
                 <tr>
