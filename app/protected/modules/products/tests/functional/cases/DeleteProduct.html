@@ -19,7 +19,7 @@
                     <td>45000</td>
                     <td></td>
                 </tr>
-                <!--go to project list-->
+                <!--go to products list view-->
                 <tr>
                     <td>open</td>
                     <td>index.php</td>
@@ -36,13 +36,23 @@
                     <td>30000</td>
                 </tr>
                 <tr>
+                    <td>waitForElementPresent</td>
+                    <td>//html/body/section/nav/div[1]/a</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/nav/div[1]/a</td>
+                    <td></td>
+                </tr>
+                <tr>
                     <td>waitForText</td>
-                    <td>//html/body/section/nav/div[1]/ul/li[8]/a/span</td>
-                    <td>Projects</td>
+                    <td>//html/body/section/nav/div[1]/ul/li[9]/a/span</td>
+                    <td>Products</td>
                 </tr>
                 <tr>
                     <td>clickAndWait</td>
-                    <td>//html/body/section/nav/div[1]/ul/li[8]/a/span</td>
+                    <td>//html/body/section/nav/div[1]/ul/li[9]/a/span</td>
                     <td></td>
                 </tr>
                 <tr>
@@ -58,27 +68,7 @@
                 <tr>
                     <td>waitForText</td>
                     <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
-                    <td>How do Projects work in Zurmo?</td>
-                </tr>
-                <tr>
-                    <td>clickAndWait</td>
-                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[1]/div[2]/a/span</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForPageToLoad</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[5]/a[4]</td>
-                    <td>Items I Own</td>
+                    <td>How do Products work in Zurmo?</td>
                 </tr>
                 <!--select product created in functional test-->
                 <tr>
@@ -140,7 +130,7 @@
                 </tr>
                 <tr>
                     <td>clickAndWait</td>
-                    <td>//html/body/section/div[1]/div[2]/div[1]/nav/div[2]/ul/li[3]/a</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/div/ul/li/ul/li[2]/a/span</td>
                     <td></td>
                 </tr>
                 <tr>
