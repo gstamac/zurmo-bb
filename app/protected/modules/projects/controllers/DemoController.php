@@ -38,7 +38,7 @@
     class ProjectsDemoController extends ProjectsDefaultController
     {
         /**
-         * Special method to load projects for functional test.
+         * Special method to load projects for testing dashboard.
          */
         public function actionLoadProjectsSampler()
         {
@@ -50,6 +50,34 @@
             for ($i = 1; $i <= 8; $i++)
             {
                 $projectName     = $i . ' Test Project';
+                $project         = new Project();
+                $project->name   = $projectName;
+                $project->status = Project::STATUS_ACTIVE;
+                $project->owner  = Yii::app()->user->userModel;
+                $saved           = $project->save();
+                assert('$saved');
+                if (!$saved)
+                {
+                    throw new NotSupportedException();
+                }
+                self::addDemoTasks($project);
+                sleep(2);
+            }
+        }
+
+        /**
+         * Special method to load projects for testing mass update.
+         */
+        public function actionLoadProjectsForMassUpdateSampler()
+        {
+            if (!Group::isUserASuperAdministrator(Yii::app()->user->userModel))
+            {
+                throw new NotSupportedException();
+            }
+
+            for ($i = 1; $i <= 12; $i++)
+            {
+                $projectName     = 'Test Project ' . $i;
                 $project         = new Project();
                 $project->name   = $projectName;
                 $project->status = Project::STATUS_ACTIVE;
