@@ -24,7 +24,7 @@
 					<td>javascript{Math.floor(Math.random()*11000)}</td>
 					<td>randomSuffix</td>
 				</tr>   
-                <!--Load Demo Data-->
+                <!--load demo data-->
 				<tr>
 					<td>open</td>
 					<td>index.php/zurmo/demo/loadAccountSampler</td>
@@ -55,44 +55,73 @@
 					<td></td>
 					<td></td>
 				</tr>
-				<!--Go To Create Project-->
-				<tr>
-					<td>open</td>
-					<td>index.php/projects/default/create</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForPageToLoad</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForCondition</td>
-					<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-					<td>30000</td>
-				</tr>
+				<!--go to create project form-->
+                <tr>
+                    <td>open</td>
+                    <td>index.php</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForPageToLoad</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/nav/div[1]/ul/li[8]/a/span</td>
+                    <td>Projects</td>
+                </tr>
+                <tr>
+                    <td>clickAndWait</td>
+                    <td>//html/body/section/nav/div[1]/ul/li[8]/a/span</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForPageToLoad</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
+                    <td>How do Projects work in Zurmo?</td>
+                </tr>
+                <tr>
+                    <td>clickAndWait</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[1]/div[2]/ul/li/a</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForPageToLoad</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/h1/span/span</td>
+                    <td>Create Project</td>
+                </tr>
 				<tr>
 					<td>waitForText</td>
 					<td>//html/body/section/div[1]/div[2]/div/div/form/div[1]/div[2]/div/h3</td>
 					<td>Rights and Permissions</td>
 				</tr>
-                <tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div/h1/span/span</td>
-					<td>Create Project</td>
-				</tr>
-				<!--Check Form Validation-->
-				<tr>
-					<td>clickAndWait</td>
-					<td>//html/body/section/div[1]/div[2]/div/div/form/div[2]/div/div/a[2]/span</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForText</td>
-					<td>//html/body/section/div[1]/div[2]/div/div/form/div[1]/div[1]/div/table/tbody/tr[1]/td/div</td>
-					<td>Name cannot be blank.</td>
-				</tr>
-				<!--Add Project Details-->
+				<!--add project details-->
                 <tr>
 					<td>waitForElementPresent</td>
 					<td>//html/body/section/div[1]/div[2]/div/div/form/div[1]/div[1]/div/table/tbody/tr[1]/td/input</td>
@@ -106,7 +135,7 @@
 				<tr>
 					<td>type</td>
 					<td>//html/body/section/div[1]/div[2]/div/div/form/div[1]/div[1]/div/table/tbody/tr[2]/td/textarea</td>
-					<td>Test Project description</td>
+					<td>Test project description</td>
 				</tr>
 				<tr>
 					<td>click</td>
@@ -148,7 +177,7 @@
 					<td>//html/body/section/div[1]/div[2]/div/div/form/div[1]/div[2]/div/div[1]/div/input</td>
 					<td>Sam Smith</td>
 				</tr>
-				<!--Link Account To Project-->
+				<!--link account to project-->
 				<tr>
 					<td>sendKeys</td>
 					<td>//html/body/section/div[1]/div[2]/div/div/form/div[1]/div[1]/div/table/tbody/tr[3]/td/ul/li/input</td>
@@ -169,7 +198,7 @@
 					<td>//html/body/section/div[1]/div[2]/div/div/form/div[1]/div[1]/div/table/tbody/tr[3]/td/ul/li[1]/p</td>
 					<td>Test Account For Functional</td>
 				</tr>
-				<!--Link Contact To Project-->
+				<!--link contact to project-->
 				<tr>
 					<td>sendKeys</td>
 					<td>//html/body/section/div[1]/div[2]/div/div/form/div[1]/div[1]/div/table/tbody/tr[4]/td/ul/li/input</td>
@@ -190,7 +219,7 @@
 					<td>//html/body/section/div[1]/div[2]/div/div/form/div[1]/div[1]/div/table/tbody/tr[4]/td/ul/li[1]/p</td>
 					<td>Test Contact For Functional</td>
 				</tr>
-				<!--Link Opportunity To Project-->
+				<!--link opportunity to project-->
 				<tr>
 					<td>sendKeys</td>
 					<td>//html/body/section/div[1]/div[2]/div/div/form/div[1]/div[1]/div/table/tbody/tr[5]/td/ul/li/input</td>
@@ -249,8 +278,13 @@
 				</tr>
                 <tr>
 					<td>waitForText</td>
+					<td>//html/body/section/div[1]/div[2]/div[1]/nav/div[1]/ul/li/div/div/div[1]/strong</td>
+					<td>Test Project ${randomSuffix}</td>
+				</tr>
+                <tr>
+					<td>waitForText</td>
 					<td>//html/body/section/div[1]/div[2]/div[1]/nav/div[1]/ul/li/div/div/div[2]</td>
-					<td>Test Project description</td>
+					<td>Test project description</td>
 				</tr>
 			</tbody>
 		</table>
