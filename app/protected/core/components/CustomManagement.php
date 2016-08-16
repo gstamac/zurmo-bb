@@ -274,5 +274,13 @@
         {
             return array();
         }
+        
+        public function resolveAccountCustomActionsBeforeSave($model)
+        {
+        }
+        
+        public function resolveOpportunityCustomActionsBeforeDelete($model)
+        {
+        }
     }
 ?>
