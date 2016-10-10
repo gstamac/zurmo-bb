@@ -253,27 +253,5 @@
                 throw new NotSupportedException();
             }
         }
-
-        /**
-         * Special method to load project for functional test.
-         */
-        public function actionLoadProjectSampler()
-        {
-            if (!Group::isUserASuperAdministrator(Yii::app()->user->userModel))
-            {
-                throw new NotSupportedException();
-            }
-
-            $project         = new Project();
-            $project->name   = "Test Project For Functional";
-            $project->status = Project::STATUS_ACTIVE;
-            $project->owner  = Yii::app()->user->userModel;
-            $saved           = $project->save();
-            assert('$saved');
-            if (!$saved)
-            {
-                throw new NotSupportedException();
-            }
-        }
     }
 ?>
