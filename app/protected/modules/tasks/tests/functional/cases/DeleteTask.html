@@ -4,13 +4,13 @@
     <head profile="http://selenium-ide.openqa.org/profiles/test-case">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <link rel="selenium.base" href="http://localhost/"/>
-        <title>KanbanBoard</title>
+        <title>Delete Task</title>
     </head>
     <body>
         <table cellpadding="1" cellspacing="1" border="1">
             <thead>
                 <tr>
-                    <td rowspan="1" colspan="3">Kanban Board</td>
+                    <td rowspan="1" colspan="3">Delete Task</td>
                 </tr>
             </thead>
             <tbody>
@@ -19,20 +19,10 @@
                     <td>45000</td>
                     <td></td>
                 </tr>
+                <!--start: go to project list-->
                 <tr>
                     <td>open</td>
-                    <td>index.php/projects/demo/loadProjectsSampler</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForPageToLoad</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <!--Go to task list-->
-                <tr>
-                    <td>open</td>
-                    <td>index.php/tasks/default</td>
+                    <td>index.php</td>
                     <td></td>
                 </tr>
                 <tr>
@@ -46,19 +36,23 @@
                     <td>30000</td>
                 </tr>
                 <tr>
-                    <td>assertText</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[5]/a[2]</td>
-                    <td>Columns</td>
-                </tr>
-                <!--Go to task kanban board view-->
-                <tr>
-                    <td>assertElementPresent</td>
-                    <td>link=Kanban</td>
+                    <td>click</td>
+                    <td>//html/body/section/nav/div[1]/a</td>
                     <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/nav/div[1]/ul/li[8]/a/span</td>
+                    <td>Projects</td>
                 </tr>
                 <tr>
                     <td>clickAndWait</td>
-                    <td>link=Kanban</td>
+                    <td>//html/body/section/nav/div[1]/ul/li[8]/a/span</td>
                     <td></td>
                 </tr>
                 <tr>
@@ -72,160 +66,57 @@
                     <td>30000</td>
                 </tr>
                 <tr>
-                    <td>assertNotText</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[5]/a[2]</td>
-                    <td>Columns</td>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
+                    <td>How do Projects work in Zurmo?</td>
                 </tr>
-                <!--Search Task-->
+                <tr>
+                    <td>clickAndWait</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[1]/div[2]/a/span</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForPageToLoad</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[5]/a[4]</td>
+                    <td>Items I Own</td>
+                </tr>
+                <!--end: go to project list-->
+                <!--start: search project created using demo data-->
                 <tr>
                     <td>sendKeys</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[2]/table/tbody/tr/td/input</td>
-                    <td>2 Test Task</td>
+                    <td>Test Project For Functional</td>
                 </tr>
                 <tr>
-                    <td>waitForTextPresent</td>
-                    <td>2 Test Task</td>
-                    <td></td>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
                 </tr>
                 <tr>
-                    <td>waitForTextNotPresent</td>
-                    <td>5 Test Task</td>
-                    <td></td>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/tbody/tr[1]/td[2]/a</td>
+                    <td>Test Project For Functional</td>
                 </tr>
                 <tr>
                     <td>waitForValue</td>
                     <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[2]/table/tbody/tr/td/input</td>
-                    <td>2 Test Task</td>
+                    <td>Test Project For Functional</td>
                 </tr>
-                <!--clear search result-->
-                <tr>
-                    <td>click</td>
-                    <td>id=clear-search-link</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <tr>
-                    <td>waitForTextNotPresent</td>
-                    <td>Criteria Selected</td>
-                    <td></td>
-                </tr>
-                <!--hide completed-->
-                <tr>
-                    <td>setSpeed</td>
-                    <td>3000</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[5]/a[4]</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[3]/div[9]/div/a/span[3]</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <tr>
-                    <td>waitForTextNotPresent</td>
-                    <td>5 Test Task</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>setSpeed</td>
-                    <td>0</td>
-                    <td></td>
-                </tr>
-                <!--clear search result-->
-                <tr>
-                    <td>click</td>
-                    <td>id=clear-search-link</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <tr>
-                    <td>waitForTextNotPresent</td>
-                    <td>Criteria Selected</td>
-                    <td></td>
-                </tr>
-                <!--Items I Own-->
-                <tr>
-                    <td>setSpeed</td>
-                    <td>3000</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[5]/a[3]</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[3]/div[9]/div/a/span[3]</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <tr>
-                    <td>waitForTextNotPresent</td>
-                    <td>Create Demo Proposal v2</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>setSpeed</td>
-                    <td>0</td>
-                    <td></td>
-                </tr>
-                <!--clear search result-->
-                <tr>
-                    <td>click</td>
-                    <td>id=clear-search-link</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <tr>
-                    <td>waitForTextNotPresent</td>
-                    <td>Criteria Selected</td>
-                    <td></td>
-                </tr>
-                <!--Go to tasks list view-->
-                <tr>
-                    <td>assertElementPresent</td>
-                    <td>link=Grid</td>
-                    <td></td>
-                </tr>
+                <!--end: search project created using demo data-->
+                <!--start: go to project's detail view-->
                 <tr>
                     <td>clickAndWait</td>
-                    <td>link=Grid</td>
+                    <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/tbody/tr[1]/td[2]/a</td>
                     <td></td>
                 </tr>
                 <tr>
@@ -239,10 +130,95 @@
                     <td>30000</td>
                 </tr>
                 <tr>
-                    <td>assertText</td>
-                    <td>//html/body/section/div[1]/div[2]/div/form/div[5]/a[2]</td>
-                    <td>Columns</td>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/h1/span/span</td>
+                    <td>Test Project For Functional</td>
                 </tr>
+                <!--end: go to project's detail view-->
+                <!--start: delete task-->
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div[2]/div[3]/div[2]/table/tbody/tr/td/div/div[1]/div/ul/li[3]/div/div[3]/h4/a</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForElementPresent</td>
+                    <td>//html/body/div[4]/div[2]/div/div/div[1]/div/ul/li/ul/li[4]/a/span</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/div[4]/div[2]/div/div/div[1]/div/ul/li/ul/li[4]/a/span</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>assertConfirmation</td>
+                    <td>Are you sure you want to delete this task?</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForPageToLoad</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForTextNotPresent</td>
+                    <td>Clone - Test task description</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForElementNotPresent</td>
+                    <td>//html/body/section/div[1]/div[2]/div[3]/div[2]/table/tbody/tr/td/div/div[1]/div/ul/li[3]</td>
+                    <td></td>
+                </tr>
+                <!--end: delete task-->
+                <!--start: clear project search result-->
+                <tr>
+                    <td>open</td>
+                    <td>index.php/projects/default/list</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForPageToLoad</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[5]/a[4]</td>
+                    <td>Items I Own</td>
+                </tr>
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[5]/a[3]/span[2]</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForTextNotPresent</td>
+                    <td>Criteria Selected</td>
+                    <td></td>
+                </tr>
+                <!--end: clear project search result-->
             </tbody>
         </table>
     </body>
