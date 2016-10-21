@@ -181,12 +181,13 @@
                 $primaryViewColumn = 0;
             }
 
-            $params = array(
-                'controllerId'     => $this->getId(),
-                'relationModuleId' => $this->getModule()->getId(),
-                'relationModel'    => $model,
-                'redirectUrl'      => $redirectUrl,
-            );
+            $params = array_merge(
+                array(
+                    'controllerId'     => $this->getId(),
+                    'relationModuleId' => $this->getModule()->getId(),
+                    'relationModel'    => $model,
+                    'redirectUrl'      => $redirectUrl,
+                ), $this->resolveAdditionalParametersForDetailsAndRelationsView($viewClassName));
             $gridView = new GridView($verticalColumns, 1);
             if ($breadCrumbView != null)
             {
@@ -196,6 +197,11 @@
                                                     $this->getModule()->getId(),
                                                     $params), $primaryViewColumn, 0);
             return $gridView;
+        }
+
+        protected function resolveAdditionalParametersForDetailsAndRelationsView($viewClassName)
+        {
+            return array();
         }
 
         protected function makeTitleBarAndEditAndDetailsView($model, $renderType,

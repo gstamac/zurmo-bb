@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head profile="http://selenium-ide.openqa.org/profiles/test-case">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link rel="selenium.base" href="http://localhost/"/>
+        <title>MassUpdateCatalogItems</title>
+    </head>
+    <body>
+        <table cellpadding="1" cellspacing="1" border="1">
+            <thead>
+                <tr>
+                    <td rowspan="1" colspan="3">Mass Update Catalog Items</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>setTimeout</td>
+                    <td>45000</td>
+                    <td></td>
+                </tr>
+                <!--load demo catalog items-->
+                <tr>
+					<td>open</td>
+					<td>index.php/productTemplates/demo/loadProductTemplatesSampler</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>waitForPageToLoad</td>
+					<td></td>
+					<td></td>
+				</tr>
+                <!--go to catalog items list view-->
+                <tr>
+                    <td>open</td>
+                    <td>index.php</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForPageToLoad</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForElementPresent</td>
+                    <td>//html/body/section/nav/div[1]/a</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/nav/div[1]/a</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/nav/div[1]/ul/li[9]/a/span</td>
+                    <td>Products</td>
+                </tr>
+                <tr>
+                    <td>clickAndWait</td>
+                    <td>//html/body/section/nav/div[1]/ul/li[9]/a/span</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForPageToLoad</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
+                    <td>How do Products work in Zurmo?</td>
+                </tr>
+                <tr>
+                    <td>clickAndWait</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[1]/div[2]/a[1]/span</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForPageToLoad</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
+                    <td>How do Products work in Zurmo?</td>
+                </tr>
+                <!--select catalog items created for functional test-->
+                <tr>
+                    <td>sendKeys</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[2]/table/tbody/tr/td/input</td>
+                    <td>Product Template</td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/tbody/tr[1]/td[2]/a</td>
+                    <td>Product Template 1</td>
+                </tr>
+                <tr>
+                    <td>verifyValue</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[2]/table/tbody/tr/td/input</td>
+                    <td>Product Template</td>
+                </tr>
+                <!--check mass update validation-->
+                <tr>
+                    <td>waitForElementPresent</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[1]/div[4]/ul/li[1]/a</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[1]/div[4]/ul/li[1]/a</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>assertAlert</td>
+                    <td>At least 1 record must be selected</td>
+                    <td></td>
+                </tr>
+                <!--update selected catalog items-->
+                <tr>
+                    <td>waitForElementPresent</td>
+                    <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/tbody/tr[1]/td[1]/label/input</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/tbody/tr[1]/td[1]/label/input</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/tbody/tr[2]/td[1]/label/input</td>
+                    <td></td>
+                </tr>
+                <!--go to mass edit view-->
+                <tr>
+                    <td>clickAndWait</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[1]/div[4]/ul/li[1]/a</td>
+                    <td></td>
+                </tr>
+                <tr>
+					<td>waitForPageToLoad</td>
+					<td></td>
+					<td></td>
+				</tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div/h1/span/span</td>
+                    <td>Mass Update: Catalog Items</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div/div/div/form/span</td>
+                    <td>2 records selected for updating. Please tick the boxes next to the fields you wish to update and then select the value you wish to be used.</td>
+                </tr>
+                <!--mass edit form validation-->
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div/div/div/form/div/div/a[1]/span[3]</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[2]/div/div/div/span[2]</td>
+                    <td>You must select at least one field to modify.</td>
+                </tr>
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[1]/th[1]/label</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[2]/th[1]/label</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[3]/th[1]/label</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div/div/div/form/div/div/a[1]/span[3]</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[1]/td/div[2]</td>
+                    <td>Status cannot be blank.</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[2]/td/div[2]</td>
+                    <td>Type cannot be blank.</td>
+                </tr>
+                <!--mass edit catalog items-->
+                <tr>
+                    <td>select</td>
+                    <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[1]/td/div/select</td>
+                    <td>Inactive</td>
+                </tr>
+                <tr>
+                    <td>select</td>
+                    <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[2]/td/div/select</td>
+                    <td>Service</td>
+                </tr>
+                <tr>
+                    <td>select</td>
+                    <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[3]/td/div/select</td>
+                    <td>Annually</td>
+                </tr>
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div/div/div/form/div/div/a[1]/span[3]</td>
+                    <td></td>
+                </tr>
+                <tr>
+					<td>waitForPageToLoad</td>
+					<td></td>
+					<td></td>
+				</tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
+                    <td>How do Products work in Zurmo?</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[2]/div/div/div/span[2]</td>
+                    <td>Successfully updated 2 records.</td>
+                </tr>
+                <!--check updated catalog items-->
+                <tr>
+                    <td>clickAndWait</td>
+                    <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/tbody/tr[1]/td[2]/a</td>
+                    <td></td>
+                </tr>
+                <tr>
+					<td>waitForPageToLoad</td>
+					<td></td>
+					<td></td>
+				</tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/h1/span/span</td>
+                    <td>Product Template 1</td>
+                </tr>
+                <tr>
+                    <td>assertText</td>
+                    <td>//html/body/section/div[1]/div[2]/div/div[2]/div/table/tbody/tr[1]/td</td>
+                    <td>Product Template 1</td>
+                </tr>
+                <tr>
+                    <td>assertText</td>
+                    <td>//html/body/section/div[1]/div[2]/div/div[2]/div/table/tbody/tr[4]/td</td>
+                    <td>Inactive</td>
+                </tr>
+                <tr>
+                    <td>assertText</td>
+                    <td>//html/body/section/div[1]/div[2]/div/div[2]/div/table/tbody/tr[5]/td</td>
+                    <td>Service</td>
+                </tr>
+                <tr>
+                    <td>assertText</td>
+                    <td>//html/body/section/div[1]/div[2]/div/div[2]/div/table/tbody/tr[6]/td</td>
+                    <td>Annually</td>
+                </tr>
+                <tr>
+                    <td>clickAndWait</td>
+                    <td>//html/body/section/div[1]/div[1]/div/a[2]</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForPageToLoad</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
+                    <td>How do Products work in Zurmo?</td>
+                </tr>
+                <tr>
+                    <td>clickAndWait</td>
+                    <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/tbody/tr[2]/td[2]/a</td>
+                    <td></td>
+                </tr>
+                <tr>
+					<td>waitForPageToLoad</td>
+					<td></td>
+					<td></td>
+				</tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/h1/span/span</td>
+                    <td>Product Template 10</td>
+                </tr>
+                <tr>
+                    <td>assertText</td>
+                    <td>//html/body/section/div[1]/div[2]/div/div[2]/div/table/tbody/tr[1]/td</td>
+                    <td>Product Template 10</td>
+                </tr>
+                <tr>
+                    <td>assertText</td>
+                    <td>//html/body/section/div[1]/div[2]/div/div[2]/div/table/tbody/tr[4]/td</td>
+                    <td>Inactive</td>
+                </tr>
+                <tr>
+                    <td>assertText</td>
+                    <td>//html/body/section/div[1]/div[2]/div/div[2]/div/table/tbody/tr[5]/td</td>
+                    <td>Service</td>
+                </tr>
+                <tr>
+                    <td>assertText</td>
+                    <td>//html/body/section/div[1]/div[2]/div/div[2]/div/table/tbody/tr[6]/td</td>
+                    <td>Annually</td>
+                </tr>
+                <tr>
+                    <td>clickAndWait</td>
+                    <td>//html/body/section/div[1]/div[1]/div/a[2]</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForPageToLoad</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
+                    <td>How do Products work in Zurmo?</td>
+                </tr>
+                <!--update all catalog items-->
+                <tr>
+                    <td>clickAndWait</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[1]/div[4]/ul/li[2]/a</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div/h1/span/span</td>
+                    <td>Mass Update: Catalog Items</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div/div/div/form/span</td>
+                    <td>12 records selected for updating. Please tick the boxes next to the fields you wish to update and then select the value you wish to be used.</td>
+                </tr>
+                <!--mass edit catalog items-->
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[1]/th[1]/label</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[2]/th[1]/label</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[3]/th[1]/label</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>select</td>
+                    <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[1]/td/div/select</td>
+                    <td>Inactive</td>
+                </tr>
+                <tr>
+                    <td>select</td>
+                    <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[2]/td/div/select</td>
+                    <td>Service</td>
+                </tr>
+                <tr>
+                    <td>select</td>
+                    <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[3]/td/div/select</td>
+                    <td>Annually</td>
+                </tr>
+                <tr>
+                    <td>clickAndWait</td>
+                    <td>//html/body/section/div[1]/div/div/div/form/div/div/a[1]/span[3]</td>
+                    <td></td>
+                </tr>
+                <tr>
+					<td>waitForPageToLoad</td>
+					<td></td>
+					<td></td>
+				</tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div/div/h3/span</td>
+                    <td>12 records updated successfully.</td>
+                </tr>
+                <tr>
+					<td>clickAndWait</td>
+					<td>//html/body/section/div[1]/div/div/div[2]/a/span</td>
+					<td></td>
+				</tr>
+                <tr>
+                    <td>waitForPageToLoad</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
+                    <td>How do Products work in Zurmo?</td>
+                </tr>
+                <!--check updated catalog items-->
+                <tr>
+					<td>click</td>
+					<td>//html/body/section/div[1]/div[2]/div[3]/div/div[3]/ul/li/a</td>
+					<td></td>
+				</tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>clickAndWait</td>
+                    <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/tbody/tr[11]/td[2]/a</td>
+                    <td></td>
+                </tr>
+                <tr>
+					<td>waitForPageToLoad</td>
+					<td></td>
+					<td></td>
+				</tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/h1/span/span</td>
+                    <td>Product Template 8</td>
+                </tr>
+                <tr>
+                    <td>assertText</td>
+                    <td>//html/body/section/div[1]/div[2]/div/div[2]/div/table/tbody/tr[1]/td</td>
+                    <td>Product Template 8</td>
+                </tr>
+                <tr>
+                    <td>assertText</td>
+                    <td>//html/body/section/div[1]/div[2]/div/div[2]/div/table/tbody/tr[4]/td</td>
+                    <td>Inactive</td>
+                </tr>
+                <tr>
+                    <td>assertText</td>
+                    <td>//html/body/section/div[1]/div[2]/div/div[2]/div/table/tbody/tr[5]/td</td>
+                    <td>Service</td>
+                </tr>
+                <tr>
+                    <td>assertText</td>
+                    <td>//html/body/section/div[1]/div[2]/div/div[2]/div/table/tbody/tr[6]/td</td>
+                    <td>Annually</td>
+                </tr>
+                <tr>
+                    <td>clickAndWait</td>
+                    <td>//html/body/section/div[1]/div[1]/div/a[2]</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForPageToLoad</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
+                    <td>How do Products work in Zurmo?</td>
+                </tr>
+                <tr>
+					<td>click</td>
+					<td>//html/body/section/div[1]/div[2]/div[3]/div/div[3]/ul/li/a</td>
+					<td></td>
+				</tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>clickAndWait</td>
+                    <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/tbody/tr[12]/td[2]/a</td>
+                    <td></td>
+                </tr>
+                <tr>
+					<td>waitForPageToLoad</td>
+					<td></td>
+					<td></td>
+				</tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/h1/span/span</td>
+                    <td>Product Template 9</td>
+                </tr>
+                <tr>
+                    <td>assertText</td>
+                    <td>//html/body/section/div[1]/div[2]/div/div[2]/div/table/tbody/tr[1]/td</td>
+                    <td>Product Template 9</td>
+                </tr>
+                <tr>
+                    <td>assertText</td>
+                    <td>//html/body/section/div[1]/div[2]/div/div[2]/div/table/tbody/tr[4]/td</td>
+                    <td>Inactive</td>
+                </tr>
+                <tr>
+                    <td>assertText</td>
+                    <td>//html/body/section/div[1]/div[2]/div/div[2]/div/table/tbody/tr[5]/td</td>
+                    <td>Service</td>
+                </tr>
+                <tr>
+                    <td>assertText</td>
+                    <td>//html/body/section/div[1]/div[2]/div/div[2]/div/table/tbody/tr[6]/td</td>
+                    <td>Annually</td>
+                </tr>
+                <tr>
+                    <td>clickAndWait</td>
+                    <td>//html/body/section/div[1]/div[1]/div/a[2]</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForPageToLoad</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
+                    <td>How do Products work in Zurmo?</td>
+                </tr>
+                <!--clear search result-->
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[5]/a[3]/span[2]</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForTextNotPresent</td>
+                    <td>Criteria Selected</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

@@ -142,6 +142,16 @@
             echo $view->render();
         }
 
+        protected function resolveAdditionalParametersForDetailsAndRelationsView($viewClassName)
+        {
+            if ($viewClassName == 'MarketingListDetailsAndRelationsView' &&
+                    isset($_GET['ajax']) && $_GET['ajax'] == 'list-viewMarketingListMembersPortletView')
+            {
+                return array('isAjaxRequest' => true);
+            }
+            return array();
+        }
+
         public function actionEdit($id)
         {
             $marketingList = MarketingList::getById(intval($id));

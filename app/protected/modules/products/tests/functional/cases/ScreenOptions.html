@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head profile="http://selenium-ide.openqa.org/profiles/test-case">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link rel="selenium.base" href="http://localhost/"/>
+        <title>ScreenOptions</title>
+    </head>
+    <body>
+        <table cellpadding="1" cellspacing="1" border="1">
+            <thead>
+                <tr>
+                    <td rowspan="1" colspan="3">Screen Options</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>setTimeout</td>
+                    <td>45000</td>
+                    <td></td>
+                </tr>
+                <!--go to products list view-->
+                <tr>
+                    <td>open</td>
+                    <td>index.php</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForPageToLoad</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForElementPresent</td>
+                    <td>//html/body/section/nav/div[1]/a</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/nav/div[1]/a</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/nav/div[1]/ul/li[9]/a/span</td>
+                    <td>Products</td>
+                </tr>
+                <tr>
+                    <td>clickAndWait</td>
+                    <td>//html/body/section/nav/div[1]/ul/li[9]/a/span</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForPageToLoad</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
+                    <td>How do Products work in Zurmo?</td>
+                </tr>
+                <!--check screen options-->
+                <tr>
+                    <td>waitForTextPresent</td>
+                    <td>is a collection of products and services your business offer.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForTextPresent</td>
+                    <td>that describes and categorizes your item and lists preset pricing information</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForTextPresent</td>
+                    <td>record is an actual customer order. Select an existing item from the catalog or create a free-standing product</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[1]/div[1]/p</td>
+                    <td>CatalogA Catalog is a collection of products and services your business offer.</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[1]/div[2]/p</td>
+                    <td>Catalog ItemCreate a Catalog Item that describes and categorizes your item and lists preset pricing information</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[1]/div[3]/p</td>
+                    <td>ProductA Product record is an actual customer order. Select an existing item from the catalog or create a free-standing product</td>
+                </tr>
+                <!--dismiss screen options-->
+                <tr>
+                    <td>waitForElementPresent</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[2]/a</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[2]/a</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForTextNotPresent</td>
+                    <td>is a collection of products and services your business offer.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForTextNotPresent</td>
+                    <td>that describes and categorizes your item and lists preset pricing information</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForTextNotPresent</td>
+                    <td>record is an actual customer order. Select an existing item from the catalog or create a free-standing product</td>
+                    <td></td>
+                </tr>
+                <!--show screen options-->
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[2]/div/a/i[2]</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForTextPresent</td>
+                    <td>Screen Options</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForTextPresent</td>
+                    <td>Show intro message</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[2]/div/ul/li/div/label/input</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForTextPresent</td>
+                    <td>is a collection of products and services your business offer.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForTextPresent</td>
+                    <td>that describes and categorizes your item and lists preset pricing information</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForTextPresent</td>
+                    <td>record is an actual customer order. Select an existing item from the catalog or create a free-standing product</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

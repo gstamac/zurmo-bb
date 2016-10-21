@@ -87,6 +87,16 @@
                 return false;
             }
         }
+        
+        protected function beforeDelete()
+        {   
+            if (parent::beforeDelete())
+            {
+                Yii::app()->custom->resolveOpportunityCustomActionsBeforeDelete($this);
+                return true;
+            }
+            return false;
+        }
 
         public function __toString()
         {

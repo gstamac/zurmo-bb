@@ -172,6 +172,10 @@
 
         protected function shouldRenderActionElementBar()
         {
+            if (ArrayUtil::getArrayValue($this->params, 'isAjaxRequest'))
+            {
+                return false;
+            }
             return true;
         }
 

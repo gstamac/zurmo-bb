@@ -260,6 +260,7 @@
             if (parent::beforeSave())
             {
                 $this->resolveAndSetDefaultSubscribers();
+                Yii::app()->custom->resolveAccountCustomActionsBeforeSave($this);
                 return true;
             }
             else

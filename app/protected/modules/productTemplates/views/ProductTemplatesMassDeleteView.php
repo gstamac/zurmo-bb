@@ -38,7 +38,7 @@
     {
         protected function renderOperationDescriptionContent()
         {
-            $highlight = ZurmoHtml::tag('em', array(), Zurmo::t('Core', 'Mass Delete is not reversable.'));
+            $highlight = ZurmoHtml::tag('em', array(), Zurmo::t('Core', 'Mass Delete is not reversible.'));
             $message  = ZurmoHtml::tag('strong', array(), $highlight) .
                         '<br />' . '<strong>' . $this->selectedRecordCount . '</strong>&#160;' .
                         Zurmo::t('ProductTemplatesModule', 'ProductTemplatesModuleSingularLabel|ProductTemplatesModulePluralLabel',
