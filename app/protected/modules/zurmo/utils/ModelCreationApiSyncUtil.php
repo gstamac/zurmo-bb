@@ -43,8 +43,9 @@
         public static function buildTable()
         {
             $schema = static::getTableSchema();
+            $messageLogger = new MessageLogger();
             CreateOrUpdateExistingTableFromSchemaDefinitionArrayUtil::generateOrUpdateTableBySchemaDefinition(
-                                                                                        $schema, new MessageLogger());
+                                                                                        $schema, $messageLogger);
         }
 
         /**

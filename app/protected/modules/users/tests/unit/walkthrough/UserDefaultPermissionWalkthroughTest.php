@@ -42,10 +42,12 @@
             SecurityTestHelper::createSuperAdmin();
             $testGroup1        = new Group();
             $testGroup1->name  = 'testGroup1';
-            assert($testGroup1->save()); // Not Coding Standard
+            $saved = $testGroup1->save();
+            assert('$saved');
             $testGroup2        = new Group();
             $testGroup2->name  = 'testGroup2';
-            assert($testGroup2->save()); // Not Coding Standard
+            $saved = $testGroup2->save();
+            assert('$saved');
         }
 
         public function testUserCanSaveDefaultPermissions()

@@ -53,30 +53,38 @@
 
             $role1 = new Role();
             $role1->name = 'Role1';
-            assert($role1->save()); // Not Coding Standard
+            $saved = $role1->save();
+            assert('$saved');
 
             $role2 = new Role();
             $role2->name = 'Role2';
-            assert($role2->save()); // Not Coding Standard
+            $saved = $role2->save();
+            assert('$saved');
 
             $role3 = new Role();
             $role3->name = 'Role3';
-            assert($role3->save()); // Not Coding Standard
+            $saved = $role3->save();
+            assert('$saved');
 
             $role4 = new Role();
             $role4->name = 'Role4';
-            assert($role4->save()); // Not Coding Standard
+            $saved = $role4->save();
+            assert('$saved');
 
             $role5 = new Role();
             $role5->name = 'Role5';
-            assert($role5->save()); // Not Coding Standard
+            $saved = $role5->save();
+            assert('$saved');
 
             $role3->roles->add($role2);
             $role2->roles->add($role1);
             $role5->roles->add($role4);
-            assert($role3->save()); // Not Coding Standard
-            assert($role2->save()); // Not Coding Standard
-            assert($role5->save()); // Not Coding Standard
+            $saved = $role3->save();
+            assert('$saved');
+            $saved = $role2->save();
+            assert('$saved');
+            $saved = $role5->save();
+            assert('$saved');
         }
 
         public function setUp()

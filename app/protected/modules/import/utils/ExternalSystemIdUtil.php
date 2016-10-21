@@ -83,8 +83,9 @@
                 $columns[]  = RedBeanModelMemberToColumnUtil::resolveColumnMetadataByHintType($columnName, $type, $length);
                 $schema     = CreateOrUpdateExistingTableFromSchemaDefinitionArrayUtil::getTableSchema($tableName,
                                                                                                         $columns);
+                $messageLogger = new MessageLogger();
                 CreateOrUpdateExistingTableFromSchemaDefinitionArrayUtil::generateOrUpdateTableBySchemaDefinition(
-                                                                                        $schema, new MessageLogger());
+                                                                                        $schema, $messageLogger);
             }
         }
     }

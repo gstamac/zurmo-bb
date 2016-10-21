@@ -57,7 +57,8 @@
             $mission->reward      = 'My test reward';
             $mission->status      = Mission::STATUS_AVAILABLE;
             $mission->addPermissions($everyoneGroup, Permission::READ_WRITE);
-            assert($mission->save()); // Not Coding Standard
+            $saved = $mission->save();
+            assert('$saved');
             AllPermissionsOptimizationUtil::securableItemGivenPermissionsForGroup($mission, $everyoneGroup);
         }
 

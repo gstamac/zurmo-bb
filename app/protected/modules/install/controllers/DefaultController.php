@@ -71,11 +71,24 @@
         public function actionSettings()
         {
             $form = new InstallSettingsForm();
-            $memcacheServiceHelper = new MemcacheServiceHelper();
-            if (!$memcacheServiceHelper->runCheckAndGetIfSuccessful())
+            $phpVersion = explode('.', phpversion());
+            if ($phpVersion[0] >= 7)
             {
-                $form->setMemcacheIsNotAvailable();
+                $memcachedServiceHelper = new MemcachedServiceHelper();
+                if (!$memcachedServiceHelper->runCheckAndGetIfSuccessful())
+                {
+                    $form->setMemcacheIsNotAvailable();
+                }
             }
+            else
+            {
+                $memcacheServiceHelper = new MemcacheServiceHelper();
+                if (!$memcacheServiceHelper->runCheckAndGetIfSuccessful())
+                {
+                    $form->setMemcacheIsNotAvailable();
+                }
+            }
+            
             $form->hostInfo = InstallUtil::getDefaultHostInfo();
             $form->scriptUrl = InstallUtil::getDefaultScriptUrl($this->getRoute());
 
