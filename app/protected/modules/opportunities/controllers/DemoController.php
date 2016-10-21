@@ -62,7 +62,7 @@
                 throw new NotSupportedException();
             }
 
-            for ($i = 0; $i < 11; $i++)
+            for ($i = 0; $i < 13; $i++)
             {
                 $owner                      = Yii::app()->user->userModel;
                 $name                       = 'Mass Delete '. $i;

@@ -159,6 +159,7 @@
             $this->registerScriptForAutoCompleteTextField();
             $cClipWidget = new CClipWidget();
             $cClipWidget->beginClip("ModelElement");
+            // Begin Not Coding Standard
             $cClipWidget->widget('zii.widgets.jui.CJuiAutoComplete', array(
                 'name'    => $this->getNameForTextField(),
                 'id'      => $this->getIdForTextField(),
@@ -166,7 +167,7 @@
                 'source'  => Yii::app()->createUrl($this->resolveModuleId() . '/' . $this->getAutoCompleteControllerId()
                                                    . '/' . static::$autoCompleteActionId, $this->getAutoCompleteUrlParams()),
                 'options' => array(
-                    'select'   => $this->getOnSelectOptionForAutoComplete($idInputName), // Not Coding Standard
+                    'select'   => $this->getOnSelectOptionForAutoComplete($idInputName),
                     'appendTo' => 'js:$("#' . $this->getIdForTextField() . '").parent().parent()',
                     'search'   => 'js: function(event, ui)
                                   {
@@ -208,13 +209,23 @@
                                        }
                                   }'
                 ),
-                'htmlOptions' => array(
-                    'disabled' => $this->getDisabledValue(),
-                    'onblur' => 'clearIdFromAutoCompleteField($(this).val(), \'' . $idInputName . '\');'
-                )
+                'htmlOptions' => array_merge(
+                    array(
+                        'disabled' => $this->getDisabledValue(),
+                        'onblur' => 'clearIdFromAutoCompleteField($(this).val(), \'' . $idInputName . '\');'
+                    ), $this->resolveAdditionalHtmlOptionsForTextField($idInputName))
             ));
+            // End Not Coding Standard
             $cClipWidget->endClip();
             return $cClipWidget->getController()->clips['ModelElement'];
+        }
+
+        /**
+         * Override in children class if you need additional html options here.
+         */
+        protected function resolveAdditionalHtmlOptionsForTextField($idInputName)
+        {
+            return array();
         }
 
         protected function getAutoCompleteUrlParams()

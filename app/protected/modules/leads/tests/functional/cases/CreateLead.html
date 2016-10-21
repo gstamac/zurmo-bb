@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head profile="http://selenium-ide.openqa.org/profiles/test-case">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link rel="selenium.base" href="http://localhost/"/>
+        <title>CreateLead</title>
+    </head>
+    <body>
+        <table cellpadding="1" cellspacing="1" border="1">
+            <thead>
+                <tr>
+                    <td rowspan="1" colspan="3">Create Lead</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>setTimeout</td>
+                    <td>45000</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>storeGlobal</td>
+                    <td>javascript{Math.floor(Math.random()*11000)}</td>
+                    <td>randomSuffix</td>
+                </tr>
+                <!--go to create lead-->
+                <tr>
+                    <td>open</td>
+                    <td>index.php</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForPageToLoad</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/nav/div[1]/ul/li[4]/a/span</td>
+                    <td>Leads</td>
+                </tr>
+                <tr>
+                    <td>clickAndWait</td>
+                    <td>//html/body/section/nav/div[1]/ul/li[4]/a/span</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForPageToLoad</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div/form/div[5]/a[4]</td>
+                    <td>Items I Own</td>
+                </tr>
+                <tr>
+                    <td>clickAndWait</td>
+                    <td>//html/body/section/div[1]/div[1]/div/nav/div[1]/a/span</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForPageToLoad</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[1]/h1/span/span</td>
+                    <td>Create Lead</td>
+                </tr>
+                <tr>
+                    <td>select</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[1]/td/div[1]/div[1]/div/select</td>
+                    <td>Mrs.</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[1]/td/div[1]/div[2]/input</td>
+                    <td>Silly</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[1]/td/div[1]/div[3]/input</td>
+                    <td>Sally ${randomSuffix}</td>
+                </tr>
+                <tr>
+                    <td>select</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[2]/td/div[1]/select</td>
+                    <td>label=In Progress</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[3]/td/input</td>
+                    <td>President</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[4]/td/input</td>
+                    <td>Rabbit Technology</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[5]/td/input</td>
+                    <td>Information Technology</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[6]/td/input</td>
+                    <td>456-777-6655</td>
+                </tr>
+                <tr>
+                    <td>select</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[7]/td/div/select</td>
+                    <td>label=Inbound Call</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[8]/td/input</td>
+                    <td>260-683-9374</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[9]/td/input</td>
+                    <td>316-455-2309</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[10]/td/div[1]/div/input</td>
+                    <td>sally1@rabbit.com</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[11]/td/div[1]/div/input</td>
+                    <td>sally2@rabbit.com</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[12]/td/div/div[1]/input</td>
+                    <td>123 Main Street</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[12]/td/div/div[2]/input</td>
+                    <td>Suite 500</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[12]/td/div/div[3]/input</td>
+                    <td>Chicago</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[12]/td/div/div[4]/div[1]/input</td>
+                    <td>IL</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[12]/td/div/div[4]/div[2]/input</td>
+                    <td>60614</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[12]/td/div/div[5]/input</td>
+                    <td>USA</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[13]/td/div/div[1]/input</td>
+                    <td>456 Bee Street</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[13]/td/div/div[2]/input</td>
+                    <td>Suite 400</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[13]/td/div/div[3]/input</td>
+                    <td>Gary</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[13]/td/div/div[4]/div[1]/input</td>
+                    <td>Indiana</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[13]/td/div/div[4]/div[2]/input</td>
+                    <td>67898</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[13]/td/div/div[5]/input</td>
+                    <td>USA</td>
+                </tr>
+                <tr>
+                    <td>select</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[14]/td/div/select</td>
+                    <td>label=Financial Services</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[15]/td/input</td>
+                    <td>http://www.rabbit.com</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[16]/td/textarea</td>
+                    <td>test description</td>
+                </tr>
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[3]/div/div[1]/div/a/span[2]</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/div[4]/div[1]/span</td>
+                    <td>User Search</td>
+                </tr>
+                <tr>
+                    <td>waitForElementPresent</td>
+                    <td>//html/body/div[4]/div[2]/div/div/div[1]/div/form/div[2]/table/tbody/tr/td/input</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>sendKeys</td>
+                    <td>//html/body/div[4]/div[2]/div/div/div[1]/div/form/div[2]/table/tbody/tr/td/input</td>
+                    <td>Sam Smith</td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/div[4]/div[2]/div/div/div[2]/div/div[2]/table/tbody/tr/td/a</td>
+                    <td>Sam Smith</td>
+                </tr>
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/div[4]/div[2]/div/div/div[2]/div/div[2]/table/tbody/tr/td/a</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForValue</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[3]/div/div[1]/div/input</td>
+                    <td>Sam Smith</td>
+                </tr>
+                <tr>
+                    <td>clickAndWait</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[2]/div/div/a[1]/span[3]</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForPageToLoad</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[1]/h3</td>
+                    <td>Details</td>
+                </tr>
+                <!--go to business card view and assert changes-->
+                <tr>
+                    <td>waitForTextPresent</td>
+                    <td>Mrs. Silly Sally ${randomSuffix}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[2]/h3</td>
+                    <td>President</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[2]/h4</td>
+                    <td>Information Technology / Rabbit Technology</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[2]/div[1]/span[1]</td>
+                    <td>456-777-6655</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[2]/div[1]/span[2]</td>
+                    <td>260-683-9374</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[2]/div[1]/span[3]/a</td>
+                    <td>sally1@rabbit.com</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[2]/div[2]/a</td>
+                    <td>123 Main Street Suite 500 Chicago IL, 60614 USA</td>
+                </tr>
+                <tr>
+                    <td>assertNotVisible</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[1]/div/table/tbody/tr[1]/td</td>
+                    <td>Mrs. Silly Sally ${randomSuffix}</td>
+                </tr>
+                <tr>
+                    <td>assertNotVisible</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[1]/div/table/tbody/tr[2]/td</td>
+                    <td>In Progress</td>
+                </tr>
+                <tr>
+                    <td>assertNotVisible</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[1]/div/table/tbody/tr[3]/td</td>
+                    <td>President</td>
+                </tr>
+                <tr>
+                    <td>assertNotVisible</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[1]/div/table/tbody/tr[4]/td</td>
+                    <td>Rabbit Technology</td>
+                </tr>
+                <tr>
+                    <td>assertNotVisible</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[1]/div/table/tbody/tr[5]/td</td>
+                    <td>Information Technology</td>
+                </tr>
+                <tr>
+                    <td>assertNotVisible</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[1]/div/table/tbody/tr[6]/td</td>
+                    <td>456-777-6655</td>
+                </tr>
+                <tr>
+                    <td>assertNotVisible</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[1]/div/table/tbody/tr[7]/td</td>
+                    <td>Inbound Call</td>
+                </tr>
+                <tr>
+                    <td>assertNotVisible</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[1]/div/table/tbody/tr[8]/td</td>
+                    <td>260-683-9374</td>
+                </tr>
+                <tr>
+                    <td>assertNotVisible</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[1]/div/table/tbody/tr[9]/td</td>
+                    <td>316-455-2309</td>
+                </tr>
+                <tr>
+                    <td>assertNotVisible</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[1]/div/table/tbody/tr[10]/td/a</td>
+                    <td>sally1@rabbit.com</td>
+                </tr>
+                <tr>
+                    <td>assertNotVisible</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[1]/div/table/tbody/tr[11]/td/a</td>
+                    <td>sally2@rabbit.com</td>
+                </tr>
+                <tr>
+                    <td>assertNotVisible</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[1]/div/table/tbody/tr[12]/td/a</td>
+                    <td>123 Main Street<br/>Suite 500<br/>Chicago IL, 60614<br/>USA</td>
+                </tr>
+                <tr>
+                    <td>assertNotVisible</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[1]/div/table/tbody/tr[13]/td/a</td>
+                    <td>456 Bee Street<br/>Suite 400<br/>Gary Indiana, 67898<br/>USA</td>
+                </tr>
+                <tr>
+                    <td>assertNotVisible</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[1]/div/table/tbody/tr[14]/td</td>
+                    <td>Financial Services</td>
+                </tr>
+                <tr>
+                    <td>assertNotVisible</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[1]/div/table/tbody/tr[15]/td/a</td>
+                    <td>http://www.rabbit.com</td>
+                </tr>
+                <tr>
+                    <td>assertNotVisible</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[1]/div/table/tbody/tr[16]/td</td>
+                    <td>test description</td>
+                </tr>
+                <!--go to full view and assert changes-->
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div[1]/ul[1]/li[1]/div[2]/div/a/span</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>assertText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[1]/div/table/tbody/tr[1]/td</td>
+                    <td>Mrs. Silly Sally ${randomSuffix}</td>
+                </tr>
+                <tr>
+                    <td>assertText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[1]/div/table/tbody/tr[2]/td</td>
+                    <td>In Progress</td>
+                </tr>
+                <tr>
+                    <td>assertText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[1]/div/table/tbody/tr[3]/td</td>
+                    <td>President</td>
+                </tr>
+                <tr>
+                    <td>assertText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[1]/div/table/tbody/tr[4]/td</td>
+                    <td>Rabbit Technology</td>
+                </tr>
+                <tr>
+                    <td>assertText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[1]/div/table/tbody/tr[5]/td</td>
+                    <td>Information Technology</td>
+                </tr>
+                <tr>
+                    <td>assertText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[1]/div/table/tbody/tr[6]/td</td>
+                    <td>456-777-6655</td>
+                </tr>
+                <tr>
+                    <td>assertText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[1]/div/table/tbody/tr[7]/td</td>
+                    <td>Inbound Call</td>
+                </tr>
+                <tr>
+                    <td>assertText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[1]/div/table/tbody/tr[8]/td</td>
+                    <td>260-683-9374</td>
+                </tr>
+                <tr>
+                    <td>assertText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[1]/div/table/tbody/tr[9]/td</td>
+                    <td>316-455-2309</td>
+                </tr>
+                <tr>
+                    <td>assertText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[1]/div/table/tbody/tr[10]/td/a</td>
+                    <td>sally1@rabbit.com</td>
+                </tr>
+                <tr>
+                    <td>assertText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[1]/div/table/tbody/tr[11]/td/a</td>
+                    <td>sally2@rabbit.com</td>
+                </tr>
+                <tr>
+                    <td>assertText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[1]/div/table/tbody/tr[12]/td/a</td>
+                    <td>123 Main Street<br/> Suite 500<br/> Chicago IL, 60614<br/> USA</td>
+                </tr>
+                <tr>
+                    <td>assertText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[1]/div/table/tbody/tr[13]/td/a</td>
+                    <td>456 Bee Street<br/> Suite 400<br/> Gary Indiana, 67898<br/> USA</td>
+                </tr>
+                <tr>
+                    <td>assertText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[1]/div/table/tbody/tr[14]/td</td>
+                    <td>Financial Services</td>
+                </tr>
+                <tr>
+                    <td>assertText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[1]/div/table/tbody/tr[15]/td/a</td>
+                    <td>http://www.rabbit.com</td>
+                </tr>
+                <tr>
+                    <td>assertText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[1]/div/table/tbody/tr[16]/td</td>
+                    <td>test description</td>
+                </tr>
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div[1]/a/span</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>assertNotVisible</td>
+                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div[1]/div/table/tbody/tr[1]/td</td>
+                    <td>Mrs. Silly Sally ${randomSuffix}</td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head profile="http://selenium-ide.openqa.org/profiles/test-case">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link rel="selenium.base" href="http://localhost/"/>
+        <title>CheckAccountFormValidation</title>
+    </head>
+    <body>
+        <table cellpadding="1" cellspacing="1" border="1">
+            <thead>
+                <tr>
+                    <td rowspan="1" colspan="3">Check Account Form Validation</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>setTimeout</td>
+                    <td>45000</td>
+                    <td></td>
+                </tr>
+                <!--go to create account page-->
+                <tr>
+                    <td>open</td>
+                    <td>index.php</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForPageToLoad</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>clickAndWait</td>
+                    <td>//html/body/section/nav/div[1]/ul/li[3]/a/span</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>clickAndWait</td>
+                    <td>//html/body/section/div[1]/div[1]/div/nav/div[1]/a/span</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div/h1/span/span</td>
+                    <td>Create Account</td>
+                </tr>
+                <!--fill fields to create validation errors-->
+                <tr>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[5]/td/input</td>
+                    <td>a</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[6]/td/input</td>
+                    <td>a</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[8]/td/input</td>
+                    <td>a</td>
+                </tr>
+                <tr>
+                    <td>clickAndWait</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[2]/div/div/a[1]/span[3]</td>
+                    <td></td>
+                </tr>
+                <!--assert validation errors-->
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[1]/td/div</td>
+                    <td>Name cannot be blank.</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[5]/td/div</td>
+                    <td>Employees must be integer.</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[6]/td/div</td>
+                    <td>Annual Revenue must be float.</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[8]/td/div</td>
+                    <td>Website is not a valid URL.</td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

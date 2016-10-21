@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head profile="http://selenium-ide.openqa.org/profiles/test-case">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link rel="selenium.base" href="http://localhost/"/>
+        <title>CheckValidationOfCreateCategoryForm</title>
+    </head>
+    <body>
+        <table cellpadding="1" cellspacing="1" border="1">
+            <thead>
+                <tr>
+                    <td rowspan="1" colspan="3">Check Validation Of Category Form</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>setTimeout</td>
+                    <td>45000</td>
+                    <td></td>
+                </tr>
+                <!--go to create category form-->
+                <tr>
+                    <td>open</td>
+                    <td>index.php</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForPageToLoad</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForElementPresent</td>
+                    <td>//html/body/section/nav/div[1]/a</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/nav/div[1]/a</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/nav/div[1]/ul/li[9]/a/span</td>
+                    <td>Products</td>
+                </tr>
+                <tr>
+                    <td>clickAndWait</td>
+                    <td>//html/body/section/nav/div[1]/ul/li[9]/a/span</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForPageToLoad</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
+                    <td>How do Products work in Zurmo?</td>
+                </tr>
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[1]/div[3]/a[2]</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[1]/div[3]/ul/li/a</td>
+                    <td>Create Category</td>
+                </tr>
+                <tr>
+                    <td>clickAndWait</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[1]/div[3]/ul/li/a</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForPageToLoad</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div/h1/span/span</td>
+                    <td>Create Category</td>
+                </tr>
+                <!--check form validation-->
+                <tr>
+                    <td>click</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/form/div[2]/div/div/a[2]/span[3]</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>waitForCondition</td>
+                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td>waitForText</td>
+                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/form/div[1]/div[1]/div/table/tbody/tr[1]/td/div</td>
+                    <td>Name cannot be blank.</td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
