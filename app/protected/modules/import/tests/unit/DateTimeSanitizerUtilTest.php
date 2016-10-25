@@ -45,7 +45,8 @@
                     'MM/dd/yyyy hh:mm',
                     'M/d/yyyy hh:mm',
                     'd/M/yyyy hh:mm',
-                    'yyyy-M-d hh:mm'
+                    'yyyy-M-d hh:mm',
+                    'yyyy-M-d hh:mm:ss',
             );
             $this->assertEquals($expected, DateTimeSanitizerUtil::getAcceptableFormats());
         }
