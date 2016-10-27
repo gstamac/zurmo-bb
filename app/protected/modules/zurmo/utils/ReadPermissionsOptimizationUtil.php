@@ -872,8 +872,9 @@
             assert('is_string($mungeTableName) && $mungeTableName  != ""');
             ZurmoRedBean::$writer->dropTableByTableName($mungeTableName);
             $schema = static::getMungeTableSchemaByName($mungeTableName);
+            $messageLogger = new MessageLogger();
             CreateOrUpdateExistingTableFromSchemaDefinitionArrayUtil::generateOrUpdateTableBySchemaDefinition(
-                                                                                        $schema, new MessageLogger());
+                                                                                        $schema, $messageLogger);
         }
 
         protected static function getMungeTableSchemaByName($tableName)

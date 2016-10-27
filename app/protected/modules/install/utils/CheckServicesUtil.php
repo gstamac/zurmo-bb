@@ -52,7 +52,7 @@
 
         private static function getServicesToCheck()
         {
-            return array('WebServer',
+            $services = array('WebServer',
                          'Php',
                          'PhpTimeZone',
                          'PhpMemoryBytes',
@@ -65,20 +65,29 @@
                          'Ctype',
                          'FilePermissions',
                          'InstanceFolders',
-                         'APC',
                          'Soap',
                          'Curl',
                          'Yii',
                          'RedBean',
                          'MbString',
-                         'Memcache',
                          'SetIncludePath',
                          'IMAP',
+                         'Mysqli',
                          'Pdo',
                          'PdoMysql',
                          'Ldap',
                          'Mcrypt'
             );
+            $phpVersion = explode('.', phpversion());
+            if ($phpVersion[0] >= 7)
+            {
+                $additionalServices = array('Memcached');
+            }
+            else
+            {
+                $additionalServices = array('Memcache', 'APC');
+            }
+            return array_merge($services, $additionalServices);
         }
 
         private static function getServicesToCheckOnlyAfterInstallation()

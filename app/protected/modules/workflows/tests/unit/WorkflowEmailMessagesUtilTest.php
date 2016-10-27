@@ -45,7 +45,8 @@
             $super = User::getByUsername('super');
             $super->primaryEmail = new Email();
             $super->primaryEmail->emailAddress = 'super@zurmo.com';
-            assert($super->save()); // Not Coding Standard
+            $saved = $super->save();
+            assert('$saved');
             $savedWorkflow                  = new SavedWorkflow();
             $savedWorkflow->name            = 'some workflow';
             $savedWorkflow->description     = 'description';
@@ -54,7 +55,7 @@
             $savedWorkflow->type            = 'some type';
             $savedWorkflow->serializedData  = serialize(array('something'));
             $saved                          = $savedWorkflow->save();
-            assert($saved); // Not Coding Standard
+            assert('$saved');
             self::$savedWorkflow = $savedWorkflow;
         }
 

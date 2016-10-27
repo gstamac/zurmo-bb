@@ -369,15 +369,15 @@
             switch ($databaseType)
             {
                 case 'mysql':
-                    $PhpDriverVersion = phpversion('mysql');
+                    $PhpDriverVersion = phpversion('mysqli');
                     if ($PhpDriverVersion !== null)
                     {
-                        $connection = @mysql_connect($databaseHostname . ':' . $databasePort, $databaseUsername, $databasePassword);
-                        $result = @mysql_query("SELECT VERSION()");
-                        $row    = @mysql_fetch_row($result);
+                        $connection = @mysqli_connect($databaseHostname, $databaseUsername, $databasePassword, '', $databasePort);
+                        $result = @mysqli_query($connection, "SELECT VERSION()");
+                        $row    = @mysqli_fetch_row($result);
                         if (is_resource($connection))
                         {
-                            mysql_close($connection);
+                            mysqli_close($connection);
                         }
                         if (isset($row[0]))
                         {
@@ -435,12 +435,12 @@
             switch ($databaseType)
             {
                 case 'mysql':
-                    $connection = @mysql_connect($databaseHostname . ':' . $databasePort, $databaseUsername, $databasePassword);
-                    $result = @mysql_query("SHOW VARIABLES LIKE 'max_allowed_packet'");
-                    $row    = @mysql_fetch_row($result);
+                    $connection = @mysqli_connect($databaseHostname, $databaseUsername, $databasePassword, '', $databasePort);
+                    $result = @mysqli_query($connection, "SHOW VARIABLES LIKE 'max_allowed_packet'");
+                    $row    = @mysqli_fetch_row($result);
                     if (is_resource($connection))
                     {
-                        mysql_close($connection);
+                        mysqli_close($connection);
                     }
                     if (isset($row[1]))
                     {
@@ -472,12 +472,12 @@
             switch ($databaseType)
             {
                 case 'mysql':
-                    $connection = @mysql_connect($databaseHostname . ':' . $databasePort, $databaseUsername, $databasePassword);
-                    $result = @mysql_query("SHOW VARIABLES LIKE 'max_sp_recursion_depth'");
-                    $row    = @mysql_fetch_row($result);
+                    $connection = @mysqli_connect($databaseHostname, $databaseUsername, $databasePassword, '', $databasePort);
+                    $result = @mysqli_query($connection, "SHOW VARIABLES LIKE 'max_sp_recursion_depth'");
+                    $row    = @mysqli_fetch_row($result);
                     if (is_resource($connection))
                     {
-                        mysql_close($connection);
+                        mysqli_close($connection);
                     }
                     if (isset($row[1]))
                     {
@@ -509,12 +509,12 @@
             switch ($databaseType)
             {
                 case 'mysql':
-                    $connection = @mysql_connect($databaseHostname . ':' . $databasePort, $databaseUsername, $databasePassword);
-                    $result = @mysql_query("SHOW VARIABLES LIKE 'thread_stack'");
-                    $row    = @mysql_fetch_row($result);
+                    $connection = @mysqli_connect($databaseHostname, $databaseUsername, $databasePassword, '', $databasePort);
+                    $result = @mysqli_query($connection, "SHOW VARIABLES LIKE 'thread_stack'");
+                    $row    = @mysqli_fetch_row($result);
                     if (is_resource($connection))
                     {
-                        mysql_close($connection);
+                        mysqli_close($connection);
                     }
                     if (isset($row[1]))
                     {
@@ -546,12 +546,12 @@
             switch ($databaseType)
             {
                 case 'mysql':
-                    $connection = @mysql_connect($databaseHostname . ':' . $databasePort, $databaseUsername, $databasePassword);
-                    $result = @mysql_query("SHOW VARIABLES LIKE 'optimizer_search_depth'");
-                    $row    = @mysql_fetch_row($result);
+                    $connection = @mysqli_connect($databaseHostname, $databaseUsername, $databasePassword, '', $databasePort);
+                    $result = @mysqli_query($connection, "SHOW VARIABLES LIKE 'optimizer_search_depth'");
+                    $row    = @mysqli_fetch_row($result);
                     if (is_resource($connection))
                     {
-                        mysql_close($connection);
+                        mysqli_close($connection);
                     }
                     if (isset($row[1]))
                     {
@@ -583,12 +583,12 @@
             switch ($databaseType)
             {
                 case 'mysql':
-                    $connection = @mysql_connect($databaseHostname . ':' . $databasePort, $databaseUsername, $databasePassword);
-                    $result = @mysql_query("SHOW VARIABLES LIKE 'log_bin'");
-                    $row    = @mysql_fetch_row($result);
+                    $connection = @mysqli_connect($databaseHostname, $databaseUsername, $databasePassword, '', $databasePort);
+                    $result = @mysqli_query($connection, "SHOW VARIABLES LIKE 'log_bin'");
+                    $row    = @mysqli_fetch_row($result);
                     if (is_resource($connection))
                     {
-                        mysql_close($connection);
+                        mysqli_close($connection);
                     }
                     if (isset($row[1]))
                     {
@@ -620,12 +620,12 @@
             switch ($databaseType)
             {
                 case 'mysql':
-                    $connection = @mysql_connect($databaseHostname . ':' . $databasePort, $databaseUsername, $databasePassword);
-                    $result = @mysql_query("SHOW VARIABLES LIKE 'log_bin_trust_function_creators'");
-                    $row    = @mysql_fetch_row($result);
+                    $connection = @mysqli_connect($databaseHostname, $databaseUsername, $databasePassword, '', $databasePort);
+                    $result = @mysqli_query($connection, "SHOW VARIABLES LIKE 'log_bin_trust_function_creators'");
+                    $row    = @mysqli_fetch_row($result);
                     if (is_resource($connection))
                     {
-                        mysql_close($connection);
+                        mysqli_close($connection);
                     }
                     if (isset($row[1]))
                     {
@@ -661,13 +661,13 @@
             switch ($databaseType)
             {
                 case 'mysql':
-                    $connection = @mysql_connect($databaseHostname . ':' . $databasePort, $databaseUsername, $databasePassword);
-                    @mysql_select_db($databaseName);
-                    $result = @mysql_query("SHOW VARIABLES LIKE 'collation_database'");
-                    $row    = @mysql_fetch_row($result);
+                    $connection = @mysqli_connect($databaseHostname, $databaseUsername, $databasePassword, '', $databasePort);
+                    @mysqli_select_db($connection, $databaseName);
+                    $result = @mysqli_query($connection, "SHOW VARIABLES LIKE 'collation_database'");
+                    $row    = @mysqli_fetch_row($result);
                     if (is_resource($connection))
                     {
-                        mysql_close($connection);
+                        mysqli_close($connection);
                     }
                     if (isset($row[1]))
                     {
@@ -700,12 +700,12 @@
             switch ($databaseType)
             {
                 case 'mysql':
-                    $connection = @mysql_connect($databaseHostname . ':' . $databasePort, $databaseUsername, $databasePassword);
-                    $result = @mysql_query("SELECT @@sql_mode;");
-                    $row    = @mysql_fetch_row($result);
+                    $connection = @mysqli_connect($databaseHostname, $databaseUsername, $databasePassword, '', $databasePort);
+                    $result = @mysqli_query($connection, "SELECT @@sql_mode;");
+                    $row    = @mysqli_fetch_row($result);
                     if (is_resource($connection))
                     {
-                        mysql_close($connection);
+                        mysqli_close($connection);
                     }
                     if (isset($row[0]))
                     {
@@ -747,13 +747,13 @@
             {
                 case 'mysql':
                     $result = true;
-                    if (($connection = @mysql_connect($host . ':' . $port, $rootUsername, $rootPassword)) === false)
+                    if (($connection = @mysqli_connect($host, $rootUsername, $rootPassword, '', $port)) === false)
                     {
-                        $result = array(mysql_errno(), mysql_error());
+                        $result = array(mysqli_connect_errno(), mysqli_connect_error());
                     }
                     if (is_resource($connection))
                     {
-                        mysql_close($connection);
+                        mysqli_close($connection);
                     }
                     return $result;
             }
@@ -786,14 +786,21 @@
             {
                 case 'mysql':
                     $result = true;
-                    if (($connection = @mysql_connect($host . ':' . $port, $rootUsername, $rootPassword)) === false ||
-                    @mysql_select_db($databaseName, $connection)         === false)
+                    if (($connection = @mysqli_connect($host, $rootUsername, $rootPassword, '', $port)) === false ||
+                    @mysqli_select_db($connection, $databaseName)         === false)
                     {
-                        $result = array(mysql_errno(), mysql_error());
+                        if ($connection === false)
+                        {
+                            $result = array(mysqli_connect_errno(), mysqli_connect_error());
+                        }
+                        else
+                        {
+                            $result = array(mysqli_errno($connection), mysqli_error($connection));
+                        }
                     }
                     if (is_resource($connection))
                     {
-                        mysql_close($connection);
+                        mysqli_close($connection);
                     }
                     return $result;
             }
@@ -826,20 +833,27 @@
                 case 'mysql':
                     $result             = true;
                     $query              = "select count(*) from user where Host in ('%', '$host') and User ='$username'";
-                    $connection         = @mysql_connect($host . ':' . $port, $rootUsername, $rootPassword);
-                    $databaseConnection = @mysql_select_db('mysql', $connection);
-                    $queryResult        = @mysql_query($query, $connection);
-                    $row                = @mysql_fetch_row($queryResult);
+                    $connection         = @mysqli_connect($host, $rootUsername, $rootPassword, '', $port);
+                    $databaseConnection = @mysqli_select_db($connection, 'mysql');
+                    $queryResult        = @mysqli_query($connection, $query);
+                    $row                = @mysqli_fetch_row($queryResult);
                     if ($connection === false || $databaseConnection === false || $queryResult === false ||
                         $row === false)
                     {
-                        $result = array(mysql_errno(), mysql_error());
+                        if ($connection === false)
+                        {
+                            $result = array(mysqli_connect_errno(), mysqli_connect_error());
+                        }
+                        else
+                        {
+                            $result = array(mysqli_errno($connection), mysqli_error($connection));
+                        }
                     }
                     else
                     {
                         if ($row == null)
                         {
-                            $result = array(mysql_errno(), mysql_error());
+                            $result = array(mysqli_errno($connection), mysqli_error($connection));
                         }
                         elseif (is_array($row) && count($row) == 1 && $row[0] == 0)
                         {
@@ -853,7 +867,7 @@
                     }
                     if (is_resource($connection))
                     {
-                        mysql_close($connection);
+                        mysqli_close($connection);
                     }
                     return $result;
             }
@@ -875,13 +889,13 @@
             {
                 case 'mysql':
                     $query      = "SELECT * FROM `GLOBAL_VARIABLES` WHERE VARIABLE_NAME='LOCAL_INFILE';";
-                    $connection = @mysql_connect($databaseHostname . ':' . $databasePort, $databaseUsername, $databasePassword, true);
-                    @mysql_select_db('information_schema', $connection);
-                    $result = @mysql_query($query, $connection);
-                    $row    = @mysql_fetch_row($result);
+                    $connection = @mysqli_connect($databaseHostname, $databaseUsername, $databasePassword, '', $databasePort);
+                    @mysqli_select_db($connection, 'information_schema');
+                    $result = @mysqli_query($connection, $query);
+                    $row    = @mysqli_fetch_row($result);
                     if (is_resource($connection))
                     {
-                        mysql_close($connection);
+                        mysqli_close($connection);
                     }
                     if (isset($row[1]))
                     {
@@ -921,15 +935,22 @@
             {
                 case 'mysql':
                     $result = true;
-                    if (($connection = @mysql_connect($host . ':' . $port, $rootUsername, $rootPassword))                   === false ||
-                    @mysql_query("drop database if exists `$databaseName`", $connection) === false ||
-                    @mysql_query("create database `$databaseName` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;", $connection) === false)
+                    if (($connection = @mysqli_connect($host, $rootUsername, $rootPassword, '', $port))                   === false ||
+                    @mysqli_query($connection, "drop database if exists `$databaseName`") === false ||
+                    @mysqli_query($connection, "create database `$databaseName` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;") === false)
                     {
-                        $result = array(mysql_errno(), mysql_error());
+                        if ($connection === false)
+                        {
+                            $result = array(mysqli_connect_errno(), mysqli_connect_error());
+                        }
+                        else
+                        {
+                            $result = array(mysqli_errno($connection), mysqli_error($connection));
+                        }
                     }
                     if (is_resource($connection))
                     {
-                        mysql_close($connection);
+                        mysqli_close($connection);
                     }
                     return $result;
             }
@@ -967,16 +988,23 @@
             {
                 case 'mysql':
                     $result = true;
-                    if (($connection = @mysql_connect($host . ':' . $port, $rootUsername, $rootPassword)) === false             ||
+                    if (($connection = @mysqli_connect($host, $rootUsername, $rootPassword, '', $port)) === false             ||
                     // The === 666 is to execute this command ignoring whether it fails.
-                        ($userDropped = @mysql_query("drop user `$username`", $connection)) === 666                             ||
-                        ($userCreated = @mysql_query("grant all on `$databaseName`.* to `$username`@'$host' IDENTIFIED BY '$password'", $connection)) === false)
+                        ($userDropped = @mysqli_query($connection, "drop user `$username`")) === 666                             ||
+                        ($userCreated = @mysqli_query($connection, "grant all on `$databaseName`.* to `$username`@'$host' IDENTIFIED BY '$password'")) === false)
                     {
-                        $result = array(mysql_errno(), mysql_error());
+                        if ($connection === false)
+                        {
+                            $result = array(mysqli_connect_errno(), mysqli_connect_error());
+                        }
+                        else
+                        {
+                            $result = array(mysqli_errno($connection), mysqli_error($connection));
+                        }
                     }
                     if (is_resource($connection))
                     {
-                        mysql_close($connection);
+                        mysqli_close($connection);
                     }
                     return $result;
             }

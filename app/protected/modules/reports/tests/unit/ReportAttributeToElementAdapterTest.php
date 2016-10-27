@@ -57,7 +57,7 @@
             $customFieldData = CustomFieldData::getByName('ReportTestDropDown');
             $customFieldData->serializedData = serialize($values);
             $saved = $customFieldData->save();
-            assert($saved);    // Not Coding Standard
+            assert('$saved');
 
             $values = array(
                 'Multi 1',
@@ -67,7 +67,7 @@
             $customFieldData = CustomFieldData::getByName('ReportTestMultiDropDown');
             $customFieldData->serializedData = serialize($values);
             $saved = $customFieldData->save();
-            assert($saved);    // Not Coding Standard
+            assert('$saved');
 
             $values = array(
                 'Radio 1',
@@ -77,7 +77,7 @@
             $customFieldData = CustomFieldData::getByName('ReportTestRadioDropDown');
             $customFieldData->serializedData = serialize($values);
             $saved = $customFieldData->save();
-            assert($saved);    // Not Coding Standard
+            assert('$saved');
 
             $values = array(
                 'Cloud 1',
@@ -87,7 +87,7 @@
             $customFieldData = CustomFieldData::getByName('ReportTestTagCloud');
             $customFieldData->serializedData = serialize($values);
             $saved = $customFieldData->save();
-            assert($saved);    // Not Coding Standard
+            assert('$saved');
         }
 
         public function setup()

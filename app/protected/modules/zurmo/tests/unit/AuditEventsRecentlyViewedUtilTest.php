@@ -57,7 +57,8 @@
             $user->username  = 'jimmy';
             $user->firstName = 'James';
             $user->lastName  = 'Boondog';
-            assert($user->save()); // Not Coding Standard
+            $saved = $user->save();
+            assert('$saved');
             assert(AuditEvent::getCount() == 3); // Not Coding Standard
         }
 
