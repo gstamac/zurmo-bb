@@ -1,286 +1,289 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-    <head profile="http://selenium-ide.openqa.org/profiles/test-case">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <link rel="selenium.base" href="http://localhost/"/>
-        <title>MassDeleteProducts</title>
-    </head>
-    <body>
-        <table cellpadding="1" cellspacing="1" border="1">
-            <thead>
-                <tr>
-                    <td rowspan="1" colspan="3">Mass Delete Products</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>setTimeout</td>
-                    <td>45000</td>
-                    <td></td>
-                </tr>
-                <!--go to products list view-->
-                <tr>
-                    <td>open</td>
-                    <td>index.php</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForPageToLoad</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <tr>
-                    <td>waitForElementPresent</td>
-                    <td>//html/body/section/nav/div[1]/a</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/nav/div[1]/a</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/nav/div[1]/ul/li[9]/a/span</td>
-                    <td>Products</td>
-                </tr>
-                <tr>
-                    <td>clickAndWait</td>
-                    <td>//html/body/section/nav/div[1]/ul/li[9]/a/span</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForPageToLoad</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
-                    <td>How do Products work in Zurmo?</td>
-                </tr>
-                <!--select products created for functional test-->
-                <tr>
-                    <td>sendKeys</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[2]/table/tbody/tr/td/input</td>
-                    <td>Product with</td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/tbody/tr/td[2]/a</td>
-                    <td>Product with lost stage 5</td>
-                </tr>
-                <tr>
-                    <td>verifyValue</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[2]/table/tbody/tr/td/input</td>
-                    <td>Product with</td>
-                </tr>
-                <!--check mass delete validation-->
-                <tr>
-                    <td>waitForElementPresent</td>
-                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[1]/div[5]/ul/li[1]/a</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[1]/div[5]/ul/li[1]/a</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <tr>
-                    <td>assertAlert</td>
-                    <td>At least 1 record must be selected</td>
-                    <td></td>
-                </tr>
-                <!--delete selected products-->
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/tbody/tr[1]/td[1]/label/input</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/tbody/tr[2]/td[1]/label/input</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>clickAndWait</td>
-                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[1]/div[5]/ul/li[1]/a</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForPageToLoad</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[2]/div/h1</td>
-                    <td>Mass Delete: Products</td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[2]/div/h1</td>
-                    <td>Mass Delete: Products</td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[2]/div/div/div/form/span/strong</td>
-                    <td>Mass Delete is not reversible</td>
-                </tr>
-                <tr>
-                    <td>waitForTextPresent</td>
-                    <td>2 Products selected for removal.</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>clickAndWait</td>
-                    <td>//html/body/section/div[1]/div[2]/div/div/div/form/div/div/a[2]/span[3]</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForPageToLoad</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[2]/div/div/div/span[2]</td>
-                    <td>2 records successfully deleted.</td>
-                </tr>
-                <tr>
-                    <td>waitForNotText</td>
-                    <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/tbody/tr[1]/td[2]/a</td>
-                    <td>Product with lost stage 5</td>
-                </tr>
-                <tr>
-                    <td>waitForNotText</td>
-                    <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/tbody/tr[2]/td[2]/a</td>
-                    <td>Product with lost stage 6</td>
-                </tr>
-                <!--delete all products-->
-                <tr>
-                    <td>clickAndWait</td>
-                    <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[1]/div[5]/ul/li[2]/a</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForPageToLoad</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[2]/div/h1</td>
-                    <td>Mass Delete: Products</td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[2]/div/h1</td>
-                    <td>Mass Delete: Products</td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[2]/div/div/div/form/span/strong</td>
-                    <td>Mass Delete is not reversible</td>
-                </tr>
-                <tr>
-                    <td>waitForTextPresent</td>
-                    <td>10 Products selected for removal.</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>clickAndWait</td>
-                    <td>//html/body/section/div[1]/div[2]/div/div/div/form/div/div/a[2]/span[3]</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForPageToLoad</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div/div/h3/span</td>
-                    <td>10 records successfully deleted.</td>
-                </tr>
-                <tr>
-                    <td>clickAndWait</td>
-                    <td>//html/body/section/div[1]/div/div/div[2]/a/span</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForPageToLoad</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[2]/div[3]/div/div[1]/table/tbody/tr/td/span</td>
-                    <td>No results found</td>
-                </tr>
-                <!--clear search result-->
-                <tr>
-                    <td>click</td>
-                    <td>id=clear-search-link</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <tr>
-                    <td>waitForTextNotPresent</td>
-                    <td>Criteria Selected</td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-    </body>
+
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="selenium.base" href="http://localhost/" />
+    <title>MassDeleteProducts</title>
+</head>
+
+<body>
+    <table cellpadding="1" cellspacing="1" border="1">
+        <thead>
+            <tr>
+                <td rowspan="1" colspan="3">Mass Delete Products</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>setTimeout</td>
+                <td>45000</td>
+                <td></td>
+            </tr>
+            <!--go to products list view-->
+            <tr>
+                <td>open</td>
+                <td>index.php</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForElementPresent</td>
+                <td>//html/body/section/nav/div[1]/a</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/nav/div[1]/a</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/nav/div[1]/ul/li[9]/a/span</td>
+                <td>Products</td>
+            </tr>
+            <tr>
+                <td>clickAndWait</td>
+                <td>//html/body/section/nav/div[1]/ul/li[9]/a/span</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
+                <td>How do Products work in Zurmo?</td>
+            </tr>
+            <!--select products created for functional test-->
+            <tr>
+                <td>sendKeys</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[2]/table/tbody/tr/td/input</td>
+                <td>Product with</td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/tbody/tr/td[2]/a</td>
+                <td>Product with lost stage 5</td>
+            </tr>
+            <tr>
+                <td>verifyValue</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[2]/table/tbody/tr/td/input</td>
+                <td>Product with</td>
+            </tr>
+            <!--check mass delete validation-->
+            <tr>
+                <td>waitForElementPresent</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[1]/div[5]/ul/li[1]/a</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[1]/div[5]/ul/li[1]/a</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>assertAlert</td>
+                <td>At least 1 record must be selected</td>
+                <td></td>
+            </tr>
+            <!--delete selected products-->
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/tbody/tr[1]/td[1]/label/input</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/tbody/tr[2]/td[1]/label/input</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>clickAndWait</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[1]/div[5]/ul/li[1]/a</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/div/h1</td>
+                <td>Mass Delete: Products</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/div/h1</td>
+                <td>Mass Delete: Products</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/div/div/div/form/span/strong</td>
+                <td>Mass Delete is not reversible</td>
+            </tr>
+            <tr>
+                <td>waitForTextPresent</td>
+                <td>2 Products selected for removal.</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>clickAndWait</td>
+                <td>//html/body/section/div[1]/div[2]/div/div/div/form/div/div/a[2]/span[3]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[2]/div/div/div/span[2]</td>
+                <td>2 records successfully deleted.</td>
+            </tr>
+            <tr>
+                <td>waitForNotText</td>
+                <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/tbody/tr[1]/td[2]/a</td>
+                <td>Product with lost stage 5</td>
+            </tr>
+            <tr>
+                <td>waitForNotText</td>
+                <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/tbody/tr[2]/td[2]/a</td>
+                <td>Product with lost stage 6</td>
+            </tr>
+            <!--delete all products-->
+            <tr>
+                <td>clickAndWait</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[1]/div[5]/ul/li[2]/a</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/div/h1</td>
+                <td>Mass Delete: Products</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/div/h1</td>
+                <td>Mass Delete: Products</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/div/div/div/form/span/strong</td>
+                <td>Mass Delete is not reversible</td>
+            </tr>
+            <tr>
+                <td>waitForTextPresent</td>
+                <td>10 Products selected for removal.</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>clickAndWait</td>
+                <td>//html/body/section/div[1]/div[2]/div/div/div/form/div/div/a[2]/span[3]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div/div/h3/span</td>
+                <td>10 records successfully deleted.</td>
+            </tr>
+            <tr>
+                <td>clickAndWait</td>
+                <td>//html/body/section/div[1]/div/div/div[2]/a/span</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/div[3]/div/div[1]/table/tbody/tr/td/span</td>
+                <td>No results found</td>
+            </tr>
+            <!--clear search result-->
+            <tr>
+                <td>click</td>
+                <td>id=clear-search-link</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForTextNotPresent</td>
+                <td>Criteria Selected</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
 </html>
