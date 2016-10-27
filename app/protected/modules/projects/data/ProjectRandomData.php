@@ -41,7 +41,6 @@
         'names' => array(
             'Acme, Inc. Project',
             'Widget Corp Project',
-            '123 Warehousing Project',
             'Demo Company Project',
             'Smith and Co. Project',
             'Foo Bars Project',
