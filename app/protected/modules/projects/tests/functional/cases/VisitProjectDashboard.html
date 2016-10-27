@@ -1,876 +1,879 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-	<head profile="http://selenium-ide.openqa.org/profiles/test-case">
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-		<link rel="selenium.base" href="http://localhost/"/>
-		<title>VisitProjectDashboard</title>
-	</head>
-	<body>
-		<table cellpadding="1" cellspacing="1" border="1">
-			<thead>
-				<tr>
-					<td rowspan="1" colspan="3">Visit Project Dashboard</td>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>setTimeout</td>
-					<td>45000</td>
-					<td></td>
-				</tr>
-				<!--load demo data-->
-				<tr>
-					<td>open</td>
-					<td>index.php/projects/demo/loadProjectsSampler</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForPageToLoad</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<!--go to project dashboard-->
-				<tr>
-					<td>open</td>
-					<td>index.php/projects/default/dashboardDetails</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForPageToLoad</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForCondition</td>
-					<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-					<td>30000</td>
-				</tr>
-				<tr>
-					<td>waitForText</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
-					<td>How do Projects work in Zurmo?</td>
-				</tr>
-                <!--bread crumb-->
-                <tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[1]/div/a</td>
-					<td>Projects</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[1]/div/span</td>
-					<td>Dashboard</td>
-				</tr>
-                <!--navigation menus-->
-                <tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div/nav/div[1]/a/span</td>
-					<td>Dashboard</td>
-				</tr>
-                <tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div/nav/div[2]/a/span</td>
-					<td>Projects</td>
-				</tr>
-				<tr>
-					<td>waitForElementNotPresent</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div/nav/div[3]</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForElementNotPresent</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div/nav/div[4]</td>
-					<td></td>
-				</tr>
-                <!--screen options-->
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
-					<td>How do Projects work in Zurmo?</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[1]/div[1]/p/strong</td>
-					<td>Create</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[1]/div[1]/p</td>
-					<td>CreateCreate projects, add tasks and work using an agile methodology</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[1]/div[2]/p/strong</td>
-					<td>Collaborate</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[1]/div[2]/p</td>
-					<td>CollaborateCollaborate with users on tasks to get things done</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[1]/div[3]/p/strong</td>
-					<td>Track</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[1]/div[3]/p</td>
-					<td>TrackSubscribe to notifications and track progress against milestones</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[2]/a</td>
-					<td>Dismiss</td>
-				</tr>
-				<!--active projects-->
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div/h3</td>
-					<td>Active Projects</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/thead/tr/th[1]/a</td>
-					<td>Name</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/a</td>
-					<td>1 Test Project</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[1]/strong</td>
-					<td>1</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[1]/span</td>
-					<td>Someday</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[2]/strong</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[2]/span</td>
-					<td>To Do</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[3]/strong</td>
-					<td>3</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[3]/span</td>
-					<td>Working On</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[4]/strong</td>
-					<td>1</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[4]/span</td>
-					<td>Completed</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[5]/strong</td>
-					<td>20</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[5]/span</td>
-					<td>% Complete</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[5]/td[1]/a</td>
-					<td>5 Test Project</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[5]/td[1]/div[1]/strong</td>
-					<td>1</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[5]/td[1]/div[1]/span</td>
-					<td>Someday</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[5]/td[1]/div[2]/strong</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[5]/td[1]/div[2]/span</td>
-					<td>To Do</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[5]/td[1]/div[3]/strong</td>
-					<td>3</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[5]/td[1]/div[3]/span</td>
-					<td>Working On</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[5]/td[1]/div[4]/strong</td>
-					<td>1</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[5]/td[1]/div[4]/span</td>
-					<td>Completed</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[5]/td[1]/div[5]/strong</td>
-					<td>20</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[5]/td[1]/div[5]/span</td>
-					<td>% Complete</td>
-				</tr>
-				<!--activity feed-->
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div/h3</td>
-					<td>Activity Feed</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div[2]/div/div/div/div[2]/table/tbody/tr[1]/td/strong[1]/i/a</td>
-					<td>8 Test Project</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div[2]/div/div/div/div[2]/table/tbody/tr[1]/td/strong[2]</td>
-					<td>Super User</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div[2]/div/div/div/div[2]/table/tbody/tr[5]/td/strong[1]/i/a</td>
-					<td>4 Test Project</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div[2]/div/div/div/div[2]/table/tbody/tr[5]/td/strong[2]</td>
-					<td>Super User</td>
-				</tr>
-				<!--dismiss screen options-->
-				<tr>
-					<td>click</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[2]/a</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForTextNotPresent</td>
-                    <td>CreateCreate projects, add tasks and work using an agile methodology</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForTextNotPresent</td>
-                    <td>CollaborateCollaborate with users on tasks to get things done</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForTextNotPresent</td>
-                    <td>TrackSubscribe to notifications and track progress against milestones</td>
-					<td></td>
-				</tr>
-				<!--show screen options-->
-				<tr>
-					<td>click</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[2]/div/a</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForElementPresent</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[2]/div/ul/li/div/label/input</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>click</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[2]/div/ul/li/div/label/input</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForText</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
-					<td>How do Projects work in Zurmo?</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
-					<td>How do Projects work in Zurmo?</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[1]/div[1]/p/strong</td>
-					<td>Create</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[1]/div[1]/p</td>
-					<td>CreateCreate projects, add tasks and work using an agile methodology</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[1]/div[2]/p/strong</td>
-					<td>Collaborate</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[1]/div[2]/p</td>
-					<td>CollaborateCollaborate with users on tasks to get things done</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[1]/div[3]/p/strong</td>
-					<td>Track</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[1]/div[3]/p</td>
-					<td>TrackSubscribe to notifications and track progress against milestones</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[2]/a</td>
-					<td>Dismiss</td>
-				</tr>
-				<!--active projects pagination-->
-				<tr>
-					<td>click</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/div[1]/ul/li[4]/a/span</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForCondition</td>
-					<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-					<td>30000</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/a</td>
-					<td>6 Test Project</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[1]/strong</td>
-					<td>1</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[1]/span</td>
-					<td>Someday</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[2]/strong</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[2]/span</td>
-					<td>To Do</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[3]/strong</td>
-					<td>3</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[3]/span</td>
-					<td>Working On</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[4]/strong</td>
-					<td>1</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[4]/span</td>
-					<td>Completed</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[5]/strong</td>
-					<td>20</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[5]/span</td>
-					<td>% Complete</td>
-				</tr>
-				<tr>
-					<td>click</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/div[1]/ul/li[3]/a/span</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForCondition</td>
-					<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-					<td>30000</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/a</td>
-					<td>1 Test Project</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[1]/strong</td>
-					<td>1</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[1]/span</td>
-					<td>Someday</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[2]/strong</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[2]/span</td>
-					<td>To Do</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[3]/strong</td>
-					<td>3</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[3]/span</td>
-					<td>Working On</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[4]/strong</td>
-					<td>1</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[4]/span</td>
-					<td>Completed</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[5]/strong</td>
-					<td>20</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[5]/span</td>
-					<td>% Complete</td>
-				</tr>
-				<tr>
-					<td>click</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/div[1]/ul/li[5]/a/span</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForCondition</td>
-					<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-					<td>30000</td>
-				</tr>
-				<tr>
-					<td>waitForNotText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/a</td>
-                    <td>1 Test Project</td>
-				</tr>
-				<tr>
-					<td>click</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/div[1]/ul/li[2]/a/span</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForCondition</td>
-					<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-					<td>30000</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/a</td>
-					<td>1 Test Project</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[1]/strong</td>
-					<td>1</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[1]/span</td>
-					<td>Someday</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[2]/strong</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[2]/span</td>
-					<td>To Do</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[3]/strong</td>
-					<td>3</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[3]/span</td>
-					<td>Working On</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[4]/strong</td>
-					<td>1</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[4]/span</td>
-					<td>Completed</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[5]/strong</td>
-					<td>20</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[5]/span</td>
-					<td>% Complete</td>
-				</tr>
-				<!--activity feed pagination-->
-				<tr>
-					<td>click</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div[2]/div/div/div/div[3]/ul/li[4]/a/span</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForCondition</td>
-					<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-					<td>30000</td>
-				</tr>
-				<tr>
-					<td>waitForText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div[2]/div/div/div/div[2]/table/tbody/tr[1]/td/strong[1]/i/a</td>
-					<td>3 Test Project</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div[2]/div/div/div/div[2]/table/tbody/tr[1]/td/strong[1]/i/a</td>
-					<td>3 Test Project</td>
-				</tr>
-				<tr>
-					<td>click</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div[2]/div/div/div/div[3]/ul/li[3]/a/span</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForCondition</td>
-					<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-					<td>30000</td>
-				</tr>
-				<tr>
-					<td>waitForText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div[2]/div/div/div/div[2]/table/tbody/tr[1]/td/strong[1]/i/a</td>
-					<td>8 Test Project</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div[2]/div/div/div/div[2]/table/tbody/tr[1]/td/strong[1]/i/a</td>
-					<td>8 Test Project</td>
-				</tr>
-				<tr>
-					<td>click</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div[2]/div/div/div/div[3]/ul/li[5]/a/span</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForCondition</td>
-					<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-					<td>30000</td>
-				</tr>
-				<tr>
-					<td>waitForNotText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div[2]/div/div/div/div[2]/table/tbody/tr[1]/td/strong[1]/i/a</td>
-                    <td>8 Test Project</td>
-				</tr>
-				<tr>
-					<td>click</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div[2]/div/div/div/div[3]/ul/li[2]/a/span</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForCondition</td>
-					<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-					<td>30000</td>
-				</tr>
-				<tr>
-					<td>waitForText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div[2]/div/div/div/div[2]/table/tbody/tr[1]/td/strong[1]/i/a</td>
-					<td>8 Test Project</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div[2]/div/div/div/div[2]/table/tbody/tr[1]/td/strong[1]/i/a</td>
-					<td>8 Test Project</td>
-				</tr>
-				<!--project link redirection-->
-				<tr>
-					<td>click</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div/nav/div[2]/a[1]/span</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForPageToLoad</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForCondition</td>
-					<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-					<td>30000</td>
-				</tr>
-				<tr>
-					<td>waitForTextPresent</td>
-					<td>result(s)</td>
-					<td></td>
-				</tr>
-                <tr>
-					<td>waitForElementPresent</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div/nav/div[3]/a/span</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div/nav/div[3]/a/span</td>
-					<td>Update</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div/nav/div[4]/a/span</td>
-					<td>Export</td>
-				</tr>
-				<tr>
-					<td>click</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div/nav/div[1]/a[1]/span</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForPageToLoad</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForCondition</td>
-					<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-					<td>30000</td>
-				</tr>
-				<tr>
-					<td>waitForText</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
-					<td>How do Projects work in Zurmo?</td>
-				</tr>
-				<tr>
-					<td>waitForElementNotPresent</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div/nav/div[3]/a/span</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForElementNotPresent</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div/nav/div[4]/a/span</td>
-					<td></td>
-				</tr>
-				<!--active projects detail view-->
-				<tr>
-					<td>click</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[4]/td[1]/a</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForPageToLoad</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForCondition</td>
-					<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-					<td>30000</td>
-				</tr>
-				<tr>
-					<td>waitForText</td>
-					<td>//html/body/section//div[1]/div[2]/div[1]/nav/div[3]/a/span</td>
-					<td>Create Task</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/h1/span/span</td>
-					<td>4 Test Project</td>
-				</tr>
-				<tr>
-					<td>open</td>
-					<td>index.php/projects/default/dashboardDetails</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForPageToLoad</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForCondition</td>
-					<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-					<td>30000</td>
-				</tr>
-				<tr>
-					<td>waitForText</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
-					<td>How do Projects work in Zurmo?</td>
-				</tr>
-				<!--active projects edit view-->
-				<tr>
-					<td>click</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[4]/td[2]/a</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForPageToLoad</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForCondition</td>
-					<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-					<td>30000</td>
-				</tr>
-				<tr>
-					<td>waitForText</td>
-					<td>//html/body/section/div[1]/div[2]/div/div/form/div[1]/div[2]/div/h3</td>
-					<td>Rights and Permissions</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div/h1/span/span</td>
-					<td>4 Test Project</td>
-				</tr>
-				<tr>
-					<td>open</td>
-					<td>index.php/projects/default/dashboardDetails</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForPageToLoad</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForCondition</td>
-					<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-					<td>30000</td>
-				</tr>
-				<tr>
-					<td>waitForText</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
-					<td>How do Projects work in Zurmo?</td>
-				</tr>
-				<!--activity feed detail view-->
-				<tr>
-					<td>click</td>
-					<td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div[2]/div/div/div/div[2]/table/tbody/tr[2]/td/strong[1]/i/a</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForPageToLoad</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForCondition</td>
-					<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-					<td>30000</td>
-				</tr>
-				<tr>
-					<td>waitForText</td>
-					<td>//html/body/section//div[1]/div[2]/div[1]/nav/div[3]/a/span</td>
-					<td>Create Task</td>
-				</tr>
-				<tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/h1/span/span</td>
-					<td>7 Test Project</td>
-				</tr>
-                <tr>
-					<td>open</td>
-					<td>index.php/projects/default/dashboardDetails</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForPageToLoad</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForCondition</td>
-					<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-					<td>30000</td>
-				</tr>
-				<tr>
-					<td>waitForText</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
-					<td>How do Projects work in Zurmo?</td>
-				</tr>
-                <!--create project link redirection-->
-                <tr>
-					<td>click</td>
-					<td>//html/body/section/div[1]/div[2]/div[1]/div/nav/div[2]/ul/li/a</td>
-					<td></td>
-				</tr>
-                <tr>
-					<td>waitForPageToLoad</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>waitForCondition</td>
-					<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-					<td>30000</td>
-				</tr>
-                <tr>
-					<td>waitForText</td>
-					<td>//html/body/section/div[1]/div[2]/div/div/form/div[1]/div[2]/div/h3</td>
-					<td>Rights and Permissions</td>
-				</tr>
-                <tr>
-					<td>assertText</td>
-					<td>//html/body/section/div[1]/div[2]/div/h1/span/span</td>
-					<td>Create Project</td>
-				</tr>
-			</tbody>
-		</table>
-	</body>
+
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="selenium.base" href="http://localhost/" />
+    <title>VisitProjectDashboard</title>
+</head>
+
+<body>
+    <table cellpadding="1" cellspacing="1" border="1">
+        <thead>
+            <tr>
+                <td rowspan="1" colspan="3">Visit Project Dashboard</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>setTimeout</td>
+                <td>45000</td>
+                <td></td>
+            </tr>
+            <!--load demo data-->
+            <tr>
+                <td>open</td>
+                <td>index.php/projects/demo/loadProjectsSampler</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <!--go to project dashboard-->
+            <tr>
+                <td>open</td>
+                <td>index.php/projects/default/dashboardDetails</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
+                <td>How do Projects work in Zurmo?</td>
+            </tr>
+            <!--bread crumb-->
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[1]/div/a</td>
+                <td>Projects</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[1]/div/span</td>
+                <td>Dashboard</td>
+            </tr>
+            <!--navigation menus-->
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div/nav/div[1]/a/span</td>
+                <td>Dashboard</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div/nav/div[2]/a/span</td>
+                <td>Projects</td>
+            </tr>
+            <tr>
+                <td>waitForElementNotPresent</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div/nav/div[3]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForElementNotPresent</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div/nav/div[4]</td>
+                <td></td>
+            </tr>
+            <!--screen options-->
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
+                <td>How do Projects work in Zurmo?</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[1]/div[1]/p/strong</td>
+                <td>Create</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[1]/div[1]/p</td>
+                <td>CreateCreate projects, add tasks and work using an agile methodology</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[1]/div[2]/p/strong</td>
+                <td>Collaborate</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[1]/div[2]/p</td>
+                <td>CollaborateCollaborate with users on tasks to get things done</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[1]/div[3]/p/strong</td>
+                <td>Track</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[1]/div[3]/p</td>
+                <td>TrackSubscribe to notifications and track progress against milestones</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[2]/a</td>
+                <td>Dismiss</td>
+            </tr>
+            <!--active projects-->
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div/h3</td>
+                <td>Active Projects</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/thead/tr/th[1]/a</td>
+                <td>Name</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/a</td>
+                <td>1 Test Project</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[1]/strong</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[1]/span</td>
+                <td>Someday</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[2]/strong</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[2]/span</td>
+                <td>To Do</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[3]/strong</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[3]/span</td>
+                <td>Working On</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[4]/strong</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[4]/span</td>
+                <td>Completed</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[5]/strong</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[5]/span</td>
+                <td>% Complete</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[5]/td[1]/a</td>
+                <td>5 Test Project</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[5]/td[1]/div[1]/strong</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[5]/td[1]/div[1]/span</td>
+                <td>Someday</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[5]/td[1]/div[2]/strong</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[5]/td[1]/div[2]/span</td>
+                <td>To Do</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[5]/td[1]/div[3]/strong</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[5]/td[1]/div[3]/span</td>
+                <td>Working On</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[5]/td[1]/div[4]/strong</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[5]/td[1]/div[4]/span</td>
+                <td>Completed</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[5]/td[1]/div[5]/strong</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[5]/td[1]/div[5]/span</td>
+                <td>% Complete</td>
+            </tr>
+            <!--activity feed-->
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div/h3</td>
+                <td>Activity Feed</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div[2]/div/div/div/div[2]/table/tbody/tr[1]/td/strong[1]/i/a</td>
+                <td>8 Test Project</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div[2]/div/div/div/div[2]/table/tbody/tr[1]/td/strong[2]</td>
+                <td>Super User</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div[2]/div/div/div/div[2]/table/tbody/tr[5]/td/strong[1]/i/a</td>
+                <td>4 Test Project</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div[2]/div/div/div/div[2]/table/tbody/tr[5]/td/strong[2]</td>
+                <td>Super User</td>
+            </tr>
+            <!--dismiss screen options-->
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[2]/a</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForTextNotPresent</td>
+                <td>CreateCreate projects, add tasks and work using an agile methodology</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForTextNotPresent</td>
+                <td>CollaborateCollaborate with users on tasks to get things done</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForTextNotPresent</td>
+                <td>TrackSubscribe to notifications and track progress against milestones</td>
+                <td></td>
+            </tr>
+            <!--show screen options-->
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[2]/div/a</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForElementPresent</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[2]/div/ul/li/div/label/input</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[2]/div/ul/li/div/label/input</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
+                <td>How do Projects work in Zurmo?</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
+                <td>How do Projects work in Zurmo?</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[1]/div[1]/p/strong</td>
+                <td>Create</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[1]/div[1]/p</td>
+                <td>CreateCreate projects, add tasks and work using an agile methodology</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[1]/div[2]/p/strong</td>
+                <td>Collaborate</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[1]/div[2]/p</td>
+                <td>CollaborateCollaborate with users on tasks to get things done</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[1]/div[3]/p/strong</td>
+                <td>Track</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[1]/div[3]/p</td>
+                <td>TrackSubscribe to notifications and track progress against milestones</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/div[2]/a</td>
+                <td>Dismiss</td>
+            </tr>
+            <!--active projects pagination-->
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/div[1]/ul/li[4]/a/span</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/a</td>
+                <td>6 Test Project</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[1]/strong</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[1]/span</td>
+                <td>Someday</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[2]/strong</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[2]/span</td>
+                <td>To Do</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[3]/strong</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[3]/span</td>
+                <td>Working On</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[4]/strong</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[4]/span</td>
+                <td>Completed</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[5]/strong</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[5]/span</td>
+                <td>% Complete</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/div[1]/ul/li[3]/a/span</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/a</td>
+                <td>1 Test Project</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[1]/strong</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[1]/span</td>
+                <td>Someday</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[2]/strong</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[2]/span</td>
+                <td>To Do</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[3]/strong</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[3]/span</td>
+                <td>Working On</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[4]/strong</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[4]/span</td>
+                <td>Completed</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[5]/strong</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[5]/span</td>
+                <td>% Complete</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/div[1]/ul/li[5]/a/span</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForNotText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/a</td>
+                <td>1 Test Project</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/div[1]/ul/li[2]/a/span</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/a</td>
+                <td>1 Test Project</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[1]/strong</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[1]/span</td>
+                <td>Someday</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[2]/strong</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[2]/span</td>
+                <td>To Do</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[3]/strong</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[3]/span</td>
+                <td>Working On</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[4]/strong</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[4]/span</td>
+                <td>Completed</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[5]/strong</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[1]/td[1]/div[5]/span</td>
+                <td>% Complete</td>
+            </tr>
+            <!--activity feed pagination-->
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div[2]/div/div/div/div[3]/ul/li[4]/a/span</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div[2]/div/div/div/div[2]/table/tbody/tr[1]/td/strong[1]/i/a</td>
+                <td>3 Test Project</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div[2]/div/div/div/div[2]/table/tbody/tr[1]/td/strong[1]/i/a</td>
+                <td>3 Test Project</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div[2]/div/div/div/div[3]/ul/li[3]/a/span</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div[2]/div/div/div/div[2]/table/tbody/tr[1]/td/strong[1]/i/a</td>
+                <td>8 Test Project</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div[2]/div/div/div/div[2]/table/tbody/tr[1]/td/strong[1]/i/a</td>
+                <td>8 Test Project</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div[2]/div/div/div/div[3]/ul/li[5]/a/span</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForNotText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div[2]/div/div/div/div[2]/table/tbody/tr[1]/td/strong[1]/i/a</td>
+                <td>8 Test Project</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div[2]/div/div/div/div[3]/ul/li[2]/a/span</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div[2]/div/div/div/div[2]/table/tbody/tr[1]/td/strong[1]/i/a</td>
+                <td>8 Test Project</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div[2]/div/div/div/div[2]/table/tbody/tr[1]/td/strong[1]/i/a</td>
+                <td>8 Test Project</td>
+            </tr>
+            <!--project link redirection-->
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div/nav/div[2]/a[1]/span</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForTextPresent</td>
+                <td>result(s)</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForElementPresent</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div/nav/div[3]/a/span</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div/nav/div[3]/a/span</td>
+                <td>Update</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div/nav/div[4]/a/span</td>
+                <td>Export</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div/nav/div[1]/a[1]/span</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
+                <td>How do Projects work in Zurmo?</td>
+            </tr>
+            <tr>
+                <td>waitForElementNotPresent</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div/nav/div[3]/a/span</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForElementNotPresent</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div/nav/div[4]/a/span</td>
+                <td></td>
+            </tr>
+            <!--active projects detail view-->
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[4]/td[1]/a</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section//div[1]/div[2]/div[1]/nav/div[3]/a/span</td>
+                <td>Create Task</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/h1/span/span</td>
+                <td>4 Test Project</td>
+            </tr>
+            <tr>
+                <td>open</td>
+                <td>index.php/projects/default/dashboardDetails</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
+                <td>How do Projects work in Zurmo?</td>
+            </tr>
+            <!--active projects edit view-->
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li/div[2]/div/div/table/tbody/tr[4]/td[2]/a</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/div/div/form/div[1]/div[2]/div/h3</td>
+                <td>Rights and Permissions</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div/h1/span/span</td>
+                <td>4 Test Project</td>
+            </tr>
+            <tr>
+                <td>open</td>
+                <td>index.php/projects/default/dashboardDetails</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
+                <td>How do Projects work in Zurmo?</td>
+            </tr>
+            <!--activity feed detail view-->
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[2]/li/div[2]/div/div/div/div[2]/table/tbody/tr[2]/td/strong[1]/i/a</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section//div[1]/div[2]/div[1]/nav/div[3]/a/span</td>
+                <td>Create Task</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/h1/span/span</td>
+                <td>7 Test Project</td>
+            </tr>
+            <tr>
+                <td>open</td>
+                <td>index.php/projects/default/dashboardDetails</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
+                <td>How do Projects work in Zurmo?</td>
+            </tr>
+            <!--create project link redirection-->
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div/nav/div[2]/ul/li/a</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/div/div/form/div[1]/div[2]/div/h3</td>
+                <td>Rights and Permissions</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div/h1/span/span</td>
+                <td>Create Project</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
 </html>
