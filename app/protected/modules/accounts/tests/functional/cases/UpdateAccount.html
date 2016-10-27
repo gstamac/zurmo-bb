@@ -1,136 +1,139 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-    <head profile="http://selenium-ide.openqa.org/profiles/test-case">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <link rel="selenium.base" href="http://localhost/"/>
-        <title>Update Account</title>
-    </head>
-    <body>
-        <table cellpadding="1" cellspacing="1" border="1">
-            <thead>
-                <tr>
-                    <td rowspan="1" colspan="3">Update Account</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>setTimeout</td>
-                    <td>45000</td>
-                    <td></td>
-                </tr>
-                <!--go to accounts list-->
-                <tr>
-                    <td>open</td>
-                    <td>index.php</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForPageToLoad</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <tr>
-                    <td>clickAndWait</td>
-                    <td>//html/body/section/nav/div[1]/ul/li[3]/a/span</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[2]/div[1]/form/div[5]/a[4]</td>
-                    <td>Items I Own</td>
-                </tr>
-                <!--select account created in functional test-->
-                <tr>
-                    <td>sendKeys</td>
-                    <td>//html/body/section/div[1]/div[2]/div[1]/form/div[2]/table/tbody/tr/td/input</td>
-                    <td>Test Account ${randomSuffix}</td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[3]/a</td>
-                    <td>Test Account ${randomSuffix}</td>
-                </tr>
-                <tr>
-                    <td>verifyValue</td>
-                    <td>//html/body/section/div[1]/div[2]/div[1]/form/div[2]/table/tbody/tr/td/input</td>
-                    <td>Test Account ${randomSuffix}</td>
-                </tr>
-                <!--go to edit account page-->
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[6]/a</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForPageToLoad</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <!--edit account-->
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div/h1/span/span</td>
-                    <td>Test Account ${randomSuffix}</td>
-                </tr>
-                <tr>
-                    <td>type</td>
-                    <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[11]/td/textarea</td>
-                    <td>This is a test account after editing</td>
-                </tr>
-                <tr>
-                    <td>clickAndWait</td>
-                    <td>//html/body/section/div[1]/div/div/form/div[2]/div/div/a[1]/span[3]</td>
-                    <td></td>
-                </tr>
-                <!--verify values after saving account-->
-                <tr>
-                    <td>waitForTextPresent</td>
-                    <td>Test Account ${randomSuffix}</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>assertText</td>
-                    <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div/table/tbody/tr[11]/td</td>
-                    <td>This is a test account after editing</td>
-                </tr>
-                <!--clear search result-->
-                <tr>
-                    <td>clickAndWait</td>
-                    <td>//html/body/section/nav/div[1]/ul/li[3]/a/span</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[2]/div[1]/form/div[5]/a[4]</td>
-                    <td>Items I Own</td>
-                </tr>
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div[2]/div[1]/form/div[5]/a[3]/span[2]</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForTextNotPresent</td>
-                    <td>Criteria Selected</td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-    </body>
+
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="selenium.base" href="http://localhost/" />
+    <title>Update Account</title>
+</head>
+
+<body>
+    <table cellpadding="1" cellspacing="1" border="1">
+        <thead>
+            <tr>
+                <td rowspan="1" colspan="3">Update Account</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>setTimeout</td>
+                <td>45000</td>
+                <td></td>
+            </tr>
+            <!--go to accounts list-->
+            <tr>
+                <td>open</td>
+                <td>index.php</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>clickAndWait</td>
+                <td>//html/body/section/nav/div[1]/ul/li[3]/a/span</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[5]/a[4]</td>
+                <td>Items I Own</td>
+            </tr>
+            <!--select account created in functional test-->
+            <tr>
+                <td>sendKeys</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[2]/table/tbody/tr/td/input</td>
+                <td>Test Account ${randomSuffix}</td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[3]/a</td>
+                <td>Test Account ${randomSuffix}</td>
+            </tr>
+            <tr>
+                <td>verifyValue</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[2]/table/tbody/tr/td/input</td>
+                <td>Test Account ${randomSuffix}</td>
+            </tr>
+            <!--go to edit account page-->
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[6]/a</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <!--edit account-->
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div/h1/span/span</td>
+                <td>Test Account ${randomSuffix}</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[11]/td/textarea</td>
+                <td>This is a test account after editing</td>
+            </tr>
+            <tr>
+                <td>clickAndWait</td>
+                <td>//html/body/section/div[1]/div/div/form/div[2]/div/div/a[1]/span[3]</td>
+                <td></td>
+            </tr>
+            <!--verify values after saving account-->
+            <tr>
+                <td>waitForTextPresent</td>
+                <td>Test Account ${randomSuffix}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div/table/tbody/tr[11]/td</td>
+                <td>This is a test account after editing</td>
+            </tr>
+            <!--clear search result-->
+            <tr>
+                <td>clickAndWait</td>
+                <td>//html/body/section/nav/div[1]/ul/li[3]/a/span</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[5]/a[4]</td>
+                <td>Items I Own</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[5]/a[3]/span[2]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForTextNotPresent</td>
+                <td>Criteria Selected</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
 </html>

@@ -1,404 +1,407 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-    <head profile="http://selenium-ide.openqa.org/profiles/test-case">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <link rel="selenium.base" href="http://localhost/"/>
-        <title>MassEditAccounts</title>
-    </head>
-    <body>
-        <table cellpadding="1" cellspacing="1" border="1">
-            <thead>
-                <tr>
-                    <td rowspan="1" colspan="3">Mass Edit Accounts</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>setTimeout</td>
-                    <td>45000</td>
-                    <td></td>
-                </tr>
-                <!--go to accounts list-->
-                <tr>
-                    <td>open</td>
-                    <td>index.php</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForPageToLoad</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <tr>
-                    <td>clickAndWait</td>
-                    <td>//html/body/section/nav/div[1]/ul/li[3]/a/span</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[2]/div[1]/form/div[5]/a[4]</td>
-                    <td>Items I Own</td>
-                </tr>
-                <!--mass check and uncheck account-->
-                <tr>
-                    <td>verifyValue</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/thead/tr[1]/th[1]/label/input</td>
-                    <td>off</td>
-                </tr>
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/thead/tr[1]/th[1]/label/input</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>verifyValue</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/thead/tr[1]/th[1]/label/input</td>
-                    <td>on</td>
-                </tr>
-                <tr>
-                    <td>verifyValue</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[1]/label/input</td>
-                    <td>on</td>
-                </tr>
-                <tr>
-                    <td>verifyValue</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[2]/td[1]/label/input</td>
-                    <td>on</td>
-                </tr>
-                <tr>
-                    <td>verifyValue</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[3]/td[1]/label/input</td>
-                    <td>on</td>
-                </tr>
-                <tr>
-                    <td>verifyValue</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[4]/td[1]/label/input</td>
-                    <td>on</td>
-                </tr>
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/thead/tr[1]/th[1]/label/input</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>verifyValue</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/thead/tr[1]/th[1]/label/input</td>
-                    <td>off</td>
-                </tr>
-                <tr>
-                    <td>verifyValue</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[1]/label/input</td>
-                    <td>off</td>
-                </tr>
-                <tr>
-                    <td>verifyValue</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[2]/td[1]/label/input</td>
-                    <td>off</td>
-                </tr>
-                <tr>
-                    <td>verifyValue</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[3]/td[1]/label/input</td>
-                    <td>off</td>
-                </tr>
-                <tr>
-                    <td>verifyValue</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[4]/td[1]/label/input</td>
-                    <td>off</td>
-                </tr>
-                <!--indivisual check and uncheck account-->
-                <tr>
-                    <td>verifyValue</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[1]/label/input</td>
-                    <td>off</td>
-                </tr>
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[1]/label/input</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>verifyValue</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[1]/label/input</td>
-                    <td>on</td>
-                </tr>
-                <!--check validation on mass update account page-->
-                <tr>
-                    <td>clickAndWait</td>
-                    <td>//html/body/section/div[1]/div[1]/div/nav/div[2]/ul/li[2]/a</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div/h1/span/span</td>
-                    <td>Mass Update: Accounts</td>
-                </tr>
-                <tr>
-                    <td>clickAndWait</td>
-                    <td>//html/body/section/div[1]/div/div/div/form/div/div/a/span[3]</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForTextPresent</td>
-                    <td>You must select at least one field to modify.</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[1]/th[1]/label/input</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[2]/th[1]/label/input</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[3]/th[1]/label/input</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[4]/th[1]/label/input</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>clickAndWait</td>
-                    <td>//html/body/section/div[1]/div/div/div/form/div/div/a/span[3]</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[1]/td[1]/div[2]</td>
-                    <td>Owner cannot be blank.</td>
-                </tr>
-                <!--mass edit all result-->
-                <tr>
-                    <td>sendKeys</td>
-                    <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[1]/td[1]/div/input</td>
-                    <td>Sam Smith</td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[1]/td[1]/ul/li/a</td>
-                    <td>Sam Smith (sam)</td>
-                </tr>
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[1]/td[1]/ul/li/a</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>select</td>
-                    <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[2]/td[1]/div/select</td>
-                    <td>Automotive</td>
-                </tr>
-                <tr>
-                    <td>select</td>
-                    <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[3]/td[1]/div/select</td>
-                    <td>Vendor</td>
-                </tr>
-                <tr>
-                    <td>type</td>
-                    <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[4]/td[1]/input</td>
-                    <td>300</td>
-                </tr>
-                <tr>
-                    <td>clickAndWait</td>
-                    <td>//html/body/section/div[1]/div/div/div/form/div/div/a/span[3]</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForTextPresent</td>
-                    <td>records updated successfully.</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>clickAndWait</td>
-                    <td>//html/body/section/div[1]/div/div/div[2]/a/span</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[2]/div[1]/form/div[5]/a[4]</td>
-                    <td>Items I Own</td>
-                </tr>
-                <!--verify values after mass editing accounts-->
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[5]/a</td>
-                    <td>Sam Smith</td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[2]/td[5]/a</td>
-                    <td>Sam Smith</td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[3]/td[5]/a</td>
-                    <td>Sam Smith</td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[4]/td[5]/a</td>
-                    <td>Sam Smith</td>
-                </tr>
-                <tr>
-                    <td>waitForTextNotPresent</td>
-                    <td>Prospect</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForTextNotPresent</td>
-                    <td>Customer</td>
-                    <td></td>
-                </tr>
-                <!--mass edit selected result-->
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[1]/label/input</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>verifyValue</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[1]/label/input</td>
-                    <td>on</td>
-                </tr>
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[2]/td[1]/label/input</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>verifyValue</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[2]/td[1]/label/input</td>
-                    <td>on</td>
-                </tr>
-                <tr>
-                    <td>clickAndWait</td>
-                    <td>//html/body/section/div[1]/div[1]/div/nav/div[2]/ul/li[1]/a</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div/h1/span/span</td>
-                    <td>Mass Update: Accounts</td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div/div/div/form/span</td>
-                    <td>2 records selected for updating. Please tick the boxes next to the fields you wish to update and then select the value you wish to be used.</td>
-                </tr>
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[1]/th[1]/label/input</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[3]/th[1]/label/input</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>sendKeys</td>
-                    <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[1]/td[1]/div/input</td>
-                    <td>Super User</td>
-                </tr>
-                <tr>
-                    <td>waitForCondition</td>
-                    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
-                    <td>30000</td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[1]/td[1]/ul/li/a</td>
-                    <td>Super User (super)</td>
-                </tr>
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[1]/td[1]/ul/li/a</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>select</td>
-                    <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[3]/td[1]/div/select</td>
-                    <td>Customer</td>
-                </tr>
-                <tr>
-                    <td>clickAndWait</td>
-                    <td>//html/body/section/div[1]/div/div/div/form/div/div/a/span[3]</td>
-                    <td></td>
-                </tr>
-                <!--verify values after mass editing accounts-->
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[5]/a</td>
-                    <td>Super User</td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[2]/td[5]/a</td>
-                    <td>Super User</td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[3]/td[5]/a</td>
-                    <td>Sam Smith</td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[4]/td[5]/a</td>
-                    <td>Sam Smith</td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[4]</td>
-                    <td>Customer</td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[2]/td[4]</td>
-                    <td>Customer</td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[3]/td[4]</td>
-                    <td>Vendor</td>
-                </tr>
-                <tr>
-                    <td>waitForText</td>
-                    <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[4]/td[4]</td>
-                    <td>Vendor</td>
-                </tr>
-                <tr>
-                    <td>waitForTextNotPresent</td>
-                    <td>Prospect</td>
-                    <td></td>
-                </tr>
-                <!--try selected mass update without selecting any record-->
-                <tr>
-                    <td>click</td>
-                    <td>//html/body/section/div[1]/div[1]/div/nav/div[2]/ul/li[1]/a</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>assertAlert</td>
-                    <td>At least 1 record must be selected</td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-    </body>
+
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="selenium.base" href="http://localhost/" />
+    <title>MassEditAccounts</title>
+</head>
+
+<body>
+    <table cellpadding="1" cellspacing="1" border="1">
+        <thead>
+            <tr>
+                <td rowspan="1" colspan="3">Mass Edit Accounts</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>setTimeout</td>
+                <td>45000</td>
+                <td></td>
+            </tr>
+            <!--go to accounts list-->
+            <tr>
+                <td>open</td>
+                <td>index.php</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>clickAndWait</td>
+                <td>//html/body/section/nav/div[1]/ul/li[3]/a/span</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[5]/a[4]</td>
+                <td>Items I Own</td>
+            </tr>
+            <!--mass check and uncheck account-->
+            <tr>
+                <td>verifyValue</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/thead/tr[1]/th[1]/label/input</td>
+                <td>off</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/thead/tr[1]/th[1]/label/input</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>verifyValue</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/thead/tr[1]/th[1]/label/input</td>
+                <td>on</td>
+            </tr>
+            <tr>
+                <td>verifyValue</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[1]/label/input</td>
+                <td>on</td>
+            </tr>
+            <tr>
+                <td>verifyValue</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[2]/td[1]/label/input</td>
+                <td>on</td>
+            </tr>
+            <tr>
+                <td>verifyValue</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[3]/td[1]/label/input</td>
+                <td>on</td>
+            </tr>
+            <tr>
+                <td>verifyValue</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[4]/td[1]/label/input</td>
+                <td>on</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/thead/tr[1]/th[1]/label/input</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>verifyValue</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/thead/tr[1]/th[1]/label/input</td>
+                <td>off</td>
+            </tr>
+            <tr>
+                <td>verifyValue</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[1]/label/input</td>
+                <td>off</td>
+            </tr>
+            <tr>
+                <td>verifyValue</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[2]/td[1]/label/input</td>
+                <td>off</td>
+            </tr>
+            <tr>
+                <td>verifyValue</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[3]/td[1]/label/input</td>
+                <td>off</td>
+            </tr>
+            <tr>
+                <td>verifyValue</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[4]/td[1]/label/input</td>
+                <td>off</td>
+            </tr>
+            <!--indivisual check and uncheck account-->
+            <tr>
+                <td>verifyValue</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[1]/label/input</td>
+                <td>off</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[1]/label/input</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>verifyValue</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[1]/label/input</td>
+                <td>on</td>
+            </tr>
+            <!--check validation on mass update account page-->
+            <tr>
+                <td>clickAndWait</td>
+                <td>//html/body/section/div[1]/div[1]/div/nav/div[2]/ul/li[2]/a</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div/h1/span/span</td>
+                <td>Mass Update: Accounts</td>
+            </tr>
+            <tr>
+                <td>clickAndWait</td>
+                <td>//html/body/section/div[1]/div/div/div/form/div/div/a/span[3]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForTextPresent</td>
+                <td>You must select at least one field to modify.</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[1]/th[1]/label/input</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[2]/th[1]/label/input</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[3]/th[1]/label/input</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[4]/th[1]/label/input</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>clickAndWait</td>
+                <td>//html/body/section/div[1]/div/div/div/form/div/div/a/span[3]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[1]/td[1]/div[2]</td>
+                <td>Owner cannot be blank.</td>
+            </tr>
+            <!--mass edit all result-->
+            <tr>
+                <td>sendKeys</td>
+                <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[1]/td[1]/div/input</td>
+                <td>Sam Smith</td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[1]/td[1]/ul/li/a</td>
+                <td>Sam Smith (sam)</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[1]/td[1]/ul/li/a</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>select</td>
+                <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[2]/td[1]/div/select</td>
+                <td>Automotive</td>
+            </tr>
+            <tr>
+                <td>select</td>
+                <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[3]/td[1]/div/select</td>
+                <td>Vendor</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[4]/td[1]/input</td>
+                <td>300</td>
+            </tr>
+            <tr>
+                <td>clickAndWait</td>
+                <td>//html/body/section/div[1]/div/div/div/form/div/div/a/span[3]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForTextPresent</td>
+                <td>records updated successfully.</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>clickAndWait</td>
+                <td>//html/body/section/div[1]/div/div/div[2]/a/span</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[5]/a[4]</td>
+                <td>Items I Own</td>
+            </tr>
+            <!--verify values after mass editing accounts-->
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[5]/a</td>
+                <td>Sam Smith</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[2]/td[5]/a</td>
+                <td>Sam Smith</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[3]/td[5]/a</td>
+                <td>Sam Smith</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[4]/td[5]/a</td>
+                <td>Sam Smith</td>
+            </tr>
+            <tr>
+                <td>waitForTextNotPresent</td>
+                <td>Prospect</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForTextNotPresent</td>
+                <td>Customer</td>
+                <td></td>
+            </tr>
+            <!--mass edit selected result-->
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[1]/label/input</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>verifyValue</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[1]/label/input</td>
+                <td>on</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[2]/td[1]/label/input</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>verifyValue</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[2]/td[1]/label/input</td>
+                <td>on</td>
+            </tr>
+            <tr>
+                <td>clickAndWait</td>
+                <td>//html/body/section/div[1]/div[1]/div/nav/div[2]/ul/li[1]/a</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div/h1/span/span</td>
+                <td>Mass Update: Accounts</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div/div/div/form/span</td>
+                <td>2 records selected for updating. Please tick the boxes next to the fields you wish to update and then select the value you wish to be used.</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[1]/th[1]/label/input</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[3]/th[1]/label/input</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>sendKeys</td>
+                <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[1]/td[1]/div/input</td>
+                <td>Super User</td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[1]/td[1]/ul/li/a</td>
+                <td>Super User (super)</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[1]/td[1]/ul/li/a</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>select</td>
+                <td>//html/body/section/div[1]/div/div/div/form/table/tbody/tr[3]/td[1]/div/select</td>
+                <td>Customer</td>
+            </tr>
+            <tr>
+                <td>clickAndWait</td>
+                <td>//html/body/section/div[1]/div/div/div/form/div/div/a/span[3]</td>
+                <td></td>
+            </tr>
+            <!--verify values after mass editing accounts-->
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[5]/a</td>
+                <td>Super User</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[2]/td[5]/a</td>
+                <td>Super User</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[3]/td[5]/a</td>
+                <td>Sam Smith</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[4]/td[5]/a</td>
+                <td>Sam Smith</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[4]</td>
+                <td>Customer</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[2]/td[4]</td>
+                <td>Customer</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[3]/td[4]</td>
+                <td>Vendor</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[4]/td[4]</td>
+                <td>Vendor</td>
+            </tr>
+            <tr>
+                <td>waitForTextNotPresent</td>
+                <td>Prospect</td>
+                <td></td>
+            </tr>
+            <!--try selected mass update without selecting any record-->
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[1]/div/nav/div[2]/ul/li[1]/a</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>assertAlert</td>
+                <td>At least 1 record must be selected</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
 </html>
