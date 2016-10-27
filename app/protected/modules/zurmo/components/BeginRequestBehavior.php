@@ -176,16 +176,33 @@
         {
             if (MEMCACHE_ON)
             {
-                //Yii::import('application.core.components.ZurmoMemCache');
-                $memcacheServiceHelper = new MemcacheServiceHelper();
-                if ($memcacheServiceHelper->runCheckAndGetIfSuccessful())
+                $phpVersion = explode('.', phpversion());
+                if ($phpVersion[0] >= 7)
                 {
-                    $cacheComponent = Yii::createComponent(array(
-                        'class'     => 'CMemCache',
-                        'keyPrefix' => ZURMO_TOKEN,
-                        'servers'   => Yii::app()->params['memcacheServers']));
-                    Yii::app()->setComponent('cache', $cacheComponent);
+                    $memcachedServiceHelper = new MemcachedServiceHelper();
+                    if ($memcachedServiceHelper->runCheckAndGetIfSuccessful())
+                    {
+                        $cacheComponent = Yii::createComponent(array(
+                            'class'     => 'CMemCache',
+                            'useMemcached'=> true,
+                            'keyPrefix' => ZURMO_TOKEN,
+                            'servers'   => Yii::app()->params['memcacheServers']));
+                        Yii::app()->setComponent('cache', $cacheComponent);
+                    }
                 }
+                else
+                {
+                    $memcacheServiceHelper = new MemcacheServiceHelper();
+                    if ($memcacheServiceHelper->runCheckAndGetIfSuccessful())
+                    {
+                        $cacheComponent = Yii::createComponent(array(
+                            'class'     => 'CMemCache',
+                            'keyPrefix' => ZURMO_TOKEN,
+                            'servers'   => Yii::app()->params['memcacheServers']));
+                        Yii::app()->setComponent('cache', $cacheComponent);
+                    }
+                }
+                
                 // todo: Find better way to append this prefix for tests.
                 // We can't put this code only in BeginRequestTestBehavior, because for API tests we are using  BeginRequestBehavior
                 if (defined('IS_TEST'))

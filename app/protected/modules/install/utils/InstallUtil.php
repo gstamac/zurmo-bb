@@ -112,6 +112,11 @@
             return !empty($timezone);
         }
 
+        public static function isMysqliInstalled()
+        {
+            return extension_loaded("mysqli");
+        }
+        
         public static function isPdoInstalled()
         {
             return extension_loaded("pdo");
@@ -330,6 +335,19 @@
         {
             $actualVersion = phpversion('memcache');
             if ($actualVersion != false && extension_loaded('memcache'))
+            {
+                return static::checkVersion($minimumRequiredVersion, $actualVersion);
+            }
+            return false;
+        }
+        
+        /**
+         * @returns true, or the memcached version if less than required, or false if not installed.
+         */
+        public static function checkMemcached($minimumRequiredVersion, /* out */ &$actualVersion)
+        {
+            $actualVersion = phpversion('memcached');
+            if ($actualVersion != false && extension_loaded('memcached'))
             {
                 return static::checkVersion($minimumRequiredVersion, $actualVersion);
             }
@@ -767,13 +785,28 @@
             // Check if user setup memcache host and port
             if ($memcacheHost && $memcachePort)
             {
-                // Check if memcache extension is installed
-                $memcacheServiceHelper = new MemcacheServiceHelper();
-                if ($memcacheServiceHelper->runCheckAndGetIfSuccessful())
+                $phpVersion = explode('.', phpversion());
+                if ($phpVersion[0] >= 7)
                 {
-                    $contents = preg_replace('/\$memcacheLevelCaching\s*=\s*false;/',
-                                             '$memcacheLevelCaching = true;',
-                                             $contents);
+                    // Check if memcached extension is installed
+                    $memcachedServiceHelper = new MemcachedServiceHelper();
+                    if ($memcachedServiceHelper->runCheckAndGetIfSuccessful())
+                    {
+                        $contents = preg_replace('/\$memcacheLevelCaching\s*=\s*false;/',
+                                                 '$memcacheLevelCaching = true;',
+                                                 $contents);
+                    }
+                }
+                else
+                {
+                    // Check if memcache extension is installed
+                    $memcacheServiceHelper = new MemcacheServiceHelper();
+                    if ($memcacheServiceHelper->runCheckAndGetIfSuccessful())
+                    {
+                        $contents = preg_replace('/\$memcacheLevelCaching\s*=\s*false;/',
+                                                 '$memcacheLevelCaching = true;',
+                                                 $contents);
+                    }
                 }
             }
 
@@ -1116,6 +1149,23 @@
         {
             assert('is_array($args)');
             $form            = new InstallSettingsForm();
+            $phpVersion = explode('.', phpversion());
+            if ($phpVersion[0] >= 7)
+            {
+                $memcachedServiceHelper = new MemcachedServiceHelper();
+                if (!$memcachedServiceHelper->runCheckAndGetIfSuccessful())
+                {
+                    $form->setMemcacheIsNotAvailable();
+                }
+            }
+            else
+            {
+                $memcacheServiceHelper = new MemcacheServiceHelper();
+                if (!$memcacheServiceHelper->runCheckAndGetIfSuccessful())
+                {
+                    $form->setMemcacheIsNotAvailable();
+                }
+            }
             $template        = "{message}\n";
             $messageStreamer = new MessageStreamer($template);
             $messageStreamer->setExtraRenderBytes(0);

@@ -63,7 +63,7 @@
             $customFieldData->serializedData   = serialize($values);
             $customFieldData->serializedLabels = serialize($labels);
             $saved = $customFieldData->save();
-            assert($saved);    // Not Coding Standard
+            assert('$saved');
             ContactsModule::loadStartingData();
         }
 

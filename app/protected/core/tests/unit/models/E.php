@@ -53,7 +53,8 @@
             if ($bean === false)
             {
                 // we need this because C uses dynamic default values from it and we need this table to be available.
-                RedBeanModelsToTablesAdapter::generateTablesFromModelClassNames(array('E'), new MessageLogger());
+                $messageLogger = new MessageLogger();
+                RedBeanModelsToTablesAdapter::generateTablesFromModelClassNames(array('E'), $messageLogger);
                 $model = new E();
                 $model->e = $e;
                 $saved = $model->save();
