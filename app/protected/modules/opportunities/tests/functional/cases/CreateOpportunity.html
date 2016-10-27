@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="selenium.base" href="http://localhost/" />
+    <title>CreateOpportunity</title>
+</head>
+
+<body>
+    <table cellpadding="1" cellspacing="1" border="1">
+        <thead>
+            <tr>
+                <td rowspan="1" colspan="3">Create Opportunity</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>setTimeout</td>
+                <td>45000</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>storeGlobal</td>
+                <td>javascript{Math.floor(Math.random()*11000)}</td>
+                <td>randomSuffix</td>
+            </tr>
+            <!--store current date-->
+            <tr>
+                <td>storeGlobal</td>
+                <td>javascript{new Date().getDate().toString()}</td>
+                <td>date</td>
+            </tr>
+            <!--store current month-->
+            <tr>
+                <td>storeGlobal</td>
+                <td>javascript{(new Date().getMonth()) + 1}</td>
+                <td>month</td>
+            </tr>
+            <!--Load Demo Data-->
+            <tr>
+                <td>open</td>
+                <td>index.php/zurmo/demo/loadAccountSampler</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <!--go to create opportunity-->
+            <tr>
+                <td>open</td>
+                <td>index.php</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/nav/div[1]/ul/li[6]/a/span</td>
+                <td>Opportunities</td>
+            </tr>
+            <tr>
+                <td>clickAndWait</td>
+                <td>//html/body/section/nav/div[1]/ul/li[6]/a/span</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/div/form/div[5]/a[4]</td>
+                <td>Items I Own</td>
+            </tr>
+            <tr>
+                <td>clickAndWait</td>
+                <td>//html/body/section/div[1]/div[1]/div/nav/div[1]/a/span</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[1]/h1/span/span</td>
+                <td>Create Opportunity</td>
+            </tr>
+            <!--add opportunity details-->
+            <tr>
+                <td>type</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[1]/div/table/tbody/tr[1]/td/input</td>
+                <td>Test Opportunity ${randomSuffix}</td>
+            </tr>
+            <tr>
+                <td>select</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[1]/div/table/tbody/tr[2]/td/div/div[1]/div/select</td>
+                <td>EUR</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[1]/div/table/tbody/tr[2]/td/div/div[2]/input</td>
+                <td>500.34</td>
+            </tr>
+            <tr>
+                <td>sendKeys</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[1]/div/table/tbody/tr[3]/td/div/input</td>
+                <td>Test Account For Functional</td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[1]/div/table/tbody/tr[3]/td/ul/li[1]/a</td>
+                <td>Test Account For Functional</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[1]/div/table/tbody/tr[3]/td/ul/li[1]/a</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>verifyValue</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[1]/div/table/tbody/tr[3]/td/div/input</td>
+                <td>Test Account For Functional</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[1]/div/table/tbody/tr[4]/td/div/input</td>
+                <td>${month}/${date}/16</td>
+            </tr>
+            <tr>
+                <td>select</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[1]/div/table/tbody/tr[5]/td/div/select</td>
+                <td>Negotiating</td>
+            </tr>
+            <tr>
+                <td>select</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[1]/div/table/tbody/tr[7]/td/div/select</td>
+                <td>Tradeshow</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[1]/div/table/tbody/tr[8]/td/textarea</td>
+                <td>test description</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/div[1]/div/a/span[2]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForElementPresent</td>
+                <td>//html/body/div[5]/div[2]/div/div[1]/div[1]/div/form/div[2]/table/tbody/tr/td/input</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>sendKeys</td>
+                <td>//html/body/div[5]/div[2]/div/div[1]/div[1]/div/form/div[2]/table/tbody/tr/td/input</td>
+                <td>Sam Smith</td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/div[5]/div[2]/div/div[1]/div[2]/div/div[2]/table/tbody/tr/td/a</td>
+                <td>Sam Smith</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/div[5]/div[2]/div/div[1]/div[2]/div/div[2]/table/tbody/tr/td/a</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>verifyValue</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/div[1]/div/input</td>
+                <td>Sam Smith</td>
+            </tr>
+            <tr>
+                <td>clickAndWait</td>
+                <td>//html/body/section/div[1]/div/div/form/div[2]/div/div/a[1]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <!--verify values after creating opportunity-->
+            <tr>
+                <td>waitForTextPresent</td>
+                <td>Test Opportunity ${randomSuffix}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div/table/tbody/tr[1]/td</td>
+                <td>Test Opportunity ${randomSuffix}</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div/table/tbody/tr[2]/td</td>
+                <td>€500.34</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div/table/tbody/tr[3]/td</td>
+                <td>Test Account For Functional</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div/table/tbody/tr[4]/td</td>
+                <td>${month}/${date}/16</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div/table/tbody/tr[5]/td</td>
+                <td>Negotiating</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div/table/tbody/tr[6]/td</td>
+                <td>50%</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div/table/tbody/tr[7]/td</td>
+                <td>Tradeshow</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div/table/tbody/tr[8]/td</td>
+                <td>test description</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

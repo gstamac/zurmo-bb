@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="selenium.base" href="http://localhost/" />
+    <title>Create Task</title>
+</head>
+
+<body>
+    <table cellpadding="1" cellspacing="1" border="1">
+        <thead>
+            <tr>
+                <td rowspan="1" colspan="3">Create Task</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>setTimeout</td>
+                <td>45000</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>storeGlobal</td>
+                <td>javascript{Math.floor(Math.random()*11000)}</td>
+                <td>randomSuffix</td>
+            </tr>
+            <!--start: load demo account-->
+            <tr>
+                <td>open</td>
+                <td>index.php/zurmo/demo/loadAccountSampler</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <!--end: load demo account-->
+            <!--start: load demo contact-->
+            <tr>
+                <td>open</td>
+                <td>index.php/zurmo/demo/loadContactSampler</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <!--end: load demo contact-->
+            <!--start: load demo opportunity-->
+            <tr>
+                <td>open</td>
+                <td>index.php/zurmo/demo/loadOpportunitySampler</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <!--end: load demo opportunity-->
+            <!--start: go to project list-->
+            <tr>
+                <td>open</td>
+                <td>index.php</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/nav/div[1]/a</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/nav/div[1]/ul/li[8]/a/span</td>
+                <td>Projects</td>
+            </tr>
+            <tr>
+                <td>clickAndWait</td>
+                <td>//html/body/section/nav/div[1]/ul/li[8]/a/span</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div[2]/div/h1</td>
+                <td>How do Projects work in Zurmo?</td>
+            </tr>
+            <tr>
+                <td>clickAndWait</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/div[1]/nav[1]/div[2]/a/span</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[5]/a[4]</td>
+                <td>Items I Own</td>
+            </tr>
+            <!--end: go to project list-->
+            <!--start: search project created using demo data-->
+            <tr>
+                <td>sendKeys</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[2]/table/tbody/tr/td/input</td>
+                <td>Test Project For Functional</td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/tbody/tr[1]/td[2]/a</td>
+                <td>Test Project For Functional</td>
+            </tr>
+            <tr>
+                <td>waitForValue</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[2]/table/tbody/tr/td/input</td>
+                <td>Test Project For Functional</td>
+            </tr>
+            <!--end: search project created using demo data-->
+            <!--start: go to project's detail view-->
+            <tr>
+                <td>clickAndWait</td>
+                <td>//html/body/section/div[1]/div[2]/div[3]/div/div[2]/table/tbody/tr[1]/td[2]/a</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/h1/span/span</td>
+                <td>Test Project For Functional</td>
+            </tr>
+            <!--end: go to project's detail view-->
+            <!--start: go to create task form-->
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/nav/div[3]/a/span</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/div[4]/div[1]/span</td>
+                <td>Create Task</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/div[4]/div[2]/div/div/div/div/form/div[1]/div/div[1]/table/tbody/tr[3]/td/a</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/div[4]/div[2]/div/div/div/div/form/div[1]/div/div[2]/table/tbody/tr[11]/th/label</td>
+                <td>Who can read and write</td>
+            </tr>
+            <!--end: go to create task form-->
+            <!--start: add task details-->
+            <tr>
+                <td>type</td>
+                <td>//html/body/div[4]/div[2]/div/div/div/div/form/div[1]/div/div[1]/table/tbody/tr[1]/td/input</td>
+                <td>Test Task ${randomSuffix}</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>//html/body/div[4]/div[2]/div/div/div/div/form/div[1]/div/div[1]/table/tbody/tr[2]/td/textarea</td>
+                <td>Test task description</td>
+            </tr>
+            <!--start: link account to task-->
+            <tr>
+                <td>sendKeys</td>
+                <td>//html/body/div[4]/div[2]/div/div/div/div/form/div[1]/div/div[2]/table/tbody/tr[6]/td/div/input</td>
+                <td>Test Account For</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/div[4]/div[2]/div/div/div/div/form/div[1]/div/div[2]/table/tbody/tr[6]/td/ul/li[1]/a</td>
+                <td>Test Account For Functional</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/div[4]/div[2]/div/div/div/div/form/div[1]/div/div[2]/table/tbody/tr[6]/td/ul/li[1]/a</td>
+                <td></td>
+            </tr>
+            <!--end: link account to task-->
+            <!--start: link contact to task-->
+            <tr>
+                <td>sendKeys</td>
+                <td>//html/body/div[4]/div[2]/div/div/div/div/form/div[1]/div/div[2]/table/tbody/tr[7]/td/div/input</td>
+                <td>Test Contact For</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/div[4]/div[2]/div/div/div/div/form/div[1]/div/div[2]/table/tbody/tr[7]/td/ul/li[1]/a</td>
+                <td>Test Contact For Functional</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/div[4]/div[2]/div/div/div/div/form/div[1]/div/div[2]/table/tbody/tr[7]/td/ul/li[1]/a</td>
+                <td></td>
+            </tr>
+            <!--end: link contact to task-->
+            <!--start: link opportunity to task-->
+            <tr>
+                <td>sendKeys</td>
+                <td>//html/body/div[4]/div[2]/div/div/div/div/form/div[1]/div/div[2]/table/tbody/tr[8]/td/div/input</td>
+                <td>Test Opportunity For</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/div[4]/div[2]/div/div/div/div/form/div[1]/div/div[2]/table/tbody/tr[8]/td/ul/li[1]/a</td>
+                <td>Test Opportunity For Functional</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/div[4]/div[2]/div/div/div/div/form/div[1]/div/div[2]/table/tbody/tr[8]/td/ul/li[1]/a</td>
+                <td></td>
+            </tr>
+            <!--end: link opportunity to task-->
+            <!--end: add task details-->
+            <!--start: save task-->
+            <tr>
+                <td>click</td>
+                <td>//html/body/div[4]/div[2]/div/div/div/div/form/div[2]/div/div/a[1]/span[3]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <!--end: save task-->
+            <!--start: add check list-->
+            <tr>
+                <td>type</td>
+                <td>//html/body/div[4]/div[2]/div/div/div[2]/div[1]/div[2]/div[2]/div/form/div[1]/input</td>
+                <td>First Task</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/div[4]/div[2]/div/div/div[2]/div[1]/div[2]/div[2]/div/form/div[2]/a/span[3]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForElementPresent</td>
+                <td>//html/body/div[4]/div[2]/div/div/div[2]/div[1]/div[2]/div[1]/ul/li[1]/div[1]/label/input</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/div[4]/div[2]/div/div/div[2]/div[1]/div[2]/div[1]/ul/li[1]/div[1]/p/label</td>
+                <td>First Task</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>//html/body/div[4]/div[2]/div/div/div[2]/div[1]/div[2]/div[2]/div/form/div[1]/input</td>
+                <td>Second Task</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/div[4]/div[2]/div/div/div[2]/div[1]/div[2]/div[2]/div/form/div[2]/a/span[3]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForElementPresent</td>
+                <td>//html/body/div[4]/div[2]/div/div/div[2]/div[1]/div[2]/div[1]/ul/li[2]/div[1]/label/input</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/div[4]/div[2]/div/div/div[2]/div[1]/div[2]/div[1]/ul/li[2]/div[1]/p/label</td>
+                <td>Second Task</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>//html/body/div[4]/div[2]/div/div/div[2]/div[1]/div[2]/div[2]/div/form/div[1]/input</td>
+                <td>Third Task</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/div[4]/div[2]/div/div/div[2]/div[1]/div[2]/div[2]/div/form/div[2]/a/span[3]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForElementPresent</td>
+                <td>//html/body/div[4]/div[2]/div/div/div[2]/div[1]/div[2]/div[1]/ul/li[3]/div[1]/label/input</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/div[4]/div[2]/div/div/div[2]/div[1]/div[2]/div[1]/ul/li[3]/div[1]/p/label</td>
+                <td>Third Task</td>
+            </tr>
+            <!--end: add check list-->
+            <!--start: add comment-->
+            <tr>
+                <td>type</td>
+                <td>//html/body/div[4]/div[2]/div/div/div[2]/div[1]/div[3]/div[2]/div/div/form/div[1]/div/table/tbody/tr[1]/td/div/textarea</td>
+                <td>Need to finish it asap.</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/div[4]/div[2]/div/div/div[2]/div[1]/div[3]/div[2]/div/div/form/div[2]/div/a/span[3]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/div[4]/div[2]/div/div/div[2]/div[1]/div[3]/div[1]/div[2]/div/div/div/a</td>
+                <td>Super User</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/div[4]/div[2]/div/div/div[2]/div[1]/div[3]/div[1]/div[2]/div/div/div/p</td>
+                <td>Need to finish it asap.</td>
+            </tr>
+            <!--end: add comment-->
+            <!--start: verify values after creating task-->
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/div[4]/div[1]/span</td>
+                <td>Collaborate On This Task</td>
+            </tr>
+            <tr>
+                <td>assertValue</td>
+                <td>//html/body/div[4]/div[2]/div/div/div[2]/div[1]/div[1]/div/form/input[2]</td>
+                <td>Test Task ${randomSuffix}</td>
+            </tr>
+            <tr>
+                <td>assertValue</td>
+                <td>//html/body/div[4]/div[2]/div/div/div[2]/div[1]/div[1]/div/form/textarea</td>
+                <td>Test task description</td>
+            </tr>
+            <tr>
+                <td>assertSelected</td>
+                <td>//html/body/div[4]/div[2]/div/div/div[2]/div[2]/div/div[1]/form/div[1]/div[1]/select</td>
+                <td>New</td>
+            </tr>
+            <tr>
+                <td>assertValue</td>
+                <td>//html/body/div[4]/div[2]/div/div/div[2]/div[2]/div/div[1]/form/div[2]/div[1]/input</td>
+                <td>Super User</td>
+            </tr>
+            <tr>
+                <td>assertValue</td>
+                <td>//html/body/div[4]/div[2]/div/div/div[2]/div[2]/div/div[1]/form/div[3]/div[1]/input</td>
+                <td>Super User</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/div[4]/div[2]/div/div/div[1]/div/ul/li/ul/li[1]/a/span</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/div[4]/div[2]/div/div/div/div/form/div[1]/div/div[1]/table/tbody/tr[3]/td/a</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/div[4]/div[2]/div/div/div/div/form/div[1]/div/div[2]/table/tbody/tr[11]/th/label</td>
+                <td>Who can read and write</td>
+            </tr>
+            <tr>
+                <td>assertValue</td>
+                <td>//html/body/div[4]/div[2]/div/div/div/div/form/div[1]/div/div[2]/table/tbody/tr[6]/td/div/input</td>
+                <td>Test Account For Functional</td>
+            </tr>
+            <tr>
+                <td>assertValue</td>
+                <td>//html/body/div[4]/div[2]/div/div/div/div/form/div[1]/div/div[2]/table/tbody/tr[7]/td/div/input</td>
+                <td>Test Contact For Functional</td>
+            </tr>
+            <tr>
+                <td>assertValue</td>
+                <td>//html/body/div[4]/div[2]/div/div/div/div/form/div[1]/div/div[2]/table/tbody/tr[8]/td/div/input</td>
+                <td>Test Opportunity For Functional</td>
+            </tr>
+            <tr>
+                <td>assertValue</td>
+                <td>//html/body/div[4]/div[2]/div/div/div/div/form/div[1]/div/div[2]/table/tbody/tr[10]/td/div/input</td>
+                <td>Test Project For Functional</td>
+            </tr>
+            <!--end: verify values after creating task-->
+            <!--start: clear project search result-->
+            <tr>
+                <td>open</td>
+                <td>index.php/projects/default/list</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[5]/a[4]</td>
+                <td>Items I Own</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/form/div[5]/a[3]/span[2]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForTextNotPresent</td>
+                <td>Criteria Selected</td>
+                <td></td>
+            </tr>
+            <!--end: clear project search result-->
+        </tbody>
+    </table>
+</body>
+
+</html>

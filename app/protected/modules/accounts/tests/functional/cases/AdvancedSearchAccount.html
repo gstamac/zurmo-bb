@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="selenium.base" href="http://localhost/" />
+    <title>AdvancedSearchAccount</title>
+</head>
+
+<body>
+    <table cellpadding="1" cellspacing="1" border="1">
+        <thead>
+            <tr>
+                <td rowspan="1" colspan="3">Advanced Search Account</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>setTimeout</td>
+                <td>45000</td>
+                <td></td>
+            </tr>
+            <!--create account for advance search by item I Own-->
+            <tr>
+                <td>open</td>
+                <td>index.php/accounts/default/create</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForTextPresent</td>
+                <td>Create Account</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>Account_name</td>
+                <td>My Account ${randomSuffix}</td>
+            </tr>
+            <tr>
+                <td>clickAndWait</td>
+                <td>save</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//div[@id='AccountDetailsPortletView']/div/div/div/table/tbody/tr[1]/td</td>
+                <td>My Account ${randomSuffix}</td>
+            </tr>
+            <!--go to accounts list-->
+            <tr>
+                <td>open</td>
+                <td>index.php</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>clickAndWait</td>
+                <td>//html/body/section/nav/div[1]/ul/li[3]/a/span</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[5]/a[4]</td>
+                <td>Items I Own</td>
+            </tr>
+            <!--check search form validation-->
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[5]/a[1]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForElementPresent</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[4]/a/span[3]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[4]/a/span[3]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForElementPresent</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[9]/div/a[1]/span[3]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[9]/div/a[1]/span[3]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[2]/p</td>
+                <td>Please fix the following input errors:</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[2]/ul/li[1]</td>
+                <td>You must select a field for row 1</td>
+            </tr>
+            <!--test empty search-->
+            <tr>
+                <td>setSpeed</td>
+                <td>3000</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>select</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[4]/div/div[1]/select</td>
+                <td>Website</td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForElementPresent</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[4]/div/div[2]/input</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[4]/div/div[2]/input</td>
+                <td>NoWebsite</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[9]/div/a[1]/span[3]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>assertTextPresent</td>
+                <td>1 Criteria Selected</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>setSpeed</td>
+                <td>0</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForTextPresent</td>
+                <td>No results found</td>
+                <td></td>
+            </tr>
+            <!--test canceling search-->
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[5]/a[3]/span[2]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForTextNotPresent</td>
+                <td>Criteria Selected</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForTextPresent</td>
+                <td>Test Account ${randomSuffix}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[5]/a[1]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForElementPresent</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[4]/a/span[3]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[4]/a/span[3]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForElementPresent</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[4]/div/div[1]/select</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>setSpeed</td>
+                <td>3000</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>select</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[4]/div/div[1]/select</td>
+                <td>Website</td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForElementPresent</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[4]/div/div[2]/input</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[4]/div/div[2]/input</td>
+                <td>NoWebsite</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[9]/div/a[2]/span</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>assertTextPresent</td>
+                <td>1 Criteria Selected</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>setSpeed</td>
+                <td>0</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForTextNotPresent</td>
+                <td>No results found</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[5]/a[3]/span[2]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForTextNotPresent</td>
+                <td>Criteria Selected</td>
+                <td></td>
+            </tr>
+            <!--Test many clauses-->
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[5]/a[1]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForElementPresent</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[4]/a/span[3]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[4]/a/span[3]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForElementPresent</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[4]/div/div[1]/select</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>setSpeed</td>
+                <td>3000</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>select</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[4]/div/div[1]/select</td>
+                <td>label=Name</td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForElementPresent</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[4]/div/div[2]/input</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[4]/div/div[2]/input</td>
+                <td>Test Account ${randomSuffix}</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[5]/a/span[3]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForElementPresent</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[5]/div/div[1]/select</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>select</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[5]/div/div[1]/select</td>
+                <td>label=Office Phone</td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForElementPresent</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[5]/div/div[2]/input</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[5]/div/div[2]/input</td>
+                <td>813-791-4772</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[6]/a/span[3]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForElementPresent</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[6]/div/div[1]/select</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>select</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[6]/div/div[1]/select</td>
+                <td>label=Website</td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForElementPresent</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[6]/div/div[2]/input</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[6]/div/div[2]/input</td>
+                <td>http://www.Unnamed.com</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[7]/a/span[3]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForElementPresent</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[7]/div/div[1]/select</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>select</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[7]/div/div[1]/select</td>
+                <td>label=Any Street</td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForElementPresent</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[7]/div/div[2]/input</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[7]/div/div[2]/input</td>
+                <td>456 Main Street</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[5]/a[4]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForElementPresent</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[8]/div/div[1]/select</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForTextPresent</td>
+                <td>Only Items I Own</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[12]/a</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[12]/div/input</td>
+                <td>1 AND 2 AND 3 AND 4 OR 5</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[13]/div/a[1]/span[3]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td[3]/a</td>
+                <td>My Account ${randomSuffix}</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[2]/td[3]/a</td>
+                <td>Test Account ${randomSuffix}</td>
+            </tr>
+            <tr>
+                <td>assertTextPresent</td>
+                <td>5 Criteria Selected</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForElementNotPresent</td>
+                <td>//html/body/section/div[1]/div[3]/div/div[2]/table/tbody/tr[3]/td[3]/a</td>
+                <td></td>
+            </tr>
+            <!--test invalid structure-->
+            <tr>
+                <td>type</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[12]/div/input</td>
+                <td>1 or or 2 AND 3 AND 4</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[13]/div/a[1]/span[3]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForTextPresent</td>
+                <td>The structure is invalid. Please fix conditions.</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>setSpeed</td>
+                <td>0</td>
+                <td></td>
+            </tr>
+            <!--clear search-->
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[5]/a[3]/span[2]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForTextNotPresent</td>
+                <td>Criteria Selected</td>
+                <td></td>
+            </tr>
+            <!--test search by item I Own-->
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[5]/a[4]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForElementPresent</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[4]/div/div[1]/select</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForElementPresent</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[4]/div/div[2]/input</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>setSpeed</td>
+                <td>3000</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[3]/div[9]/div/a[1]/span[3]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>assertTextPresent</td>
+                <td>1 Criteria Selected</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForTextPresent</td>
+                <td>My Account ${randomSuffix}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>setSpeed</td>
+                <td>0</td>
+                <td></td>
+            </tr>
+            <!--clear search result-->
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div[2]/div[1]/form/div[5]/a[3]/span[2]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForTextNotPresent</td>
+                <td>Criteria Selected</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

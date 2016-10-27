@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="selenium.base" href="http://localhost/" />
+    <title>CreateAccount</title>
+</head>
+
+<body>
+    <table cellpadding="1" cellspacing="1" border="1">
+        <thead>
+            <tr>
+                <td rowspan="1" colspan="3">Create Account</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>setTimeout</td>
+                <td>45000</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>storeGlobal</td>
+                <td>javascript{Math.floor(Math.random()*11000)}</td>
+                <td>randomSuffix</td>
+            </tr>
+            <!--go to create account page-->
+            <tr>
+                <td>open</td>
+                <td>index.php</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>clickAndWait</td>
+                <td>//html/body/section/nav/div[1]/ul/li[3]/a/span</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>clickAndWait</td>
+                <td>//html/body/section/div[1]/div[1]/div/nav/div[1]/a/span</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div/h1/span/span</td>
+                <td>Create Account</td>
+            </tr>
+            <!--fill account details-->
+            <tr>
+                <td>type</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[1]/td/input</td>
+                <td>Test Account ${randomSuffix}</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[2]/td/input</td>
+                <td>813-791-4772</td>
+            </tr>
+            <tr>
+                <td>select</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[3]/td/div/select</td>
+                <td>label=Automotive</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[4]/td/input</td>
+                <td>560-329-3835</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[5]/td/input</td>
+                <td>300</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[6]/td/input</td>
+                <td>253000000</td>
+            </tr>
+            <tr>
+                <td>select</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[7]/td/div/select</td>
+                <td>label=Vendor</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[8]/td/input</td>
+                <td>http://www.Unnamed.com</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[9]/td/div/div[1]/input</td>
+                <td>18368 North Hill Trail</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[9]/td/div/div[3]/input</td>
+                <td>Columbus</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[9]/td/div/div[4]/div[1]/input</td>
+                <td>OH</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[9]/td/div/div[4]/div[2]/input</td>
+                <td>43085</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[9]/td/div/div[5]/input</td>
+                <td>USA</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[10]/td/div/div[1]/input</td>
+                <td>456 Main Street</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[10]/td/div/div[2]/input</td>
+                <td>Suite 200</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[10]/td/div/div[3]/input</td>
+                <td>New York</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[10]/td/div/div[4]/div[1]/input</td>
+                <td>NY</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[10]/td/div/div[4]/div[2]/input</td>
+                <td>12133</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[10]/td/div/div[5]/input</td>
+                <td>USA</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[2]/div/table/tbody/tr[11]/td/textarea</td>
+                <td>This is a test account</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[3]/div/div[1]/div/a/span[1]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>sendKeys</td>
+                <td>//html/body/div[4]/div[2]/div/div/div[1]/div/form/div[2]/table/tbody/tr/td/input</td>
+                <td>Sam S</td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/div[4]/div[2]/div/div/div[2]/div/div[2]/table/tbody/tr[1]/td/a</td>
+                <td>Sam Smith</td>
+            </tr>
+            <tr>
+                <td>click</td>
+                <td>//html/body/div[4]/div[2]/div/div/div[2]/div/div[2]/table/tbody/tr[1]/td/a</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForValue</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[3]/div/div[1]/div/input</td>
+                <td>Sam Smith</td>
+            </tr>
+            <tr>
+                <td>clickAndWait</td>
+                <td>//html/body/section/div[1]/div/div/form/div[2]/div/div/a[1]/span[3]</td>
+                <td></td>
+            </tr>
+            <!--verify values after creating account-->
+            <tr>
+                <td>waitForTextPresent</td>
+                <td>Test Account ${randomSuffix}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div/table/tbody/tr[1]/td</td>
+                <td>Test Account ${randomSuffix}</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div/table/tbody/tr[2]/td</td>
+                <td>813-791-4772</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div/table/tbody/tr[3]/td</td>
+                <td>Automotive</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div/table/tbody/tr[4]/td</td>
+                <td>560-329-3835</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div/table/tbody/tr[5]/td</td>
+                <td>300</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div/table/tbody/tr[6]/td</td>
+                <td>253,000,000</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div/table/tbody/tr[7]/td</td>
+                <td>Vendor</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div/table/tbody/tr[8]/td/a</td>
+                <td>http://www.Unnamed.com</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div/table/tbody/tr[9]/td/a</td>
+                <td>18368 North Hill Trail
+                    <br/> Columbus OH, 43085
+                    <br/> USA</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div/table/tbody/tr[10]/td/a</td>
+                <td>456 Main Street
+                    <br/> Suite 200
+                    <br/> New York NY, 12133
+                    <br/> USA</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div[2]/div[2]/div/ul[1]/li[1]/div[2]/div/div/div/div/table/tbody/tr[11]/td</td>
+                <td>This is a test account</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="selenium.base" href="http://localhost/" />
+    <title>CheckOpportunityFormValidation</title>
+</head>
+
+<body>
+    <table cellpadding="1" cellspacing="1" border="1">
+        <thead>
+            <tr>
+                <td rowspan="1" colspan="3">Check Opportunity Form Validation</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>setTimeout</td>
+                <td>45000</td>
+                <td></td>
+            </tr>
+            <!--go to create opportunity-->
+            <tr>
+                <td>open</td>
+                <td>index.php</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/nav/div[1]/ul/li[6]/a/span</td>
+                <td>Opportunities</td>
+            </tr>
+            <tr>
+                <td>clickAndWait</td>
+                <td>//html/body/section/nav/div[1]/ul/li[6]/a/span</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[2]/div/form/div[5]/a[4]</td>
+                <td>Items I Own</td>
+            </tr>
+            <tr>
+                <td>clickAndWait</td>
+                <td>//html/body/section/div[1]/div[1]/div/nav/div[1]/a/span</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
+                <td>waitForText</td>
+                <td>//html/body/section/div[1]/div[1]/h1/span/span</td>
+                <td>Create Opportunity</td>
+            </tr>
+            <!--check default values-->
+            <tr>
+                <td>assertSelectedLabel</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[1]/div/table/tbody/tr[2]/td/div/div[1]/div/select</td>
+                <td>USD</td>
+            </tr>
+            <tr>
+                <td>assertValue</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[1]/div/table/tbody/tr[2]/td/div/div[2]/input</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>assertSelectedLabel</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[1]/div/table/tbody/tr[5]/td/div/select</td>
+                <td>Prospecting</td>
+            </tr>
+            <tr>
+                <td>assertValue</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[1]/div/table/tbody/tr[6]/td/input</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>assertSelectedLabel</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[1]/div/table/tbody/tr[7]/td/div/select</td>
+                <td>(None)</td>
+            </tr>
+            <!--fill fields to create validation errors-->
+            <tr>
+                <td>type</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[1]/div/table/tbody/tr[2]/td/div/div[2]/input</td>
+                <td>text</td>
+            </tr>
+            <tr>
+                <td>select</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[1]/div/table/tbody/tr[5]/td/div/select</td>
+                <td>(None)</td>
+            </tr>
+            <tr>
+                <td>clickAndWait</td>
+                <td>//html/body/section/div[1]/div/div/form/div[2]/div/div/a[1]</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForPageToLoad</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <!--assert validation errors-->
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[1]/div/table/tbody/tr[1]/td/div</td>
+                <td>Name cannot be blank.</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[1]/div/table/tbody/tr[2]/td/div/div[2]/div</td>
+                <td>Value must be float.</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[1]/div/table/tbody/tr[4]/td/div[2]</td>
+                <td>Close Date cannot be blank.</td>
+            </tr>
+            <tr>
+                <td>assertText</td>
+                <td>//html/body/section/div[1]/div/div/form/div[1]/div[1]/div/table/tbody/tr[5]/td/div[2]</td>
+                <td>Stage cannot be blank.</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>
