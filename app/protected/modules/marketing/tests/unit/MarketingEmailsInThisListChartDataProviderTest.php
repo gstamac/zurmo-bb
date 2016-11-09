@@ -693,7 +693,15 @@
             if ($groupingBy == MarketingOverallMetricsForm::GROUPING_TYPE_WEEK)
             {
                 $date = new DateTime($date);
-                $date->modify(('Sunday' == $date->format('l')) ? 'Monday last week' : 'Monday this week');
+                //$date->modify(('Sunday' == $date->format('l')) ? 'Monday last week' : 'Monday this week');
+                if (('Sunday' == $date->format('l')) && !DateTimeUtil::doesWeekStrictlyStartOnMonday())
+                {
+                    $date->modify('Monday last week');
+                }
+                else
+                {
+                    $date->modify('Monday this week');
+                }
                 $dateForLabel = $date->format('Y-m-d');
             }
             elseif ($groupingBy == MarketingOverallMetricsForm::GROUPING_TYPE_MONTH)
