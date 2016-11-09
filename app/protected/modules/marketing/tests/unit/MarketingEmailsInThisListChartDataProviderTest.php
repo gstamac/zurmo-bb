@@ -53,11 +53,14 @@
             $contact1->primaryEmail->emailAddress = 'contact1@example.com';
             $contact2->primaryEmail->emailAddress = 'contact2@example.com';
             $contact3->primaryEmail->emailAddress = 'contact3@example.com';
-            // Begin Not Coding Standard
-            assert($contact1->save());
-            assert($contact2->save());
-            assert($contact3->save());
-            // End Not Coding Standard
+            
+            $saved = $contact1->save();
+            assert('$saved');
+            $saved = $contact2->save();
+            assert('$saved');
+            $saved = $contact3->save();
+            assert('$saved');
+            
         }
 
         public function setUp()
@@ -693,7 +696,6 @@
             if ($groupingBy == MarketingOverallMetricsForm::GROUPING_TYPE_WEEK)
             {
                 $date = new DateTime($date);
-                //$date->modify(('Sunday' == $date->format('l')) ? 'Monday last week' : 'Monday this week');
                 if (('Sunday' == $date->format('l')) && !DateTimeUtil::doesWeekStrictlyStartOnMonday())
                 {
                     $date->modify('Monday last week');
