@@ -117,13 +117,13 @@
             AddressMappingUtil::updateChangedAddresses(2);
             $account1 = Account::getById($accountId1);
             $this->assertEquals(round('42.11469', 4),  round($account1->billingAddress->latitude, 4));
-            $this->assertEquals(round('-87.976399', 4), round($account1->billingAddress->longitude, 4));
+            $this->assertEquals(round('-87.979699', 4), round($account1->billingAddress->longitude, 4));
             $this->assertEquals(0,             $account1->billingAddress->invalid);
             unset($account1);
 
             $account2 = Account::getById($accountId2);
-            $this->assertEquals(round('37.3968',   4), round($account2->billingAddress->latitude,  4));
-            $this->assertEquals(round('-121.8779', 4), round($account2->billingAddress->longitude, 4));
+            $this->assertEquals(round('37.3927',   4), round($account2->billingAddress->latitude,  4));
+            $this->assertEquals(round('-121.8751', 4), round($account2->billingAddress->longitude, 4));
             $this->assertEquals(0,             $account2->billingAddress->invalid);
             unset($account2);
 
@@ -200,8 +200,8 @@
             AddressMappingUtil::updateChangedAddresses();
 
             $account1 = Account::getById($accountId1);
-            $this->assertEquals(round('42.11529', 4),  round($account1->billingAddress->latitude, 4));
-            $this->assertEquals(round('-87.976399', 4), round($account1->billingAddress->longitude, 4));
+            $this->assertEquals(round('42.11469', 4),  round($account1->billingAddress->latitude, 4));
+            $this->assertEquals(round('-87.979699', 4), round($account1->billingAddress->longitude, 4));
             $this->assertEquals(0,             $account1->billingAddress->invalid);
         }
     }

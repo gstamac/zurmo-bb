@@ -131,7 +131,7 @@
             $this->assertTrue(isset($latitudeLongitudeCoordinates['latitude']));
             $this->assertTrue(isset($latitudeLongitudeCoordinates['longitude']));
             $this->assertEquals(round('42.11469', 4), round($latitudeLongitudeCoordinates['latitude'], 4));
-            $this->assertEquals(round('-87.976399', 4), round($latitudeLongitudeCoordinates['longitude'], 4));
+            $this->assertEquals(round('-87.979699', 4), round($latitudeLongitudeCoordinates['longitude'], 4));
         }
     }
 ?>
