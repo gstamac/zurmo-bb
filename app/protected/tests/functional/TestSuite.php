@@ -393,9 +393,9 @@
 
         protected static function getServerByServerControlUrl($url)
         {
-            if (stristr($url, 'dev9.zurmo.com'))
+            if (stristr($url, 'dev8a.zurmo.com'))
             {
-                return 'dev9.zurmo.com';
+                return 'dev8a.zurmo.com';
             }
             elseif (stristr($url, 'dev8.zurmo.com'))
             {
@@ -494,9 +494,9 @@
 
         protected static function getResultServerByFileName($resultFile)
         {
-            if (stristr($resultFile, 'dev9.zurmo.com'))
+            if (stristr($resultFile, 'dev8a.zurmo.com'))
             {
-                return 'dev9.zurmo.com';
+                return 'dev8a.zurmo.com';
             }
             elseif (stristr($resultFile, 'dev8.zurmo.com'))
             {
