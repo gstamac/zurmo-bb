@@ -34,45 +34,23 @@
      * "Copyright Zurmo Inc. 2015. All rights reserved".
      ********************************************************************************/
 
-    class ContactStateRedBeanModelAttributeValueToExportValueAdapterTest extends ZurmoBaseTest
+    /**
+     * Checks that the mysqli extension for php is installed.
+     */
+    class MysqliServiceHelper extends ServiceHelper
     {
-        public static function setUpBeforeClass()
+        protected function checkService()
         {
-            parent::setUpBeforeClass();
-            $user = SecurityTestHelper::createSuperAdmin();
-            Yii::app()->user->userModel = $user;
-            $loaded = ContactsModule::loadStartingData();
-            assert('$loaded');
-        }
-
-        public function testGetExportValue()
-        {
-            $super = User::getByUsername('super');
-            Yii::app()->user->userModel = $super;
-
-            $data = array();
-            $contactStates = ContactState::getByName('Qualified');
-            $contact = new Contact();
-            $contact->owner         = $super;
-            $contact->firstName     = 'Super';
-            $contact->lastName      = 'Man';
-            $contact->jobTitle      = 'Superhero';
-            $contact->description   = 'Some Description';
-            $contact->department    = 'Red Tape';
-            $contact->officePhone   = '1234567890';
-            $contact->mobilePhone   = '0987654321';
-            $contact->officeFax     = '1222222222';
-            $contact->state         = $contactStates[0];
-            $this->assertTrue($contact->save());
-
-            $adapter = new ContactStateRedBeanModelAttributeValueToExportValueAdapter($contact, 'state');
-            $adapter->resolveData($data);
-            $compareData = array($contactStates[0]->name);
-            $this->assertEquals($compareData, $data);
-            $data = array();
-            $adapter->resolveHeaderData($data);
-            $compareData = array($contact->getAttributeLabel('state'));
-            $this->assertEquals($compareData, $data);
+            $passed = InstallUtil::isMysqliInstalled();
+            if ($passed)
+            {
+                $this->message = Zurmo::t('InstallModule', 'mysqli is installed.');
+            }
+            else
+            {
+                $this->message = Zurmo::t('InstallModule', 'mysqli is not installed.');
+            }
+            return $passed;
         }
     }
 ?>

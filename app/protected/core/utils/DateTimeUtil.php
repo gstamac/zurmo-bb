@@ -567,7 +567,14 @@
             while ($weekTimeStamp <= $endTimeStamp)
             {
                 $date = new DateTime(date('Y-m-d', $weekTimeStamp));
-                $date->modify(('Sunday' == $date->format('l')) ? 'Monday last week' : 'Monday this week');
+                if (('Sunday' == $date->format('l')) && !static::doesWeekStrictlyStartOnMonday())
+                {
+                    $date->modify('Monday last week');
+                }
+                else
+                {
+                    $date->modify('Monday this week');
+                }
                 $beginDateOfWeek = $date->format('Y-m-d');
                 $date->modify('this week next sunday');
                 $endDateOfWeek = $date->format('Y-m-d');
@@ -576,7 +583,14 @@
             }
             //Capture dates in last week if needed
             $date = new DateTime(date('Y-m-d', $weekTimeStamp));
-            $date->modify(('Sunday' == $date->format('l')) ? 'Monday last week' : 'Monday this week');
+            if (('Sunday' == $date->format('l')) && !static::doesWeekStrictlyStartOnMonday())
+            {
+                $date->modify('Monday last week');
+            }
+            else
+            {
+                $date->modify('Monday this week');
+            }
             $beginDateOfWeek = $date->format('Y-m-d');
             if ($beginDateOfWeek < $endDate)
             {
@@ -588,7 +602,14 @@
             if ($endDateOfWeek < $endDate)
             {
                 $date = new DateTime(date('Y-m-d', $weekTimeStamp));
-                $date->modify(('Sunday' == $date->format('l')) ? 'Monday last week' : 'Monday this week');
+                if (('Sunday' == $date->format('l')) && !static::doesWeekStrictlyStartOnMonday())
+                {
+                    $date->modify('Monday last week');
+                }
+                else
+                {
+                    $date->modify('Monday this week');
+                }
                 $beginDateOfWeek = $date->format('Y-m-d');
                 $date->modify('this week next sunday');
                 $endDateOfWeek = $date->format('Y-m-d');
@@ -655,7 +676,7 @@
             $dayOfTheWeek = date('w', strtotime($stringTime));
             $dateTime = new DateTime($stringTime);
             $dateTime->modify('this week');
-            if ($dayOfTheWeek == 0)
+            if ($dayOfTheWeek == 0 && !static::doesWeekStrictlyStartOnMonday())
             {
                 $dateTime->modify('-7 days');
             }
@@ -674,7 +695,7 @@
             $dayOfTheWeek = date('w', strtotime($stringTime));
             $dateTime = new DateTime($stringTime);
             $dateTime->modify('this week +6 days');
-            if ($dayOfTheWeek == 0)
+            if ($dayOfTheWeek == 0 && !static::doesWeekStrictlyStartOnMonday())
             {
                 $dateTime->modify('-7 days');
             }
@@ -738,6 +759,28 @@
             $minutes         = ($minutes < 10)? '0' . $minutes : $minutes;
             $seconds         = ($seconds < 10)? '0' . $seconds : $seconds;
             return $date . ' ' . $hours . ':' . $minutes . ':' . $seconds;
+        }
+        
+        /**
+         * Determines if current PHP version is configured so that weeks always start on monday.
+         * Formerly (older PHP versions), sunday would also be considered to start a week. 
+         * @return boolean
+         */
+        public static function doesWeekStrictlyStartOnMonday()
+        {
+            // 2014-04-27 was a sunday, so if we consider strictly that a week starts on monday,
+            // then the first day of the week is 2014-04-21
+            $stringTime = '2014-04-27 23:59:59';
+            $dateTime = new DateTime($stringTime);
+            $dateTime->modify('this week');
+            if ($dateTime->format('Y-m-d') == '2014-04-21')
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 ?>

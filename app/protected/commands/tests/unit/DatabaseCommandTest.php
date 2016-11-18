@@ -104,18 +104,20 @@
                     $this->temporaryDatabasePassword,
                     $this->temporaryDatabasePort,
                     $this->temporaryDatabaseName));
-                $connection = @mysql_connect($this->temporaryDatabaseHostname . ':' . $this->temporaryDatabasePort,
+                $connection = @mysqli_connect($this->temporaryDatabaseHostname,
                     $this->temporaryDatabaseUsername,
-                    $this->temporaryDatabasePassword);
-                $this->assertTrue(is_resource($connection));
+                    $this->temporaryDatabasePassword,
+                    '',
+                    $this->temporaryDatabasePort);
+                $this->assertTrue(is_object($connection));
 
-                @mysql_select_db($this->temporaryDatabaseName);
-                @mysql_query("create table temptable (temptable_id int(11) unsigned not null)", $connection);
-                @mysql_query("insert into temptable values ('5')", $connection);
-                @mysql_query("insert into temptable values ('10')", $connection);
-                $result = @mysql_query("SELECT count(*) from temptable");
-                $totalRows = mysql_fetch_row($result);
-                @mysql_close($connection);
+                @mysqli_select_db($connection, $this->temporaryDatabaseName);
+                @mysqli_query($connection, "create table temptable (temptable_id int(11) unsigned not null)");
+                @mysqli_query($connection, "insert into temptable values ('5')");
+                @mysqli_query($connection, "insert into temptable values ('10')");
+                $result = @mysqli_query($connection, "SELECT count(*) from temptable");
+                $totalRows = mysqli_fetch_row($result);
+                @mysqli_close($connection);
 
                 $this->assertEquals(2, $totalRows[0]);
 
@@ -142,13 +144,15 @@
                     $this->temporaryDatabaseName));
 
                 // Ensure that database don't exist
-                $connection = @mysql_connect($this->temporaryDatabaseHostname . ':' . $this->temporaryDatabasePort,
+                $connection = @mysqli_connect($this->temporaryDatabaseHostname,
                     $this->temporaryDatabaseUsername,
-                    $this->temporaryDatabasePassword);
-                $this->assertTrue(is_resource($connection));
+                    $this->temporaryDatabasePassword,
+                    '',
+                    $this->temporaryDatabasePort);
+                $this->assertTrue(is_object($connection));
 
-                @mysql_select_db($this->temporaryDatabaseName, $connection);
-                $result = @mysql_query("SELECT count(*) from temptable", $connection);
+                @mysqli_select_db($connection, $this->temporaryDatabaseName);
+                $result = @mysqli_query($connection, "SELECT count(*) from temptable");
                 $this->assertFalse($result);
 
                 // Now restore database
@@ -163,24 +167,26 @@
                 exec($command, $output);
                 sleep(2);
 
-                $connection = @mysql_connect($this->temporaryDatabaseHostname . ':' . $this->temporaryDatabasePort,
+                $connection = @mysqli_connect($this->temporaryDatabaseHostname,
                     $this->temporaryDatabaseUsername,
-                    $this->temporaryDatabasePassword);
+                    $this->temporaryDatabasePassword,
+                    '',
+                    $this->temporaryDatabasePort);
 
-                $this->assertTrue(is_resource($connection));
+                $this->assertTrue(is_object($connection));
 
-                $result = @mysql_select_db($this->temporaryDatabaseName, $connection);
+                $result = @mysqli_select_db($connection, $this->temporaryDatabaseName);
                 $this->assertTrue($result);
 
-                $result = @mysql_query("SELECT count(*) from temptable", $connection);
-                $this->assertTrue(is_resource($result));
-                $totalRows = mysql_fetch_row($result);
+                $result = @mysqli_query($connection, "SELECT count(*) from temptable");
+                $this->assertTrue(is_object($result));
+                $totalRows = mysqli_fetch_row($result);
 
-                $result = @mysql_query("SELECT * from temptable", $connection);
-                $rows1 = mysql_fetch_row($result);
-                $rows2 = mysql_fetch_row($result);
+                $result = @mysqli_query($connection, "SELECT * from temptable");
+                $rows1 = mysqli_fetch_row($result);
+                $rows2 = mysqli_fetch_row($result);
 
-                @mysql_close($connection);
+                @mysqli_close($connection);
 
                 $this->assertEquals(2, $totalRows[0]);
                 $this->assertEquals(5,  $rows1[0]);

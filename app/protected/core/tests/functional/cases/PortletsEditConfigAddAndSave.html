@@ -22,14 +22,24 @@
                 <td></td>
             </tr>
             <tr>
+                <td>store</td>
+                <td>javascript{Math.floor(Math.random()*11000)}</td>
+                <td>randomSuffix</td>
+            </tr>
+            <tr>
                 <td>open</td>
-                <td>index.php/accounts/default</td>
+                <td>index.php</td>
                 <td></td>
             </tr>
             <tr>
                 <td>waitForPageToLoad</td>
                 <td></td>
                 <td></td>
+            </tr>
+            <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
             </tr>
             <tr>
                 <td>clickAndWait</td>
@@ -42,28 +52,33 @@
                 <td></td>
             </tr>
             <tr>
+                <td>waitForCondition</td>
+                <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+                <td>30000</td>
+            </tr>
+            <tr>
                 <td>waitForTextPresent</td>
                 <td>Edit Portlet</td>
                 <td></td>
             </tr>
             <tr>
-                <td>store</td>
-                <td>javascript{Math.floor(Math.random()*11000)}</td>
-                <td>randomSuffix</td>
+                <td>waitForElementPresent</td>
+                <td>//html/body/div[5]/div[2]/div/div/div/form/div[1]/table/tbody/tr/td/input</td>
+                <td></td>
             </tr>
             <tr>
                 <td>type</td>
-                <td>MyListForm_title</td>
-                <td>TestTitle ${randomSuffix}</td>
+                <td>//html/body/div[5]/div[2]/div/div/div/form/div[1]/table/tbody/tr/td/input</td>
+                <td>Test Title ${randomSuffix}</td>
             </tr>
             <tr>
                 <td>click</td>
-                <td>name=save</td>
+                <td>save</td>
                 <td></td>
             </tr>
             <tr>
                 <td>waitForTextPresent</td>
-                <td>TestTitle ${randomSuffix}</td>
+                <td>Test Title ${randomSuffix}</td>
                 <td></td>
             </tr>
             <tr>

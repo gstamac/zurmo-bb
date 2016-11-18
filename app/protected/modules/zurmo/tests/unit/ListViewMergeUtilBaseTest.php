@@ -101,7 +101,8 @@
             $this->assertEquals(0, count($primaryModel->projects));
             $project = ProjectTestHelper::createProjectByNameForOwner($this->modelClass . ' Project', Yii::app()->user->userModel);
             $project->$relatedFieldName->add($this->selectedModels[1]);
-            assert($project->save()); // Not Coding Standard
+            $saved = $project->save();
+            assert('$saved');
         }
 
         protected function validateProject()
@@ -118,7 +119,8 @@
             $this->assertEquals(0, count($primaryModel->products));
             $product = ProductTestHelper::createProductByNameForOwner($this->modelClass . ' Product', Yii::app()->user->userModel);
             $product->$relatedFieldName = $this->selectedModels[1];
-            $product->save();
+            $saved = $product->save();
+            assert('$saved');
         }
 
         protected function validateProduct()
