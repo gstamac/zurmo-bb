@@ -39,7 +39,7 @@
      */
     abstract class ImportDatabaseUtil
     {
-        const ALLOWED_ENCODINGS_FOR_CONVERSION = 'UTF-8, UTF-7, ASCII, CP1252, EUC-JP, SJIS, eucJP-win, SJIS-win, JIS, ISO-2022-JP';
+        const ALLOWED_ENCODINGS_FOR_CONVERSION = 'UTF-8, UTF-7, ASCII, CP1252, ISO-8859-1, EUC-JP, SJIS, eucJP-win, SJIS-win, JIS, ISO-2022-JP';
 
         const MAX_IMPORT_COLUMN_COUNT   = 99;
 
@@ -145,7 +145,7 @@
             $currentCharset = mb_detect_encoding($v, static::ALLOWED_ENCODINGS_FOR_CONVERSION);
             if (!empty($currentCharset) && $currentCharset != "UTF-8")
             {
-                $v = mb_convert_encoding($v, "UTF-8");
+                $v = mb_convert_encoding($v, "UTF-8", static::ALLOWED_ENCODINGS_FOR_CONVERSION);
             }
             $importData[$k] = $v;
         }
@@ -655,9 +655,10 @@
             // this dropTable is here just because as fail-safe for direct invocations from other classes.
             ZurmoRedBean::$writer->dropTableByTableName($tableName);
             $schema = static::getTableSchemaByNameAndImportColumns($tableName, $columns);
+            $messageLogger = new MessageLogger();
             CreateOrUpdateExistingTableFromSchemaDefinitionArrayUtil::generateOrUpdateTableBySchemaDefinition(
                                                                                                 $schema,
-                                                                                                new MessageLogger());
+                                                                                                $messageLogger);
         }
     }
 ?>

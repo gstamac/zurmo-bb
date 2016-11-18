@@ -297,7 +297,7 @@
          */
         protected function renderControlNonEditable()
         {
-            if (!empty($this->model->{$this->attribute}->id) && $this->model->{$this->attribute}->id > 0)
+            if (is_object($this->model->{$this->attribute}) && $this->model->{$this->attribute}->id > 0)
             {
                 if ($this->showLinkOnNonEditable())
                 {
@@ -380,7 +380,7 @@
          */
         protected function getName()
         {
-            if (!empty($this->model->{$this->attribute}->id) && $this->model->{$this->attribute}->id > 0)
+            if (is_object($this->model->{$this->attribute}) && $this->model->{$this->attribute}->id > 0)
             {
                 return $this->model->{$this->attribute};
             }
@@ -393,7 +393,7 @@
          */
         protected function getId()
         {
-            if (!empty($this->model->{$this->attribute}->id) && $this->model->{$this->attribute}->id > 0)
+            if (is_object($this->model->{$this->attribute}) && $this->model->{$this->attribute}->id > 0)
             {
                 return $this->model->{$this->attribute}->id;
             }

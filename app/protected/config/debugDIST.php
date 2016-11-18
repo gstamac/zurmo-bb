@@ -148,6 +148,15 @@
     {
         assert_options(ASSERT_CALLBACK, 'assertFailureInCli');
     }
+    $phpVersion = explode('.', phpversion());
+    if ($phpVersion[0] >= 7 && $debugOn)
+    {
+        if (ini_get('zend.assertions') == 0)
+        {
+            ini_set('zend.assertions', '1');
+        }
+        ini_set('assert.exception', '0');
+    }
 
     function assertFailureInBrowser($file, $line, $message)
     {

@@ -79,7 +79,7 @@
             }
             else
             {
-                $this->assertEquals('string',  gettype($rows[0]['integer'])); // Dodgy!!!
+                $this->assertEquals('integer',  gettype($rows[0]['integer'])); // Dodgy!!!
                 $this->assertEquals('string',  gettype($wukka->integer));     // Dodgy!!!
             }
         }

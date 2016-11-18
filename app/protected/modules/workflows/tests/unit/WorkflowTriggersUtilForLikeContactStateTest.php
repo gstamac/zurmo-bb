@@ -57,7 +57,7 @@
         {
             parent::setUpBeforeClass();
             $loaded = ContactsModule::loadStartingData();
-            assert($loaded); // Not Coding Standard
+            assert('$loaded');
             $contactStates          = ContactState::getByName('New');
             self::$newState         = $contactStates[0];
             $contactStates          = ContactState::getByName('In progress');

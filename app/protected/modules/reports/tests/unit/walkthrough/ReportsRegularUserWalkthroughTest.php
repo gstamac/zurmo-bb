@@ -49,12 +49,14 @@
             Yii::app()->user->userModel = $nobody;
 
             $everyoneGroup = Group::getByName(Group::EVERYONE_GROUP_NAME);
-            assert($everyoneGroup->save()); // Not Coding Standard
-
+            $saved = $everyoneGroup->save();
+            assert('$saved');
+            
             $group1        = new Group();
             $group1->name  = 'Group1';
             $group1->users->add($nobody);
-            assert($group1->save()); // Not Coding Standard
+            $saved = $group1->save();
+            assert('$saved');
             AllPermissionsOptimizationUtil::rebuild();
         }
 
@@ -122,8 +124,9 @@
             $nobody->setRight('ReportsModule', ReportsModule::RIGHT_ACCESS_REPORTS);
             $nobody->setRight('ReportsModule', ReportsModule::RIGHT_CREATE_REPORTS);
             $nobody->setRight('ReportsModule', ReportsModule::RIGHT_DELETE_REPORTS);
-            assert($nobody->save()); // Not Coding Standard
-
+            $saved = $nobody->save();
+            assert('$saved');
+            
             $savedReports = SavedReport::getAll();
             $this->assertEquals(0, count($savedReports));
             $nobody = $this->logoutCurrentUserLoginNewUserAndGetByUsername('nobody');
