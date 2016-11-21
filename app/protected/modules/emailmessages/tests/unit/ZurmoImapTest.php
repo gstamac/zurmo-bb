@@ -281,8 +281,8 @@
                                                   $imap->imapUsername,
                                                   'Test email body',
                                                   '<strong>Test</strong> email html body',
-                                                  array(Yii::app()->params['emailTestAccounts']['userImapSettings']['imapUsername']),
-                                                  array(Yii::app()->params['emailTestAccounts']['userImapSettings']['imapUsername']),
+                                                  null,
+                                                  null,
                                                   array($filePath_1, $filePath_2, $filePath_3)
             );
             sleep(40);
@@ -292,7 +292,6 @@
             $this->assertEquals("Test email body", trim($messages[0]->textBody));
             $this->assertEquals('<!-- zurmo css inline --> <strong>Test</strong> email html body', trim(static::replaceNewLinesCharacters($messages[0]->htmlBody)));
             $this->assertEquals($imap->imapUsername, $messages[0]->to[0]['email']);
-            $this->assertEquals(Yii::app()->params['emailTestAccounts']['userImapSettings']['imapUsername'], $messages[0]->cc[0]['email']);
             $this->assertEquals(Yii::app()->emailHelper->outboundUsername, $messages[0]->fromEmail);
 
             $this->assertEquals(3, count($messages[0]->attachments));
