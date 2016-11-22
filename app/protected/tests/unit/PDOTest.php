@@ -77,9 +77,14 @@
                 $this->assertEquals('integer', gettype($rows[0]['integer'])); // Good! This is what we want!!!
                 $this->assertEquals('string',  gettype($wukka->integer));     // Dodgy!!!
             }
-            else
+            elseif (strpos($phpVersion, '7.') !== false)
             {
                 $this->assertEquals('integer',  gettype($rows[0]['integer'])); // Dodgy!!!
+                $this->assertEquals('string',  gettype($wukka->integer));     // Dodgy!!!
+            }
+            else
+            {
+                $this->assertEquals('string',  gettype($rows[0]['integer'])); // Dodgy!!!
                 $this->assertEquals('string',  gettype($wukka->integer));     // Dodgy!!!
             }
         }

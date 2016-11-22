@@ -81,7 +81,7 @@
             $phpVersion = explode('.', phpversion());
             if ($phpVersion[0] >= 7)
             {
-                $additionalServices = array('Memcached');
+                $additionalServices = array('Memcached', 'ZendAssertions');
             }
             else
             {
