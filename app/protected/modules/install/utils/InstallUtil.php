@@ -52,6 +52,17 @@
         // its checks, the subsequent methods that modify things should
         // be expected to succeed.
 
+        
+        public static function canAssertionsBeEnabledAtRuntime()
+        {
+            $assertionsEnabled = ini_get('zend.assertions');
+            if ($assertionsEnabled == -1)
+            {
+                return false;
+            }
+            return true;
+        }
+        
         /**
          * @param $requiredVersions An array mapping server names to minimum
          *                          required versions. eg: array('apache' => '2.2.16')
