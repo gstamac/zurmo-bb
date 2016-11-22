@@ -40,6 +40,8 @@
      */
     class ZendAssertionsServiceHelper extends ServiceHelper
     {
+        protected $required = false;
+        
         protected function checkService()
         {
             $passed = InstallUtil::canAssertionsBeEnabledAtRuntime();
