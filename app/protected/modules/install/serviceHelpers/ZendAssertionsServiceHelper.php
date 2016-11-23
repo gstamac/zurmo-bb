@@ -47,11 +47,11 @@
             $passed = InstallUtil::canAssertionsBeEnabledAtRuntime();
             if ($passed)
             {
-                $this->message = Zurmo::t('InstallModule', 'Assertions can be enabled at runtime.');
+                $this->message = Zurmo::t('InstallModule', 'Debug mode can be turned on at runtime.');
             }
             else
             {
-                $this->message = Zurmo::t('InstallModule', 'Assertions cannot be enabled at runtime.');
+                $this->message = Zurmo::t('InstallModule', 'Debug mode cannot be turned on at runtime. Set zend.assertions = 0 in php.ini');
             }
             return $passed;
         }
