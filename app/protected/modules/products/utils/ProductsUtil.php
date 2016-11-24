@@ -156,7 +156,7 @@
             $title = self::getModalTitleForProduct($renderType);
             $extraCloseScriptForModalAjaxOptions = static::resolveExtraCloseScriptForModalAjaxOptions($sourceId);
             return   ModalView::getAjaxOptionsForModalLink($title, self::getModalContainerId(), 'auto', 600,
-                'center top+25', $class = "'product-dialog'", // Not Coding Standard
+                array('my'=>'center top+25','at'=>'center top+25'), $class = "'product-dialog'", // Not Coding Standard
                 $extraCloseScriptForModalAjaxOptions);
         }
 
