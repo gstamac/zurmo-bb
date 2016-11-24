@@ -98,7 +98,9 @@
         {
             assert('count($this->steps()) > 0');
             assert('count($this->stepMessages()) > 0');
-            assert('count($this->stepMessages()) == count($this->steps())');
+            $stepMessagesCount = count($this->stepMessages());
+            $stepsCount = count($this->steps());
+            assert('$stepMessagesCount == $stepsCount');
         }
 
         /**
