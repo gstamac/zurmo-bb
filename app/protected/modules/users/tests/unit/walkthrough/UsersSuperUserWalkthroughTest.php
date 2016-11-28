@@ -790,7 +790,10 @@
 
         public function testExplicitLoginPermissions()
         {
-            Yii::app()->googleAppsHelper->isEnabledSignInViaGoogle = false;
+            if (Yii::app()->edition != 'Community')
+            {
+                Yii::app()->googleAppsHelper->isEnabledSignInViaGoogle = false;
+            }
             $aUser = User::getByUsername('auser');
             $aUser->setIsSystemUser();
             $aUser->setIsNotRootUser();
