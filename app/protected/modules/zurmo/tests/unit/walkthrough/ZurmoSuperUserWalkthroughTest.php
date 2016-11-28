@@ -88,6 +88,7 @@
             Yii::app()->user->userModel = null;
 
             //Show login form.
+            Yii::app()->googleAppsHelper->isEnabledSignInViaGoogle = false;
             $this->runControllerWithNoExceptionsAndGetContent('zurmo/default/login');
             //Validate Login form.
             $this->setPostArray(array(
