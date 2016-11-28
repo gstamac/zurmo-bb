@@ -52,7 +52,7 @@
 
         private static function getServicesToCheck()
         {
-            return array('WebServer',
+            $services = array('WebServer',
                          'Php',
                          'PhpTimeZone',
                          'PhpMemoryBytes',
@@ -78,6 +78,16 @@
                          'Ldap',
                          'Mcrypt'
             );
+            $phpVersion = explode('.', phpversion());
+            if ($phpVersion[0] >= 7)
+            {
+                $additionalServices = array('Memcached', 'ZendAssertions');
+            }
+            else
+            {
+                $additionalServices = array('Memcache', 'APC');
+            }
+            return array_merge($services, $additionalServices);
         }
 
         private static function getServicesToCheckOnlyAfterInstallation()
@@ -110,8 +120,8 @@
         private static function getServicesToCheckAfterInstallation()
         {
             $services = CMap::mergeArray(static::getServicesToCheck(),
-                                            static::getServicesToCheckOnlyAfterInstallation(),
-                                            static::getAdditionalServicesToCheck());
+                                            static::getAdditionalServicesToCheck(),
+                                            static::getServicesToCheckOnlyAfterInstallation());
             static::sanitizeServicesToExcludeCheckAfterInstallation($services);
             return $services;
         }
@@ -128,19 +138,6 @@
                          'DatabaseOptimizerSearchDepth',
                          'DatabaseCheckLoadLocalInFile',
             );
-
-            $phpVersion = explode('.', phpversion());
-            
-            if ($phpVersion[0] >= 7)
-            {
-                $additionalServicesByPHPVersion = array('Memcached', 'ZendAssertions');
-            }
-            else
-            {
-                $additionalServicesByPHPVersion = array('Memcache', 'APC');
-            }
-
-            return array_merge($additionalServices, $additionalServicesByPHPVersion);
         }
 
         /**

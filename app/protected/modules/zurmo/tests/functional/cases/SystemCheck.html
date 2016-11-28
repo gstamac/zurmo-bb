@@ -21,7 +21,7 @@
                 <td>45000</td>
                 <td></td>
             </tr>
-            <!-- create a parent group -->
+            <!--go to developer tools-->
             <tr>
                 <td>open</td>
                 <td>index.php/configuration</td>
@@ -92,6 +92,21 @@
                 <td>//html/body/section/div[1]/div[2]/div/div/table[1]/tbody/tr[1]/td[1]/h4</td>
                 <td>Failed Optional Services</td>
             </tr>
+            <!--tr>
+                <td>waitForTextPresent</td>
+                <td>Memcached extension is not installed.</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForTextPresent</td>
+                <td>Minimum version required: 2.0.0.</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForTextPresent</td>
+                <td>Debug mode cannot be turned on at runtime. Set zend.assertions = 0 in php.ini</td>
+                <td></td>
+            </tr-->
             <tr>
                 <td>waitForTextPresent</td>
                 <td>Database does not support LOAD LOCAL INFILE.</td>
@@ -367,105 +382,65 @@
                 <td>//html/body/section/div[1]/div[2]/div/div/table[2]/tbody/tr[25]/td[2]/span</td>
                 <td>PASS</td>
             </tr>
-            <!--tr>
-                <td>waitForText</td>
-                <td>//html/body/section/div[1]/div[2]/div/div/table[2]/tbody/tr[26]/td[1]</td>
-                <td>The application.log runtime file is writable.<br/> The /minScript/cache runtime directory is writable.<br/> The debug.php file is present.</td>
+            <tr>
+                <td>waitForTextPresent</td>
+                <td>Mysql version installed: 5.5.29 Minimum version required: 5.0.0</td>
+                <td></td>
             </tr>
             <tr>
-                <td>waitForText</td>
-                <td>//html/body/section/div[1]/div[2]/div/div/table[2]/tbody/tr[26]/td[2]/span</td>
-                <td>PASS</td>
+                <td>waitForTextPresent</td>
+                <td>Database is not in strict mode.</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForTextPresent</td>
+                <td>Database max_allowed_packet size meets minimum requirement.</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForTextPresent</td>
+                <td>Database max_sp_recursion_depth size meets minimum requirement.</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForTextPresent</td>
+                <td>Database thread_stack value meets minimum requirement.</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForTextPresent</td>
+                <td>Database default collation meets minimum requirement.</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForTextPresent</td>
+                <td>Database log_bin=off and therefore satisfies this requirement.</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForTextPresent</td>
+                <td>Database optimizer_search_depth size meets requirement.</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForTextPresent</td>
+                <td>The application.log runtime file is writable.</td>
+                <td></td>
+            </tr>
+            <!--tr>
+                <td>waitForTextPresent</td>
+                <td>The /minScript/cache runtime directory is writable.</td>
+                <td></td>
             </tr-->
             <tr>
-                <td>waitForText</td>
-                <td>//html/body/section/div[1]/div[2]/div/div/table[2]/tbody/tr[27]/td[1]</td>
+                <td>waitForTextPresent</td>
+                <td>The debug.php file is present.</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>waitForTextPresent</td>
                 <td>Host Info and Script Url are configured correctly.</td>
-            </tr>
-            <tr>
-                <td>waitForText</td>
-                <td>//html/body/section/div[1]/div[2]/div/div/table[2]/tbody/tr[27]/td[2]/span</td>
-                <td>PASS</td>
-            </tr>
-            <tr>
-                <td>waitForText</td>
-                <td>//html/body/section/div[1]/div[2]/div/div/table[2]/tbody/tr[28]/td[1]</td>
-                <td>Mysql version installed: 5.5.29 Minimum version required: 5.0.0</td>
-            </tr>
-            <tr>
-                <td>waitForText</td>
-                <td>//html/body/section/div[1]/div[2]/div/div/table[2]/tbody/tr[28]/td[2]/span</td>
-                <td>PASS</td>
-            </tr>
-            <tr>
-                <td>waitForText</td>
-                <td>//html/body/section/div[1]/div[2]/div/div/table[2]/tbody/tr[29]/td[1]</td>
-                <td>Database is not in strict mode.</td>
-            </tr>
-            <tr>
-                <td>waitForText</td>
-                <td>//html/body/section/div[1]/div[2]/div/div/table[2]/tbody/tr[29]/td[2]/span</td>
-                <td>PASS</td>
-            </tr>
-            <tr>
-                <td>waitForText</td>
-                <td>//html/body/section/div[1]/div[2]/div/div/table[2]/tbody/tr[30]/td[1]</td>
-                <td>Database max_allowed_packet size meets minimum requirement.</td>
-            </tr>
-            <tr>
-                <td>waitForText</td>
-                <td>//html/body/section/div[1]/div[2]/div/div/table[2]/tbody/tr[30]/td[2]/span</td>
-                <td>PASS</td>
-            </tr>
-            <tr>
-                <td>waitForText</td>
-                <td>//html/body/section/div[1]/div[2]/div/div/table[2]/tbody/tr[31]/td[1]</td>
-                <td>Database max_sp_recursion_depth size meets minimum requirement.</td>
-            </tr>
-            <tr>
-                <td>waitForText</td>
-                <td>//html/body/section/div[1]/div[2]/div/div/table[2]/tbody/tr[31]/td[2]/span</td>
-                <td>PASS</td>
-            </tr>
-            <tr>
-                <td>waitForText</td>
-                <td>//html/body/section/div[1]/div[2]/div/div/table[2]/tbody/tr[32]/td[1]</td>
-                <td>Database thread_stack value meets minimum requirement.</td>
-            </tr>
-            <tr>
-                <td>waitForText</td>
-                <td>//html/body/section/div[1]/div[2]/div/div/table[2]/tbody/tr[32]/td[2]/span</td>
-                <td>PASS</td>
-            </tr>
-            <tr>
-                <td>waitForText</td>
-                <td>//html/body/section/div[1]/div[2]/div/div/table[2]/tbody/tr[33]/td[1]</td>
-                <td>Database default collation meets minimum requirement.</td>
-            </tr>
-            <tr>
-                <td>waitForText</td>
-                <td>//html/body/section/div[1]/div[2]/div/div/table[2]/tbody/tr[33]/td[2]/span</td>
-                <td>PASS</td>
-            </tr>
-            <tr>
-                <td>waitForText</td>
-                <td>//html/body/section/div[1]/div[2]/div/div/table[2]/tbody/tr[34]/td[1]</td>
-                <td>Database log_bin=off and therefore satisfies this requirement.</td>
-            </tr>
-            <tr>
-                <td>waitForText</td>
-                <td>//html/body/section/div[1]/div[2]/div/div/table[2]/tbody/tr[34]/td[2]/span</td>
-                <td>PASS</td>
-            </tr>
-            <tr>
-                <td>waitForText</td>
-                <td>//html/body/section/div[1]/div[2]/div/div/table[2]/tbody/tr[35]/td[1]</td>
-                <td>Database optimizer_search_depth size meets requirement.</td>
-            </tr>
-            <tr>
-                <td>waitForText</td>
-                <td>//html/body/section/div[1]/div[2]/div/div/table[2]/tbody/tr[35]/td[2]/span</td>
-                <td>PASS</td>
+                <td></td>
             </tr>
         </tbody>
     </table>
