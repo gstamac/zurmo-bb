@@ -398,6 +398,7 @@
             'application.modules.api.tests.unit.forms.*',
             'application.modules.install.serviceHelpers.MemcacheServiceHelper',
             'application.modules.install.serviceHelpers.MemcachedServiceHelper',
+            'application.modules.install.serviceHelpers.MysqliServiceHelper',
             'application.modules.install.serviceHelpers.ServiceHelper',
             'application.modules.install.serviceHelpers.SetIncludePathServiceHelper',
             'application.modules.install.utils.InstallUtil',
